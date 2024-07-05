@@ -1,0 +1,29 @@
+name: Vercel Preview Deployment
+
+on:
+  push:
+    branches-ignore:
+      - 'main'
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Vite and dependencies
+        run: npm install
+
+      - name: Build Project with Vite
+        run: npm run build
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel
+
+      - name: Deploy to Vercel Preview
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_ORG_PROJECT }}
+        run: vercel deploy --prod=false --token ${{ secrets.VERCEL_TOKEN }}
