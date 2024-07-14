@@ -1,0 +1,137 @@
+import { FunctionComponent } from 'react'
+import { Link } from 'react-router-dom'
+import {
+  Box,
+  Heading,
+  List,
+  ListItem,
+  SimpleGrid,
+  Text
+} from '@chakra-ui/react'
+import { FaXTwitter } from 'react-icons/fa6'
+import { IoLogoLinkedin } from 'react-icons/io'
+
+import { colors } from '../../colors'
+
+const Footer: FunctionComponent = () => {
+  return (
+    <Box
+      as="footer"
+      bg={colors.primaryDark}
+      height={"auto"}
+      color={"#fff"}
+    >
+      <Box
+        width={"90%"}
+        m={"0px auto"}
+        pt={"4rem"}
+        pb={"3rem"}
+      >
+        <SimpleGrid
+          minChildWidth="250px"
+          spacing={10}
+          color={"#f1f1f1"}
+        >
+          <Box>
+            <Heading
+              as="h6"
+              size={"md"}
+              color={colors.primary}
+            >
+              Learn Hub
+            </Heading>
+            <Text
+              my={"25px"}
+              fontSize={"14px"}
+              fontWeight={"normal"}
+              lineHeight={"1.7rem"}
+            >
+              A portal for problem solving, knowledge sharing and community builders, join others for sharing knowledge.
+            </Text>
+          </Box>
+          <Box>
+            <Heading
+              as="h6"
+              size={"md"}
+              color={colors.primary}
+            >
+              Product
+            </Heading>
+            <List
+              my={"25px"}
+              fontSize={"14px"}
+              fontWeight={"normal"}
+              spacing={3}
+            >
+              <ListItem><Link to="/">Home</Link></ListItem>
+              <ListItem><Link to="/forum">Forum</Link></ListItem>
+              <ListItem><Link to="/articles">Articles</Link></ListItem>
+            </List>
+          </Box>
+          <Box>
+            <Heading
+              as="h6"
+              size={"md"}
+              color={colors.primary}
+            >
+              Support
+            </Heading>
+            <List
+              my={"25px"}
+              fontSize={"14px"}
+              fontWeight={"normal"}
+              spacing={3}
+            >
+              <ListItem><Link to="/">Account</Link></ListItem>
+              <ListItem><Link to="/forum">Feedback</Link></ListItem>
+              <ListItem><Link to="/articles">Contact Us</Link></ListItem>
+            </List>
+          </Box>
+          <Box>
+            <Heading
+              as="h6"
+              size={"md"}
+              color={colors.primary}
+            >
+              Socials
+            </Heading>
+            <List
+              my={"25px"}
+              fontSize={"14px"}
+              fontWeight={"normal"}
+              spacing={3}
+            >
+              <ListItem>
+                <Link
+                  to=""
+                  style={{
+                    display: "flex",
+                    gap: "3px"
+                  }}
+                >
+                  <FaXTwitter style={{ fontSize: "20px" }} />Twitter
+                </Link>
+              </ListItem>
+              <ListItem>
+                <Link
+                  to=""
+                  style={{
+                    display: "flex",
+                    gap: "3px"
+                  }}>
+                  <IoLogoLinkedin style={{ fontSize: "20px" }} />LinkedIn
+                </Link>
+              </ListItem>
+            </List>
+          </Box>
+        </SimpleGrid>
+
+        <Box mt={"20px"} pt={"20px"} borderTop={"1px solid gray"}>
+          <Text fontSize={"15px"}>&copy; 2024 Learn Hub. All right reserved.</Text>
+        </Box>
+      </Box>
+    </Box>
+  )
+}
+
+export default Footer
