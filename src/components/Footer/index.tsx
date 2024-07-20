@@ -55,7 +55,7 @@ const Footer: FunctionComponent = () => {
               size={"md"}
               color={colors.primary}
             >
-              Product
+              Main
             </Heading>
             <List
               my={"25px"}
