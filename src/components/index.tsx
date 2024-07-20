@@ -5,6 +5,7 @@ import Footer from '@components/Footer'
 import HeroSection from '@components/HeroSection'
 import NavBar from '@components/NavBar'
 import NotFound from '@components/NotFound'
+import Search from '@components/Search'
 
 export {
   Button,
@@ -14,4 +15,5 @@ export {
   LatestArticleCard,
   NavBar,
   NotFound,
+  Search,
 }
