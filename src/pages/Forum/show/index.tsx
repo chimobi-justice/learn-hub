@@ -14,11 +14,9 @@ import {
 import { MdOutlineThumbUp } from 'react-icons/md'
 
 import { colors } from '../../../colors'
+import {FollowCard, RecommendTopicCard } from '@components/index'
 import DiscussionCard from '@pages/Forum/components/discussionCard'
-import RecommendTopicCard from '@pages/Forum/components/recommendTopicCard'
-import FollowCard from '@pages/Forum/components/followCard'
 import RepliesCard from '@pages/Forum/components/repliesCard'
-
 import AvatarPic from '@assets/images/avatar.jpg'
 
 const ShowSingleForum = () => {
@@ -32,9 +30,10 @@ const ShowSingleForum = () => {
       <Box
         display={"flex"}
         justifyContent={"space-between"}
+        flexDir={{ base: "column", md: "row"}}
         gap={5}
       >
-        <Box width={"70%"}>
+        <Box width={{ base: "100%", md: "70%"}}>
           <Card>
             <CardHeader borderBottom={"1px solid #f1f1f1"}>
               <Box
@@ -119,7 +118,7 @@ const ShowSingleForum = () => {
           <RepliesCard />
         </Box>
 
-        <Box width={"30%"}>
+        <Box width={{ base: "100%", md: "30%"}}>
           <Box>
             <DiscussionCard />
           </Box>

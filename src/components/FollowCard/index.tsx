@@ -10,7 +10,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 
-import { colors } from '../../../colors'
+import { colors } from '../../colors'
 import { Button } from '@components/index'
 import AvatarPic from '@assets/images/avatar.jpg'
 
