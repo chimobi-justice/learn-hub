@@ -18,11 +18,8 @@ import { MdOutlineQuickreply, MdOutlineThumbUp } from 'react-icons/md'
 
 import { colors } from '../../colors'
 import truncate from '@helpers/truncate'
-import { Button, Search } from '@components/index'
+import { Button, Search, FollowCard, RecommendTopicCard } from '@components/index'
 import DiscussionCard from '@pages/Forum/components/discussionCard'
-import RecommendTopicCard from '@pages/Forum/components/recommendTopicCard'
-import FollowCard from '@pages/Forum/components/followCard'
-
 import AvatarPic from '@assets/images/avatar.jpg'
 
 const Forum = () => {
@@ -38,13 +35,15 @@ const Forum = () => {
       <Box
         display={"flex"}
         justifyContent={"space-between"}
+        flexDir={{ base: "column", md: "row"}}
         gap={5}
       >
-        <Box width={"70%"}>
+        <Box width={{ base: "100%", md: "70%"}}>
           <Card>
             <CardHeader borderBottom={"1px solid #f1f1f1"}>
               <Stack
                 direction={"row"}
+                alignItems={"center"}
               >
                 <Heading size={"md"}>
                   Thr<Text as="span" color={colors.primary}>ea</Text>ds
@@ -142,7 +141,7 @@ const Forum = () => {
           </Box>
         </Box>
 
-        <Box width={"30%"}>
+        <Box width={{ base: "100%", md: "30%"}}>
           <Box>
             <DiscussionCard />
           </Box>

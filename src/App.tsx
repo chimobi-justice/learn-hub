@@ -10,6 +10,8 @@ import Home from '@pages/Home'
 import Forum from '@pages/Forum'
 import ShowSingleForum from '@pages/Forum/show'
 import NotFound from '@components/NotFound'
+import Articles from '@pages/Articles'
+import ShowSingleArticle from '@pages/Articles/show'
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +20,9 @@ const routes = createBrowserRouter(
         <Route index path='/' element={<Home />} />
         <Route index path='/forum' element={<Forum />} />
         <Route index path='/forum/:slug' element={<ShowSingleForum />} />
+
+        <Route index path='/articles' element={<Articles />} />
+        <Route index path='/articles/:slug' element={<ShowSingleArticle />} />
 
         <Route index path='*' element={<NotFound />} />
       </Route>

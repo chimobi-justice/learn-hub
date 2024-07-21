@@ -10,7 +10,7 @@ import {
   WrapItem
 } from '@chakra-ui/react'
 
-import { colors } from '../../../colors'
+import { colors } from '../../colors'
 
 const RecommendTopicCard = () => {
   const data = [1, 2, 3, 4, 5];

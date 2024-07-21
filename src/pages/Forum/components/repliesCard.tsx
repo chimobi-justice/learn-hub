@@ -17,7 +17,7 @@ const RepliesCard = () => {
   const data = [1, 2, 3, 4, 5, 6, 7];
 
   return (
-    <Card mt={"20px"} ml={"35px"}>
+    <Card mt={"20px"} ml={{ base: "12px", md: "35px"}}>
       <CardHeader pb={"4px"}>
         <Heading size={"sm"}>Replies</Heading>
       </CardHeader>

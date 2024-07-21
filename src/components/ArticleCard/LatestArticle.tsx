@@ -29,7 +29,7 @@ const LatestArticleCard: FunctionComponent<IProps> = ({
   CTAText
 }) => {
   return (
-    <Card maxW='sm' bg={"transparent"} boxShadow={"none"}>
+    <Card maxW="sm" bg={"transparent"} boxShadow={"none"}>
       <CardBody>
         <Image
           src={articleImage}
