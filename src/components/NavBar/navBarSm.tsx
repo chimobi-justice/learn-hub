@@ -1,5 +1,5 @@
 import { FunctionComponent, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import {
   Box,
   Flex,
@@ -116,29 +116,33 @@ const NavBarSm: FunctionComponent = () => {
 
               <Box py="20px" w="100%">
                 <VStack spacing={5}>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    width="100%"
-                    type="button"
-                    fontWeight={"semibold"}
-                    rounded="sm"
-                    onClick={() => setOpen(false)}
-                  >
-                    Sign in
-                  </Button>
+                  <Link to="/auth/login" style={{ width: "100%" }}>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      width="100%"
+                      type="button"
+                      fontWeight={"semibold"}
+                      rounded="sm"
+                      onClick={() => setOpen(false)}
+                    >
+                      Sign in
+                    </Button>
+                  </Link>
 
-                  <Button
-                    variant="solid"
-                    size="lg"
-                    width="100%"
-                    type="button"
-                    fontWeight={"semibold"}
-                    rounded="sm"
-                    onClick={() => setOpen(false)}
-                  >
-                    Sign up
-                  </Button>
+                  <Link to="/auth/register" style={{ width: "100%" }}>
+                    <Button
+                      variant="solid"
+                      size="lg"
+                      width="100%"
+                      type="button"
+                      fontWeight={"semibold"}
+                      rounded="sm"
+                      onClick={() => setOpen(false)}
+                    >
+                      Sign up
+                    </Button>
+                  </Link>
                 </VStack>
               </Box>
             </Box>
