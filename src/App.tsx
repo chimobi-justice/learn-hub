@@ -13,6 +13,9 @@ import NotFound from '@components/NotFound'
 import Articles from '@pages/Articles'
 import ShowSingleArticle from '@pages/Articles/show'
 
+import Login from '@pages/Auth/Login'
+import Register from '@pages/Auth/Register'
+
 const routes = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -23,6 +26,9 @@ const routes = createBrowserRouter(
 
         <Route index path='/articles' element={<Articles />} />
         <Route index path='/articles/:slug' element={<ShowSingleArticle />} />
+
+        <Route index path='/auth/login' element={<Login />} />
+        <Route index path='/auth/register' element={<Register />} />
 
         <Route index path='*' element={<NotFound />} />
       </Route>

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { Box, Container, Heading, HStack, Text } from '@chakra-ui/react'
 import { FaRegUser } from 'react-icons/fa'
 
@@ -50,25 +50,30 @@ const NavBarLg: FunctionComponent = () => {
           </Box>
 
           <HStack spacing={4}>
-            <Button
-              variant="outline"
-              size="md"
-              type="button"
-              fontWeight={"semibold"}
-              rounded="lg"
-            >
-              Login
-            </Button>
-            <Button
-              variant="solid"
-              size="md"
-              type="button"
-              fontWeight={"semibold"}
-              rounded="lg"
-              leftIcon={<FaRegUser />}
-            >
-              Sign up
-            </Button>
+            <Link to="/auth/login">
+              <Button
+                variant="outline"
+                size="md"
+                type="button"
+                fontWeight={"semibold"}
+                rounded="lg"
+              >
+                Login
+              </Button>
+            </Link>
+
+            <Link to="/auth/register">
+              <Button
+                variant="solid"
+                size="md"
+                type="button"
+                fontWeight={"semibold"}
+                rounded="lg"
+                leftIcon={<FaRegUser />}
+              >
+                Sign up
+              </Button>
+            </Link>
           </HStack>
         </Box>
       </Container>

@@ -9,6 +9,7 @@ import NotFound from '@components/NotFound'
 import Search from '@components/Search'
 import RecommendTopicCard from '@components/RecommendTopicCard'
 import FollowCard from '@components/FollowCard'
+import Input from '@components/Input'
 
 export {
   ArticlesCard,
@@ -22,4 +23,5 @@ export {
   NotFound,
   RecommendTopicCard,
   Search,
+  Input,
 }
