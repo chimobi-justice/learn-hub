@@ -66,7 +66,7 @@ const Login = () => {
             color={"#0009"}
           >
             Don't have an account? {" "}
-            <Link to="/auth/login">
+            <Link to="/auth/register">
               <Text
                 as={"span"}
                 color={colors.primary}

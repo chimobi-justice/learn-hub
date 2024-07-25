@@ -32,13 +32,27 @@ const Forum = () => {
     >
       <Heading pb={"15px"} size={"xl"}>Forum</Heading>
 
+      <Box mb={"15px"}>
+        <Link to="/forum/new">
+          <Button
+            variant="solid"
+            size={{ base: "md", lg: "lg" }}
+            width={{ base: "100%", lg: "auto" }}
+            type="button"
+            fontWeight={"semibold"}
+            rounded="sm"
+          >
+            Create Forum
+          </Button>
+        </Link>
+      </Box>
       <Box
         display={"flex"}
         justifyContent={"space-between"}
-        flexDir={{ base: "column", md: "row"}}
+        flexDir={{ base: "column", md: "row" }}
         gap={5}
       >
-        <Box width={{ base: "100%", md: "70%"}}>
+        <Box width={{ base: "100%", md: "70%" }}>
           <Card>
             <CardHeader borderBottom={"1px solid #f1f1f1"}>
               <Stack
@@ -99,21 +113,21 @@ const Forum = () => {
                         </Link>
                       </Text>
 
-                      <HStack 
-                        borderTop={"1px solid #f1f1f1"} 
+                      <HStack
+                        borderTop={"1px solid #f1f1f1"}
                         pt={"7px"}
                         gap={3}
                       >
-                        <Text 
-                          fontSize={"12px"} 
+                        <Text
+                          fontSize={"12px"}
                           display={"flex"}
                           gap={1}
                           alignItems={"center"}
                         >
                           <MdOutlineQuickreply /> 30 Replies
                         </Text>
-                        <Text 
-                          fontSize={"12px"} 
+                        <Text
+                          fontSize={"12px"}
                           display={"flex"}
                           gap={1}
                           alignItems={"center"}
@@ -141,7 +155,7 @@ const Forum = () => {
           </Box>
         </Box>
 
-        <Box width={{ base: "100%", md: "30%"}}>
+        <Box width={{ base: "100%", md: "30%" }}>
           <Box>
             <DiscussionCard />
           </Box>
