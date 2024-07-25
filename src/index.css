@@ -1,3 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+
 .active {
     color: #7253a4;
+}
+
+.editor-input {
+    height: 90%;
+    width: 100%;
+    border: none;
 }

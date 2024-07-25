@@ -19,7 +19,7 @@ import DiscussionCard from '@pages/Forum/components/discussionCard'
 import RepliesCard from '@pages/Forum/components/repliesCard'
 import AvatarPic from '@assets/images/avatar.jpg'
 
-const ShowSingleForum = () => {
+const ShowForum = () => {
   return (
     <Box
       width={"90%"}
@@ -136,4 +136,4 @@ const ShowSingleForum = () => {
   )
 }
 
-export default ShowSingleForum;
+export default ShowForum;

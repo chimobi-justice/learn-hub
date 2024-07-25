@@ -8,7 +8,8 @@ import {
 import Layout from '@layout/index'
 import Home from '@pages/Home'
 import Forum from '@pages/Forum'
-import ShowSingleForum from '@pages/Forum/show'
+import ShowForum from '@pages/Forum/show'
+import CreateForum from '@pages/Forum/create'
 import NotFound from '@components/NotFound'
 import Articles from '@pages/Articles'
 import ShowSingleArticle from '@pages/Articles/show'
@@ -22,7 +23,8 @@ const routes = createBrowserRouter(
       <Route path="/" element={<Layout />}>
         <Route index path='/' element={<Home />} />
         <Route index path='/forum' element={<Forum />} />
-        <Route index path='/forum/:slug' element={<ShowSingleForum />} />
+        <Route index path='/forum/:slug' element={<ShowForum />} />
+        <Route index path='/forum/new' element={<CreateForum />} />
 
         <Route index path='/articles' element={<Articles />} />
         <Route index path='/articles/:slug' element={<ShowSingleArticle />} />
