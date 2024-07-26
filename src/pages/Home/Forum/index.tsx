@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Heading, SimpleGrid, Text } from '@chakra-ui/react'
 import { FaArrowRight } from 'react-icons/fa6'
@@ -5,7 +6,7 @@ import { FaArrowRight } from 'react-icons/fa6'
 import { Button, Card } from '@components/index'
 import { colors } from '../../../colors'
 
-const HomeForum = () => {
+const HomeForum: FunctionComponent = () => {
   const CardData = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (

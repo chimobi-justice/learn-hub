@@ -19,7 +19,7 @@ interface IProps extends Pick<ButtonProps, 'fontSize' | 'fontWeight'> {
   loadingText?: string;
   size: SizeType;
   width?: WidthSize;
-  variant: "outline" | "solid";
+  variant: "outline" | "solid" | "danger";
   type: "button" | "submit";
   rounded: ButtonRoundedRadius;
   leftIcon?: ReactElement;

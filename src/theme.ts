@@ -37,6 +37,13 @@ export const Theme = extendTheme({
             border: "2px solid #7253a4",
           },
         },
+        danger: {
+          bg: "red",
+          color: "white",
+          _hover: {
+            bg: "red.400"
+          },
+        },
       }
     }
   }

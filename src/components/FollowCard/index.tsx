@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Avatar,
@@ -14,7 +15,7 @@ import { colors } from '../../colors'
 import { Button } from '@components/index'
 import AvatarPic from '@assets/images/avatar.jpg'
 
-const FollowCard = () => {
+const FollowCard: FunctionComponent = () => {
   const data = [1, 2, 3];
 
   return (

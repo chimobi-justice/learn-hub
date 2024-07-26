@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { FunctionComponent, useRef, useState } from 'react'
 import {
   Box,
   FormControl,
@@ -11,7 +11,7 @@ import { FaUpload, FaImage } from 'react-icons/fa6'
 
 import Button from '@components/Button'
 
-const CreateArticle = () => {
+const CreateArticle: FunctionComponent = () => {
   const [value, setValue] = useState<string>('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 

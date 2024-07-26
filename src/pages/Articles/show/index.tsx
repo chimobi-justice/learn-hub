@@ -1,4 +1,4 @@
-// import React from 'react';
+import { FunctionComponent } from 'react'
 import { Box, Stack, Text } from '@chakra-ui/react'
 import { MdOutlineQuickreply, MdOutlineThumbUp } from 'react-icons/md'
 import Markdown from 'react-markdown'
@@ -28,7 +28,7 @@ import { CodeHighlight } from '@constant/Code'
 // };
 
 
-const ShowArticle = () => {
+const ShowArticle: FunctionComponent = () => {
   return (
     <Box>
       <ArticleHeroSection
@@ -63,7 +63,7 @@ const ShowArticle = () => {
               <MdOutlineQuickreply style={{ fontSize: "24px", marginBottom: "5px" }} /> 30
             </Text>
             <Text
-              fontSize={"18px"}
+              fontSize={{ base: "15px", md: "18px" }}
               display={"flex"}
               flexDir={{ base: "row", md: "column" }}
               gap={3}

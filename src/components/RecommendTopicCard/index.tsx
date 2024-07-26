@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Card,
@@ -12,7 +13,7 @@ import {
 
 import { colors } from '../../colors'
 
-const RecommendTopicCard = () => {
+const RecommendTopicCard: FunctionComponent = () => {
   const data = [1, 2, 3, 4, 5];
 
   return (
