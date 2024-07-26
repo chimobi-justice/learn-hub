@@ -37,18 +37,18 @@ const ArticlesCard: FunctionComponent<IProps> = ({
       <CardBody p={"0px"}>
         <Box
           display={"flex"}
+          flexDir={{base: "column", md: "row"}}
           alignItems={"center"}
           gap={2}
         >
-          <Box width={"35%"}>
+          <Box width={{ base: "100%", md: "35%"}}>
             <Image
               src={articleImg}
-              boxSize='250px'
               alt='Just'
             />
           </Box>
 
-          <Box width={"65%"}>
+          <Box width={{ base: "100%", md: "65%"}} p={"5px"}>
             <Heading
               size="lg"
               lineHeight={"1.6em"}
