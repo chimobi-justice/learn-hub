@@ -10,6 +10,7 @@ import Search from '@components/Search'
 import RecommendTopicCard from '@components/RecommendTopicCard'
 import FollowCard from '@components/FollowCard'
 import Input from '@components/Input'
+import TextArea from '@components/TextArea'
 
 export {
   ArticlesCard,
@@ -24,4 +25,5 @@ export {
   RecommendTopicCard,
   Search,
   Input,
+  TextArea,
 }

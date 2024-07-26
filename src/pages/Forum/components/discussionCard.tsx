@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Box,
@@ -13,7 +14,7 @@ import { FaArrowRight } from 'react-icons/fa6'
 
 import truncate from '@helpers/truncate'
 
-const DiscussionCard = () => {
+const DiscussionCard: FunctionComponent = () => {
   const data = [1, 2, 3];
   return (
     <Card>

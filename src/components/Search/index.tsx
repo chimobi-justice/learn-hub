@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { FunctionComponent, useRef } from 'react'
 import {
   Input,
   InputGroup,
@@ -12,7 +12,7 @@ import {
 import { FiSearch } from 'react-icons/fi'
 import Button from '@components/Button'
 
-const Search = () => {
+const Search: FunctionComponent = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const initialRef = useRef(null)

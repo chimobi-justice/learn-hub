@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Avatar,
@@ -22,7 +22,7 @@ import { Button, Search, FollowCard, RecommendTopicCard } from '@components/inde
 import DiscussionCard from '@pages/Forum/components/discussionCard'
 import AvatarPic from '@assets/images/avatar.jpg'
 
-const Forum = () => {
+const Forum: FunctionComponent = () => {
   const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (

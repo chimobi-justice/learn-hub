@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Avatar,
@@ -13,7 +13,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 
-const RepliesCard = () => {
+const RepliesCard: FunctionComponent = () => {
   const data = [1, 2, 3, 4, 5, 6, 7];
 
   return (

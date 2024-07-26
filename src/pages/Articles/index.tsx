@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react'
 import { Box, Heading, SimpleGrid } from '@chakra-ui/react'
 import {
   LatestArticleCard,
@@ -8,7 +9,7 @@ import {
 } from '@components/index'
 import { Link } from 'react-router-dom';
 
-const Articles = () => {
+const Articles: FunctionComponent = () => {
   const CardLatestData = [1, 2, 3];
   const CardData = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 

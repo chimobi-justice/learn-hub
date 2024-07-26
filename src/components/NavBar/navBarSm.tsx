@@ -10,11 +10,19 @@ import {
   ListItem,
   Spacer,
   Text,
-  HStack
+  HStack,
+  Menu as ChakraMenu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Avatar,
+  MenuDivider,
 } from '@chakra-ui/react'
 import {
   IoIosCloseCircleOutline,
-  IoMdList
+  IoMdList,
+  IoIosArrowUp,
+  IoIosArrowDown
 } from 'react-icons/io'
 
 import { colors } from '../../colors'
@@ -23,6 +31,8 @@ import { Menu } from '@constant/Menu'
 
 const NavBarSm: FunctionComponent = () => {
   const [open, setOpen] = useState<boolean>(false);
+
+  const isLoggedIn = false;
 
   const handleDrawerBox = () => {
     setOpen((prevState) => !prevState);
@@ -115,35 +125,81 @@ const NavBarSm: FunctionComponent = () => {
               </List>
 
               <Box py="20px" w="100%">
-                <VStack spacing={5}>
-                  <Link to="/auth/login" style={{ width: "100%" }}>
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      width="100%"
-                      type="button"
-                      fontWeight={"semibold"}
-                      rounded="sm"
-                      onClick={() => setOpen(false)}
-                    >
-                      Sign in
-                    </Button>
-                  </Link>
+                {isLoggedIn ? (
+                  <Box position={"absolute"} bottom={"10px"}>
+                    <ChakraMenu>
+                      {({ isOpen }) => (
+                        <>
+                          <MenuButton as={Box} cursor="pointer">
+                            <Box display={"flex"} alignItems={"center"} gap="20px">
+                              <Box display={"flex"} alignItems={"center"} gap="12px">
+                                <Avatar
+                                  size={"sm"}
+                                  name="justice chimobi"
+                                />
+                                <Box>
+                                  <Text
+                                    fontSize={"14px"}
+                                    fontWeight={400}
+                                    color={colors.primary}
+                                  >
+                                    Justice Chimobi
+                                  </Text>
+                                </Box>
+                              </Box>
+                              {isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                            </Box>
+                          </MenuButton>
+                          <MenuList>
+                            <MenuItem color={"blcack"}>
+                              Your Profile
+                            </MenuItem>
+                            <MenuItem color={"black"}>
+                              Your Articles
+                            </MenuItem>
+                            <MenuItem color={"black"}>
+                              Settings
+                            </MenuItem>
+                            <MenuDivider />
+                            <MenuItem color={"black"}>
+                              Logout
+                            </MenuItem>
+                          </MenuList>
+                        </>
+                      )}
+                    </ChakraMenu>
+                  </Box>
+                ) : (
+                  <VStack spacing={5}>
+                    <Link to="/auth/login" style={{ width: "100%" }}>
+                      <Button
+                        variant="outline"
+                        size="lg"
+                        width="100%"
+                        type="button"
+                        fontWeight={"semibold"}
+                        rounded="sm"
+                        onClick={() => setOpen(false)}
+                      >
+                        Sign in
+                      </Button>
+                    </Link>
 
-                  <Link to="/auth/register" style={{ width: "100%" }}>
-                    <Button
-                      variant="solid"
-                      size="lg"
-                      width="100%"
-                      type="button"
-                      fontWeight={"semibold"}
-                      rounded="sm"
-                      onClick={() => setOpen(false)}
-                    >
-                      Sign up
-                    </Button>
-                  </Link>
-                </VStack>
+                    <Link to="/auth/register" style={{ width: "100%" }}>
+                      <Button
+                        variant="solid"
+                        size="lg"
+                        width="100%"
+                        type="button"
+                        fontWeight={"semibold"}
+                        rounded="sm"
+                        onClick={() => setOpen(false)}
+                      >
+                        Sign up
+                      </Button>
+                    </Link>
+                  </VStack>
+                )}
               </Box>
             </Box>
           </Box>

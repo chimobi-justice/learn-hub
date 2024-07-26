@@ -1,9 +1,10 @@
+import { FunctionComponent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Box, Center, Heading, Text } from '@chakra-ui/react'
 
 import { Button } from '@components/index'
 
-const NotFound = () => {
+const NotFound: FunctionComponent = () => {
   const navigate = useNavigate();
 
   return (

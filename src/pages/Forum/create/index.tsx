@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FunctionComponent, useState } from 'react'
 import { 
   Box, 
   FormControl, 
@@ -9,7 +9,7 @@ import 'react-quill/dist/quill.snow.css'
 
 import Button from '@components/Button'
 
-const CreateForum = () => {
+const CreateForum: FunctionComponent = () => {
   const [value, setValue] = useState<string>('');
 
   return (

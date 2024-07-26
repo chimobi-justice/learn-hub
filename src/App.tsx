@@ -18,6 +18,7 @@ import CreateArticle from '@pages/Articles/create'
 import Login from '@pages/Auth/Login'
 import Register from '@pages/Auth/Register'
 import Profile from '@pages/Users/Profile'
+import ProfileEdit from '@pages/Users/Settings'
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -32,7 +33,8 @@ const routes = createBrowserRouter(
         <Route index path='/articles/:slug' element={<ShowArticle />} />
         <Route index path='/articles/new' element={<CreateArticle />} />
 
-        <Route index path='/user/lnb/:id' element={<Profile />} />
+        <Route index path='/user/lnb/:user' element={<Profile />} />
+        <Route index path='/user/lnb/:user/edit' element={<ProfileEdit />} />
 
         <Route index path='/auth/login' element={<Login />} />
         <Route index path='/auth/register' element={<Register />} />

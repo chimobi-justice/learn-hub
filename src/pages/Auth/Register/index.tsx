@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Box,
@@ -13,7 +14,7 @@ import {
 import { Button, Input } from '@components/index'
 import { colors } from '../../../colors'
 
-const Register = () => {
+const Register: FunctionComponent = () => {
   return (
     <Box
       width={{ base: "100%", md: "35%" }}

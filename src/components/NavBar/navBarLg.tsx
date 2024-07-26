@@ -1,13 +1,28 @@
 import { FunctionComponent } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { Box, Container, Heading, HStack, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Container,
+  Heading,
+  HStack,
+  Text,
+  Menu as ChakraMenu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Avatar,
+  MenuDivider,
+} from '@chakra-ui/react'
 import { FaRegUser } from 'react-icons/fa'
+import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io'
 
 import Button from '@components/Button'
 import { colors } from '../../colors'
 import { Menu } from '@constant/Menu'
 
 const NavBarLg: FunctionComponent = () => {
+  const isLoggedIn = false;
+
   return (
     <Box
       as="nav"
@@ -49,32 +64,80 @@ const NavBarLg: FunctionComponent = () => {
             ))}
           </Box>
 
-          <HStack spacing={4}>
-            <Link to="/auth/login">
-              <Button
-                variant="outline"
-                size="md"
-                type="button"
-                fontWeight={"semibold"}
-                rounded="lg"
-              >
-                Login
-              </Button>
-            </Link>
 
-            <Link to="/auth/register">
-              <Button
-                variant="solid"
-                size="md"
-                type="button"
-                fontWeight={"semibold"}
-                rounded="lg"
-                leftIcon={<FaRegUser />}
-              >
-                Sign up
-              </Button>
-            </Link>
-          </HStack>
+          {isLoggedIn ? (
+            <Box>
+              <ChakraMenu>
+                {({ isOpen }) => (
+                  <>
+                    <MenuButton as={Box} cursor="pointer">
+                      <Box display={"flex"} alignItems={"center"} gap="20px">
+                        <Box display={"flex"} alignItems={"center"} gap="12px">
+                          <Avatar
+                            size={"sm"}
+                            name="justice chimobi"
+                          />
+                          <Box>
+                            <Text
+                              fontSize={"14px"}
+                              fontWeight={400}
+                              color={colors.primary}
+                            >
+                              Justice Chimobi
+                            </Text>
+                          </Box>
+                        </Box>
+                        {isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                      </Box>
+                    </MenuButton>
+                    <MenuList>
+                      <MenuItem color={"blcack"}>
+                        Your Profile
+                      </MenuItem>
+                      <MenuItem color={"black"}>
+                        Your Articles
+                      </MenuItem>
+                      <MenuItem color={"black"}>
+                        Settings
+                      </MenuItem>
+                      <MenuDivider />
+                      <MenuItem color={"black"}>
+                        Logout
+                      </MenuItem>
+                    </MenuList>
+                  </>
+                )}
+              </ChakraMenu>
+            </Box>
+          ) : (
+
+            <HStack spacing={4}>
+              <Link to="/auth/login">
+                <Button
+                  variant="outline"
+                  size="md"
+                  type="button"
+                  fontWeight={"semibold"}
+                  rounded="lg"
+                >
+                  Login
+                </Button>
+              </Link>
+
+              <Link to="/auth/register">
+                <Button
+                  variant="solid"
+                  size="md"
+                  type="button"
+                  fontWeight={"semibold"}
+                  rounded="lg"
+                  leftIcon={<FaRegUser />}
+                >
+                  Sign up
+                </Button>
+              </Link>
+            </HStack>
+          )}
         </Box>
       </Container>
     </Box>
