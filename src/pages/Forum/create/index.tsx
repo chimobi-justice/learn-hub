@@ -10,11 +10,10 @@ import 'react-quill/dist/quill.snow.css'
 import Button from '@components/Button'
 
 const CreateForum = () => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState<string>('');
 
   return (
-    <Box width={"50%"} m={"2rem auto"}>
-
+    <Box width={{ base: "98%", md: "50%"}} m={"2rem auto"}>
       <form>
         <FormControl my={"2.5rem"}>
           <Input type='email' py={"60px"}  size={"lg"} fontSize={"3rem"} variant='flushed' colorScheme="gray" placeholder="Title" />

@@ -6,6 +6,7 @@ import {
   ArticlesCard,
   Button
 } from '@components/index'
+import { Link } from 'react-router-dom';
 
 const Articles = () => {
   const CardLatestData = [1, 2, 3];
@@ -16,7 +17,28 @@ const Articles = () => {
       width={"90%"}
       m={"4rem auto"}
     >
-      <Heading pb={"15px"} size={"xl"}>Articles</Heading>
+      <Box 
+        display={"flex"} 
+        justifyContent={"space-between"}
+        flexDir={{base: "column", md: "row"}}
+      >
+        <Heading pb={"15px"} size={"xl"}>Articles</Heading>
+
+        <Box mb={"15px"}>
+          <Link to="/articles/new">
+            <Button
+              variant="solid"
+              size={{ base: "md", lg: "lg" }}
+              width={{ base: "100%", lg: "auto" }}
+              type="button"
+              fontWeight={"semibold"}
+              rounded="sm"
+            >
+              Create Articles
+            </Button>
+          </Link>
+        </Box>
+      </Box>
 
       <SimpleGrid minChildWidth="300px" spacing={3}>
         {CardLatestData?.map((index) => (
