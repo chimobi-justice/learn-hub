@@ -11,11 +11,12 @@ import {
   Image,
   Text
 } from '@chakra-ui/react'
-import { FaGithub, FaXTwitter } from "react-icons/fa6";
-import { GiWorld } from "react-icons/gi";
+import { FaGithub, FaXTwitter } from 'react-icons/fa6'
+import { GiWorld } from 'react-icons/gi'
 
 import { RecommendTopicCard, FollowCard, Button } from '@components/index'
 import AvatarPic from '@assets/images/avatar.jpg'
+import CoverPic from '@assets/images/cover.jpg'
 
 const Profile: FunctionComponent = () => {
   return (
@@ -37,8 +38,8 @@ const Profile: FunctionComponent = () => {
             <CardHeader p={"0px"} position={"relative"}>
               <Image
                 objectFit='cover'
-                src='https://bit.ly/dan-abramov'
-                alt='Dan Abramov'
+                src={CoverPic}
+                alt='cover photo'
                 height={"200px"}
                 width={"100%"}
                 borderRadius="md"
@@ -47,8 +48,8 @@ const Profile: FunctionComponent = () => {
               <Box
                 position={"absolute"}
                 bottom={"-5%"}
-                left={"50%"}
-                transform={"translateX(-50%)"}
+                left={"0%"}
+                transform={"translateX(15%)"}
                 border={"4px solid white"}
                 borderRadius={"full"}
                 boxShadow={"md"}
@@ -72,23 +73,23 @@ const Profile: FunctionComponent = () => {
 
                 <HStack
                   spacing={3}
-                  mt={"10px"}
+                  my={"10px"}
                 >
-                  <Link to="github.com">
+                  <Link to="github.com" target="_blank">
                     <Text
                       fontSize={{ base: "15px", md: "18px" }}
                     >
                       <FaGithub style={{ fontSize: "24px", marginBottom: "5px" }} />
                     </Text>
                   </Link>
-                  <Link to="x.com">
+                  <Link to="x.com" target="_blank">
                     <Text
                       fontSize={{ base: "15px", md: "18px" }}
                     >
                       <FaXTwitter style={{ fontSize: "24px", marginBottom: "5px" }} />
                     </Text>
                   </Link>
-                  <Link to="google.com">
+                  <Link to="google.com" target="_blank">
                     <Text
                       fontSize={{ base: "15px", md: "18px" }}
                     >
@@ -99,7 +100,7 @@ const Profile: FunctionComponent = () => {
               </Box>
 
               <Box>
-                <Link to="/user/lnb/justice-chimobi/edit">
+                <Link to="/me/settings/account/edit">
                   <Button
                     variant="solid"
                     size={{ base: "sm", lg: "md" }}
