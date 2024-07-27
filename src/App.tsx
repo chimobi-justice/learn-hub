@@ -15,10 +15,12 @@ import Articles from '@pages/Articles'
 import ShowArticle from '@pages/Articles/show'
 import CreateArticle from '@pages/Articles/create'
 
-import Login from '@pages/Auth/Login'
-import Register from '@pages/Auth/Register'
 import Profile from '@pages/Users/Profile'
 import ProfileEdit from '@pages/Users/Settings'
+import UserViews from '@pages/Users/UserViews'
+
+import Login from '@pages/Auth/Login'
+import Register from '@pages/Auth/Register'
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -33,8 +35,9 @@ const routes = createBrowserRouter(
         <Route index path='/articles/:slug' element={<ShowArticle />} />
         <Route index path='/articles/new' element={<CreateArticle />} />
 
-        <Route index path='/user/lnb/:user' element={<Profile />} />
-        <Route index path='/user/lnb/:user/edit' element={<ProfileEdit />} />
+        <Route index path='/me/:username' element={<Profile />} />
+        <Route index path='/me/settings/account/edit' element={<ProfileEdit />} />
+        <Route index path='/me/views/:username' element={<UserViews />} />
 
         <Route index path='/auth/login' element={<Login />} />
         <Route index path='/auth/register' element={<Register />} />

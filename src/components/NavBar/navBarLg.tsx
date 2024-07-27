@@ -91,15 +91,21 @@ const NavBarLg: FunctionComponent = () => {
                       </Box>
                     </MenuButton>
                     <MenuList>
-                      <MenuItem color={"blcack"}>
-                        Your Profile
-                      </MenuItem>
-                      <MenuItem color={"black"}>
-                        Your Articles
-                      </MenuItem>
-                      <MenuItem color={"black"}>
-                        Settings
-                      </MenuItem>
+                      <Link to="/me/@justice-chimobi">
+                        <MenuItem color={"blcack"}>
+                          Your Profile
+                        </MenuItem>
+                      </Link>
+                      <Link to="/me/views/@justice-chimobi">
+                        <MenuItem color={"black"}>
+                          Your Stories
+                        </MenuItem>
+                      </Link>
+                      <Link to="/me/settings/account/edit">
+                        <MenuItem color={"black"}>
+                          Settings
+                        </MenuItem>
+                      </Link>
                       <MenuDivider />
                       <MenuItem color={"black"}>
                         Logout

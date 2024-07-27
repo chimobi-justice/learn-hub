@@ -151,15 +151,30 @@ const NavBarSm: FunctionComponent = () => {
                             </Box>
                           </MenuButton>
                           <MenuList>
-                            <MenuItem color={"blcack"}>
-                              Your Profile
-                            </MenuItem>
-                            <MenuItem color={"black"}>
-                              Your Articles
-                            </MenuItem>
-                            <MenuItem color={"black"}>
-                              Settings
-                            </MenuItem>
+                            <Link 
+                              to="/me/@justice-chimobi"
+                              onClick={() => setOpen(false)}
+                            >
+                              <MenuItem color={"blcack"}>
+                                Your Profile
+                              </MenuItem>
+                            </Link>
+                            <Link 
+                              to="/me/views/@justice-chimobi"
+                              onClick={() => setOpen(false)}
+                            >
+                              <MenuItem color={"black"}>
+                                Your Stories
+                              </MenuItem>
+                            </Link>
+                            <Link 
+                              to="/me/settings/account/edit"
+                              onClick={() => setOpen(false)}
+                            >
+                              <MenuItem color={"black"}>
+                                Settings
+                              </MenuItem>
+                            </Link>
                             <MenuDivider />
                             <MenuItem color={"black"}>
                               Logout
