@@ -21,6 +21,7 @@ import UserViews from '@pages/Users/UserViews'
 
 import Login from '@pages/Auth/Login'
 import Register from '@pages/Auth/Register'
+import PrivateRoutes from './Route/privateRoute'
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -29,15 +30,17 @@ const routes = createBrowserRouter(
         <Route index path='/' element={<Home />} />
         <Route index path='/forum' element={<Forum />} />
         <Route index path='/forum/:slug' element={<ShowForum />} />
-        <Route index path='/forum/new' element={<CreateForum />} />
 
         <Route index path='/articles' element={<Articles />} />
         <Route index path='/articles/:slug' element={<ShowArticle />} />
-        <Route index path='/articles/new' element={<CreateArticle />} />
 
-        <Route index path='/me/:username' element={<Profile />} />
-        <Route index path='/me/settings/account/edit' element={<ProfileEdit />} />
-        <Route index path='/me/views/:username' element={<UserViews />} />
+        {/* private route */}
+        <Route path="/articles/new" element={<PrivateRoutes element={<CreateArticle />} />} />
+        <Route path="/forum/new" element={<PrivateRoutes element={<CreateForum />} />} />
+        <Route path="/me/:username" element={<PrivateRoutes element={<Profile />} />} />
+        <Route path="/me/settings/account/edit" element={<PrivateRoutes element={<ProfileEdit />} />} />
+        <Route path="/me/views/:username" element={<PrivateRoutes element={<UserViews />} />} />
+        {/* end private route */}
 
         <Route index path='/auth/login' element={<Login />} />
         <Route index path='/auth/register' element={<Register />} />
@@ -50,7 +53,7 @@ const routes = createBrowserRouter(
 
 const App = () => {
   return (
-    <RouterProvider router={routes}/>
+    <RouterProvider router={routes} />
   )
 }
 

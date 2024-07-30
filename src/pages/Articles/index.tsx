@@ -8,8 +8,11 @@ import {
   Button
 } from '@components/index'
 import { Link } from 'react-router-dom';
+import { useUser } from '@context/userContext';
 
 const Articles: FunctionComponent = () => {
+  const { user } = useUser();
+
   const CardLatestData = [1, 2, 3];
   const CardData = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -25,20 +28,22 @@ const Articles: FunctionComponent = () => {
       >
         <Heading pb={"15px"} size={"xl"}>Articles</Heading>
 
-        <Box mb={"15px"}>
-          <Link to="/articles/new">
-            <Button
-              variant="solid"
-              size={{ base: "md", lg: "lg" }}
-              width={{ base: "100%", lg: "auto" }}
-              type="button"
-              fontWeight={"semibold"}
-              rounded="sm"
-            >
-              Create Articles
-            </Button>
-          </Link>
-        </Box>
+        {user && (
+          <Box mb={"15px"}>
+            <Link to="/articles/new">
+              <Button
+                variant="solid"
+                size={{ base: "md", lg: "lg" }}
+                width={{ base: "100%", lg: "auto" }}
+                type="button"
+                fontWeight={"semibold"}
+                rounded="sm"
+              >
+                Create Articles
+              </Button>
+            </Link>
+          </Box>
+        )}
       </Box>
 
       <SimpleGrid minChildWidth="300px" spacing={3}>
