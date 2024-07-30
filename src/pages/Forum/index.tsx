@@ -21,8 +21,11 @@ import truncate from '@helpers/truncate'
 import { Button, Search, FollowCard, RecommendTopicCard } from '@components/index'
 import DiscussionCard from '@pages/Forum/components/discussionCard'
 import AvatarPic from '@assets/images/avatar.jpg'
+import { useUser } from '@context/userContext'
 
 const Forum: FunctionComponent = () => {
+  const { user } = useUser();
+
   const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
@@ -32,20 +35,22 @@ const Forum: FunctionComponent = () => {
     >
       <Heading pb={"15px"} size={"xl"}>Forum</Heading>
 
-      <Box mb={"15px"}>
-        <Link to="/forum/new">
-          <Button
-            variant="solid"
-            size={{ base: "md", lg: "lg" }}
-            width={{ base: "100%", lg: "auto" }}
-            type="button"
-            fontWeight={"semibold"}
-            rounded="sm"
-          >
-            Create Forum
-          </Button>
-        </Link>
-      </Box>
+      {user && (
+        <Box mb={"15px"}>
+          <Link to="/forum/new">
+            <Button
+              variant="solid"
+              size={{ base: "md", lg: "lg" }}
+              width={{ base: "100%", lg: "auto" }}
+              type="button"
+              fontWeight={"semibold"}
+              rounded="sm"
+            >
+              Create Forum
+            </Button>
+          </Link>
+        </Box>
+      )}
       <Box
         display={"flex"}
         justifyContent={"space-between"}

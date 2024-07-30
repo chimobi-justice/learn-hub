@@ -28,11 +28,12 @@ import {
 import { colors } from '../../colors'
 import { Button } from '@components/index'
 import { Menu } from '@constant/Menu'
+import { useUser } from '@context/userContext'
 
 const NavBarSm: FunctionComponent = () => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const isLoggedIn = false;
+  const { user } = useUser();
 
   const handleDrawerBox = () => {
     setOpen((prevState) => !prevState);
@@ -125,7 +126,7 @@ const NavBarSm: FunctionComponent = () => {
               </List>
 
               <Box py="20px" w="100%">
-                {isLoggedIn ? (
+                {user ? (
                   <Box position={"absolute"} bottom={"10px"}>
                     <ChakraMenu>
                       {({ isOpen }) => (
@@ -135,7 +136,7 @@ const NavBarSm: FunctionComponent = () => {
                               <Box display={"flex"} alignItems={"center"} gap="12px">
                                 <Avatar
                                   size={"sm"}
-                                  name="justice chimobi"
+                                  name={user?.data?.fullname}
                                 />
                                 <Box>
                                   <Text
@@ -143,7 +144,7 @@ const NavBarSm: FunctionComponent = () => {
                                     fontWeight={400}
                                     color={colors.primary}
                                   >
-                                    Justice Chimobi
+                                    {user?.data?.fullname}
                                   </Text>
                                 </Box>
                               </Box>

@@ -10,7 +10,10 @@
       "@helpers/*": ["src/helpers/*"],
       "@context/*": ["src/context/*"],
       "@constant/*": ["src/constant/*"],
-      "@pages/*": ["src/pages/*"]
+      "@pages/*": ["src/pages/*"],
+      "@api/*": ["src/api/*"],
+      "@services/*": ["src/services/*"],
+      "@validations/*": ["src/validations/*"],
     },
 
     "composite": true,

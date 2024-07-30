@@ -14,6 +14,8 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@tanstack/react-query": "^5.50.1",
+    "axios": "^1.7.2",
+    "formik": "^2.4.6",
     "framer-motion": "^11.2.13",
     "highlight.js": "^11.10.0",
     "react": "^18.3.1",
@@ -21,7 +23,9 @@
     "react-icons": "^5.2.1",
     "react-markdown": "^9.0.1",
     "react-quill": "^2.0.0",
-    "react-router-dom": "^6.24.1"
+    "react-router-dom": "^6.24.1",
+    "react-toastify": "^10.0.5",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

@@ -14,7 +14,10 @@ export default defineConfig({
       '@errorBoundary': '/src/ErrorBoundary',
       '@helpers': '/src/helpers',
       '@context': '/src/context',
-      '@constant': '/src/constant'
+      '@constant': '/src/constant',
+      '@api': '/src/api',
+      '@services': '/src/services',
+      '@validations': '/src/validations'
     }
   }
 })

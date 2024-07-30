@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { ChangeEvent, FocusEvent, FunctionComponent } from 'react'
 import { Input as ChakraInput } from '@chakra-ui/react'
 
 import { colors } from '../../colors'
@@ -9,8 +9,8 @@ interface IProps {
   name: string;
   width?: string;
   placeholder: string;
-  onBlur?: () => void;
-  onChange?: () => void;
+  onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input: FunctionComponent<IProps> = ({
@@ -18,7 +18,9 @@ const Input: FunctionComponent<IProps> = ({
   value,
   name,
   width,
-  placeholder
+  placeholder,
+  onBlur,
+  onChange
 
 }) => {
   return (
@@ -38,7 +40,8 @@ const Input: FunctionComponent<IProps> = ({
         fontSize: "14px",
         fontWeight: 400,
       }}
-
+      onBlur={onBlur}
+      onChange={onChange}
     />
   )
 }

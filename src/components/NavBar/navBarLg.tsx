@@ -19,9 +19,16 @@ import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io'
 import Button from '@components/Button'
 import { colors } from '../../colors'
 import { Menu } from '@constant/Menu'
+import { useUser } from '@context/userContext'
+import { useSignOut } from '@hooks/auth/useSignOut'
 
-const NavBarLg: FunctionComponent = () => {
-  const isLoggedIn = false;
+const NavBarLg: FunctionComponent = () => {  
+  const { user } = useUser();
+  const { signOutMutation } = useSignOut()
+
+  const handleLoggedOut = () => {
+    signOutMutation.mutate();
+  };
 
   return (
     <Box
@@ -64,8 +71,7 @@ const NavBarLg: FunctionComponent = () => {
             ))}
           </Box>
 
-
-          {isLoggedIn ? (
+          {user ? (
             <Box>
               <ChakraMenu>
                 {({ isOpen }) => (
@@ -75,15 +81,15 @@ const NavBarLg: FunctionComponent = () => {
                         <Box display={"flex"} alignItems={"center"} gap="12px">
                           <Avatar
                             size={"sm"}
-                            name="justice chimobi"
+                            name={user?.data?.fullname}
                           />
                           <Box>
                             <Text
                               fontSize={"14px"}
                               fontWeight={400}
-                              color={colors.primary}
+                              color={"#000"}
                             >
-                              Justice Chimobi
+                              {user?.data?.fullname}
                             </Text>
                           </Box>
                         </Box>
@@ -107,7 +113,7 @@ const NavBarLg: FunctionComponent = () => {
                         </MenuItem>
                       </Link>
                       <MenuDivider />
-                      <MenuItem color={"black"}>
+                      <MenuItem color={"black"} onClick={handleLoggedOut}>
                         Logout
                       </MenuItem>
                     </MenuList>
@@ -116,7 +122,6 @@ const NavBarLg: FunctionComponent = () => {
               </ChakraMenu>
             </Box>
           ) : (
-
             <HStack spacing={4}>
               <Link to="/auth/login">
                 <Button
