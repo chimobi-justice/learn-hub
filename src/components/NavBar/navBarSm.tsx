@@ -29,11 +29,17 @@ import { colors } from '../../colors'
 import { Button } from '@components/index'
 import { Menu } from '@constant/Menu'
 import { useUser } from '@context/userContext'
+import { useSignOut } from '@hooks/auth/useSignOut'
 
 const NavBarSm: FunctionComponent = () => {
   const [open, setOpen] = useState<boolean>(false);
 
   const { user } = useUser();
+  const { signOutMutation } = useSignOut()
+
+  const handleLoggedOut = () => {
+    signOutMutation.mutate();
+  };
 
   const handleDrawerBox = () => {
     setOpen((prevState) => !prevState);
@@ -153,7 +159,7 @@ const NavBarSm: FunctionComponent = () => {
                           </MenuButton>
                           <MenuList>
                             <Link 
-                              to="/me/@justice-chimobi"
+                              to={`/me/@${user?.data?.username}`}
                               onClick={() => setOpen(false)}
                             >
                               <MenuItem color={"blcack"}>
@@ -161,7 +167,7 @@ const NavBarSm: FunctionComponent = () => {
                               </MenuItem>
                             </Link>
                             <Link 
-                              to="/me/views/@justice-chimobi"
+                              to={`/me/views/@${user?.data?.username}`}
                               onClick={() => setOpen(false)}
                             >
                               <MenuItem color={"black"}>
@@ -177,7 +183,7 @@ const NavBarSm: FunctionComponent = () => {
                               </MenuItem>
                             </Link>
                             <MenuDivider />
-                            <MenuItem color={"black"}>
+                            <MenuItem color={"black"} onClick={handleLoggedOut}>
                               Logout
                             </MenuItem>
                           </MenuList>

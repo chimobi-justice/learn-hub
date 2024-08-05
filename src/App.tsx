@@ -21,7 +21,7 @@ import UserViews from '@pages/Users/UserViews'
 
 import Login from '@pages/Auth/Login'
 import Register from '@pages/Auth/Register'
-import PrivateRoutes from './Route/privateRoute'
+import PrivateRoute from './Route/privateRoute'
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -35,11 +35,11 @@ const routes = createBrowserRouter(
         <Route index path='/articles/:slug' element={<ShowArticle />} />
 
         {/* private route */}
-        <Route path="/articles/new" element={<PrivateRoutes element={<CreateArticle />} />} />
-        <Route path="/forum/new" element={<PrivateRoutes element={<CreateForum />} />} />
-        <Route path="/me/:username" element={<PrivateRoutes element={<Profile />} />} />
-        <Route path="/me/settings/account/edit" element={<PrivateRoutes element={<ProfileEdit />} />} />
-        <Route path="/me/views/:username" element={<PrivateRoutes element={<UserViews />} />} />
+        <Route path="/articles/new" element={<PrivateRoute element={<CreateArticle />} />} />
+        <Route path="/forum/new" element={<PrivateRoute element={<CreateForum />} />} />
+        <Route path="/me/:username" element={<PrivateRoute element={<Profile />} />} />
+        <Route path="/me/settings/account/edit" element={<PrivateRoute element={<ProfileEdit />} />} />
+        <Route path="/me/views/:username" element={<PrivateRoute element={<UserViews />} />} />
         {/* end private route */}
 
         <Route index path='/auth/login' element={<Login />} />

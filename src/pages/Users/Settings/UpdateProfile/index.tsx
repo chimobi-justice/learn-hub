@@ -5,25 +5,59 @@ import {
   Card,
   CardBody,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   IconButton,
-  SimpleGrid
+  SimpleGrid,
+  Spinner
 } from '@chakra-ui/react'
-import { FaCamera } from 'react-icons/fa6';
+import { Formik, Field } from 'formik'
+import { FaCamera } from 'react-icons/fa6'
 
-import {
-  Button,
-  Input,
-  TextArea
-} from '@components/index'
+import { Button, Input, TextArea } from '@components/index'
 import { colors } from '../../../../colors'
-import AvatarPic from '@assets/images/avatar.jpg'
+import { useUpdateProfile } from '@hooks/user/useUpdateProfile'
+import { useUpdateAvatar } from '@hooks/user/useUpdateAvatar'
+import { useImageUpload } from '@hooks/useImageUpload'
+import { UpdateProfileRequest } from '@api/index'
+import { updateProfilevalidateSchema } from '@validations/updateProfile'
+import { useUser } from '@context/userContext'
+import { capitalizeFirstLetter } from '@helpers/capitalize'
 
 const UpdateProfile: FunctionComponent = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const { user } = useUser();
+  const { updateProfileMutation } = useUpdateProfile();
+  const { updateProfileAvatarMutation } = useUpdateAvatar();
+  const res = user?.data;
+
+  const initialValues: UpdateProfileRequest = {
+    fullname: res?.fullname ?? '',
+    username: res?.username ?? '',
+    email: res?.email ?? '',
+    avatar: res?.avatar ?? '',
+    twitter: res?.twitter ?? '',
+    gitHub: res?.gitHub ?? '',
+    website: res?.website ?? '',
+    profile_headlines: res?.profile_headlines ?? '',
+    state: res?.state ?? '',
+    country: res?.country ?? '',
+    bio: res?.bio ?? '',
+  };
+
+  const { handleFileUpload, loading: imageUploadLoading } = useImageUpload({
+    onSuccess: (data) => {
+      updateProfileAvatarMutation.mutate({ avatar: data.imageUploadUrl });
+    },
+  });
+
+  const handleUpdateProfile = (values: UpdateProfileRequest) => {
+    updateProfileMutation.mutate(values);
+  };
+
   const handleClick = () => {
-    fileInputRef.current?.click(); 
+    fileInputRef.current?.click();
   };
 
   return (
@@ -40,109 +74,119 @@ const UpdateProfile: FunctionComponent = () => {
             boxShadow="md"
             zIndex={1}
           >
-            <Avatar size="2xl" name="Segun Adebayo" src={AvatarPic} />
-            <IconButton
-              aria-label="Change avatar"
-              icon={<FaCamera />}
-              onClick={handleClick}
-              position="absolute"
-              bottom="0"
-              right="0"
-              borderRadius="full"
-              bg={colors.primary}
-              boxShadow="md"
-              size="lg"
-              m={2}
-            />
-            <input
-              type="file"
-              accept="image/*"
-              ref={fileInputRef}
-              style={{ display: 'none' }}
-              onChange={() => console.log("file clicked")}
-            />
- 
+            {imageUploadLoading ? (
+              <Spinner
+                size="xl"
+                thickness="4px"
+                speed="0.65s"
+                color={colors.primary}
+                position="absolute"
+                top="50%"
+                left="50%"
+                transform="translate(-50%, -50%)"
+                zIndex={2}
+              />
+            ) : (
+              <>
+                <Avatar size="2xl" name={res?.fullname} src={res?.avatar} />
+              
+                <IconButton
+                  aria-label="Change avatar"
+                  icon={<FaCamera />}
+                  onClick={handleClick}
+                  position="absolute"
+                  bottom="0"
+                  right="0"
+                  borderRadius="full"
+                  bg={colors.primary}
+                  boxShadow="md"
+                  size="lg"
+                  m={2}
+                />
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={fileInputRef}
+                  style={{ display: 'none' }}
+                  onChange={handleFileUpload}
+                />
+              </>
+            )}
           </Box>
         </Box>
-        <SimpleGrid minChildWidth="300px" spacing={3} mb={6}>
-          <FormControl isRequired>
-            <FormLabel>First Name</FormLabel>
-            <Input
-              type="text"
-              name="fullname"
-              placeholder="Full Name"
-            />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel>Username</FormLabel>
-            <Input
-              type="text"
-              name="username"
-              placeholder="Username"
-            />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel>Email Address</FormLabel>
-            <Input
-              type="email"
-              name="email"
-              placeholder="Email"
-            />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel>Twitter</FormLabel>
-            <Input
-              type="text"
-              name="twitter"
-              placeholder="@"
-            />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel>GitHub</FormLabel>
-            <Input
-              type="text"
-              name="github"
-              placeholder="github username"
-            />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel>Website</FormLabel>
-            <Input
-              type="url"
-              name="website"
-              placeholder="www.example.com"
-            />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel>Headlines</FormLabel>
-            <Input
-              type="text"
-              name="headlines"
-              placeholder="e.g., Frontend Developer"
-            />
-          </FormControl>
-        </SimpleGrid>
-        <Box mb={6}>
-          <FormControl isRequired>
-            <FormLabel>Short Bio</FormLabel>
-            <TextArea
-              placeholder="Tell us about yourself..."
-              name="bio"
-            />
-          </FormControl>
-        </Box>
-        <Box textAlign="right">
-          <Button
-            variant="solid"
-            size={{ base: "sm", lg: "md" }}
-            width={{ base: "100%", lg: "auto" }}
-            type="submit"
-            fontWeight="semibold"
-            rounded="sm"
-          >
-            Update Profile
-          </Button>
-        </Box>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={handleUpdateProfile}
+          validationSchema={updateProfilevalidateSchema}
+        >
+          {({ handleSubmit, errors, touched }) => (
+            <form onSubmit={handleSubmit}>
+              <SimpleGrid minChildWidth="300px" spacing={3} mb={6}>
+                {[
+                  { name: 'fullname', type: 'text', placeholder: 'eg, John Doe' },
+                  { name: 'username', type: 'text', placeholder: 'eg, john-doe' },
+                  { name: 'email', type: 'email', disabled: true },
+                  { name: 'twitter', type: 'text', placeholder: 'eg, @johndoe' },
+                  { name: 'gitHub', type: 'text', placeholder: 'eg, doejohn_' },
+                  { name: 'website', type: 'text', placeholder: 'eg, www.johndoe.com' },
+                  { name: 'profile_headlines', type: 'text', placeholder: 'eg, Frontend Developer || React' },
+                  { name: 'state', type: 'text', placeholder: 'Ebonyi' },
+                  { name: 'country', type: 'text', placeholder: 'Nigeria' },
+                ].map(({ name, type, disabled, placeholder }) => (
+                  <FormControl
+                    key={name}
+                    isRequired
+                    isInvalid={!!errors[name as keyof typeof errors] && touched[name as keyof typeof touched]}
+                  >
+                    <FormLabel htmlFor={name}>
+                      {capitalizeFirstLetter(name.replace('_', ' '))}
+                    </FormLabel>
+                    <Field
+                      as={Input}
+                      id={name}
+                      name={name}
+                      type={type}
+                      placeholder={placeholder}
+                      disabled={disabled}
+                    />
+                    <FormErrorMessage>{errors[name as keyof typeof errors]}</FormErrorMessage>
+                  </FormControl>
+                ))}
+              </SimpleGrid>
+
+              <Box mb={6}>
+                <FormControl
+                  isRequired
+                  isInvalid={!!errors.bio && touched.bio}
+                >
+                  <FormLabel htmlFor="bio">Bio</FormLabel>
+                  <Field
+                    as={TextArea}
+                    id="bio"
+                    name="bio"
+                    type="text"
+                    placeholder="Write a bio"
+                  />
+                  <FormErrorMessage>{errors.bio}</FormErrorMessage>
+                </FormControl>
+              </Box>
+
+              <Box textAlign="right">
+                <Button
+                  variant="solid"
+                  size={{ base: "sm", lg: "md" }}
+                  width={{ base: "100%", lg: "auto" }}
+                  type="submit"
+                  fontWeight="semibold"
+                  rounded="sm"
+                  isloading={updateProfileMutation.isPending}
+                >
+                  Update Profile
+                </Button>
+              </Box>
+            </form>
+          )}
+        </Formik>
       </CardBody>
     </Card>
   );

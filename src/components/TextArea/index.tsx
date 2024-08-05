@@ -16,8 +16,9 @@ const TextArea: FunctionComponent<IProps> = ({
   value,
   name,
   width,
-  placeholder
-
+  placeholder,
+  onBlur,
+  onChange
 }) => {
   return (
     <ChakraInput 
@@ -35,7 +36,8 @@ const TextArea: FunctionComponent<IProps> = ({
         fontSize: "14px",
         fontWeight: 400,
       }}
-
+      onBlur={onBlur}
+      onChange={onChange}
     />
   )
 }

@@ -15,10 +15,13 @@ import { FaGithub, FaXTwitter } from 'react-icons/fa6'
 import { GiWorld } from 'react-icons/gi'
 
 import { RecommendTopicCard, FollowCard, Button } from '@components/index'
-import AvatarPic from '@assets/images/avatar.jpg'
 import CoverPic from '@assets/images/cover.jpg'
+import { useUser } from '@context/userContext'
+import { colors } from '../../../colors'
 
 const Profile: FunctionComponent = () => {
+  const { user } = useUser();
+
   return (
     <Box
       m={"3rem auto"}
@@ -54,7 +57,7 @@ const Profile: FunctionComponent = () => {
                 borderRadius={"full"}
                 boxShadow={"md"}
               >
-                <Avatar size='2xl' name='Segun Adebayo' src={AvatarPic} />
+                <Avatar size='2xl' name={user?.data?.fullname} src={user?.data?.avatar} />
               </Box>
             </CardHeader>
             <CardBody
@@ -66,36 +69,56 @@ const Profile: FunctionComponent = () => {
 
             >
               <Box>
-                <Heading as={"h6"} size={"md"}>Justice Chimobi</Heading>
-                <Text fontSize={"17px"} lineHeight={"1.7em"}>Frontend Developer || Full stack || TypeScript || Reactjs || Laravel</Text>
-                <Text fontSize={"14px"} my={"5px"}>Lagos state, Nigeria</Text>
+                <Heading as={"h6"} size={"md"}>{user?.data?.fullname}</Heading>
+                <Text fontSize={"17px"} my={"7px"} lineHeight={"1.7em"}>{user?.data?.profile_headlines}</Text>
+                <Text fontSize={"14px"} my={"7px"}>{user?.data?.state}, {user?.data?.country}</Text>
                 <Text fontSize={"14px"}>20 followers - 2 following</Text>
 
                 <HStack
                   spacing={3}
                   my={"10px"}
                 >
-                  <Link to="github.com" target="_blank">
-                    <Text
-                      fontSize={{ base: "15px", md: "18px" }}
+                  {user?.data?.gitHub && (
+                    <Link
+                      to={`https://www.github.com/${user?.data?.gitHub}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      <FaGithub style={{ fontSize: "24px", marginBottom: "5px" }} />
-                    </Text>
-                  </Link>
-                  <Link to="x.com" target="_blank">
-                    <Text
-                      fontSize={{ base: "15px", md: "18px" }}
+                      <Text
+                        fontSize={{ base: "15px", md: "18px" }}
+                      >
+                        <FaGithub style={{ fontSize: "24px", marginBottom: "5px" }} />
+                      </Text>
+                    </Link>
+                  )}
+
+                  {user?.data?.gitHub && (
+                    <Link
+                      to={`https://x.com/${user?.data?.twitter}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      <FaXTwitter style={{ fontSize: "24px", marginBottom: "5px" }} />
-                    </Text>
-                  </Link>
-                  <Link to="google.com" target="_blank">
-                    <Text
-                      fontSize={{ base: "15px", md: "18px" }}
+                      <Text
+                        fontSize={{ base: "15px", md: "18px" }}
+                      >
+                        <FaXTwitter style={{ fontSize: "24px", marginBottom: "5px" }} />
+                      </Text>
+                    </Link>
+                  )}
+
+                  {user?.data?.gitHub && (
+                    <Link 
+                      to={user?.data?.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      <GiWorld style={{ fontSize: "24px", marginBottom: "5px" }} />
-                    </Text>
-                  </Link>
+                      <Text
+                        fontSize={{ base: "15px", md: "18px" }}
+                      >
+                        <GiWorld style={{ fontSize: "24px", marginBottom: "5px" }} />
+                      </Text>
+                    </Link>
+                  )}
                 </HStack>
               </Box>
 
@@ -122,27 +145,22 @@ const Profile: FunctionComponent = () => {
             </CardHeader>
             <CardBody mt={"15px"}>
               <Box>
-                <Text fontSize={"15px"} lineHeight={"1.7em"}>
-                  👋 Hi, I'm Justice, a multifaceted Software Developer based in Lagos, Nigeria. I'm passionate about crafting innovative web and mobile applications that make a difference. By day, I tackle complex technical challenges, and by night, I transform into a technical writer, sharing my knowledge with the community.
+                {user?.data?.bio && (
+                  <Text fontSize={"15px"} lineHeight={"1.7em"}>
+                    {user?.data?.bio}
+                  </Text>
+                )}
 
-                  As a skilled Software Developer, my expertise includes:
-
-                  - Reactjs
-                  - Nextjs
-                  - Typescript
-                  - React-Query
-                  - Redux
-                  - Laravel
-                  - Sass
-                  - Styled-Component
-                  - Ant-Design
-                  - Chakra-ui
-                  - Mui
-                  - Tailwind CSS
-                  - MySQL
-
-                  I'm a continuous learner, always seeking to improve my skills and stay up-to-date with the latest technologies. Let's connect and create something amazing together!
-                </Text>
+                {!user?.data?.bio && (
+                  <Heading fontSize={"15px"} lineHeight={"1.7em"}>
+                    Please edit your profile to see your bio! {" "}
+                    <Text as="span" color={colors.primary} textDecoration={"underline"}>
+                      <Link to="/me/settings/account/edit">
+                        Edit Profile
+                      </Link>
+                    </Text>
+                  </Heading>
+                )}
               </Box>
             </CardBody>
           </Card>
