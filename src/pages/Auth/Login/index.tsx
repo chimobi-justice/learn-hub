@@ -11,34 +11,25 @@ import {
   Text,
   FormErrorMessage
 } from '@chakra-ui/react'
+import { Formik, Field } from 'formik'
 
 import { Button, Input } from '@components/index'
 import { colors } from '../../../colors'
 import { useSignin } from '@hooks/auth/useSignin'
 import { SigninRequest } from '@api/index'
-import { useFormik } from 'formik'
 import { signInvalidateSchema } from '@validations/signin'
 
 const Login: FunctionComponent = () => {
   const { signinMutation } = useSignin();
 
-  const _handleSignin = (values: SigninRequest) => {
-    signinMutation.mutate({
-      email: values.email,
-      password: values.password,
-    })
-  }
+  const handleSignin = (values: SigninRequest) => {
+    signinMutation.mutate(values);
+  };
 
-  const formilk = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    onSubmit: _handleSignin,
-    validationSchema: signInvalidateSchema,
-  });
-
-  const { handleChange, handleBlur, handleSubmit, errors, values } = formilk;
+  const initialValues: SigninRequest = {
+    email: "",
+    password: ""
+  };
 
   return (
     <Box
@@ -50,73 +41,79 @@ const Login: FunctionComponent = () => {
           <Heading as={"h3"} size={"lg"} color={"#0009"}>Welcome back</Heading>
         </CardHeader>
         <CardBody>
-          <form onSubmit={handleSubmit}>
-            <Box my={"15px"}>
-              <FormControl>
-                <FormLabel fontSize={"14px"} fontWeight={"bold"}>Email address</FormLabel>
-                <Input
-                  type='email'
-                  name='email'
-                  placeholder="Enter Email Address"
-                  value={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.email && (
-                  <FormErrorMessage>{errors.email}</FormErrorMessage>
-                )}
-              </FormControl>
-            </Box>
+          <Formik
+            initialValues={initialValues}
+            onSubmit={handleSignin}
+            validationSchema={signInvalidateSchema}
+          >
+            {({ handleSubmit, errors, touched }) => (
+              <form onSubmit={handleSubmit}>
+                <Box my={"15px"}>
+                  <FormControl
+                    isRequired
+                    isInvalid={!!errors.email && touched.email}
+                  >
+                    <FormLabel htmlFor="email">Email address</FormLabel>
+                    <Field
+                      as={Input}
+                      id="email"
+                      name="email"
+                      type="email"
+                    />
+                    <FormErrorMessage>{errors.email}</FormErrorMessage>
+                  </FormControl>
+                </Box>
 
-            <Box my={"15px"}>
-              <FormControl>
-                <FormLabel fontSize={"14px"} fontWeight={"bold"}>Password</FormLabel>
-                <Input
-                  type="password"
-                  name='password'
-                  placeholder="Enter Password"
-                  value={values.password}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.password && (
-                  <FormErrorMessage>{errors.password}</FormErrorMessage>
-                )}
-              </FormControl>
-            </Box>
+                <Box my={"15px"}>
+                  <FormControl
+                    isRequired
+                    isInvalid={!!errors.password && touched.password}
+                  >
+                    <FormLabel htmlFor="email">Password</FormLabel>
+                    <Field
+                      as={Input}
+                      id="password"
+                      name="password"
+                      type="password"
+                    />
+                    <FormErrorMessage>{errors.password}</FormErrorMessage>
+                  </FormControl>
+                </Box>
 
-            <Box my={"15px"}>
-              <Button
-                variant="solid"
-                size={{ base: "md", lg: "lg" }}
-                width={"100%"}
-                type="submit"
-                fontWeight={"semibold"}
-                rounded="sm"
-                isloading={signinMutation.isPending}
-              >
-                Sign In
-              </Button>
-            </Box>
+                <Box my={"15px"}>
+                  <Button
+                    variant="solid"
+                    size={{ base: "md", lg: "lg" }}
+                    width={"100%"}
+                    type="submit"
+                    fontWeight={"semibold"}
+                    rounded="sm"
+                    isloading={signinMutation.isPending}
+                  >
+                    Sign In
+                  </Button>
+                </Box>
 
-            <Text
-              fontSize={"14px"}
-              fontWeight={"300"}
-              textAlign={{ base: "center", md: "right" }}
-              color={"#0009"}
-            >
-              Don't have an account? {" "}
-              <Link to="/auth/register">
                 <Text
-                  as={"span"}
-                  color={colors.primary}
-                  _hover={{ textDecoration: "underline" }}
+                  fontSize={"14px"}
+                  fontWeight={"300"}
+                  textAlign={{ base: "center", md: "right" }}
+                  color={"#0009"}
                 >
-                  Sign Up
+                  Don't have an account? {" "}
+                  <Link to="/auth/register">
+                    <Text
+                      as={"span"}
+                      color={colors.primary}
+                      _hover={{ textDecoration: "underline" }}
+                    >
+                      Sign Up
+                    </Text>
+                  </Link>
                 </Text>
-              </Link>
-            </Text>
-          </form>
+              </form>
+            )}
+          </Formik>
         </CardBody>
       </Card>
     </Box>

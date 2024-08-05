@@ -1,53 +1,107 @@
 import { FunctionComponent } from 'react'
-import { 
-  Box, 
-  Card, 
-  CardBody, 
-  FormControl, 
-  FormLabel 
+import {
+  Box,
+  Card,
+  CardBody,
+  FormControl,
+  FormErrorMessage,
+  FormLabel
 } from '@chakra-ui/react'
+import { Formik, Field } from 'formik'
 
-import { 
-  Button, 
-  Input, 
-} from '@components/index'
+import { Button, Input } from '@components/index'
+import { useUpdatePassword } from '@hooks/user/useUpdatePassword'
+import { UpdatePasswordRequest } from '@api/index'
+import { updatePasswordvalidateSchema } from '@validations/updatePassword'
 
 const UpdatePassword: FunctionComponent = () => {
+  const { updatePasswordMutation } = useUpdatePassword();
+
+  const handleUpdatePassword = (values: UpdatePasswordRequest) => {
+    updatePasswordMutation.mutate(values)
+  };
+
+  const initialValues: UpdatePasswordRequest = {
+    current_password: "",
+    password: "",
+    password_confirmation: ""
+  };
+
   return (
     <Card mt={"10"}>
       <CardBody>
-        <FormControl isRequired>
-          <FormLabel>First name</FormLabel>
-          <Input
-            type="text"
-            name='fullname'
-            placeholder="Fullname"
-          />
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel>Username</FormLabel>
-          <Input
-            type="text"
-            name='username'
-            placeholder="Username"
-          />
-        </FormControl>
+        <Formik 
+          initialValues={initialValues} 
+          onSubmit={handleUpdatePassword} 
+          validationSchema={updatePasswordvalidateSchema}
+        >
+          {({ handleSubmit, errors, touched }) => (
+            <form onSubmit={handleSubmit}>
+              <Box my={"15px"}>
+                <FormControl 
+                  isRequired 
+                  isInvalid={!!errors.current_password && touched.current_password}
+                >
+                  <FormLabel htmlFor="current_password">Current Password</FormLabel>
+                  <Field 
+                    as={Input}
+                    id="current_password"
+                    name="current_password"
+                    type="password"
+                  />
+                  <FormErrorMessage>{errors.current_password}</FormErrorMessage>
+                </FormControl>
+              </Box>
 
-        <Box textAlign={"right"} mt={"10"}>
-          <Button
-            variant="solid"
-            size={{ base: "sm", lg: "md" }}
-            width={{ base: "100%", lg: "auto" }}
-            type="button"
-            fontWeight={"semibold"}
-            rounded="sm"
-          >
-            Update Password
-          </Button>
-        </Box>
+              <Box my={"15px"}>
+                <FormControl 
+                  isRequired 
+                  isInvalid={!!errors.password && touched.password}>
+                  <FormLabel htmlFor="password">New Password</FormLabel>
+                  <Field 
+                    as={Input}
+                    id="password"
+                    name="password"
+                    type="password"
+                  />
+                  <FormErrorMessage>{errors.password}</FormErrorMessage>
+                </FormControl>
+              </Box>
+
+              <Box my={"15px"}>
+                <FormControl 
+                  isRequired 
+                  isInvalid={!!errors.password_confirmation && touched.password_confirmation}>
+                  <FormLabel htmlFor="password_confirmation">Confirm New Password</FormLabel>
+                  <Field 
+                    as={Input}
+                    id="password_confirmation"
+                    name="password_confirmation"
+                    type="password"
+                  />
+                  <FormErrorMessage>{errors.password_confirmation}</FormErrorMessage>
+                </FormControl>
+              </Box>
+
+              <Box textAlign={"right"} mt={"10"}>
+                <Button
+                  variant="solid"
+                  size={{ base: "sm", lg: "md" }}
+                  width={{ base: "100%", lg: "auto" }}
+                  type="submit"
+                  fontWeight={"semibold"}
+                  rounded="sm"
+                  isloading={updatePasswordMutation.isPending}
+                >
+                  Update Password
+                </Button>
+              </Box>
+            </form>
+          )}
+        </Formik>
       </CardBody>
     </Card>
-  )
-}
+  );
+};
 
-export default UpdatePassword
+export default UpdatePassword;

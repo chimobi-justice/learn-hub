@@ -11,7 +11,7 @@ import {
   Text,
   FormErrorMessage,
 } from '@chakra-ui/react'
-import { useFormik } from 'formik'
+import { Formik, Field } from 'formik'
 
 import { Button, Input } from '@components/index'
 import { colors } from '../../../colors'
@@ -22,25 +22,15 @@ import { SignupRequest } from '@api/index'
 const Register: FunctionComponent = () => {
   const { signupMutation } = useSignup();
 
-  const _handleSignup = (values: SignupRequest) => {
-    signupMutation.mutate({
-      fullname: values.fullname,
-      email: values.email,
-      password: values.password,
-    })
-  }
+  const handleSignup = (values: SignupRequest) => {
+    signupMutation.mutate(values);
+  };
 
-  const formilk = useFormik({
-    initialValues: {
-      fullname: '',
-      email: '',
-      password: '',
-    },
-    onSubmit: _handleSignup,
-    validationSchema: signUpvalidateSchema,
-  });
-
-  const { handleChange, handleBlur, handleSubmit, errors, values } = formilk;
+  const initialValues: SignupRequest = {
+    fullname: "",
+    email: "",
+    password: ""
+  };
 
   return (
     <Box
@@ -52,88 +42,93 @@ const Register: FunctionComponent = () => {
           <Heading as={"h3"} size={"lg"} color={"#0009"}>Sign Up</Heading>
         </CardHeader>
         <CardBody>
-          <form onSubmit={handleSubmit}>
-            <Box mb={"15px"}>
-              <FormControl>
-                <FormLabel fontSize={"14px"} fontWeight={"bold"}>Full Name</FormLabel>
-                <Input
-                  type="text"
-                  name="fullname"
-                  placeholder="Enter Full Name"
-                  value={values.fullname}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.fullname && (
-                  <FormErrorMessage>{errors.fullname}</FormErrorMessage>
-                )}
-              </FormControl>
-            </Box>
-            <Box my={"15px"}>
-              <FormControl>
-                <FormLabel fontSize={"14px"} fontWeight={"bold"}>Email address</FormLabel>
-                <Input
-                  type="email"
-                  name="email"
-                  placeholder="Enter Email Address"
-                  value={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.email && (
-                  <FormErrorMessage>{errors.email}</FormErrorMessage>
-                )}
-              </FormControl>
-            </Box>
+          <Formik
+            initialValues={initialValues}
+            onSubmit={handleSignup}
+            validationSchema={signUpvalidateSchema}
+          >
+            {({ handleSubmit, errors, touched }) => (
+              <form onSubmit={handleSubmit}>
+                <Box mb={"15px"}>
+                  <FormControl
+                    isRequired
+                    isInvalid={!!errors.fullname && touched.fullname}
+                  >
+                    <FormLabel htmlFor="fullname">Fullname</FormLabel>
+                    <Field
+                      as={Input}
+                      id="fullname"
+                      name="fullname"
+                      type="text"
+                    />
+                    <FormErrorMessage>{errors.fullname}</FormErrorMessage>
+                  </FormControl>
+                </Box>
+                <Box my={"15px"}>
+                  <FormControl
+                    isRequired
+                    isInvalid={!!errors.email && touched.email}
+                  >
+                    <FormLabel htmlFor="email">Enter Email</FormLabel>
+                    <Field
+                      as={Input}
+                      id="email"
+                      name="email"
+                      type="email"
+                    />
+                    <FormErrorMessage>{errors.email}</FormErrorMessage>
+                  </FormControl>
+                </Box>
 
-            <Box my={"15px"}>
-              <FormControl>
-                <FormLabel fontSize={"14px"} fontWeight={"bold"}>Password</FormLabel>
-                <Input
-                  type="password"
-                  name='password'
-                  placeholder="Enter Password"
-                  value={values.password}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.password && (
-                  <FormErrorMessage>{errors.password}</FormErrorMessage>
-                )}
-              </FormControl>
-            </Box>
+                <Box my={"15px"}>
+                  <FormControl
+                    isRequired
+                    isInvalid={!!errors.password && touched.password}
+                  >
+                    <FormLabel htmlFor="password">Password</FormLabel>
+                    <Field
+                      as={Input}
+                      id="password"
+                      name="password"
+                      type="password"
+                    />
+                    <FormErrorMessage>{errors.password}</FormErrorMessage>
+                  </FormControl>
+                </Box>
 
-            <Box my={"20px"}>
-              <Button
-                variant="solid"
-                size={{ base: "md", lg: "lg" }}
-                width={"100%"}
-                type="submit"
-                fontWeight={"semibold"}
-                rounded="sm"
-                isloading={signupMutation.isPending}
-              >
-                Sign Up
-              </Button>
-            </Box>
-            <Text
-              fontSize={"14px"}
-              fontWeight={"300"}
-              textAlign={{ base: "center", md: "right" }}
-              color={"#0009"}
-            >
-              Already have an account? {" "}
-              <Link to="/auth/login">
+                <Box my={"20px"}>
+                  <Button
+                    variant="solid"
+                    size={{ base: "md", lg: "lg" }}
+                    width={"100%"}
+                    type="submit"
+                    fontWeight={"semibold"}
+                    rounded="sm"
+                    isloading={signupMutation.isPending}
+                  >
+                    Sign Up
+                  </Button>
+                </Box>
                 <Text
-                  as={"span"}
-                  color={colors.primary}
-                  _hover={{ textDecoration: "underline" }}
+                  fontSize={"14px"}
+                  fontWeight={"300"}
+                  textAlign={{ base: "center", md: "right" }}
+                  color={"#0009"}
                 >
-                  Sign In
+                  Already have an account? {" "}
+                  <Link to="/auth/login">
+                    <Text
+                      as={"span"}
+                      color={colors.primary}
+                      _hover={{ textDecoration: "underline" }}
+                    >
+                      Sign In
+                    </Text>
+                  </Link>
                 </Text>
-              </Link>
-            </Text>
-          </form>
+              </form>
+            )}
+          </Formik>
         </CardBody>
       </Card>
     </Box>

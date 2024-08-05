@@ -1,16 +1,17 @@
 import { FunctionComponent } from 'react'
-import { 
-  Box, 
-  Container, 
-  Heading, 
-  Image, 
-  Stack, 
-  Text 
+import {
+  Box,
+  Container,
+  Heading,
+  Image,
+  Stack,
+  Text
 } from '@chakra-ui/react'
 
 import HeroImg from '@assets/images/hero.jpg'
 import Button from '@components/Button'
 import { colors } from '../../colors'
+import { Link } from 'react-router-dom'
 
 const HeroSection: FunctionComponent = () => {
   return (
@@ -62,27 +63,31 @@ const HeroSection: FunctionComponent = () => {
               my={"15px"}
               direction={{ base: "column", lg: "row" }}
             >
-              <Button
-                variant="solid"
-                size={{ base: "md", lg: "lg" }}
-                width={{ base: "100%", lg: "auto" }}
-                type="button"
-                fontWeight={"semibold"}
-                rounded="sm"
-              >
-                Join the community
-              </Button>
+              <Link to="/auth/register">
+                <Button
+                  variant="solid"
+                  size={{ base: "md", lg: "lg" }}
+                  width={{ base: "100%", lg: "auto" }}
+                  type="button"
+                  fontWeight={"semibold"}
+                  rounded="sm"
+                >
+                  Join the community
+                </Button>
+              </Link>
 
-              <Button
-                variant="outline"
-                size={{ base: "md", lg: "lg" }}
-                width={{ base: "100%", lg: "auto" }}
-                type="button"
-                fontWeight={"semibold"}
-                rounded="sm"
-              >
-                Visit Forum
-              </Button>
+              <Link to="/forum">
+                <Button
+                  variant="outline"
+                  size={{ base: "md", lg: "lg" }}
+                  width={{ base: "100%", lg: "auto" }}
+                  type="button"
+                  fontWeight={"semibold"}
+                  rounded="sm"
+                >
+                  Visit Forum
+                </Button>
+              </Link>
             </Stack>
           </Box>
 

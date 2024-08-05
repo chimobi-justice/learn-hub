@@ -9,6 +9,7 @@ interface IProps {
   name: string;
   width?: string;
   placeholder: string;
+  disabled?: boolean;
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
@@ -19,6 +20,7 @@ const Input: FunctionComponent<IProps> = ({
   name,
   width,
   placeholder,
+  disabled,
   onBlur,
   onChange
 
@@ -40,6 +42,7 @@ const Input: FunctionComponent<IProps> = ({
         fontSize: "14px",
         fontWeight: 400,
       }}
+      disabled={disabled}
       onBlur={onBlur}
       onChange={onChange}
     />
