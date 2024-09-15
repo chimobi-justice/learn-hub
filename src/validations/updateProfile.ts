@@ -1,6 +1,6 @@
 import * as Yup from 'yup'
 
-export const updateProfilevalidateSchema = () => Yup.object({
+export const updateProfileValidationSchema = () => Yup.object({
   fullname: Yup.string()
     .required("Required"),
   username: Yup.string()

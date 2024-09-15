@@ -16,7 +16,7 @@ const DeleteAccount: FunctionComponent = () => {
 
   const { deleteAccountMutation } = useDeleteAccount();
 
-  const hanldeDeleteAccount = () => {
+  const handleDeleteAccount = () => {
     deleteAccountMutation.mutate();
   }
 
@@ -50,7 +50,7 @@ const DeleteAccount: FunctionComponent = () => {
         onClose={onClose}
         alertHeader="Delete your account"
         alertBody="Are you sure? You can't undo this action afterwards."
-        handleDelete={hanldeDeleteAccount}
+        handleDelete={handleDeleteAccount}
         isLoading={deleteAccountMutation.isPending}
       />
     </>

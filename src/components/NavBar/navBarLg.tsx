@@ -43,14 +43,16 @@ const NavBarLg: FunctionComponent = () => {
           justifyContent="space-between"
           py={"20px"}
         >
-          <Heading
-            fontStyle={"italic"}
-            fontWeight={"bold"}
-            as="h4"
-            color={colors.primary}
-          >
-            Learn <Text as="span" color={"#000"}>Hub</Text>
-          </Heading>
+          <Link to="/">
+            <Heading
+              fontStyle={"italic"}
+              fontWeight={"bold"}
+              as="h4"
+              color={colors.primary}
+            >
+              Learn <Text as="span" color={"#000"}>Hub</Text>
+            </Heading>
+          </Link>
 
           <Box
             display={"inline-flex"}
@@ -102,9 +104,9 @@ const NavBarLg: FunctionComponent = () => {
                           Your Profile
                         </MenuItem>
                       </Link>
-                      <Link to={`/me/views/@${user?.data?.username}`}>
+                      <Link to={`/me/articles/@${user?.data?.username}`}>
                         <MenuItem color={"black"}>
-                          Your Stories
+                          Your Articles
                         </MenuItem>
                       </Link>
                       <Link to="/me/settings/account/edit">

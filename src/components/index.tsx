@@ -3,6 +3,7 @@ import ArticlesCard from '@components/ArticleCard/Articles'
 import LatestArticleCard from '@components/ArticleCard/LatestArticle'
 import Button from '@components/Button'
 import Card from '@components/Card'
+import DeleteBox from '@components/DeleteBox'
 import Footer from '@components/Footer'
 import HeroSection from '@components/HeroSection'
 import NavBar from '@components/NavBar'
@@ -18,6 +19,7 @@ export {
   ArticlesCard,
   Button,
   Card,
+  DeleteBox,
   HeroSection,
   FollowCard,
   Footer,

@@ -15,7 +15,7 @@ type WidthSize = string | { base: string, sm?: string, md?: string, lg?: string 
 
 interface IProps extends Pick<ButtonProps, 'fontSize' | 'fontWeight'> {
   isloading?: boolean;
-  isDisable?: boolean;
+  isDisabled?: boolean;
   loadingText?: string;
   size: SizeType;
   width?: WidthSize;
@@ -30,7 +30,7 @@ interface IProps extends Pick<ButtonProps, 'fontSize' | 'fontWeight'> {
 
 const Button: FunctionComponent<IProps> = ({
   isloading,
-  isDisable,
+  isDisabled,
   loadingText,
   size,
   width,
@@ -48,7 +48,7 @@ const Button: FunctionComponent<IProps> = ({
   return (
     <ChakraButton
       isLoading={isloading}
-      isDisabled={isDisable}
+      isDisabled={isDisabled}
       loadingText={loadingText}
       size={size}
       width={width}

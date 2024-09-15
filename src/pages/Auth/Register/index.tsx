@@ -16,7 +16,7 @@ import { Formik, Field } from 'formik'
 import { Button, Input } from '@components/index'
 import { colors } from '../../../colors'
 import { useSignup } from '@hooks/auth/useSignup'
-import { signUpvalidateSchema } from '@validations/signup'
+import { signUpValidataionSchema } from '@validations/signup'
 import { SignupRequest } from '@api/index'
 
 const Register: FunctionComponent = () => {
@@ -45,7 +45,7 @@ const Register: FunctionComponent = () => {
           <Formik
             initialValues={initialValues}
             onSubmit={handleSignup}
-            validationSchema={signUpvalidateSchema}
+            validationSchema={signUpValidataionSchema}
           >
             {({ handleSubmit, errors, touched }) => (
               <form onSubmit={handleSubmit}>
@@ -60,6 +60,7 @@ const Register: FunctionComponent = () => {
                       id="fullname"
                       name="fullname"
                       type="text"
+                      placeholder="enter fullname"
                     />
                     <FormErrorMessage>{errors.fullname}</FormErrorMessage>
                   </FormControl>
@@ -75,6 +76,7 @@ const Register: FunctionComponent = () => {
                       id="email"
                       name="email"
                       type="email"
+                      placeholder="enter email address"
                     />
                     <FormErrorMessage>{errors.email}</FormErrorMessage>
                   </FormControl>
@@ -91,6 +93,7 @@ const Register: FunctionComponent = () => {
                       id="password"
                       name="password"
                       type="password"
+                      placeholder="enter email password"
                     />
                     <FormErrorMessage>{errors.password}</FormErrorMessage>
                   </FormControl>

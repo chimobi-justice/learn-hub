@@ -17,11 +17,12 @@ import CreateArticle from '@pages/Articles/create'
 
 import Profile from '@pages/Users/Profile'
 import ProfileEdit from '@pages/Users/Settings'
-import UserViews from '@pages/Users/UserViews'
 
 import Login from '@pages/Auth/Login'
 import Register from '@pages/Auth/Register'
 import PrivateRoute from './Route/privateRoute'
+import EditArticle from '@pages/Articles/edit'
+import ArthoredArticles from '@pages/Users/AuthoredViews/Articles'
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -32,14 +33,15 @@ const routes = createBrowserRouter(
         <Route index path='/forum/:slug' element={<ShowForum />} />
 
         <Route index path='/articles' element={<Articles />} />
-        <Route index path='/articles/:slug' element={<ShowArticle />} />
+        <Route index path='/articles/:slug/:id' element={<ShowArticle />} />
 
         {/* private route */}
         <Route path="/articles/new" element={<PrivateRoute element={<CreateArticle />} />} />
+        <Route path="/articles/edit/:id" element={<PrivateRoute element={<EditArticle />} />} />
         <Route path="/forum/new" element={<PrivateRoute element={<CreateForum />} />} />
         <Route path="/me/:username" element={<PrivateRoute element={<Profile />} />} />
         <Route path="/me/settings/account/edit" element={<PrivateRoute element={<ProfileEdit />} />} />
-        <Route path="/me/views/:username" element={<PrivateRoute element={<UserViews />} />} />
+        <Route path="/me/articles/:username" element={<PrivateRoute element={<ArthoredArticles />} />} />
         {/* end private route */}
 
         <Route index path='/auth/login' element={<Login />} />

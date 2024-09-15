@@ -10,80 +10,120 @@ import {
   Image,
   Text
 } from '@chakra-ui/react'
+import { CiEdit } from 'react-icons/ci'
+import { MdDeleteOutline } from 'react-icons/md'
 
 import truncate from '@helpers/truncate'
+import { stripTags } from '@helpers/stripTags';
 
 interface IProps {
   articleImg: string;
   title: string;
-  slug: string;
   description: string;
-  authorUsername: string;
-  authorAvatar: string;
-  authorOccupation: string;
+  authorUsername?: string;
+  authorAvatar?: string;
+  authorOccupation?: string;
+  CTA?: string;
+  isOwner?: boolean;
+  onDelete?: () => void;
+  id?: any;
 }
 
 const ArticlesCard: FunctionComponent<IProps> = ({
   articleImg,
   title,
-  slug,
   description,
   authorUsername,
   authorAvatar,
   authorOccupation,
+  CTA = '#',
+  isOwner,
+  onDelete,
+  id
 }) => {
   return (
     <Card mb={"15px"}>
       <CardBody p={"0px"}>
         <Box
           display={"flex"}
-          flexDir={{base: "column", md: "row"}}
+          flexDir={{ base: "column", md: "row" }}
           alignItems={"center"}
           gap={2}
         >
-          <Box width={{ base: "100%", md: "35%"}}>
+          <Box width={{ base: "100%", md: "35%" }}>
             <Image
               src={articleImg}
-              alt='Just'
+              alt={articleImg}
+              width={"100%"}
+              height={"250px"}
             />
           </Box>
 
-          <Box width={{ base: "100%", md: "65%"}} p={"5px"}>
-            <Heading
-              size="lg"
-              lineHeight={"1.6em"}
-              fontSize={"24px"}
-              mb={"10px"}
-              _hover={{
-                textDecoration: "underline"
-              }}
-            >
-              <Link to={`/articles/${slug}`}>
-                {truncate(title, 80)}
-              </Link>
-            </Heading>
-            <Text
-              fontSize={"14px"}
-              lineHeight={"1.7em"}
-              color={"#0009"}
-            >
-              {truncate(`${description}`, 250)}
-            </Text>
+          <Box 
+            width={{ base: "100%", md: "65%" }} 
+            p={"5px"} 
+            display={"flex"}
+            justifyContent={"space-between"}
+          >
+            <Box>
+              <Heading
+                size="lg"
+                lineHeight={"1.6em"}
+                fontSize={"24px"}
+                mb={"10px"}
+                _hover={{
+                  textDecoration: "underline"
+                }}
+              >
+                <Link to={CTA}>
+                  {truncate(title, 80)}
+                </Link>
+              </Heading>
+              <Text
+                fontSize={"14px"}
+                lineHeight={"1.7em"}
+                color={"#0009"}
+                dangerouslySetInnerHTML={stripTags(truncate(description, 250))}
+              />
 
-            <Flex flex="1" gap={2} alignItems="center" flexWrap="wrap" mt={"12px"}>
-              <Link to="/user/nelson-dev">
-                <Avatar size={"xs"} name="Nelson Dev" src={authorAvatar} />
-              </Link>
-
-              <Box>
-                <Heading size="xs" fontSize={"13px"}>
-                  <Link to="/user/nelson-dev">
-                    {authorUsername}
+              <Flex flex="1" gap={2} alignItems="center" flexWrap="wrap" my={"12px"}>
+                {authorUsername && authorAvatar && (
+                  <Link to={`/user/${authorUsername}`}>
+                    <Avatar size={"xs"} name="Nelson Dev" src={authorAvatar} />
                   </Link>
-                </Heading>
-                <Text fontSize={"12px"} color={"#0009"}>{authorOccupation}</Text>
-              </Box>
-            </Flex>
+                )}
+
+                <Box>
+                  {authorUsername && (
+
+                    <Heading size="xs" fontSize={"13px"}>
+                      <Link to={`/user/${authorUsername}`}>
+                        {authorUsername}
+                      </Link>
+                    </Heading>
+                  )}
+
+                  {authorOccupation && (
+                    <Text fontSize={"12px"} color={"#0009"}>{authorOccupation}</Text>
+                  )}
+                </Box>
+
+              </Flex>
+            </Box>
+            
+            {isOwner && (
+              <Flex p={"5px"} gap={2}>
+                <Box>
+                  <Link to={`/articles/edit/${id}`}>
+                    <CiEdit size={"25px"} cursor={"pointer"} />
+                  </Link>
+                </Box>
+
+                <Box>
+                  <MdDeleteOutline size={"25px"} color="red" cursor={"pointer"} onClick={onDelete} />
+                </Box>
+              </Flex>
+            )}
           </Box>
         </Box>
       </CardBody>

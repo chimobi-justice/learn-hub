@@ -1,6 +1,6 @@
 import * as Yup from 'yup'
 
-export const updatePasswordvalidateSchema = () => Yup.object({
+export const updatePasswordValidationSchema = () => Yup.object({
   current_password: Yup.string()
     .required("Required"),
   password: Yup.string()
