@@ -12,7 +12,7 @@ import { Formik, Field } from 'formik'
 import { Button, Input } from '@components/index'
 import { useUpdatePassword } from '@hooks/user/useUpdatePassword'
 import { UpdatePasswordRequest } from '@api/index'
-import { updatePasswordvalidateSchema } from '@validations/updatePassword'
+import { updatePasswordValidationSchema } from '@validations/updatePassword'
 
 const UpdatePassword: FunctionComponent = () => {
   const { updatePasswordMutation } = useUpdatePassword();
@@ -33,7 +33,7 @@ const UpdatePassword: FunctionComponent = () => {
         <Formik 
           initialValues={initialValues} 
           onSubmit={handleUpdatePassword} 
-          validationSchema={updatePasswordvalidateSchema}
+          validationSchema={updatePasswordValidationSchema}
         >
           {({ handleSubmit, errors, touched }) => (
             <form onSubmit={handleSubmit}>
@@ -48,6 +48,7 @@ const UpdatePassword: FunctionComponent = () => {
                     id="current_password"
                     name="current_password"
                     type="password"
+                    placeholder="enter current password"
                   />
                   <FormErrorMessage>{errors.current_password}</FormErrorMessage>
                 </FormControl>
@@ -63,6 +64,7 @@ const UpdatePassword: FunctionComponent = () => {
                     id="password"
                     name="password"
                     type="password"
+                    placeholder="enter new password"
                   />
                   <FormErrorMessage>{errors.password}</FormErrorMessage>
                 </FormControl>
@@ -78,6 +80,7 @@ const UpdatePassword: FunctionComponent = () => {
                     id="password_confirmation"
                     name="password_confirmation"
                     type="password"
+                    placeholder="re-enter new password"
                   />
                   <FormErrorMessage>{errors.password_confirmation}</FormErrorMessage>
                 </FormControl>

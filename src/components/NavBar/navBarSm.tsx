@@ -56,16 +56,18 @@ const NavBarSm: FunctionComponent = () => {
         w="100%"
         display={{ base: 'flex', md: 'none' }}
       >
-        <Heading
-          as="h4"
-          display={"flex"}
-          gap={2}
-          size="lg"
-          fontStyle={"italic"}
-          color={colors.primary}
-        >
-          Learn <Text color={"#000"}>Hub</Text>
-        </Heading>
+        <Link to="/">
+          <Heading
+            as="h4"
+            display={"flex"}
+            gap={2}
+            size="lg"
+            fontStyle={"italic"}
+            color={colors.primary}
+          >
+            Learn <Text color={"#000"}>Hub</Text>
+          </Heading>
+        </Link>
 
         <HStack spacing={3}>
           <Icon
@@ -158,7 +160,7 @@ const NavBarSm: FunctionComponent = () => {
                             </Box>
                           </MenuButton>
                           <MenuList>
-                            <Link 
+                            <Link
                               to={`/me/@${user?.data?.username}`}
                               onClick={() => setOpen(false)}
                             >
@@ -166,15 +168,15 @@ const NavBarSm: FunctionComponent = () => {
                                 Your Profile
                               </MenuItem>
                             </Link>
-                            <Link 
-                              to={`/me/views/@${user?.data?.username}`}
+                            <Link
+                              to={`/me/articles/@${user?.data?.username}`}
                               onClick={() => setOpen(false)}
                             >
                               <MenuItem color={"black"}>
-                                Your Stories
+                                Your Articles
                               </MenuItem>
                             </Link>
-                            <Link 
+                            <Link
                               to="/me/settings/account/edit"
                               onClick={() => setOpen(false)}
                             >

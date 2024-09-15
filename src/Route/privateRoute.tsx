@@ -1,22 +1,24 @@
-import { FunctionComponent, ReactElement } from 'react'
+import { axiosInstance } from '@api/axiosInstance';
+import { FunctionComponent, ReactElement, useEffect } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 
-import { useUser } from '@context/userContext'
+// import { useUser } from '@context/userContext'
 
 interface PrivateRouteProps {
   element: ReactElement;
 }
 
 const PrivateRoute: FunctionComponent<PrivateRouteProps> = ({ element }) => {
-  const { user } = useUser();
   const location = useLocation();
 
-  if (!user) {
+  const loggedInUser = localStorage.getItem("ucType_");
+
+  if (!loggedInUser) {
     return (
-      <Navigate 
-        to="/auth/login" 
-        state={{ from: location }} 
-        replace 
+      <Navigate
+        to="/auth/login"
+        state={{ from: location }}
+        replace
       />
     );
   }

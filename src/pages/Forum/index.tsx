@@ -24,7 +24,7 @@ import AvatarPic from '@assets/images/avatar.jpg'
 import { useUser } from '@context/userContext'
 
 const Forum: FunctionComponent = () => {
-  const { user } = useUser();
+  const userContext = useUser();
 
   const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -35,7 +35,7 @@ const Forum: FunctionComponent = () => {
     >
       <Heading pb={"15px"} size={"xl"}>Forum</Heading>
 
-      {user && (
+      {userContext?.user && (
         <Box mb={"15px"}>
           <Link to="/forum/new">
             <Button

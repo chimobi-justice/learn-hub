@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactElement } from 'react'
+import { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Card,
@@ -7,9 +7,12 @@ import {
   Text,
   Heading,
   Image,
-  Stack
+  Stack,
+  Box
 } from '@chakra-ui/react'
 import { FaArrowRight } from 'react-icons/fa6'
+import { stripTags } from '@helpers/stripTags';
+import truncate from '@helpers/truncate';
 
 interface IProps {
   articleImage: string;
@@ -17,7 +20,7 @@ interface IProps {
   title: string;
   description: string;
   CTA: string;
-  CTAText: string | ReactElement;
+  CTAText: string;
 }
 
 const LatestArticleCard: FunctionComponent<IProps> = ({
@@ -29,19 +32,24 @@ const LatestArticleCard: FunctionComponent<IProps> = ({
   CTAText
 }) => {
   return (
-    <Card maxW="sm" bg={"transparent"} boxShadow={"none"}>
+    <Card maxW="sm">
       <CardBody>
-        <Image
-          src={articleImage}
-          alt='Green double couch with wooden legs'
-          borderRadius='lg'
-        />
+        <Box>
+          <Image
+            src={articleImage}
+            alt='Green double couch with wooden legs'
+            borderRadius='lg'
+            width={"100%"}
+            height={"200px"}
+            objectFit={"cover"}
+          />
+        </Box>
         <Stack mt='6' spacing='3'>
           <Text fontSize={"14px"} color={"#0009"}>{date}</Text>
-          <Heading 
-            as="h4" 
-            size="md" 
-            mb={"15px"} 
+          <Heading
+            as="h4"
+            size="md"
+            mb={"15px"}
             fontWeight={"500"}
             _hover={{
               textDecoration: "underline"
@@ -49,25 +57,29 @@ const LatestArticleCard: FunctionComponent<IProps> = ({
           >
             <Link to={CTA}>{title}</Link>
           </Heading>
-          <Text>
-            {description}
-          </Text>
+
+          <Text
+            fontSize={"14px"}
+            lineHeight={"1.7em"}
+            color={"#0009"}
+            dangerouslySetInnerHTML={stripTags(truncate(description, 250))}
+          />
         </Stack>
       </CardBody>
 
       <CardFooter>
         <Link to={CTA}>
-          <Text 
-            as="span" 
-            display={"flex"} 
+          <Text
+            as="span"
+            display={"flex"}
             alignItems={"center"}
-            color={"#0009"} 
+            color={"#0009"}
             gap={3}
             _hover={{
               textDecoration: "underline"
             }}
-          > 
-            {CTAText} <FaArrowRight color="#0009" /> 
+          >
+            {CTAText} <FaArrowRight color="#0009" />
           </Text>
         </Link>
       </CardFooter>

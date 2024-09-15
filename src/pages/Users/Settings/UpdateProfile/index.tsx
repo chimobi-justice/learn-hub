@@ -20,17 +20,17 @@ import { useUpdateProfile } from '@hooks/user/useUpdateProfile'
 import { useUpdateAvatar } from '@hooks/user/useUpdateAvatar'
 import { useImageUpload } from '@hooks/useImageUpload'
 import { UpdateProfileRequest } from '@api/index'
-import { updateProfilevalidateSchema } from '@validations/updateProfile'
+import { updateProfileValidationSchema } from '@validations/updateProfile'
 import { useUser } from '@context/userContext'
 import { capitalizeFirstLetter } from '@helpers/capitalize'
 
 const UpdateProfile: FunctionComponent = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { user } = useUser();
+  const userContext = useUser();
   const { updateProfileMutation } = useUpdateProfile();
   const { updateProfileAvatarMutation } = useUpdateAvatar();
-  const res = user?.data;
+  const res = userContext?.user?.data;
 
   const initialValues: UpdateProfileRequest = {
     fullname: res?.fullname ?? '',
@@ -89,7 +89,7 @@ const UpdateProfile: FunctionComponent = () => {
             ) : (
               <>
                 <Avatar size="2xl" name={res?.fullname} src={res?.avatar} />
-              
+
                 <IconButton
                   aria-label="Change avatar"
                   icon={<FaCamera />}
@@ -117,7 +117,7 @@ const UpdateProfile: FunctionComponent = () => {
         <Formik
           initialValues={initialValues}
           onSubmit={handleUpdateProfile}
-          validationSchema={updateProfilevalidateSchema}
+          validationSchema={updateProfileValidationSchema}
         >
           {({ handleSubmit, errors, touched }) => (
             <form onSubmit={handleSubmit}>

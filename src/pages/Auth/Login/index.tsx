@@ -17,7 +17,7 @@ import { Button, Input } from '@components/index'
 import { colors } from '../../../colors'
 import { useSignin } from '@hooks/auth/useSignin'
 import { SigninRequest } from '@api/index'
-import { signInvalidateSchema } from '@validations/signin'
+import { signInValidataionSchema } from '@validations/signin'
 
 const Login: FunctionComponent = () => {
   const { signinMutation } = useSignin();
@@ -44,7 +44,7 @@ const Login: FunctionComponent = () => {
           <Formik
             initialValues={initialValues}
             onSubmit={handleSignin}
-            validationSchema={signInvalidateSchema}
+            validationSchema={signInValidataionSchema}
           >
             {({ handleSubmit, errors, touched }) => (
               <form onSubmit={handleSubmit}>
@@ -59,6 +59,7 @@ const Login: FunctionComponent = () => {
                       id="email"
                       name="email"
                       type="email"
+                      placeholder="enter email address"
                     />
                     <FormErrorMessage>{errors.email}</FormErrorMessage>
                   </FormControl>
@@ -75,6 +76,7 @@ const Login: FunctionComponent = () => {
                       id="password"
                       name="password"
                       type="password"
+                      placeholder="enter password"
                     />
                     <FormErrorMessage>{errors.password}</FormErrorMessage>
                   </FormControl>

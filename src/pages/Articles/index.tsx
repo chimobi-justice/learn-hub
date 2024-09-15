@@ -1,30 +1,55 @@
-import { FunctionComponent } from 'react'
-import { Box, Heading, SimpleGrid } from '@chakra-ui/react'
+import { Fragment, FunctionComponent, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Box, Heading, SimpleGrid, useDisclosure } from '@chakra-ui/react'
+
 import {
   LatestArticleCard,
   FollowCard,
   RecommendTopicCard,
   ArticlesCard,
-  Button
+  Button,
+  Alert
 } from '@components/index'
-import { Link } from 'react-router-dom';
 import { useUser } from '@context/userContext';
+import { useGetPaginatedArticles } from '@hooks/article/useGetPaginatedArticles';
+import { useDeleteArticle } from '@hooks/article/useDeleteArticle';
 
 const Articles: FunctionComponent = () => {
   const { user } = useUser();
+  const {
+    articles,
+    isLoading,
+    isSuccess,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage
+  } = useGetPaginatedArticles(10)
+  const { deleteArticleMutation } = useDeleteArticle()
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [deletingArticleId, setDeletingArticleId] = useState(null);
 
   const CardLatestData = [1, 2, 3];
-  const CardData = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  const handleDelete = (articleId: any) => {
+    setDeletingArticleId(articleId)
+    onOpen()
+  }
+
+  const handleDeleteArticle = () => {
+    if (!deletingArticleId) return;
+    deleteArticleMutation.mutate(deletingArticleId)
+    onClose()
+  }
 
   return (
     <Box
       width={"90%"}
       m={"4rem auto"}
     >
-      <Box 
-        display={"flex"} 
+      <Box
+        display={"flex"}
         justifyContent={"space-between"}
-        flexDir={{base: "column", md: "row"}}
+        flexDir={{ base: "column", md: "row" }}
       >
         <Heading pb={"15px"} size={"xl"}>Articles</Heading>
 
@@ -69,33 +94,47 @@ const Articles: FunctionComponent = () => {
         my={"3rem"}
       >
         <Box width={{ base: "100%", md: "70%" }}>
-          {CardData.map((index) => (
-            <ArticlesCard
-              key={index}
-              articleImg="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-              title="2024 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima, nemo"
-              description="Lorem ipsum dolor sit amet consectetur adipisicing elit. A dolore est modi. 
-              Repellendus quisquam, aliquam perspiciatis consequuntur vero quam quibusdam atque dolorem 
-              quos dolores, in minima modi deleniti, quae doloribus?
-              "
-              slug="2024-lorem-ipsum-dolor-sit-amet-consectetur-adipisicing-elit-Minima-nemo"
-              authorAvatar=""
-              authorUsername="Nelson Dev"
-              authorOccupation="Developer at Prembly"
-            />
+          {isLoading && <p>loading..</p>}
+
+          {articles && isSuccess && articles?.map((page: any, pageIndex: any) => (
+            <Fragment key={pageIndex}>
+              {page?.data?.articles.map((article: any, index: any) => (
+                <ArticlesCard
+                  key={index}
+                  id={article?.id}
+                  articleImg={article?.thumbnail}
+                  title={article?.title}
+                  description={article?.content}
+                  CTA={`/articles/${article?.slug}/${article?.id}`}
+                  isOwner={article?.isOwner}
+                  authorAvatar={article?.author?.fullname}
+                  authorUsername={article?.author?.username}
+                  authorOccupation={article?.author?.profile_headlines}
+                  onDelete={() => handleDelete(article.id)}
+                />
+              ))}
+            </Fragment>
           ))}
 
-          <Box textAlign={"center"} mt={"25px"}>
-            <Button
-              size="lg"
-              rounded="md"
-              type="button"
-              variant="solid"
-
-            >
-              see more
-            </Button>
-          </Box>
+          {hasNextPage && (
+            <Box textAlign={"center"} mt={"25px"}>
+              <Button
+                size="lg"
+                rounded="md"
+                type="button"
+                variant="solid"
+                onClick={fetchNextPage}
+                isDisabled={!hasNextPage && isFetchingNextPage}
+              >
+                {isFetchingNextPage
+                  ? "Loading more.."
+                  : hasNextPage
+                    ? "Load More"
+                    : "Nothing more to load"
+                }
+              </Button>
+            </Box>
+          )}
         </Box>
 
         <Box width={{ base: "100%", md: "30%" }}>
@@ -107,6 +146,15 @@ const Articles: FunctionComponent = () => {
             <FollowCard />
           </Box>
         </Box>
+
+        <Alert
+          isOpen={isOpen}
+          onClose={onClose}
+          alertHeader="Delete Article"
+          alertBody="Are you sure? You can't undo this action afterwards."
+          handleDelete={handleDeleteArticle}
+          isLoading={deleteArticleMutation.isPending}
+        />
       </Box>
     </Box>
   )

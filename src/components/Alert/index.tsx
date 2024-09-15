@@ -47,7 +47,7 @@ const Alert: FunctionComponent<IProps> = ({
           </AlertDialogBody>
 
           <AlertDialogFooter>
-            <HStack spacing={3}>
+            <HStack spacing={3} textAlign={"center"} margin={"0px auto"}>
               <Button
                 variant="outline"
                 size="md"

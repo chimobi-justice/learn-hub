@@ -5,9 +5,10 @@ import { FaArrowRight } from 'react-icons/fa6'
 
 import { Button, LatestArticleCard } from '@components/index'
 import { colors } from '../../../colors'
+import { useGetArticles } from '@hooks/article/useGetArticles'
 
 const HomeArticles: FunctionComponent = () => {
-  const CardData = [1, 2, 3, 4, 5, 6];
+  const { data: articles } = useGetArticles(4)
 
   return (
     <Box width={"90%"} m={"4rem auto"}>
@@ -19,14 +20,14 @@ const HomeArticles: FunctionComponent = () => {
       </Heading>
 
       <SimpleGrid minChildWidth="300px" spacing={3}>
-        {CardData?.map((index) => (
+        {articles?.map((article: any, index: any) => (
           <LatestArticleCard
             key={index}
-            articleImage='https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-            date='1 week ago'
-            title='lorem ipsum dolor'
-            description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum molestiae nihil adipisci tenetur vitae impedit.'
-            CTA='/forum/lorem-ipsum-dolor'
+            articleImage={article?.thumbnail}
+            date={article?.created_at?.human}
+            title={article?.title}
+            description={article?.content}
+            CTA={`/articles/${article?.slug}/${article?.id}`}
             CTAText='Read article'
           />
         ))}
