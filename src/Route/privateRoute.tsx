@@ -1,5 +1,4 @@
-import { axiosInstance } from '@api/axiosInstance';
-import { FunctionComponent, ReactElement, useEffect } from 'react'
+import { FunctionComponent, ReactElement } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 
 // import { useUser } from '@context/userContext'
