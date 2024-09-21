@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react'
 
 import { axiosInstance } from '@api/axiosInstance'
-import { errorNotification } from '@helpers/notification' 
+import { errorNotification } from '@helpers/notification'
 
 interface UseImageUploadOptions {
   onSuccess: (data: any) => void;
@@ -14,9 +14,9 @@ export const useImageUpload = ({
 
   const handleFileUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    
+
     const file = e.target.files?.[0];
-    
+
     if (file) {
       const fileSize = file.size;
       const maxFileSizeInBytes = 2 * 1024 * 1024;
@@ -42,12 +42,19 @@ export const useImageUpload = ({
         if (res.status === 201) {
           onSuccess(res.data);
         }
-      } catch (error) {
-        errorNotification('Upload failed');
+      } catch (error: any) {
+        if (error?.response) {
+          errorNotification(`Upload failed ${error?.response?.data?.message}`);
+        } else if (error?.request) {
+          errorNotification('No response from server. Please check your network.');
+        } else {
+          errorNotification(error?.message);
+        }
       } finally {
         setLoading(false);
+        e.target.value = '';
       }
-    }
+    } 
   };
 
   return { handleFileUpload, loading };

@@ -48,7 +48,7 @@ const UpdateProfile: FunctionComponent = () => {
 
   const { handleFileUpload, loading: imageUploadLoading } = useImageUpload({
     onSuccess: (data) => {
-      updateProfileAvatarMutation.mutate({ avatar: data.imageUploadUrl });
+      updateProfileAvatarMutation.mutate({ avatar: data?.data?.imageUploadUrl });
     },
   });
 

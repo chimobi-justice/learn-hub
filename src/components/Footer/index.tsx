@@ -64,7 +64,7 @@ const Footer: FunctionComponent = () => {
               spacing={3}
             >
               <ListItem><Link to="/">Home</Link></ListItem>
-              <ListItem><Link to="/forum">Forum</Link></ListItem>
+              <ListItem><Link to="/threads">Threads</Link></ListItem>
               <ListItem><Link to="/articles">Articles</Link></ListItem>
             </List>
           </Box>
@@ -83,8 +83,8 @@ const Footer: FunctionComponent = () => {
               spacing={3}
             >
               <ListItem><Link to="/">Account</Link></ListItem>
-              <ListItem><Link to="/forum">Feedback</Link></ListItem>
-              <ListItem><Link to="/articles">Contact Us</Link></ListItem>
+              <ListItem><Link to="/">Feedback</Link></ListItem>
+              <ListItem><Link to="/">Contact Us</Link></ListItem>
             </List>
           </Box>
           <Box>
@@ -127,7 +127,7 @@ const Footer: FunctionComponent = () => {
         </SimpleGrid>
 
         <Box mt={"20px"} pt={"20px"} borderTop={"1px solid gray"}>
-          <Text fontSize={"15px"}>&copy; 2024 Learn Hub. All right reserved.</Text>
+          <Text fontSize={"15px"}>&copy; 2024 Learn Hub. All right reserved. Made in Nigeria.</Text>
         </Box>
       </Box>
     </Box>

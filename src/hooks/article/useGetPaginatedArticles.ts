@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query'
 
 import { axiosInstance } from '@api/axiosInstance'
 import { GET_PAGINATED_ARTICLES_ENDPOINT } from '@api/index'
@@ -21,6 +21,7 @@ export const useGetPaginatedArticles = (limit: number = 0) => {
   } = useInfiniteQuery({
     queryKey: ['articles', limit],
     queryFn: fetchPaginatedArticles,
+    placeholderData: keepPreviousData,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       if (!lastPage.data.pagination.next_page_url) {

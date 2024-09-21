@@ -6,8 +6,8 @@ export const Menu = [
   },
   {
     id: 2,
-    name: "Forum",
-    url: "/forum"
+    name: "Threads",
+    url: "/threads"
   },
   {
     id: 3,

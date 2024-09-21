@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import ArticleForm from '@pages/Articles/ArticleForm'
+import ArticleForm from '@pages/Articles/components/ArticleForm'
 
 const CreateArticle: FunctionComponent = () => {
   return (

@@ -14,7 +14,7 @@ import {
 import { FaGithub, FaXTwitter } from 'react-icons/fa6'
 import { GiWorld } from 'react-icons/gi'
 
-import { RecommendTopicCard, FollowCard, Button } from '@components/index'
+import { FollowCard, Button } from '@components/index'
 import CoverPic from '@assets/images/cover.jpg'
 import { useUser } from '@context/userContext'
 import { colors } from '../../../colors'
@@ -50,7 +50,7 @@ const Profile: FunctionComponent = () => {
 
               <Box
                 position={"absolute"}
-                bottom={"-5%"}
+                bottom={"-10%"}
                 left={"0%"}
                 transform={"translateX(15%)"}
                 border={"4px solid white"}
@@ -92,7 +92,7 @@ const Profile: FunctionComponent = () => {
                     </Link>
                   )}
 
-                  {user?.data?.gitHub && (
+                  {user?.data?.twitter && (
                     <Link
                       to={`https://x.com/${user?.data?.twitter}`}
                       target="_blank"
@@ -106,7 +106,7 @@ const Profile: FunctionComponent = () => {
                     </Link>
                   )}
 
-                  {user?.data?.gitHub && (
+                  {user?.data?.website && (
                     <Link 
                       to={user?.data?.website}
                       target="_blank"
@@ -167,9 +167,9 @@ const Profile: FunctionComponent = () => {
         </Box>
 
         <Box width={{ base: "100%", md: "30%" }}>
-          <Box>
+          {/* <Box>
             <RecommendTopicCard />
-          </Box>
+          </Box> */}
 
           <Box mt={"15px"}>
             <FollowCard />

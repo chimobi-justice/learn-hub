@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import { Box, Heading } from '@chakra-ui/react'
 
 import {
-  RecommendTopicCard,
+  // RecommendTopicCard,
   FollowCard
 } from '@components/index'
 import UpdatePassword from '@pages/Users/Settings/UpdatePassword'
@@ -39,9 +39,9 @@ const ProfileEdit: FunctionComponent = () => {
         </Box>
 
         <Box width={{ base: "100%", md: "30%" }}>
-          <Box>
+          {/* <Box>
             <RecommendTopicCard />
-          </Box>
+          </Box> */}
 
           <Box mt={"15px"}>
             <FollowCard />

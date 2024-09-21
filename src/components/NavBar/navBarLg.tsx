@@ -99,14 +99,19 @@ const NavBarLg: FunctionComponent = () => {
                       </Box>
                     </MenuButton>
                     <MenuList>
-                      <Link to={`/me/@${user?.data?.username}`}>
+                      <Link to={`/me/${user?.data?.username}`}>
                         <MenuItem color={"blcack"}>
                           Your Profile
                         </MenuItem>
                       </Link>
-                      <Link to={`/me/articles/@${user?.data?.username}`}>
+                      <Link to={`/me/articles/${user?.data?.username}`}>
                         <MenuItem color={"black"}>
                           Your Articles
+                        </MenuItem>
+                      </Link>
+                      <Link to={`/me/threads/${user?.data?.username}`}>
+                        <MenuItem color={"black"}>
+                          Your Threads
                         </MenuItem>
                       </Link>
                       <Link to="/me/settings/account/edit">

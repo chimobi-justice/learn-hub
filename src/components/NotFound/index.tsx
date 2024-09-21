@@ -32,7 +32,7 @@ const NotFound: FunctionComponent = () => {
             navigate(-1);
           }}
         >
-          Back Home
+          Back
         </Button>
       </Box>
     </Center>

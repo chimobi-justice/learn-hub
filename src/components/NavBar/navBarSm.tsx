@@ -161,7 +161,7 @@ const NavBarSm: FunctionComponent = () => {
                           </MenuButton>
                           <MenuList>
                             <Link
-                              to={`/me/@${user?.data?.username}`}
+                              to={`/me/${user?.data?.username}`}
                               onClick={() => setOpen(false)}
                             >
                               <MenuItem color={"blcack"}>
@@ -169,11 +169,19 @@ const NavBarSm: FunctionComponent = () => {
                               </MenuItem>
                             </Link>
                             <Link
-                              to={`/me/articles/@${user?.data?.username}`}
+                              to={`/me/articles/${user?.data?.username}`}
                               onClick={() => setOpen(false)}
                             >
                               <MenuItem color={"black"}>
                                 Your Articles
+                              </MenuItem>
+                            </Link>
+                            <Link
+                              to={`/me/theads/${user?.data?.username}`}
+                              onClick={() => setOpen(false)}
+                            >
+                              <MenuItem color={"black"}>
+                                Your Theads
                               </MenuItem>
                             </Link>
                             <Link
