@@ -5,10 +5,11 @@ import { Box, Heading, SimpleGrid, useDisclosure } from '@chakra-ui/react'
 import {
   LatestArticleCard,
   FollowCard,
-  RecommendTopicCard,
+  // RecommendTopicCard,
   ArticlesCard,
   Button,
-  Alert
+  Alert,
+  Skeleton
 } from '@components/index'
 import { useUser } from '@context/userContext';
 import { useGetPaginatedArticles } from '@hooks/article/useGetPaginatedArticles';
@@ -94,22 +95,24 @@ const Articles: FunctionComponent = () => {
         my={"3rem"}
       >
         <Box width={{ base: "100%", md: "70%" }}>
-          {isLoading && <p>loading..</p>}
+          {isLoading && <Skeleton />}
 
-          {articles && isSuccess && articles?.map((page: any, pageIndex: any) => (
+          {articles && isSuccess && articles?.map((page: any, pageIndex: number) => (
             <Fragment key={pageIndex}>
-              {page?.data?.articles.map((article: any, index: any) => (
+              {page?.data?.articles.map((article: any, index: number) => (
                 <ArticlesCard
                   key={index}
                   id={article?.id}
                   articleImg={article?.thumbnail}
                   title={article?.title}
                   description={article?.content}
+                  read_time={article?.read_time}
                   CTA={`/articles/${article?.slug}/${article?.id}`}
                   isOwner={article?.isOwner}
-                  authorAvatar={article?.author?.fullname}
+                  authorAvatar={article?.author?.avatar}
+                  authorFullname={article?.author?.fullname}
                   authorUsername={article?.author?.username}
-                  authorOccupation={article?.author?.profile_headlines}
+                  authorProfileHeadlines={article?.author?.profile_headlines}
                   onDelete={() => handleDelete(article.id)}
                 />
               ))}
@@ -138,9 +141,9 @@ const Articles: FunctionComponent = () => {
         </Box>
 
         <Box width={{ base: "100%", md: "30%" }}>
-          <Box>
+          {/* <Box>
             <RecommendTopicCard />
-          </Box>
+          </Box> */}
 
           <Box mt={"15px"}>
             <FollowCard />

@@ -1,4 +1,5 @@
 import { Fragment, FunctionComponent, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import {
   Box,
   Heading,
@@ -6,12 +7,13 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 
-import { RecommendTopicCard, FollowCard, Button, ArticlesCard, Alert } from '@components/index'
-import { useGetAuthoredArticles } from '@hooks/article/useGetAuthoredArticles';
-import { useDeleteArticle } from '@hooks/article/useDeleteArticle';
-import { Link } from 'react-router-dom';
+import { FollowCard, Button, ArticlesCard, Alert, Skeleton, EmptyState, NotFound } from '@components/index'
+import { useGetAuthoredArticles } from '@hooks/article/useGetAuthoredArticles'
+import { useDeleteArticle } from '@hooks/article/useDeleteArticle'
 
 const ArthoredArticles: FunctionComponent = () => {
+  const { username } = useParams();
+
   const {
     articles,
     isLoading,
@@ -19,7 +21,7 @@ const ArthoredArticles: FunctionComponent = () => {
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage
-  } = useGetAuthoredArticles(10)
+  } = useGetAuthoredArticles(10, username!)
   const { deleteArticleMutation } = useDeleteArticle()
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [deletingArticleId, setDeletingArticleId] = useState(null);
@@ -34,6 +36,10 @@ const ArthoredArticles: FunctionComponent = () => {
     deleteArticleMutation.mutate(deletingArticleId)
     onClose()
   }
+
+  if(!articles && !isSuccess && !isLoading) {
+    return <NotFound />
+  } 
 
   return (
     <Box
@@ -52,7 +58,7 @@ const ArthoredArticles: FunctionComponent = () => {
           spacing={4}
           direction={{ base: "column", md: "row" }}
         >
-          <Link to="/forums/new">
+          <Link to="/threads/new">
             <Button
               variant="outline"
               size="md"
@@ -86,7 +92,13 @@ const ArthoredArticles: FunctionComponent = () => {
       >
         <Box width={{ base: "100%", md: "70%" }}>
           <Box>
-            {isLoading && <p>loading..</p>}
+            {isLoading && <Skeleton />}
+
+            {!isLoading && isSuccess && articles?.length === 0 && (
+              <Box textAlign="center" mt="20px">
+                <Heading as="h5" size="md">You don't have any articles yet</Heading>
+              </Box>
+            )}
 
             {articles && isSuccess && articles?.map((page: any, pageIndex: number) => (
               <Fragment key={pageIndex}>
@@ -102,6 +114,10 @@ const ArthoredArticles: FunctionComponent = () => {
                     onDelete={() => handleDelete(article.id)}
                   />
                 ))}
+
+                {!isLoading && isSuccess && page?.data?.articles?.length === 0 && (
+                  <EmptyState />
+                )}
               </Fragment>
             ))}
 
@@ -128,9 +144,9 @@ const ArthoredArticles: FunctionComponent = () => {
         </Box>
 
         <Box width={{ base: "100%", md: "30%" }}>
-          <Box>
+          {/* <Box>
             <RecommendTopicCard />
-          </Box>
+          </Box> */}
 
           <Box mt={"15px"}>
             <FollowCard />

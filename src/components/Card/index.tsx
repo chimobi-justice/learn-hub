@@ -14,8 +14,12 @@ import {
 } from '@chakra-ui/react'
 import { FaArrowRight } from 'react-icons/fa6'
 
+import { stripTags } from '@helpers/stripTags'
+import truncate from '@helpers/truncate'
+
 interface IProps {
-  profile: string;
+  authorAvatar: string;
+  authorName: string;
   userName: string;
   date: string;
   title: string;
@@ -25,7 +29,8 @@ interface IProps {
 }
 
 const Card: FunctionComponent<IProps> = ({
-  profile,
+  authorAvatar,
+  authorName,
   userName,
   date,
   title,
@@ -38,12 +43,16 @@ const Card: FunctionComponent<IProps> = ({
       <CardHeader>
         <HStack>
           <Box display={"flex"} gap={2} alignItems={"center"}>
+          <Link to={`/user/${userName}`} style={{ display: "flex", alignItems: "center", gap: "5px"}}>
+
             <Avatar
               size="sm"
-              src={profile}
+              src={authorAvatar}
+              name={authorName}
             />
 
-            <Text fontSize={"14px"}>{userName}</Text>
+            <Text fontSize={"14px"}>{truncate(userName, 20)}</Text>
+            </Link>
           </Box>
 
           <Spacer />
@@ -65,7 +74,12 @@ const Card: FunctionComponent<IProps> = ({
           <Link to={CTA}>{title}</Link>
         </Heading>
 
-        <Text fontSize={"14px"} fontWeight={"300"}>{description}</Text>
+        <Text
+          fontSize={"14px"}
+          lineHeight={"1.7em"}
+          color={"#0009"}
+          dangerouslySetInnerHTML={stripTags(truncate(description, 100))}
+        />
       </CardBody>
 
       <CardFooter>

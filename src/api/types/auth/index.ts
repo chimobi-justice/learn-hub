@@ -16,4 +16,5 @@ export interface SigninRequest {
 export interface SigninResponse {
   message: string;
   access_token: string;
+  username: string;
 }

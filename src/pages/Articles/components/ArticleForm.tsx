@@ -6,11 +6,9 @@ import {
   Input,
   Text
 } from '@chakra-ui/react'
-import ReactQuill from 'react-quill'
-import 'react-quill/dist/quill.snow.css'
 import { FaUpload, FaImage } from 'react-icons/fa6'
 
-import { Button } from '@components/index'
+import { Button, Editor } from '@components/index'
 import { useCreateArticle } from '@hooks/article/useCreateArticle'
 import { useEditArticle } from '@hooks/article/useEditArticle'
 import { useImageUpload } from '@hooks/useImageUpload'
@@ -55,8 +53,8 @@ const ArticleForm: FunctionComponent<ArticleFormProps> = ({
   const handleSubmitArticle = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!title || !thumbnail || !content) {
-      errorNotification("All the fields are Required!")
+    if (!thumbnail) {
+      errorNotification("Please select a file to upload!")
       return;
     }
 
@@ -149,14 +147,11 @@ const ArticleForm: FunctionComponent<ArticleFormProps> = ({
         </FormControl>
 
         <Box height={"400px"}>
-          <ReactQuill
-            theme="snow"
-            value={content}
-            onChange={setContent}
-            className="editor-input"
-            placeholder="write here to post threads"
+          <Editor 
+            content={content} 
+            setContent={setContent} 
+            placeholder="write here to post threads" 
           />
-
         </Box>
 
         <Box textAlign={"right"} my={"25px"}>
@@ -167,6 +162,7 @@ const ArticleForm: FunctionComponent<ArticleFormProps> = ({
             type="submit"
             fontWeight={"semibold"}
             rounded="sm"
+            isDisabled={!title || !content}
             isloading={isEditing ? editArticleMutation.isPending : createArticleMutation.isPending}
           >
             {isEditing ? "Update" : "Save"}

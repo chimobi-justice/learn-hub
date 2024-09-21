@@ -13,7 +13,11 @@ export const useDeleteArticle = () => {
 
       queryClient.invalidateQueries({
         queryKey: ['articles']
-      })
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: ['article']
+      });
     },
     onError: (error) => {
       errorNotification(error?.message)

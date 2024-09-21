@@ -8,6 +8,7 @@ interface IProps {
   authorAvatar: string;
   authorName: string;
   authorUsername: string;
+  read_time: string;
   date: string;
 }
 
@@ -16,6 +17,7 @@ const ArticleHeroSection: FunctionComponent<IProps> = ({
   authorAvatar,
   authorName,
   authorUsername,
+  read_time,
   date
 }) => {
   return (
@@ -51,7 +53,7 @@ const ArticleHeroSection: FunctionComponent<IProps> = ({
             {title}
         </Heading>
 
-        <Flex flex="1" gap={2} alignItems="center" flexWrap="wrap">
+        <Flex flex="1" gap={3} alignItems="center" flexWrap="wrap">
           <Link to={`/user/${authorUsername}`}>
             <Avatar size={"sm"} name={authorName} src={authorAvatar} />
           </Link>
@@ -59,6 +61,10 @@ const ArticleHeroSection: FunctionComponent<IProps> = ({
           <Link to="/user/droney-abah">
             <Heading size="xs">{authorName}</Heading>
           </Link>
+
+          <Text fontSize={"13px"}>{read_time}</Text>
+
+          <Text> &bull; </Text>
 
           <Text fontSize={"13px"}>{date}</Text>
         </Flex>

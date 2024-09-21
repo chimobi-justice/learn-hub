@@ -27,24 +27,19 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-// axiosInstance.interceptors.response.use(
-//   (response) => {
-//     return response;
-//   },
-//   (error) => {
-//     if (error.response.status === 401) {
-//       localStorage.removeItem('ucType_');
-//       // window.location.href = '/auth/login'
-//     }
-//     return Promise.reject(error);
-//   }
-// );
-
 axiosInstance.interceptors.response.use(
-  response => response,
-  error => {
+  (response) => response,
+  (error) => {
     if (axios.isAxiosError(error)) {
-      throw new Error(error.response?.data?.message || 'An unexpected error occurred');
+      // Handle 401 (unauthorized) by removing token from localStorage
+      if (error.response?.status === 401 && localStorage.getItem('ucType_')) {
+        localStorage.removeItem('ucType_');
+        location.href = '/auth/login'
+      }
+      throw new Error(error?.response?.data?.message 
+          || error?.response?.status 
+          || error?.message 
+          || 'An unexpected error occurred');
     }
     return Promise.reject(new Error('An unexpected error occurred'));
   }

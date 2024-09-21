@@ -20,9 +20,11 @@ interface IProps {
   articleImg: string;
   title: string;
   description: string;
+  read_time: string;
   authorUsername?: string;
+  authorFullname?: string;
   authorAvatar?: string;
-  authorOccupation?: string;
+  authorProfileHeadlines?: string;
   CTA?: string;
   isOwner?: boolean;
   onDelete?: () => void;
@@ -33,16 +35,18 @@ const ArticlesCard: FunctionComponent<IProps> = ({
   articleImg,
   title,
   description,
+  read_time,
   authorUsername,
+  authorFullname,
   authorAvatar,
-  authorOccupation,
+  authorProfileHeadlines,
   CTA = '#',
   isOwner,
   onDelete,
   id
 }) => {
   return (
-    <Card mb={"15px"}>
+    <Card mb={"20px"}>
       <CardBody p={"0px"}>
         <Box
           display={"flex"}
@@ -63,6 +67,7 @@ const ArticlesCard: FunctionComponent<IProps> = ({
             width={{ base: "100%", md: "65%" }} 
             p={"5px"} 
             display={"flex"}
+            gap={2}
             justifyContent={"space-between"}
           >
             <Box>
@@ -89,7 +94,7 @@ const ArticlesCard: FunctionComponent<IProps> = ({
               <Flex flex="1" gap={2} alignItems="center" flexWrap="wrap" my={"12px"}>
                 {authorUsername && authorAvatar && (
                   <Link to={`/user/${authorUsername}`}>
-                    <Avatar size={"xs"} name="Nelson Dev" src={authorAvatar} />
+                    <Avatar size={"xs"} name={authorFullname} src={authorAvatar} />
                   </Link>
                 )}
 
@@ -103,9 +108,13 @@ const ArticlesCard: FunctionComponent<IProps> = ({
                     </Heading>
                   )}
 
-                  {authorOccupation && (
-                    <Text fontSize={"12px"} color={"#0009"}>{authorOccupation}</Text>
-                  )}
+                  <Box display={"flex"} gap={3}>
+                    {authorProfileHeadlines && (
+                      <Text fontSize={"12px"} color={"#0009"}>{truncate(authorProfileHeadlines, 60)}</Text>
+                    )}
+
+                    <Text fontSize={"12px"} color={"#0009"}>{read_time}</Text>
+                  </Box>
                 </Box>
 
               </Flex>

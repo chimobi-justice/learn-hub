@@ -12,9 +12,10 @@ export const GET_PAGINATED_ARTICLES_ENDPOINT = `${API_BASE_URL}/articles/all/pag
 
 export const GET_SINGLE_ARTICLE_ENDPOINT = `${API_BASE_URL}/articles`;
 
-export const GET_ARTHORED_ARTICLE_ENDPOINT = `${API_BASE_URL}/articles/authored`;
+export const GET_ARTHORED_ARTICLES_ENDPOINT = `${API_BASE_URL}/articles/authored`;
 
+export const CREATE_ARTICLE_COMMENT_ENDPOINT = `${API_BASE_URL}/articles`;
 
+export const ARTICLE_LIKE_ENDPOINT = `${API_BASE_URL}/articles`;
 
-
-
+export const ARTICLE_DISLIKE_ENDPOINT = `${API_BASE_URL}/articles`;
