@@ -46,7 +46,7 @@ const ArticleForm: FunctionComponent<ArticleFormProps> = ({
 
   const { handleFileUpload, loading: imageUploadLoading } = useImageUpload({
     onSuccess: (data) => {
-      setThumbnail(data.data)
+      setThumbnail(data?.data?.imageUploadUrl)
     },
   });
 
