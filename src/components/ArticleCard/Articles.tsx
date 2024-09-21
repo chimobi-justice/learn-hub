@@ -20,7 +20,7 @@ interface IProps {
   articleImg: string;
   title: string;
   description: string;
-  read_time: string;
+  read_time?: string;
   authorUsername?: string;
   authorFullname?: string;
   authorAvatar?: string;

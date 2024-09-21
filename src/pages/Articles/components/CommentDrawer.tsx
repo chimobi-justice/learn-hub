@@ -15,7 +15,6 @@ import {
 } from '@chakra-ui/react'
 
 import { Button, ContentBlockContent, Editor } from '@components/index'
-import { stripTags } from '@helpers/stripTags'
 import { useUser } from '@context/userContext'
 import { colors } from '../../../colors'
 
