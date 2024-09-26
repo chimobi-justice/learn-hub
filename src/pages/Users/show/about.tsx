@@ -22,7 +22,9 @@ const PublicUserAboutDetails: FunctionComponent<PublicUserAboutDetailsProps> = (
       </Text>
 
       <Box mt={"30px"}>
-        <Text fontSize={"14px"}>Connect with <Text as={"span"} fontWeight={"bold"}>{data?.fullname}</Text></Text>
+        {data?.twitter && (
+          <Text fontSize={"14px"}>Connect with <Text as={"span"} fontWeight={"bold"}>{data?.fullname}</Text></Text>
+        )}
 
         <HStack
           spacing={3}

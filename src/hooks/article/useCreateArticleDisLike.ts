@@ -16,6 +16,10 @@ export const useCreateArticleDisLike = () => {
       queryClient.invalidateQueries({
         queryKey: ['article']
       });
+
+      queryClient.invalidateQueries({
+        queryKey: ['public-author-article']
+      });
     },
     onError: (error) => {
       errorNotification(error?.message)
