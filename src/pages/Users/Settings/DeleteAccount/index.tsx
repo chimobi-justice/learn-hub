@@ -32,7 +32,7 @@ const DeleteAccount: FunctionComponent = () => {
           <Box textAlign={"right"} mt={"10"}>
             <Button
               variant="danger"
-              size={{ base: "sm", lg: "md" }}
+              size={{ base: "md", lg: "lg" }}
               width={{ base: "100%", lg: "auto" }}
               type="button"
               fontWeight={"semibold"}

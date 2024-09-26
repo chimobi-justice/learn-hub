@@ -64,7 +64,7 @@ const ThreadForm: FunctionComponent<ThreadFormProps> = ({
           />
         </FormControl>
 
-        <Box height={"400px"}>
+        <Box height={"400px"} mb={"25px"}>
           <Editor
             content={content}
             setContent={setContent}
@@ -72,7 +72,7 @@ const ThreadForm: FunctionComponent<ThreadFormProps> = ({
           />
         </Box>
 
-        <Box textAlign={"right"} my={"25px"}>
+        <Box textAlign={"right"} py={"20px"}>
           <Button
             variant="solid"
             size={{ base: "md", lg: "lg" }}

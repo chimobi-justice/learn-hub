@@ -52,17 +52,9 @@ const ShowThread: FunctionComponent = () => {
               <>
                 <Card>
                   <CardHeader borderBottom={"1px solid #f1f1f1"}>
-                    <Box
-                      display={"flex"}
-                      alignItems={"center"}
-                      gap={4}
-                    >
-                      <Heading as={"h3"} size={"md"}>
-                        Thr<Text as="span" color={colors.primary}>ea</Text>ds
-                      </Heading>
-
-                      <Heading as={"h5"} size={"sm"} fontWeight={"400"}>{data?.data?.title}</Heading>
-                    </Box>
+                    <Heading as={"h3"} size={"md"}>
+                      Thr<Text as="span" color={colors.primary}>ea</Text>ds
+                    </Heading>
                   </CardHeader>
 
                   <CardBody>

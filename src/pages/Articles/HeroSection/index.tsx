@@ -58,7 +58,7 @@ const ArticleHeroSection: FunctionComponent<IProps> = ({
             <Avatar size={"sm"} name={authorName} src={authorAvatar} />
           </Link>
 
-          <Link to="/user/droney-abah">
+          <Link to={`/user/${authorUsername}`}>
             <Heading size="xs">{authorName}</Heading>
           </Link>
 

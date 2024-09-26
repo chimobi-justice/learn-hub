@@ -14,7 +14,7 @@ import { CiEdit } from 'react-icons/ci'
 import { MdDeleteOutline } from 'react-icons/md'
 
 import truncate from '@helpers/truncate'
-import { stripTags } from '@helpers/stripTags';
+import { stripTags } from '@helpers/stripTags'
 
 interface IProps {
   articleImg: string;
@@ -63,9 +63,9 @@ const ArticlesCard: FunctionComponent<IProps> = ({
             />
           </Box>
 
-          <Box 
-            width={{ base: "100%", md: "65%" }} 
-            p={"5px"} 
+          <Box
+            width={{ base: "100%", md: "65%" }}
+            p={"10px"}
             display={"flex"}
             gap={2}
             justifyContent={"space-between"}
@@ -88,38 +88,36 @@ const ArticlesCard: FunctionComponent<IProps> = ({
                 fontSize={"14px"}
                 lineHeight={"1.7em"}
                 color={"#0009"}
-                dangerouslySetInnerHTML={stripTags(truncate(description, 250))}
+                dangerouslySetInnerHTML={stripTags(truncate(description, 200))}
               />
 
-              <Flex flex="1" gap={2} alignItems="center" flexWrap="wrap" my={"12px"}>
-                {authorUsername && authorAvatar && (
-                  <Link to={`/user/${authorUsername}`}>
-                    <Avatar size={"xs"} name={authorFullname} src={authorAvatar} />
-                  </Link>
-                )}
-
-                <Box>
+              <Flex flex="1" gap={2} my={"12px"} flexDirection={{ base: "column", md: "row" }}>
+                <Box display={"flex"} gap={3} alignItems={"center"}>
                   {authorUsername && (
+                    <Link to={`/user/${authorUsername}`}>
+                      <Avatar size={"xs"} name={authorFullname} src={authorAvatar} />
+                    </Link>
+                  )}
 
+                  {authorUsername && (
                     <Heading size="xs" fontSize={"13px"}>
                       <Link to={`/user/${authorUsername}`}>
                         {authorUsername}
                       </Link>
                     </Heading>
                   )}
-
-                  <Box display={"flex"} gap={3}>
-                    {authorProfileHeadlines && (
-                      <Text fontSize={"12px"} color={"#0009"}>{truncate(authorProfileHeadlines, 60)}</Text>
-                    )}
-
-                    <Text fontSize={"12px"} color={"#0009"}>{read_time}</Text>
-                  </Box>
                 </Box>
 
+                <Box display={"flex"} gap={3} alignItems={"center"}>
+                  {authorProfileHeadlines && (
+                    <Text fontSize={"12px"} color={"#0009"}>{truncate(authorProfileHeadlines, 60)}</Text>
+                  )}
+
+                  <Text fontSize={"12px"} color={"#0009"}>{read_time}</Text>
+                </Box>
               </Flex>
             </Box>
-            
+
             {isOwner && (
               <Flex p={"5px"} gap={2}>
                 <Box>

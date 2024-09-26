@@ -25,10 +25,13 @@ import ArthoredArticles from '@pages/Users/AuthoredViews/Articles'
 import ShowArticle from '@pages/Articles/show'
 import CreateArticle from '@pages/Articles/create'
 
+import ShowUserPublicPosts from '@pages/Users/show'
+
 import Login from '@pages/Auth/Login'
 import Register from '@pages/Auth/Register'
 
 import PrivateRoute from './Route/privateRoute'
+import AuthRoute from './Route/AuthRoute'
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -40,6 +43,8 @@ const routes = createBrowserRouter(
 
         <Route index path='/articles' element={<Articles />} />
         <Route index path='/articles/:slug/:id' element={<ShowArticle />} />
+
+        <Route index path='/user/:username' element={<ShowUserPublicPosts />} />
 
         {/* private route */}
         <Route path="/articles/new" element={<PrivateRoute element={<CreateArticle />} />} />
@@ -54,8 +59,8 @@ const routes = createBrowserRouter(
         <Route path="/me/settings/account/edit" element={<PrivateRoute element={<ProfileEdit />} />} />
         {/* end private route */}
 
-        <Route index path='/auth/login' element={<Login />} />
-        <Route index path='/auth/register' element={<Register />} />
+        <Route path="/auth/login" element={<AuthRoute element={<Login />} />} />
+        <Route path="/auth/register" element={<AuthRoute element={<Register />} />} />
 
         <Route index path='*' element={<NotFound />} />
       </Route>

@@ -20,7 +20,8 @@ const ArthoredArticles: FunctionComponent = () => {
     isSuccess,
     hasNextPage,
     fetchNextPage,
-    isFetchingNextPage
+    isFetchingNextPage,
+    dataStatus
   } = useGetAuthoredArticles(10, username!)
   const { deleteArticleMutation } = useDeleteArticle()
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -37,9 +38,7 @@ const ArthoredArticles: FunctionComponent = () => {
     onClose()
   }
 
-  if(!articles && !isSuccess && !isLoading) {
-    return <NotFound />
-  } 
+  if (dataStatus === 404) return <NotFound />;
 
   return (
     <Box

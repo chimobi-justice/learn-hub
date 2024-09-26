@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react'
-import { Box, Heading } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
+import { Box, Heading, Text } from '@chakra-ui/react'
 
 import {
   // RecommendTopicCard,
@@ -8,13 +9,27 @@ import {
 import UpdatePassword from '@pages/Users/Settings/UpdatePassword'
 import UpdateProfile from '@pages/Users/Settings/UpdateProfile'
 import DeleteAccount from '@pages/Users/Settings/DeleteAccount'
+import { useUser } from '@context/userContext'
 
 const ProfileEdit: FunctionComponent = () => {
+  const { user } = useUser();
+
   return (
     <Box
       m={"3rem auto"}
       width={"90%"}
     >
+      <Text 
+        mb={"5px"} 
+        fontSize={"18px"} 
+        cursor={"pointer"}
+        _hover={{textDecoration: "underline"}}
+      >
+        <Link to={`/me/${user?.data?.username}`}>
+          Back
+        </Link>
+      </Text>
+
       <Heading as="h4" size="lg" py={"10px"}>Settings</Heading>
 
       <Box

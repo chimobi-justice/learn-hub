@@ -14,4 +14,9 @@ export const Menu = [
     name: "Articles",
     url: "articles"
   },
+  {
+    id: 4,
+    name: "Discussions ~ coming soon",
+    url: ""
+  },
 ];

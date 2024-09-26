@@ -28,7 +28,8 @@ const ArthoredThreads: FunctionComponent = () => {
     isSuccess,
     hasNextPage,
     fetchNextPage,
-    isFetchingNextPage
+    isFetchingNextPage,
+    dataStatus
   } = useGetAuthoredThreads(10, username!)
   const { deleteThreadMutation } = useDeleteThread();
 
@@ -46,9 +47,7 @@ const ArthoredThreads: FunctionComponent = () => {
     onClose()
   }
 
-  if (!threads && !isSuccess && !isLoading) {
-    return <NotFound />
-  }
+  if (dataStatus === 404) return <NotFound />;
 
   return (
     <>

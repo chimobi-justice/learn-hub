@@ -6,18 +6,16 @@ import {
   CardBody,
   CardHeader,
   Heading,
-  Spacer,
   Stack,
   StackDivider,
   Text
 } from '@chakra-ui/react'
 
 import { colors } from '../../colors'
-import { Button, Search, FollowCard, Skeleton } from '@components/index'
+import { Button, FollowCard, Skeleton, ThreadCard } from '@components/index'
 import DiscussionCard from '@pages/Threads/components/discussionCard'
 import { useUser } from '@context/userContext'
 import { useGetPaginatedThreads } from '@hooks/thread/useGetPaginatedThreads'
-import ThreadCard from '@components/ThreadCard'
 
 const Threads: FunctionComponent = () => {
   const { user } = useUser();
@@ -73,10 +71,6 @@ const Threads: FunctionComponent = () => {
                     <Heading size={"md"}>
                       Thr<Text as="span" color={colors.primary}>ea</Text>ds
                     </Heading>
-
-                    <Spacer />
-
-                    <Search />
                   </Stack>
                 </CardHeader>
 

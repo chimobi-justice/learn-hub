@@ -99,6 +99,7 @@ const HeroSection: FunctionComponent = () => {
           <Box
             width={{ base: "100%", lg: "50%" }}
             mt={{ base: "25px", lg: "2px" }}
+            display={{ base: "none", md: "block" }}
           >
             <Image
               src={HeroImg}

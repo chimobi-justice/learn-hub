@@ -36,11 +36,8 @@ axiosInstance.interceptors.response.use(
         localStorage.removeItem('ucType_');
         location.href = '/auth/login'
       }
-      throw new Error(error?.response?.data?.message 
-          || error?.response?.status 
-          || error?.message 
-          || 'An unexpected error occurred');
+    return Promise.reject(error);
+
     }
-    return Promise.reject(new Error('An unexpected error occurred'));
   }
 );
