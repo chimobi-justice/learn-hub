@@ -16,6 +16,10 @@ export const useCreateThreadLike = () => {
       queryClient.invalidateQueries({
         queryKey: ['thread']
       });
+
+      queryClient.invalidateQueries({
+        queryKey: ['public-author-threads']
+      });
     },
     onError: (error) => {
       errorNotification(error?.message)

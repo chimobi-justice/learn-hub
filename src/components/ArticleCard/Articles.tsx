@@ -71,66 +71,71 @@ const ArticlesCard: FunctionComponent<IProps> = ({
             justifyContent={"space-between"}
           >
             <Box>
-              <Heading
-                size="lg"
-                lineHeight={"1.6em"}
-                fontSize={"24px"}
-                mb={"10px"}
-                _hover={{
-                  textDecoration: "underline"
-                }}
-              >
-                <Link to={CTA}>
-                  {truncate(title, 80)}
-                </Link>
-              </Heading>
-              <Text
-                fontSize={"14px"}
-                lineHeight={"1.7em"}
-                color={"#0009"}
-                dangerouslySetInnerHTML={stripTags(truncate(description, 200))}
-              />
-
-              <Flex flex="1" gap={2} my={"12px"} flexDirection={{ base: "column", md: "row" }}>
-                <Box display={"flex"} gap={3} alignItems={"center"}>
-                  {authorUsername && (
-                    <Link to={`/user/${authorUsername}`}>
-                      <Avatar size={"xs"} name={authorFullname} src={authorAvatar} />
-                    </Link>
-                  )}
-
-                  {authorUsername && (
-                    <Heading size="xs" fontSize={"13px"}>
-                      <Link to={`/user/${authorUsername}`}>
-                        {authorUsername}
-                      </Link>
-                    </Heading>
-                  )}
-                </Box>
-
-                <Box display={"flex"} gap={3} alignItems={"center"}>
-                  {authorProfileHeadlines && (
-                    <Text fontSize={"12px"} color={"#0009"}>{truncate(authorProfileHeadlines, 60)}</Text>
-                  )}
-
-                  <Text fontSize={"12px"} color={"#0009"}>{read_time}</Text>
-                </Box>
-              </Flex>
-            </Box>
-
-            {isOwner && (
-              <Flex p={"5px"} gap={2}>
-                <Box>
-                  <Link to={`/articles/edit/${id}`}>
-                    <CiEdit size={"25px"} cursor={"pointer"} />
+              <Box display={"flex"}>
+                <Heading
+                  size="lg"
+                  lineHeight={"1.6em"}
+                  fontSize={"24px"}
+                  mb={"10px"}
+                  _hover={{
+                    textDecoration: "underline"
+                  }}
+                >
+                  <Link to={CTA}>
+                    {truncate(title, 80)}
                   </Link>
-                </Box>
+                </Heading>
 
-                <Box>
-                  <MdDeleteOutline size={"25px"} color="red" cursor={"pointer"} onClick={onDelete} />
-                </Box>
-              </Flex>
-            )}
+                {isOwner && (
+                <Flex p={"5px"} gap={2}>
+                  <Box>
+                    <Link to={`/articles/edit/${id}`}>
+                      <CiEdit size={"25px"} cursor={"pointer"} />
+                    </Link>
+                  </Box>
+
+                  <Box>
+                    <MdDeleteOutline size={"25px"} color="red" cursor={"pointer"} onClick={onDelete} />
+                  </Box>
+                </Flex>
+              )}
+              </Box>
+
+              <Box>
+                <Text
+                  fontSize={"14px"}
+                  lineHeight={"1.7em"}
+                  color={"#0009"}
+                  dangerouslySetInnerHTML={stripTags(truncate(description, 200))}
+                />
+
+                <Flex flex="1" gap={2} my={"12px"} flexDirection={{ base: "column", md: "row" }}>
+                  <Box display={"flex"} gap={3} alignItems={"center"}>
+                    {authorUsername && (
+                      <Link to={`/user/${authorUsername}`}>
+                        <Avatar size={"xs"} name={authorFullname} src={authorAvatar} />
+                      </Link>
+                    )}
+
+                    {authorUsername && (
+                      <Heading size="xs" fontSize={"13px"}>
+                        <Link to={`/user/${authorUsername}`}>
+                          {authorUsername}
+                        </Link>
+                      </Heading>
+                    )}
+                  </Box>
+
+                  <Box display={"flex"} gap={3} alignItems={"center"}>
+                    {authorProfileHeadlines && (
+                      <Text fontSize={"12px"} color={"#0009"}>{truncate(authorProfileHeadlines, 60)}</Text>
+                    )}
+
+                    <Text fontSize={"12px"} color={"#0009"}>{read_time}</Text>
+                  </Box>
+                </Flex>
+              </Box>
+            </Box>
           </Box>
         </Box>
       </CardBody>

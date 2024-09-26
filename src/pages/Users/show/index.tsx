@@ -27,9 +27,10 @@ const ShowUserPublicPosts: FunctionComponent = () => {
 
   const { data, isLoading } = useGetPublicUser(username!)
 
-  if (!data) return <NotFound />;
-
+  
   if (isLoading) return <Skeleton />
+
+  if (!data) return <NotFound />;
 
   const userData = data?.data;
 
