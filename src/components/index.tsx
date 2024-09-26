@@ -16,6 +16,7 @@ import TextArea from '@components/TextArea'
 import EmptyState from '@components/EmptyState'
 import Editor from '@components/Editor'
 import ContentBlockContent from '@components/CodeBlockContent'
+import ThreadCard from '@components/ThreadCard'
 
 export {
   Alert,
@@ -36,4 +37,5 @@ export {
   EmptyState,
   Editor,
   ContentBlockContent,
+  ThreadCard,
 }

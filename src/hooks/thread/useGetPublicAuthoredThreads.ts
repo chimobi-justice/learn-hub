@@ -1,12 +1,13 @@
 import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query'
 
 import { axiosInstance } from '@api/axiosInstance'
-import { GET_ARTHORED_ARTICLES_ENDPOINT } from '@api/index'
+import { GET_ARTHORED_THREADS_ENDPOINT } from '@api/index'
 
-export const useGetAuthoredArticles = (limit: number = 0, username: string) => {
-  const fetchPaginatedArticles = async ({ pageParam = 0 }) => {
+export const useGetPublicAuthoredThreads = (limit: number = 0, username: string) => {
+  const fetchPublicAuthoredThreads = async ({ pageParam = 0 }) => {
     try {
-      const res = await axiosInstance.get(`${GET_ARTHORED_ARTICLES_ENDPOINT}/${username}?limit=${limit}&page=${pageParam}`);
+      const res = await axiosInstance
+          .get(`${GET_ARTHORED_THREADS_ENDPOINT}/${username}/public?limit=${limit}&page=${pageParam}`);
       const dataStatus = res.status;
       const dataResponse = await res.data;
       return { ...dataResponse, dataStatus, prevOffset: pageParam };
@@ -19,17 +20,17 @@ export const useGetAuthoredArticles = (limit: number = 0, username: string) => {
   };
 
   const {
-    data: articlesResponse,
+    data: threadsResponse,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
     isLoading,
     isSuccess
   } = useInfiniteQuery({
-    queryKey: ['articles', limit, username],
-    queryFn: fetchPaginatedArticles,
-    initialPageParam: 1,
+    queryKey: ['public-author-threads', limit, username],
+    queryFn: fetchPublicAuthoredThreads,
     placeholderData: keepPreviousData,
+    initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       if (!lastPage?.data?.pagination?.next_page_url) {
         return undefined;
@@ -38,16 +39,16 @@ export const useGetAuthoredArticles = (limit: number = 0, username: string) => {
     }
   })
 
-  const articles = articlesResponse?.pages ?? null;
-  const dataStatus = articlesResponse?.pages?.[0]?.dataStatus ?? null;
+  const threads = threadsResponse?.pages ?? null;
+  const dataStatus = threadsResponse?.pages?.[0]?.dataStatus ?? null;
 
-  return {
-    articles,
-    isLoading,
-    isSuccess,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    dataStatus
+  return { 
+    threads, 
+    isLoading, 
+    isSuccess, 
+    fetchNextPage, 
+    hasNextPage, 
+    isFetchingNextPage, 
+    dataStatus 
   }
 }

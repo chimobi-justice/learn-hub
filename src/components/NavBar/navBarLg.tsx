@@ -16,13 +16,13 @@ import {
 import { FaRegUser } from 'react-icons/fa'
 import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io'
 
-import Button from '@components/Button'
+import { Button, Search } from '@components/index'
 import { colors } from '../../colors'
 import { Menu } from '@constant/Menu'
 import { useUser } from '@context/userContext'
 import { useSignOut } from '@hooks/auth/useSignOut'
 
-const NavBarLg: FunctionComponent = () => {  
+const NavBarLg: FunctionComponent = () => {
   const { user } = useUser();
   const { signOutMutation } = useSignOut()
 
@@ -43,16 +43,20 @@ const NavBarLg: FunctionComponent = () => {
           justifyContent="space-between"
           py={"20px"}
         >
-          <Link to="/">
-            <Heading
-              fontStyle={"italic"}
-              fontWeight={"bold"}
-              as="h4"
-              color={colors.primary}
-            >
-              Learn <Text as="span" color={"#000"}>Hub</Text>
-            </Heading>
-          </Link>
+          <Box display={"flex"} gap={4} alignItems={"center"}>
+            <Link to="/">
+              <Heading
+                fontStyle={"italic"}
+                fontWeight={"bold"}
+                as="h4"
+                color={colors.primary}
+              >
+                Learn <Text as="span" color={"#000"}>Hub</Text>
+              </Heading>
+            </Link>
+
+            <Search />
+          </Box>
 
           <Box
             display={"inline-flex"}
@@ -84,6 +88,7 @@ const NavBarLg: FunctionComponent = () => {
                           <Avatar
                             size={"sm"}
                             name={user?.data?.fullname}
+                            src={user?.data?.avatar}
                           />
                           <Box>
                             <Text

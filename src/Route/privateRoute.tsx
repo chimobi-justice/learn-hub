@@ -1,8 +1,6 @@
 import { FunctionComponent, ReactElement } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 
-// import { useUser } from '@context/userContext'
-
 interface PrivateRouteProps {
   element: ReactElement;
 }

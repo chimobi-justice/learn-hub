@@ -8,7 +8,7 @@ import { colors } from '../../../colors'
 import { useGetThreads } from '@hooks/thread/useGetThreads'
 
 const HomeThreads: FunctionComponent = () => {
-  const { data: threads, isLoading, isSuccess } = useGetThreads(6)
+  const { data: threads, isLoading, isSuccess } = useGetThreads(12)
 
   return (
     <Box width={"90%"} m={"4rem auto"}>

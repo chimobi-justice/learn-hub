@@ -113,7 +113,7 @@ const Articles: FunctionComponent = () => {
                   authorFullname={article?.author?.fullname}
                   authorUsername={article?.author?.username}
                   authorProfileHeadlines={article?.author?.profile_headlines}
-                  onDelete={() => handleDelete(article.id)}
+                  onDelete={() => handleDelete(article?.id)}
                 />
               ))}
             </Fragment>

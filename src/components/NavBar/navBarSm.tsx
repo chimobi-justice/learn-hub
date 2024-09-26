@@ -26,7 +26,7 @@ import {
 } from 'react-icons/io'
 
 import { colors } from '../../colors'
-import { Button } from '@components/index'
+import { Button, Search } from '@components/index'
 import { Menu } from '@constant/Menu'
 import { useUser } from '@context/userContext'
 import { useSignOut } from '@hooks/auth/useSignOut'
@@ -119,6 +119,7 @@ const NavBarSm: FunctionComponent = () => {
             </Box>
 
             <Box p={"10px"}>
+              <Search />
               <List alignItems="start" mt="2rem" w="100%">
                 {Menu?.map((menu) => (
                   <ListItem w="100%" mb="20px" key={menu.id}>
@@ -145,6 +146,7 @@ const NavBarSm: FunctionComponent = () => {
                                 <Avatar
                                   size={"sm"}
                                   name={user?.data?.fullname}
+                                  src={user?.data?.avatar}
                                 />
                                 <Box>
                                   <Text

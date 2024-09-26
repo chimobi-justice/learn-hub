@@ -5,12 +5,6 @@ export const updateProfileValidationSchema = () => Yup.object({
     .required("Required"),
   username: Yup.string()
     .required("Required"),
-  twitter: Yup.string()
-    .required("Required"),
-  gitHub: Yup.string()
-    .required("Required"),
-  website: Yup.string()
-    .required("Required"),
   profile_headlines: Yup.string()
     .required("Required"),
   state: Yup.string()
@@ -18,5 +12,11 @@ export const updateProfileValidationSchema = () => Yup.object({
   country: Yup.string()
     .required("Required"),
   bio: Yup.string()
-    .required("Required")
+    .required("Required"),
+  twitter: Yup.string()
+    .nullable("Required"),
+  gitHub: Yup.string()
+    .nullable("Required"),
+  website: Yup.string()
+    .nullable("Required")
 });

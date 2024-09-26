@@ -146,7 +146,7 @@ const ArticleForm: FunctionComponent<ArticleFormProps> = ({
           />
         </FormControl>
 
-        <Box height={"400px"}>
+        <Box height={"400px"} mb={"25px"}>
           <Editor 
             content={content} 
             setContent={setContent} 
@@ -154,7 +154,7 @@ const ArticleForm: FunctionComponent<ArticleFormProps> = ({
           />
         </Box>
 
-        <Box textAlign={"right"} my={"25px"}>
+        <Box textAlign={"right"} py={"25px"}>
           <Button
             variant="solid"
             size={{ base: "md", lg: "lg" }}

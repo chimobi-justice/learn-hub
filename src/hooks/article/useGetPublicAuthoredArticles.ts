@@ -3,10 +3,11 @@ import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query'
 import { axiosInstance } from '@api/axiosInstance'
 import { GET_ARTHORED_ARTICLES_ENDPOINT } from '@api/index'
 
-export const useGetAuthoredArticles = (limit: number = 0, username: string) => {
-  const fetchPaginatedArticles = async ({ pageParam = 0 }) => {
+export const useGetPublicAuthoredArticles = (limit: number = 0, username: string) => {
+  const fetchPublicAuthoredArticles = async ({ pageParam = 0 }) => {
     try {
-      const res = await axiosInstance.get(`${GET_ARTHORED_ARTICLES_ENDPOINT}/${username}?limit=${limit}&page=${pageParam}`);
+      const res = await axiosInstance
+          .get(`${GET_ARTHORED_ARTICLES_ENDPOINT}/${username}/public?limit=${limit}&page=${pageParam}`);
       const dataStatus = res.status;
       const dataResponse = await res.data;
       return { ...dataResponse, dataStatus, prevOffset: pageParam };
@@ -26,10 +27,10 @@ export const useGetAuthoredArticles = (limit: number = 0, username: string) => {
     isLoading,
     isSuccess
   } = useInfiniteQuery({
-    queryKey: ['articles', limit, username],
-    queryFn: fetchPaginatedArticles,
-    initialPageParam: 1,
+    queryKey: ['public-author-articles', limit, username],
+    queryFn: fetchPublicAuthoredArticles,
     placeholderData: keepPreviousData,
+    initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       if (!lastPage?.data?.pagination?.next_page_url) {
         return undefined;
@@ -41,13 +42,13 @@ export const useGetAuthoredArticles = (limit: number = 0, username: string) => {
   const articles = articlesResponse?.pages ?? null;
   const dataStatus = articlesResponse?.pages?.[0]?.dataStatus ?? null;
 
-  return {
-    articles,
-    isLoading,
-    isSuccess,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    dataStatus
+  return { 
+    articles, 
+    isLoading, 
+    isSuccess, 
+    fetchNextPage, 
+    hasNextPage, 
+    isFetchingNextPage, 
+    dataStatus 
   }
 }

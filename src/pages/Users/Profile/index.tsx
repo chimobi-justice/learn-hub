@@ -72,7 +72,7 @@ const Profile: FunctionComponent = () => {
                 <Heading as={"h6"} size={"md"}>{user?.data?.fullname}</Heading>
                 <Text fontSize={"17px"} my={"7px"} lineHeight={"1.7em"}>{user?.data?.profile_headlines}</Text>
                 <Text fontSize={"14px"} my={"7px"}>{user?.data?.state}, {user?.data?.country}</Text>
-                <Text fontSize={"14px"}>20 followers - 2 following</Text>
+                <Text fontSize={"14px"}>0 followers - 0 following</Text>
 
                 <HStack
                   spacing={3}
@@ -126,7 +126,7 @@ const Profile: FunctionComponent = () => {
                 <Link to="/me/settings/account/edit">
                   <Button
                     variant="solid"
-                    size={{ base: "sm", lg: "md" }}
+                    size={{ base: "md", lg: "lg" }}
                     width={{ base: "100%", lg: "auto" }}
                     type="button"
                     fontWeight={"semibold"}

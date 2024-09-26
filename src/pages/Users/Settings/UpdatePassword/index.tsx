@@ -89,7 +89,7 @@ const UpdatePassword: FunctionComponent = () => {
               <Box textAlign={"right"} mt={"10"}>
                 <Button
                   variant="solid"
-                  size={{ base: "sm", lg: "md" }}
+                  size={{ base: "md", lg: "lg" }}
                   width={{ base: "100%", lg: "auto" }}
                   type="submit"
                   fontWeight={"semibold"}

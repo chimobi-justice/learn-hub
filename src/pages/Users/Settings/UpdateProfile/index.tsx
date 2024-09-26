@@ -1,4 +1,4 @@
-import { FunctionComponent, useRef } from 'react'
+import { FunctionComponent, useEffect, useRef, useState } from 'react'
 import {
   Avatar,
   Box,
@@ -27,24 +27,24 @@ import { capitalizeFirstLetter } from '@helpers/capitalize'
 const UpdateProfile: FunctionComponent = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const userContext = useUser();
+  const { user } = useUser();
   const { updateProfileMutation } = useUpdateProfile();
   const { updateProfileAvatarMutation } = useUpdateAvatar();
-  const res = userContext?.user?.data;
+  const res = user?.data;
 
-  const initialValues: UpdateProfileRequest = {
-    fullname: res?.fullname ?? '',
-    username: res?.username ?? '',
-    email: res?.email ?? '',
-    avatar: res?.avatar ?? '',
-    twitter: res?.twitter ?? '',
-    gitHub: res?.gitHub ?? '',
-    website: res?.website ?? '',
-    profile_headlines: res?.profile_headlines ?? '',
-    state: res?.state ?? '',
-    country: res?.country ?? '',
-    bio: res?.bio ?? '',
-  };
+  const [initialValues, setInitialValues] = useState<UpdateProfileRequest>({
+    fullname: '',
+    username: '',
+    email: '',
+    avatar: '',
+    twitter: '',
+    gitHub: '',
+    website: '',
+    profile_headlines: '',
+    state: '',
+    country: '',
+    bio: '',
+  });
 
   const { handleFileUpload, loading: imageUploadLoading } = useImageUpload({
     onSuccess: (data) => {
@@ -60,13 +60,31 @@ const UpdateProfile: FunctionComponent = () => {
     fileInputRef.current?.click();
   };
 
+  useEffect(() => {
+    if (res) {
+      setInitialValues({
+        fullname: res?.fullname ?? '',
+        username: res?.username ?? '',
+        email: res?.email ?? '',
+        avatar: res?.avatar ?? '',
+        twitter: res?.twitter ?? '',
+        gitHub: res?.gitHub ?? '',
+        website: res?.website ?? '',
+        profile_headlines: res?.profile_headlines ?? '',
+        state: res?.state ?? '',
+        country: res?.country ?? '',
+        bio: res?.bio ?? '',
+      })
+    }
+  }, [res]);
+
   return (
     <Card>
       <CardBody position="relative">
         <Box textAlign="center" mb={12}>
           <Box
             position="absolute"
-            top="-13%"
+            top={{ base: "-10%", md: "-13%"}}
             left="50%"
             transform="translateX(-50%)"
             border="4px solid white"
@@ -115,6 +133,7 @@ const UpdateProfile: FunctionComponent = () => {
           </Box>
         </Box>
         <Formik
+          enableReinitialize
           initialValues={initialValues}
           onSubmit={handleUpdateProfile}
           validationSchema={updateProfileValidationSchema}
@@ -123,19 +142,19 @@ const UpdateProfile: FunctionComponent = () => {
             <form onSubmit={handleSubmit}>
               <SimpleGrid minChildWidth="300px" spacing={3} mb={6}>
                 {[
-                  { name: 'fullname', type: 'text', placeholder: 'eg, John Doe' },
-                  { name: 'username', type: 'text', placeholder: 'eg, john-doe' },
-                  { name: 'email', type: 'email', disabled: true },
-                  { name: 'twitter', type: 'text', placeholder: 'eg, @johndoe' },
-                  { name: 'gitHub', type: 'text', placeholder: 'eg, doejohn_' },
-                  { name: 'website', type: 'text', placeholder: 'eg, www.johndoe.com' },
-                  { name: 'profile_headlines', type: 'text', placeholder: 'eg, Frontend Developer || React' },
-                  { name: 'state', type: 'text', placeholder: 'Ebonyi' },
-                  { name: 'country', type: 'text', placeholder: 'Nigeria' },
-                ].map(({ name, type, disabled, placeholder }) => (
+                  { name: 'fullname', type: 'text', placeholder: 'eg, John Doe', isRequired: true },
+                  { name: 'username', type: 'text', placeholder: 'eg, john-doe', isRequired: true },
+                  { name: 'email', type: 'email', disabled: true, isRequired: true },
+                  { name: 'profile_headlines', type: 'text', placeholder: 'eg, Frontend Developer || React', isRequired: true },
+                  { name: 'state', type: 'text', placeholder: 'Ebonyi', isRequired: true },
+                  { name: 'country', type: 'text', placeholder: 'Nigeria', isRequired: true },
+                  { name: 'twitter', type: 'text', placeholder: 'eg, @johndoe', isRequired: true },
+                  { name: 'gitHub', type: 'text', placeholder: 'eg, doejohn_', isRequired: false },
+                  { name: 'website', type: 'text', placeholder: 'eg, www.johndoe.com', isRequired: false },
+                ].map(({ name, type, disabled, placeholder, isRequired }) => (
                   <FormControl
                     key={name}
-                    isRequired
+                    isRequired={isRequired}
                     isInvalid={!!errors[name as keyof typeof errors] && touched[name as keyof typeof touched]}
                   >
                     <FormLabel htmlFor={name}>
@@ -174,7 +193,7 @@ const UpdateProfile: FunctionComponent = () => {
               <Box textAlign="right">
                 <Button
                   variant="solid"
-                  size={{ base: "sm", lg: "md" }}
+                  size={{ base: "md", lg: "lg" }}
                   width={{ base: "100%", lg: "auto" }}
                   type="submit"
                   fontWeight="semibold"

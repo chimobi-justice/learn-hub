@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { FaXTwitter } from 'react-icons/fa6'
 import { IoLogoLinkedin } from 'react-icons/io'
+import { FaGithub } from "react-icons/fa";
 
 import { colors } from '../../colors'
 
@@ -120,6 +121,17 @@ const Footer: FunctionComponent = () => {
                     gap: "3px"
                   }}>
                   <IoLogoLinkedin style={{ fontSize: "20px" }} />LinkedIn
+                </Link>
+              </ListItem>
+              <ListItem>
+                <Link
+                  to="https://github.com/chimobi-justice/learn-hub"
+                  target='_blank'
+                  style={{
+                    display: "flex",
+                    gap: "3px"
+                  }}>
+                  <FaGithub style={{ fontSize: "20px" }} />Github
                 </Link>
               </ListItem>
             </List>

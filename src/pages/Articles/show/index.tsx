@@ -40,11 +40,11 @@ const ShowArticle: FunctionComponent = () => {
           <>
             <ArticleHeroSection
               title={data?.data?.title}
-              authorAvatar={data?.data?.author.avatar}
-              authorName={data?.data?.author.fullname}
-              authorUsername={data?.data?.author.fullname}
+              authorAvatar={data?.data?.author?.avatar}
+              authorName={data?.data?.author?.fullname}
+              authorUsername={data?.data?.author?.username}
               read_time={data?.data?.read_time}
-              date={data?.data?.created_at.human_short}
+              date={data?.data?.created_at?.human}
             />
 
             <Box

@@ -8,7 +8,7 @@ import { colors } from '../../../colors'
 import { useGetArticles } from '@hooks/article/useGetArticles'
 
 const HomeArticles: FunctionComponent = () => {
-  const { data: articles, isLoading, isSuccess } = useGetArticles(4)
+  const { data: articles, isLoading, isSuccess } = useGetArticles(8)
 
   return (
     <Box width={"90%"} m={"4rem auto"}>
