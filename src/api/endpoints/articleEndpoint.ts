@@ -19,3 +19,7 @@ export const CREATE_ARTICLE_COMMENT_ENDPOINT = `${API_BASE_URL}/articles`;
 export const ARTICLE_LIKE_ENDPOINT = `${API_BASE_URL}/articles`;
 
 export const ARTICLE_DISLIKE_ENDPOINT = `${API_BASE_URL}/articles`;
+
+export const GET_RECOMMENDED_ARTICLES_ENDPOINT = `${API_BASE_URL}/articles/recommented-articles`;
+
+export const GET_PINNED_ARTICLES_ENDPOINT = `${API_BASE_URL}/articles/pinned-articles`;

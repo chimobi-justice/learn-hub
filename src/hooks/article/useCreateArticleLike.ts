@@ -21,8 +21,8 @@ export const useCreateArticleLike = () => {
         queryKey: ['public-author-article']
       });
     },
-    onError: (error) => {
-      errorNotification(error?.message)
+    onError: (error: any) => {
+      errorNotification(error?.response?.data?.message)
     }
   })
 

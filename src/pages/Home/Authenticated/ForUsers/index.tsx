@@ -1,14 +1,11 @@
-import { Fragment, FunctionComponent, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Fragment, useState } from 'react'
+import { Box, useDisclosure } from '@chakra-ui/react'
 
 import { Alert, ArticlesCard, Button, Skeleton } from '@components/index'
-import { useGetPublicAuthoredArticles } from '@hooks/article/useGetPublicAuthoredArticles'
-import { Box, Heading, useDisclosure } from '@chakra-ui/react'
 import { useDeleteArticle } from '@hooks/article/useDeleteArticle'
+import { useGetRecommentedArticles } from '@hooks/article/useGetRecommentedArticles'
 
-const PublicUserArticles: FunctionComponent = () => {
-  const { username } = useParams();
-
+const ForYou = () => {
   const {
     articles,
     isLoading,
@@ -16,7 +13,8 @@ const PublicUserArticles: FunctionComponent = () => {
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage
-  } = useGetPublicAuthoredArticles(20, username!);
+  } = useGetRecommentedArticles(20)
+
   const { deleteArticleMutation } = useDeleteArticle()
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [deleteArticleId, setDeleteArticleId] = useState(null);
@@ -54,12 +52,6 @@ const PublicUserArticles: FunctionComponent = () => {
               onDelete={() => handleDelete(article?.id)}
             />
           ))}
-
-          {page?.data?.articles?.length === 0 && (
-            <Box textAlign="center" mt="20px">
-              <Heading as="h5" size="md">This author don't have any articles yet</Heading>
-            </Box>
-          )}
         </Fragment>
       ))}
 
@@ -92,8 +84,7 @@ const PublicUserArticles: FunctionComponent = () => {
         isLoading={deleteArticleMutation.isPending}
       />
     </>
-
   )
 }
 
-export default PublicUserArticles;
+export default ForYou;

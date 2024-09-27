@@ -19,8 +19,8 @@ export const useDeleteArticle = () => {
         queryKey: ['article']
       });
     },
-    onError: (error) => {
-      errorNotification(error?.message)
+    onError: (error: any) => {
+      errorNotification(error?.response?.data?.message)
     }
   })
 

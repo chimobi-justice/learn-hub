@@ -9,8 +9,8 @@ export const useUpdatePassword = () => {
     onSuccess: (data) => {
       successNotification(data?.message)
     },
-    onError: (error) => {
-      errorNotification(error?.message)
+    onError: (error: any) => {
+      errorNotification(error?.response?.data?.message)
     }
   })
 

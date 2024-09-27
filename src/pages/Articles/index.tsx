@@ -14,6 +14,7 @@ import {
 import { useUser } from '@context/userContext';
 import { useGetPaginatedArticles } from '@hooks/article/useGetPaginatedArticles';
 import { useDeleteArticle } from '@hooks/article/useDeleteArticle';
+import { useGetPinnedArticles } from '@hooks/article/useGetPinnedArticles';
 
 const Articles: FunctionComponent = () => {
   const { user } = useUser();
@@ -26,10 +27,9 @@ const Articles: FunctionComponent = () => {
     isFetchingNextPage
   } = useGetPaginatedArticles(10)
   const { deleteArticleMutation } = useDeleteArticle()
+  const {data: pinArticles } = useGetPinnedArticles();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [deletingArticleId, setDeletingArticleId] = useState(null);
-
-  const CardLatestData = [1, 2, 3];
 
   const handleDelete = (articleId: any) => {
     setDeletingArticleId(articleId)
@@ -72,15 +72,15 @@ const Articles: FunctionComponent = () => {
         )}
       </Box>
 
-      <SimpleGrid minChildWidth="300px" spacing={3}>
-        {CardLatestData?.map((index) => (
+      <SimpleGrid minChildWidth="370px" spacing={4}>
+        {pinArticles?.map((article: any, index: number) => (
           <LatestArticleCard
             key={index}
-            articleImage='https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-            date='1 week ago'
-            title='lorem ipsum dolor'
-            description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum molestiae nihil adipisci tenetur vitae impedit.'
-            CTA='/articles/lorem-ipsum-dolor'
+            articleImage={article?.thumbnail}
+            date={article?.created_at?.human}
+            title={article?.title}
+            description={article?.content}
+            CTA={`/articles/${article?.slug}/${article?.id}`}
             CTAText='Read article'
           />
         ))}
@@ -112,7 +112,6 @@ const Articles: FunctionComponent = () => {
                   authorAvatar={article?.author?.avatar}
                   authorFullname={article?.author?.fullname}
                   authorUsername={article?.author?.username}
-                  authorProfileHeadlines={article?.author?.profile_headlines}
                   onDelete={() => handleDelete(article?.id)}
                 />
               ))}

@@ -175,7 +175,6 @@ const UpdateProfile: FunctionComponent = () => {
 
               <Box mb={6}>
                 <FormControl
-                  isRequired
                   isInvalid={!!errors.bio && touched.bio}
                 >
                   <FormLabel htmlFor="bio">Bio</FormLabel>

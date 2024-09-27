@@ -61,7 +61,7 @@ const Card: FunctionComponent<IProps> = ({
         </HStack>
       </CardHeader>
 
-      <CardBody>
+      <CardBody overflow={"hidden"}>
         <Heading
           as="h5"
           size={"md"}

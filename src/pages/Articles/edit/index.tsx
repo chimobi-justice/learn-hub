@@ -9,8 +9,6 @@ const EditArticle: FunctionComponent = () => {
 
   const { data } = useGetSingleArticle(id!);
 
-  console.log(data, id);
-
   return (
     <ArticleForm
       titleValue={data?.data?.title}

@@ -23,8 +23,8 @@ export const useDeleteThread = () => {
         queryKey: ['public-author-threads']
       });
     },
-    onError: (error) => {
-      errorNotification(error?.message)
+    onError: (error: any) => {
+      errorNotification(error?.response?.data?.message)
     }
   })
 

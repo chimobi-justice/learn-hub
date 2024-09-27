@@ -39,7 +39,6 @@ const ArticlesCard: FunctionComponent<IProps> = ({
   authorUsername,
   authorFullname,
   authorAvatar,
-  authorProfileHeadlines,
   CTA = '#',
   isOwner,
   onDelete,
@@ -58,8 +57,9 @@ const ArticlesCard: FunctionComponent<IProps> = ({
             <Image
               src={articleImg}
               alt={articleImg}
-              width={"100%"}
-              height={"250px"}
+              width={{ base: "100%", md: "50%" }}
+              height={{ base: "200px", md: "150px" }}
+              mx={{ base: "", md: "auto" }}
             />
           </Box>
 
@@ -109,7 +109,14 @@ const ArticlesCard: FunctionComponent<IProps> = ({
                   dangerouslySetInnerHTML={stripTags(truncate(description, 200))}
                 />
 
-                <Flex flex="1" gap={2} my={"12px"} flexDirection={{ base: "column", md: "row" }}>
+                <Flex 
+                  flex="1" 
+                  gap={2} 
+                  my={"12px"} 
+                  justifyContent={"space-between"} 
+                  flexDirection={{ base: "column", md: "row" }}
+                  alignItems={"center"}
+                >
                   <Box display={"flex"} gap={3} alignItems={"center"}>
                     {authorUsername && (
                       <Link to={`/user/${authorUsername}`}>
@@ -124,13 +131,12 @@ const ArticlesCard: FunctionComponent<IProps> = ({
                         </Link>
                       </Heading>
                     )}
+
+                    <Text fontSize={"12px"} color={"blue"} cursor={"pointer"} _hover={{ textDecoration: "underline"}}>follow</Text>
+
                   </Box>
 
-                  <Box display={"flex"} gap={3} alignItems={"center"}>
-                    {authorProfileHeadlines && (
-                      <Text fontSize={"12px"} color={"#0009"}>{truncate(authorProfileHeadlines, 60)}</Text>
-                    )}
-
+                  <Box gap={3} alignItems={"center"}>
                     <Text fontSize={"12px"} color={"#0009"}>{read_time}</Text>
                   </Box>
                 </Flex>
