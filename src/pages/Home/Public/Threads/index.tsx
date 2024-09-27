@@ -4,7 +4,7 @@ import { Box, Heading, SimpleGrid, Text } from '@chakra-ui/react'
 import { FaArrowRight } from 'react-icons/fa6'
 
 import { Button, Card, Skeleton } from '@components/index'
-import { colors } from '../../../colors'
+import { colors } from '../../../../colors'
 import { useGetThreads } from '@hooks/thread/useGetThreads'
 
 const HomeThreads: FunctionComponent = () => {

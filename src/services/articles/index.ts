@@ -8,6 +8,8 @@ import {
   DELETE_ARTICLE_ENDPOINT,
   EDIT_ARTICLE_ENDPOINT,
   GET_ALL_ARTICLES_ENDPOINT,
+  GET_PINNED_ARTICLES_ENDPOINT,
+  GET_RECOMMENDED_ARTICLES_ENDPOINT,
   GET_SINGLE_ARTICLE_ENDPOINT
 } from '@api/index'
 
@@ -49,4 +51,14 @@ export const createArticleLike = async ({id}: {id: string}) => {
 export const createArticleDisLike = async ({id}: {id: string}) => {
   const response = await axiosInstance.delete(`${ARTICLE_DISLIKE_ENDPOINT}/${id}/dislikes`);
   return response.data;
+}
+
+export const getRecommentedArticles = async (limit: number) => {
+  const response = await axiosInstance.get(`${GET_RECOMMENDED_ARTICLES_ENDPOINT}?limit=${limit}`);
+  return response.data.data;
+}
+
+export const getPinnedArticles = async () => {
+  const response = await axiosInstance.get(GET_PINNED_ARTICLES_ENDPOINT);
+  return response.data.data;
 }

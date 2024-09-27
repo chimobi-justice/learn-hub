@@ -4,7 +4,7 @@ import { Box, Heading, SimpleGrid, Text } from '@chakra-ui/react'
 import { FaArrowRight } from 'react-icons/fa6'
 
 import { Button, LatestArticleCard, Skeleton } from '@components/index'
-import { colors } from '../../../colors'
+import { colors } from '../../../../colors'
 import { useGetArticles } from '@hooks/article/useGetArticles'
 
 const HomeArticles: FunctionComponent = () => {
@@ -21,7 +21,7 @@ const HomeArticles: FunctionComponent = () => {
 
       {articles && isSuccess && (
         <>
-          <SimpleGrid minChildWidth="300px" spacing={3}>
+          <SimpleGrid minChildWidth="370px" spacing={4}>
             {articles?.map((article: any, index: any) => (
               <LatestArticleCard
                 key={index}
@@ -52,7 +52,7 @@ const HomeArticles: FunctionComponent = () => {
         </>
       )}
 
-{isLoading && <Skeleton />}
+      {isLoading && <Skeleton />}
 
     </Box>
   )

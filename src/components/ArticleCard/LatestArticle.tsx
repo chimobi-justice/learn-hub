@@ -32,7 +32,7 @@ const LatestArticleCard: FunctionComponent<IProps> = ({
   CTAText
 }) => {
   return (
-    <Card maxW="sm">
+    <Card>
       <CardBody>
         <Box>
           <Image

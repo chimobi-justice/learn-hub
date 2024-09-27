@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react'
+import { Link } from 'react-router-dom'
 import {
   Box,
   Container,
@@ -11,12 +12,8 @@ import {
 import HeroImg from '@assets/images/hero.jpg'
 import Button from '@components/Button'
 import { colors } from '../../colors'
-import { Link } from 'react-router-dom'
-import { useUser } from '@context/userContext'
 
 const HeroSection: FunctionComponent = () => {
-  const { user } = useUser();
-
   return (
     <Box
       as="section"
@@ -61,39 +58,37 @@ const HeroSection: FunctionComponent = () => {
               A portal for problem solving, knowledge sharing and community builders, join others for sharing knowledge.
             </Text>
 
-            {!user && (
-              <Stack
-                spacing={4}
-                my={"15px"}
-                direction={{ base: "column", lg: "row" }}
-              >
-                <Link to="/auth/register">
-                  <Button
-                    variant="solid"
-                    size={{ base: "md", lg: "lg" }}
-                    width={{ base: "100%", lg: "auto" }}
-                    type="button"
-                    fontWeight={"semibold"}
-                    rounded="sm"
-                  >
-                    Join the community
-                  </Button>
-                </Link>
+            <Stack
+              spacing={4}
+              my={"15px"}
+              direction={{ base: "column", lg: "row" }}
+            >
+              <Link to="/auth/register">
+                <Button
+                  variant="solid"
+                  size={{ base: "md", lg: "lg" }}
+                  width={{ base: "100%", lg: "auto" }}
+                  type="button"
+                  fontWeight={"semibold"}
+                  rounded="sm"
+                >
+                  Join the community
+                </Button>
+              </Link>
 
-                <Link to="/threads">
-                  <Button
-                    variant="outline"
-                    size={{ base: "md", lg: "lg" }}
-                    width={{ base: "100%", lg: "auto" }}
-                    type="button"
-                    fontWeight={"semibold"}
-                    rounded="sm"
-                  >
-                    Visit Threads
-                  </Button>
-                </Link>
-              </Stack>
-            )}
+              <Link to="/threads">
+                <Button
+                  variant="outline"
+                  size={{ base: "md", lg: "lg" }}
+                  width={{ base: "100%", lg: "auto" }}
+                  type="button"
+                  fontWeight={"semibold"}
+                  rounded="sm"
+                >
+                  Visit Threads
+                </Button>
+              </Link>
+            </Stack>
           </Box>
 
           <Box

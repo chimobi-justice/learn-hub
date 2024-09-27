@@ -18,8 +18,8 @@ export const useSignOut = () => {
 
       location.href = "/auth/login?auth&session=signout";
     },
-    onError: (error) => {
-      errorNotification(error.message)
+    onError: (error: any) => {
+      errorNotification(error?.response?.data?.message)
     }
   })
 

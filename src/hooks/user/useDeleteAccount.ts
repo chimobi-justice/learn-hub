@@ -17,8 +17,8 @@ export const useDeleteAccount = () => {
 
       location.href = "/auth/login";
     },
-    onError: (error) => {
-      errorNotification(error.message)
+    onError: (error: any) => {
+      errorNotification(error?.response?.data?.message)
     }
   })
 

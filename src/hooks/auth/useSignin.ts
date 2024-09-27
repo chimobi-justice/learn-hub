@@ -18,10 +18,10 @@ export const useSignin = () => {
 
       localStorage.setItem('ucType_', data?.access_token);
 
-      navigate(`/me/${data?.username}`);
+      navigate('/');
     },
-    onError: (error) => {
-      errorNotification(error.message)
+    onError: (error: any) => {
+      errorNotification(error?.response?.data?.message)
     }
   })
 
