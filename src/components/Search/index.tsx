@@ -1,4 +1,4 @@
-import { ChangeEvent, FunctionComponent, useRef, useState } from 'react'
+import { ChangeEvent, FunctionComponent, useEffect, useRef, useState } from 'react'
 import {
   Box,
   Input,
@@ -9,17 +9,11 @@ import {
   ModalContent,
   ModalOverlay,
   Spinner,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
   Text,
   useDisclosure
 } from '@chakra-ui/react'
 import { FiSearch } from 'react-icons/fi'
 import Button from '@components/Button'
-import { colors } from '../../colors'
 import { useGetSearch } from '@hooks/search/useGetSearch'
 import { Link } from 'react-router-dom'
 import truncate from '@helpers/truncate'
@@ -31,12 +25,27 @@ const Search: FunctionComponent = () => {
   const finalRef = useRef(null)
 
   const [searchQuery, setSearchQuery] = useState<string>('')
+  const [searchArr, setSearchArr] = useState<any>([]);
 
   const { data, isLoading, isError } = useGetSearch(searchQuery);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e?.target?.value)
+    const value = e?.target?.value;
+    setSearchQuery(value);
+
+    if (value.length === 0) {
+      // Clear the search results if input is cleared
+      setSearchArr([]);
+    }
   }
+
+  useEffect(() => {
+    if (searchQuery?.length > 0 && data) {
+      setSearchArr((prev: any) => 
+        [...prev, ...data?.articles?.data, ...data?.threads?.data]
+      )
+    }
+  }, [data, searchQuery])
 
   return (
     <>
@@ -59,14 +68,14 @@ const Search: FunctionComponent = () => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalBody py={6}>
+          <ModalBody py={6} overflow={"auto"}>
             <InputGroup>
               <InputLeftElement pointerEvents='none'>
                 <FiSearch />
               </InputLeftElement>
               <Input
                 type="text"
-                placeholder="Search for articles, threads and users..."
+                placeholder="Search for articles, threads..."
                 value={searchQuery}
                 onChange={handleInputChange}
                 ref={initialRef}
@@ -74,111 +83,36 @@ const Search: FunctionComponent = () => {
             </InputGroup>
 
             <Box mt={"10px"}>
-              <Tabs isFitted variant='enclosed'>
-                <TabList mb='1em' color={colors.primary}>
-                  <Tab>Articles {data?.articles?.total}</Tab>
-                  <Tab>Threads {data?.threads?.total}</Tab>
-                  <Tab>Users {data?.users?.total}</Tab>
-                </TabList>
-                <TabPanels>
-                  <TabPanel p={"5px"}>
-                    {isLoading ? (
-                      <Box textAlign={"center"}>
-                        <Spinner />
-                      </Box>
-                    ) : isError ? (
-                      <Text color="red.500">Error fetching data</Text>
-                    ) : (
-                      <Box width={"100%"}>
-                        {data?.articles?.data?.length > 0 ? (
-                          data?.articles?.data?.map((article: any, index: number) => (
-                            <Text
-                              key={index}
-                              fontSize={"14px"}
-                              my={"12px"}
-                              p={"10px"}
-                              cursor={"pointer"}
-                              _hover={{
-                                bg: "#f1f1f1"
-                              }}
-                            >
-                              <Link to={`/articles/${article?.slug}/${article?.id}`} onClick={onClose}>
-                                {truncate(article?.title, 200)}
-                              </Link>
-                            </Text>
-                          ))
-                        ) : (
-                          <Text>No articles found</Text>
-                        )}
-                      </Box>
-                    )}
-                  </TabPanel>
-                  <TabPanel>
-                    {isLoading ? (
-                      <Box textAlign={"center"}>
-                        <Spinner />
-                      </Box>
-                    ) : isError ? (
-                      <Text color="red.500">Error fetching data</Text>
-                    ) : (
-                      <Box>
-                        {data?.threads?.data?.length > 0 ? (
-                          data?.threads?.data?.map((thread: any, index: number) => (
-                            <Text
-                              key={index}
-                              fontSize={"14px"}
-                              my={"12px"}
-                              p={"10px"}
-                              cursor={"pointer"}
-                              _hover={{
-                                bg: "#f1f1f1"
-                              }}
-                            >
-                              <Link to={`/threads/${thread?.slug}/${thread?.id}`} onClick={onClose}>
-                                {truncate(thread?.title, 200)}
-                              </Link>
-                            </Text>
-                          ))
-                        ) : (
-                          <Text>No threads found</Text>
-                        )}
-                      </Box>
-                    )}
-                  </TabPanel>
-                  <TabPanel>
-                    {isLoading ? (
-                      <Box textAlign={"center"}>
-                        <Spinner />
-                      </Box>
-                    ) : isError ? (
-                      <Text color="red.500">Error fetching data</Text>
-                    ) : (
-                      <Box>
-                        {data?.users?.data?.length > 0 ? (
-                          data?.users?.data?.map((user: any, index: number) => (
-                            <Text
-                              key={index}
-                              fontSize={"14px"}
-                              my={"12px"}
-                              p={"10px"}
-                              cursor={"pointer"}
-                              _hover={{
-                                bg: "#f1f1f1"
-                              }}
-                            >
-                              <Link to={`/user/${user?.username}`} onClick={onClose}>
-                                {truncate(user?.fullname, 200)}
-                              </Link>
-                            </Text>
-                          ))
-                        ) : (
-                          <Text>No users found</Text>
-                        )}
-                      </Box>
-                    )}
-                  </TabPanel>
-                </TabPanels>
-              </Tabs>
+              {isLoading ? (
+                <Box textAlign={"center"}>
+                  <Spinner />
+                </Box>
+              ) : isError ? (
+                <Text color="red.500">Error fetching data</Text>
+              ) : (
+                <Box width={"100%"} maxH="400px" overflowY="auto">
+                  {searchArr?.length > 0 ? (
+                    searchArr?.map((d: any, index: number) => (
+                      <Text
+                        key={index}
+                        fontSize={"14px"}
+                        my={"12px"}
+                        p={"10px"}
+                        cursor={"pointer"}
+                        _hover={{
+                          bg: "#f1f1f1"
+                        }}
+                      >
+                        <Link to={d?.url} onClick={onClose} style={{ display: "block"}}>
+                          {truncate(d?.title, 200)}
+                        </Link>
+                      </Text>
+                    ))
+                  ) : (
+                    <Text>No data found!</Text>
+                  )}
+                </Box>
+              )}
             </Box>
           </ModalBody>
         </ModalContent>
