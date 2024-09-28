@@ -29,6 +29,7 @@ interface IProps {
   isOwner?: boolean;
   onDelete?: () => void;
   id?: any;
+  isLoggedIn?: any
 }
 
 const ArticlesCard: FunctionComponent<IProps> = ({
@@ -42,10 +43,11 @@ const ArticlesCard: FunctionComponent<IProps> = ({
   CTA = '#',
   isOwner,
   onDelete,
-  id
+  id,
+  isLoggedIn
 }) => {
   return (
-    <Card mb={"20px"}>
+    <Card mb={"20px"} size={"md"}>
       <CardBody p={"0px"}>
         <Box
           display={"flex"}
@@ -70,35 +72,39 @@ const ArticlesCard: FunctionComponent<IProps> = ({
             gap={2}
             justifyContent={"space-between"}
           >
-            <Box>
-              <Box display={"flex"}>
-                <Heading
-                  size="lg"
-                  lineHeight={"1.6em"}
-                  fontSize={"24px"}
-                  mb={"10px"}
-                  _hover={{
-                    textDecoration: "underline"
-                  }}
-                >
-                  <Link to={CTA}>
-                    {truncate(title, 80)}
-                  </Link>
-                </Heading>
-
-                {isOwner && (
-                <Flex p={"5px"} gap={2}>
-                  <Box>
-                    <Link to={`/articles/edit/${id}`}>
-                      <CiEdit size={"25px"} cursor={"pointer"} />
+            <Box width={"100%"}>
+              <Box display={"flex"} justifyContent={"space-between"} width={"100%"}>
+                <Box>
+                  <Heading
+                    size="lg"
+                    lineHeight={"1.6em"}
+                    fontSize={"24px"}
+                    mb={"10px"}
+                    _hover={{
+                      textDecoration: "underline"
+                    }}
+                  >
+                    <Link to={CTA}>
+                      {truncate(title, 80)}
                     </Link>
-                  </Box>
+                  </Heading>
+                </Box>
+                
+                <Box>
+                  {isOwner && (
+                    <Flex p={"5px"} gap={2}>
+                      <Box>
+                        <Link to={`/articles/edit/${id}`}>
+                          <CiEdit size={"25px"} cursor={"pointer"} />
+                        </Link>
+                      </Box>
 
-                  <Box>
-                    <MdDeleteOutline size={"25px"} color="red" cursor={"pointer"} onClick={onDelete} />
-                  </Box>
-                </Flex>
-              )}
+                      <Box>
+                        <MdDeleteOutline size={"25px"} color="red" cursor={"pointer"} onClick={onDelete} />
+                      </Box>
+                    </Flex>
+                  )}
+                </Box>
               </Box>
 
               <Box>
@@ -109,11 +115,11 @@ const ArticlesCard: FunctionComponent<IProps> = ({
                   dangerouslySetInnerHTML={stripTags(truncate(description, 200))}
                 />
 
-                <Flex 
-                  flex="1" 
-                  gap={2} 
-                  my={"12px"} 
-                  justifyContent={"space-between"} 
+                <Flex
+                  flex="1"
+                  gap={2}
+                  my={"12px"}
+                  justifyContent={"space-between"}
                   flexDirection={{ base: "column", md: "row" }}
                   alignItems={"center"}
                 >
@@ -124,15 +130,17 @@ const ArticlesCard: FunctionComponent<IProps> = ({
                       </Link>
                     )}
 
-                    {authorUsername && (
+                    {authorFullname && (
                       <Heading size="xs" fontSize={"13px"}>
                         <Link to={`/user/${authorUsername}`}>
-                          {authorUsername}
+                          {authorFullname}
                         </Link>
                       </Heading>
                     )}
 
-                    <Text fontSize={"12px"} color={"blue"} cursor={"pointer"} _hover={{ textDecoration: "underline"}}>follow</Text>
+                    {!isOwner && isLoggedIn && (
+                      <Text fontSize={"14px"} color={"blue"} cursor={"pointer"} _hover={{ textDecoration: "underline" }}>follow</Text>
+                    )}
 
                   </Box>
 

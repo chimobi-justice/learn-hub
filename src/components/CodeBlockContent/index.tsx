@@ -31,7 +31,16 @@ const ContentBlockContent: FunctionComponent<ContentBlockContentProps> = ({ cont
           padding: '20px',
           borderRadius: '6px',
           overflowX: 'auto',
+          fontSize: '13px'
         },
+        'blockquote': {
+          borderLeft: '3px solid grey',
+          pl: '15px'
+        },
+        'a': {
+          color: 'blue',
+          textDecoration: 'underline'
+        }
       }}
     />
   );
