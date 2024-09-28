@@ -17,6 +17,7 @@ import EmptyState from '@components/EmptyState'
 import Editor from '@components/Editor'
 import ContentBlockContent from '@components/CodeBlockContent'
 import ThreadCard from '@components/ThreadCard'
+import Popover from '@components/Popover'
 
 export {
   Alert,
@@ -38,4 +39,5 @@ export {
   Editor,
   ContentBlockContent,
   ThreadCard,
+  Popover,
 }

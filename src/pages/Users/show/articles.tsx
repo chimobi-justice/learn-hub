@@ -5,10 +5,12 @@ import { Alert, ArticlesCard, Button, Skeleton } from '@components/index'
 import { useGetPublicAuthoredArticles } from '@hooks/article/useGetPublicAuthoredArticles'
 import { Box, Heading, useDisclosure } from '@chakra-ui/react'
 import { useDeleteArticle } from '@hooks/article/useDeleteArticle'
+import { useUser } from '@context/userContext'
 
 const PublicUserArticles: FunctionComponent = () => {
   const { username } = useParams();
 
+  const { user } = useUser();
   const {
     articles,
     isLoading,
@@ -52,6 +54,7 @@ const PublicUserArticles: FunctionComponent = () => {
               authorFullname={article?.author?.fullname}
               authorUsername={article?.author?.username}
               onDelete={() => handleDelete(article?.id)}
+              isLoggedIn={!!user}
             />
           ))}
 

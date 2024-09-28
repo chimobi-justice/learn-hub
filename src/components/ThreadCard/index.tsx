@@ -1,13 +1,13 @@
 import { FormEvent, Fragment, FunctionComponent, useState } from 'react'
 import { Flex, useDisclosure } from '@chakra-ui/react'
 
-import { 
-  ThreadCardActions, 
-  ThreadCardContent, 
-  ThreadCardHeader, 
-  ThreadCardInteractions, 
-  DeleteConfirmation, 
-  ThreadCommentForm 
+import {
+  ThreadCardActions,
+  ThreadCardContent,
+  ThreadCardHeader,
+  ThreadCardInteractions,
+  DeleteConfirmation,
+  ThreadCommentForm
 } from '@components/ThreadCard/components'
 import { errorNotification } from '@helpers/notification'
 import { useUser } from '@context/userContext'

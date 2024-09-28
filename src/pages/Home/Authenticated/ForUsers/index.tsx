@@ -4,8 +4,10 @@ import { Box, useDisclosure } from '@chakra-ui/react'
 import { Alert, ArticlesCard, Button, Skeleton } from '@components/index'
 import { useDeleteArticle } from '@hooks/article/useDeleteArticle'
 import { useGetRecommentedArticles } from '@hooks/article/useGetRecommentedArticles'
+import { useUser } from '@context/userContext'
 
 const ForYou = () => {
+  const { user } = useUser();
   const {
     articles,
     isLoading,
@@ -50,6 +52,7 @@ const ForYou = () => {
               authorFullname={article?.author?.fullname}
               authorUsername={article?.author?.username}
               onDelete={() => handleDelete(article?.id)}
+              isLoggedIn={!!user}
             />
           ))}
         </Fragment>

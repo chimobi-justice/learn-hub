@@ -179,7 +179,7 @@ const NavBarSm: FunctionComponent = () => {
                               </MenuItem>
                             </Link>
                             <Link
-                              to={`/me/theads/${user?.data?.username}`}
+                              to={`/me/threads/${user?.data?.username}`}
                               onClick={() => setOpen(false)}
                             >
                               <MenuItem color={"black"}>

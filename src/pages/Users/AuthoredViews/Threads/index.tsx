@@ -11,14 +11,14 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 
-import { FollowCard, Button, Alert, Skeleton, EmptyState, NotFound } from '@components/index'
-import { useGetAuthoredThreads } from '@hooks/thread/useGetAuthoredThreads';
-import { Link, useParams } from 'react-router-dom';
-import { stripTags } from '@helpers/stripTags';
-import { MdDeleteOutline, MdOutlineThumbUp } from 'react-icons/md';
-import truncate from '@helpers/truncate';
-import { CiEdit } from 'react-icons/ci';
-import { useDeleteThread } from '@hooks/thread/useDeleteThread';
+import { FollowCard, Button, Alert, Skeleton, EmptyState, NotFound, ContentBlockContent } from '@components/index'
+import { useGetAuthoredThreads } from '@hooks/thread/useGetAuthoredThreads'
+import { Link, useParams } from 'react-router-dom'
+import { MdDeleteOutline, MdOutlineThumbUp } from 'react-icons/md'
+import truncate from '@helpers/truncate'
+import { CiEdit } from 'react-icons/ci'
+import { useDeleteThread } from '@hooks/thread/useDeleteThread'
+
 const ArthoredThreads: FunctionComponent = () => {
   const { username } = useParams();
 
@@ -60,17 +60,20 @@ const ArthoredThreads: FunctionComponent = () => {
           justifyContent={"space-between"}
           flexDirection={{ base: "column", md: "row" }}
           alignItems={"center"}
+          mb={"10px"}
         >
           <Heading as="h4" size="lg" py={"20px"}>My Threads</Heading>
 
           <Stack
             spacing={4}
             direction={{ base: "column", md: "row" }}
+            width={{ base: "100%", lg: "auto" }}
           >
             <Link to="/threads/new">
               <Button
                 variant="outline"
-                size="md"
+                size={{ base: "md", lg: "lg" }}
+                width={{ base: "100%", lg: "auto" }}
                 type="button"
                 fontWeight={"semibold"}
                 rounded="lg"
@@ -82,7 +85,8 @@ const ArthoredThreads: FunctionComponent = () => {
             <Link to="/articles/new">
               <Button
                 variant="solid"
-                size="md"
+                size={{ base: "md", lg: "lg" }}
+                width={{ base: "100%", lg: "auto" }}
                 type="button"
                 fontWeight={"semibold"}
                 rounded="lg"
@@ -132,13 +136,9 @@ const ArthoredThreads: FunctionComponent = () => {
                           </Flex>
 
                           <Box my={"14px"}>
-                            <Text
-                              fontSize={"13px"}
-                              mb={"10px"}
-                              color={"#0009"}
-                              lineHeight={"1.8em"}
-                              dangerouslySetInnerHTML={stripTags(truncate(thread?.content, 250))}
-                            />
+                            <Box height={"130px"} overflow={"hidden"} p="5px">
+                              <ContentBlockContent content={truncate(thread?.content, 250)} />
+                            </Box>
 
                             <HStack borderTop={"1px solid #f1f1f1"} pt={"7px"}>
                               <Text
