@@ -72,7 +72,7 @@ const Articles: FunctionComponent = () => {
         )}
       </Box>
 
-      <SimpleGrid minChildWidth="370px" spacing={4}>
+      <SimpleGrid minChildWidth="350px" spacing={3}>
         {pinArticles?.map((article: any, index: number) => (
           <LatestArticleCard
             key={index}

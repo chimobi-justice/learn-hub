@@ -32,19 +32,19 @@ const LatestArticleCard: FunctionComponent<IProps> = ({
   CTAText
 }) => {
   return (
-    <Card>
+    <Card  maxW={"md"}>
       <CardBody>
         <Box>
           <Image
             src={articleImage}
-            alt='Green double couch with wooden legs'
+            alt={title}
             borderRadius='lg'
             width={"100%"}
             height={"200px"}
             objectFit={"cover"}
           />
         </Box>
-        <Stack mt='6' spacing='3'>
+        <Stack mt='6' spacing={2}>
           <Text fontSize={"14px"} color={"#0009"}>{date}</Text>
           <Heading
             as="h4"

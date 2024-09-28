@@ -19,9 +19,11 @@ const HomeArticles: FunctionComponent = () => {
         Lat<Text as="span" color={colors.primary}>est</Text> Ar<Text as="span" color={colors.primary}>tic</Text>les
       </Heading>
 
+      {isLoading && <Skeleton />}
+
       {articles && isSuccess && (
         <>
-          <SimpleGrid minChildWidth="370px" spacing={4}>
+          <SimpleGrid minChildWidth="350px" spacing={3}>
             {articles?.map((article: any, index: any) => (
               <LatestArticleCard
                 key={index}
@@ -51,9 +53,6 @@ const HomeArticles: FunctionComponent = () => {
           </Box>
         </>
       )}
-
-      {isLoading && <Skeleton />}
-
     </Box>
   )
 }
