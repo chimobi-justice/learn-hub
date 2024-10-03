@@ -2,9 +2,11 @@ import { Fragment, useState } from 'react'
 import { Box, useDisclosure } from '@chakra-ui/react'
 
 import { Alert, ArticlesCard, Button, Skeleton } from '@components/index'
+import { useUser } from '@context/userContext'
 import { useDeleteArticle } from '@hooks/article/useDeleteArticle'
 import { useGetRecommentedArticles } from '@hooks/article/useGetRecommentedArticles'
-import { useUser } from '@context/userContext'
+import { useCreateSaveArticle } from '@hooks/article/useCreateSaveArticles'
+import { useDeleteSaveArticle } from '@hooks/article/useDeleteSavaArticles'
 
 const ForYou = () => {
   const { user } = useUser();
@@ -16,8 +18,9 @@ const ForYou = () => {
     fetchNextPage,
     isFetchingNextPage
   } = useGetRecommentedArticles(20)
-
   const { deleteArticleMutation } = useDeleteArticle()
+  const { createSaveArticleMutation } = useCreateSaveArticle();
+  const { deleteSaveArticleMutation} = useDeleteSaveArticle()
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [deleteArticleId, setDeleteArticleId] = useState(null);
 
@@ -31,6 +34,22 @@ const ForYou = () => {
     deleteArticleMutation.mutate(deleteArticleId)
     onClose()
   }
+
+  const handleSaveUnsavedArticle = (articleId: string, is_saved: boolean) => {
+    if (is_saved) {
+      unsaveArticle(articleId);
+    } else {
+      saveArticle(articleId);
+    }
+  }
+
+  const saveArticle = (articleId: string) => {
+    createSaveArticleMutation.mutate(articleId);
+  };
+
+  const unsaveArticle = (articleId: string) => {
+    deleteSaveArticleMutation.mutate(articleId);
+  };
 
   return (
     <>
@@ -53,6 +72,8 @@ const ForYou = () => {
               authorUsername={article?.author?.username}
               onDelete={() => handleDelete(article?.id)}
               isLoggedIn={!!user}
+              is_saved={article?.is_saved}
+              saveUnsavedArticle={() => handleSaveUnsavedArticle(article?.id, article?.is_saved)}
             />
           ))}
         </Fragment>

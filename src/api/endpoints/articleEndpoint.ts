@@ -23,3 +23,10 @@ export const ARTICLE_DISLIKE_ENDPOINT = `${API_BASE_URL}/articles`;
 export const GET_RECOMMENDED_ARTICLES_ENDPOINT = `${API_BASE_URL}/articles/recommented-articles`;
 
 export const GET_PINNED_ARTICLES_ENDPOINT = `${API_BASE_URL}/articles/pinned-articles`;
+
+export const CREATE_SAVE_ARTICLE_ENDPOINT = `${API_BASE_URL}/articles/save-article`;
+
+export const DELETE_SAVE_ARTICLE_ENDPOINT = `${API_BASE_URL}/articles/unsave-article`;
+
+export const GET_SAVED_ARTICLES_ENDPOINT = `${API_BASE_URL}/articles/saved-articles`;
+

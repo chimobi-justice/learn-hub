@@ -13,7 +13,7 @@ import {
 import { colors } from '../../../colors'
 import { FollowCard, RecommendTopicCard } from '@components/index'
 import Following from '@pages/Home/Authenticated/Following'
-import ForYou from '@pages/Home/Authenticated/ForUsers'
+import ForYou from '@pages/Home/Authenticated/ForYou'
 
 const HomeAuthUserPage: FunctionComponent = () => {
   const [tabIndex, setTabIndex] = useState(0);

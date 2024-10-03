@@ -7,7 +7,6 @@ import Footer from '@components/Footer'
 import HeroSection from '@components/HeroSection'
 import NavBar from '@components/NavBar'
 import NotFound from '@components/NotFound'
-import Search from '@components/Search'
 import Skeleton from '@components/Skeleton'
 import RecommendTopicCard from '@components/RecommendTopicCard'
 import FollowCard from '@components/FollowCard'
@@ -31,7 +30,6 @@ export {
   NavBar,
   NotFound,
   RecommendTopicCard,
-  Search,
   Skeleton,
   Input,
   TextArea,

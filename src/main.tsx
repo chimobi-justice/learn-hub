@@ -5,10 +5,12 @@ import './index.css'
 import 'react-quill/dist/quill.snow.css'
 import 'react-toastify/dist/ReactToastify.css'
 import '../node_modules/highlight.js/styles/atom-one-dark.css'
+import '@fontsource/raleway/400.css'
+import '@fontsource/open-sans/700.css'
 import { ToastContainer } from 'react-toastify'
 import { ChakraProvider } from '@chakra-ui/react'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import { Theme } from './theme'
 import UserContextProvider from '@context/userContext.tsx'

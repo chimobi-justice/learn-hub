@@ -23,7 +23,7 @@ const HomeArticles: FunctionComponent = () => {
 
       {articles && isSuccess && (
         <>
-          <SimpleGrid minChildWidth="350px" spacing={3}>
+          <SimpleGrid minChildWidth="250px" spacing={3}>
             {articles?.map((article: any, index: any) => (
               <LatestArticleCard
                 key={index}

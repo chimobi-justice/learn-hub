@@ -25,11 +25,16 @@ import {
 } from 'react-router-dom'
 import AuthRoute from './AuthRoute'
 import PrivateRoute from './privateRoute'
+import Search from '@pages/Search'
+import SavedArticles from '@pages/Users/SavedArticles'
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index path='/' element={<Home />} />
+      
+      <Route path="/search" element={<Search />} />
+
       <Route index path='/threads' element={<Threads />} />
       <Route index path='/threads/:slug/:id' element={<ShowThread />} />
 
@@ -47,7 +52,8 @@ const routes = createBrowserRouter(
       <Route path="/threads/edit/:id" element={<PrivateRoute element={<EditThread />} />} />
       <Route path="/me/threads/:username" element={<PrivateRoute element={<ArthoredThreads />} />} />
 
-      <Route path="/me/:username" element={<PrivateRoute element={<Profile />} />} />
+      <Route path="/:username" element={<PrivateRoute element={<Profile />} />} />
+      <Route path="/:username/reading-list" element={<PrivateRoute element={<SavedArticles />} />} />
       <Route path="/me/settings/account/edit" element={<PrivateRoute element={<ProfileEdit />} />} />
       {/* end private route */}
 

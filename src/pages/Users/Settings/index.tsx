@@ -30,7 +30,9 @@ const ProfileEdit: FunctionComponent = () => {
         </Link>
       </Text>
 
-      <Heading as="h4" size="lg" py={"10px"}>Settings</Heading>
+      <Heading as="h4" size="lg" py={"10px"}>
+        <Text color={"gray.400"} as={"span"}>profile</Text> \ <Text as={"span"}>Settings</Text>
+      </Heading>
 
       <Box
         display={"flex"}

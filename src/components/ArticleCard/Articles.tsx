@@ -8,10 +8,13 @@ import {
   Flex,
   Heading,
   Image,
-  Text
+  Text,
+  Tooltip
 } from '@chakra-ui/react'
 import { CiEdit } from 'react-icons/ci'
 import { MdDeleteOutline } from 'react-icons/md'
+import { BsSave } from 'react-icons/bs'
+import { IoSaveSharp } from "react-icons/io5";
 
 import truncate from '@helpers/truncate'
 import { stripTags } from '@helpers/stripTags'
@@ -29,7 +32,9 @@ interface IProps {
   isOwner?: boolean;
   onDelete?: () => void;
   id?: any;
-  isLoggedIn?: any
+  isLoggedIn?: any;
+  is_saved?: boolean;
+  saveUnsavedArticle?: () => void;
 }
 
 const ArticlesCard: FunctionComponent<IProps> = ({
@@ -44,7 +49,9 @@ const ArticlesCard: FunctionComponent<IProps> = ({
   isOwner,
   onDelete,
   id,
-  isLoggedIn
+  isLoggedIn,
+  is_saved,
+  saveUnsavedArticle
 }) => {
   return (
     <Card mb={"20px"} size={"md"}>
@@ -89,7 +96,7 @@ const ArticlesCard: FunctionComponent<IProps> = ({
                     </Link>
                   </Heading>
                 </Box>
-                
+
                 <Box>
                   {isOwner && (
                     <Flex p={"5px"} gap={2}>
@@ -144,7 +151,23 @@ const ArticlesCard: FunctionComponent<IProps> = ({
 
                   </Box>
 
-                  <Box gap={3} alignItems={"center"}>
+                  <Box gap={3} alignItems={"center"} display={"flex"}>
+                    {!isOwner && isLoggedIn && !is_saved && (
+                      <Tooltip label='Save' placement='top'>
+                        <Text as={"span"}>
+                          <BsSave onClick={saveUnsavedArticle} cursor={"pointer"} />
+                        </Text>
+                      </Tooltip>
+                    )}
+
+                    {!isOwner && isLoggedIn && is_saved &&
+                      <Tooltip label='Article Saved' placement='top'>
+                        <Text as={"span"}>
+                          <IoSaveSharp onClick={saveUnsavedArticle} cursor={"pointer"} />
+                        </Text>
+                      </Tooltip>
+                    }
+
                     <Text fontSize={"12px"} color={"#0009"}>{read_time}</Text>
                   </Box>
                 </Flex>

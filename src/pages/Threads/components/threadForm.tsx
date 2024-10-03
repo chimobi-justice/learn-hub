@@ -38,6 +38,9 @@ const ThreadForm: FunctionComponent<ThreadFormProps> = ({
     } else {
       createThreadMutation.mutate(threadData);
     }
+
+    setContent('')
+    setTitle('')
   };
 
   useEffect(() => {

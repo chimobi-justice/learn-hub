@@ -6,10 +6,14 @@ export const Theme = extendTheme({
       body: {
         background: "#fafafa",
         color: "#000",
-        fontFamily: "DM SAN, Arial, sans-serif",
         height: "100vh",
       }
     })
+  },
+
+  fonts: {
+    heading: `'Open Sans', sans-serif`,
+    body: `'Raleway', sans-serif`,
   },
 
   components: {
