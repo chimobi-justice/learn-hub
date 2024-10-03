@@ -24,10 +24,10 @@ export const useGetPaginatedArticles = (limit: number = 0) => {
     placeholderData: keepPreviousData,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
-      if (!lastPage.data.pagination.next_page_url) {
+      if (!lastPage?.data?.pagination?.next_page_url) {
         return undefined;
       }
-      return lastPage.data.pagination.current_page + 1
+      return lastPage?.data?.pagination?.current_page + 1
     }
   })
 

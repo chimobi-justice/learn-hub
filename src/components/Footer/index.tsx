@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { FaXTwitter } from 'react-icons/fa6'
 import { IoLogoLinkedin } from 'react-icons/io'
-import { FaGithub } from "react-icons/fa";
+import { FaGithub } from 'react-icons/fa'
 
 import { colors } from '../../colors'
 
@@ -83,7 +83,6 @@ const Footer: FunctionComponent = () => {
               fontWeight={"normal"}
               spacing={3}
             >
-              <ListItem><Link to="/">Account</Link></ListItem>
               <ListItem><Link to="/">Feedback</Link></ListItem>
               <ListItem><Link to="/">Contact Us</Link></ListItem>
             </List>
@@ -139,7 +138,7 @@ const Footer: FunctionComponent = () => {
         </SimpleGrid>
 
         <Box mt={"20px"} pt={"20px"} borderTop={"1px solid gray"}>
-          <Text fontSize={"15px"}>&copy; 2024 Learn Hub. All right reserved. Made in Nigeria.</Text>
+          <Text fontSize={"13px"}>&copy; 2024 Learn Hub. All right reserved. Made in Nigeria.</Text>
         </Box>
       </Box>
     </Box>

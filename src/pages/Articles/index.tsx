@@ -11,10 +11,12 @@ import {
   Alert,
   Skeleton
 } from '@components/index'
-import { useUser } from '@context/userContext';
-import { useGetPaginatedArticles } from '@hooks/article/useGetPaginatedArticles';
-import { useDeleteArticle } from '@hooks/article/useDeleteArticle';
-import { useGetPinnedArticles } from '@hooks/article/useGetPinnedArticles';
+import { useUser } from '@context/userContext'
+import { useGetPaginatedArticles } from '@hooks/article/useGetPaginatedArticles'
+import { useDeleteArticle } from '@hooks/article/useDeleteArticle'
+import { useGetPinnedArticles } from '@hooks/article/useGetPinnedArticles'
+import { useCreateSaveArticle } from '@hooks/article/useCreateSaveArticles'
+import { useDeleteSaveArticle } from '@hooks/article/useDeleteSavaArticles'
 
 const Articles: FunctionComponent = () => {
   const { user } = useUser();
@@ -27,20 +29,38 @@ const Articles: FunctionComponent = () => {
     isFetchingNextPage
   } = useGetPaginatedArticles(10)
   const { deleteArticleMutation } = useDeleteArticle()
-  const {data: pinArticles } = useGetPinnedArticles();
+  const { data: pinArticles } = useGetPinnedArticles();
+  const { createSaveArticleMutation } = useCreateSaveArticle();
+  const { deleteSaveArticleMutation} = useDeleteSaveArticle()
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [deletingArticleId, setDeletingArticleId] = useState(null);
+  const [deleteArticleId, setDeleteArticleId] = useState(null);
 
   const handleDelete = (articleId: any) => {
-    setDeletingArticleId(articleId)
+    setDeleteArticleId(articleId)
     onOpen()
   }
 
   const handleDeleteArticle = () => {
-    if (!deletingArticleId) return;
-    deleteArticleMutation.mutate(deletingArticleId)
+    if (!deleteArticleId) return;
+    deleteArticleMutation.mutate(deleteArticleId)
     onClose()
   }
+
+  const handleSaveUnsavedArticle = (articleId: string, is_saved: boolean) => {
+    if (is_saved) {
+      unsaveArticle(articleId);
+    } else {
+      saveArticle(articleId);
+    }
+  }
+
+  const saveArticle = (articleId: string) => {
+    createSaveArticleMutation.mutate(articleId);
+  };
+
+  const unsaveArticle = (articleId: string) => {
+    deleteSaveArticleMutation.mutate(articleId);
+  };
 
   return (
     <Box
@@ -72,7 +92,7 @@ const Articles: FunctionComponent = () => {
         )}
       </Box>
 
-      <SimpleGrid minChildWidth="350px" spacing={3}>
+      <SimpleGrid minChildWidth="250px" spacing={3}>
         {pinArticles?.map((article: any, index: number) => (
           <LatestArticleCard
             key={index}
@@ -114,6 +134,8 @@ const Articles: FunctionComponent = () => {
                   authorUsername={article?.author?.username}
                   onDelete={() => handleDelete(article?.id)}
                   isLoggedIn={!!user}
+                  is_saved={article?.is_saved}
+                  saveUnsavedArticle={() => handleSaveUnsavedArticle(article?.id, article?.is_saved)}
                 />
               ))}
             </Fragment>

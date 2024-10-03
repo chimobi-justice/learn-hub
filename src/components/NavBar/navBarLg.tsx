@@ -15,8 +15,14 @@ import {
 } from '@chakra-ui/react'
 import { FaRegUser } from 'react-icons/fa'
 import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io'
+import { GoPerson } from 'react-icons/go'
+import { FiSearch } from 'react-icons/fi'
+import { RiArticleFill } from 'react-icons/ri'
+import { RiChatThreadLine } from 'react-icons/ri'
+import { CiViewList } from 'react-icons/ci'
+import { IoSettingsOutline } from 'react-icons/io5'
 
-import { Button, Search } from '@components/index'
+import { Button } from '@components/index'
 import { colors } from '../../colors'
 import { Menu } from '@constant/Menu'
 import { useUser } from '@context/userContext'
@@ -43,7 +49,6 @@ const NavBarLg: FunctionComponent = () => {
           justifyContent="space-between"
           py={"20px"}
         >
-          {/* <Box display={"flex"} gap={4} alignItems={"center"}> */}
           <Link to="/">
             <Heading
               fontStyle={"italic"}
@@ -54,7 +59,6 @@ const NavBarLg: FunctionComponent = () => {
               Learn <Text as="span" color={"#000"}>Hub</Text>
             </Heading>
           </Link>
-          {/* </Box> */}
 
           <Box
             display={"inline-flex"}
@@ -75,10 +79,17 @@ const NavBarLg: FunctionComponent = () => {
             ))}
           </Box>
 
-
-
           <Box display={"flex"} gap={4} alignItems={"center"}>
-            <Search />
+            <Link to={"/search"}>
+              <Button
+                size="md"
+                rounded="md"
+                type="button"
+                variant="outline"
+              >
+                <FiSearch />
+              </Button>
+            </Link>
 
             {user ? (
               <Box>
@@ -107,29 +118,34 @@ const NavBarLg: FunctionComponent = () => {
                         </Box>
                       </MenuButton>
                       <MenuList>
-                        <Link to={`/me/${user?.data?.username}`}>
+                        <Link to={`/${user?.data?.username}`}>
                           <MenuItem color={"blcack"}>
-                            Your Profile
+                            <GoPerson style={{ marginRight: "4px" }} /> Your Profile
                           </MenuItem>
                         </Link>
                         <Link to={`/me/articles/${user?.data?.username}`}>
                           <MenuItem color={"black"}>
-                            Your Articles
+                            <RiArticleFill style={{ marginRight: "4px" }} /> Your Articles
                           </MenuItem>
                         </Link>
                         <Link to={`/me/threads/${user?.data?.username}`}>
                           <MenuItem color={"black"}>
-                            Your Threads
+                            <RiChatThreadLine style={{ marginRight: "4px" }} /> Your Threads
+                          </MenuItem>
+                        </Link>
+                        <Link to={`/${user?.data?.username}/reading-list`}>
+                          <MenuItem color={"black"}>
+                            <CiViewList style={{ marginRight: "4px" }} /> Reading List
                           </MenuItem>
                         </Link>
                         <Link to="/me/settings/account/edit">
                           <MenuItem color={"black"}>
-                            Settings
+                            <IoSettingsOutline style={{ marginRight: "4px" }} /> Settings
                           </MenuItem>
                         </Link>
                         <MenuDivider />
                         <MenuItem color={"black"} onClick={handleLoggedOut}>
-                          Logout
+                          <FaRegUser style={{ marginRight: "4px" }} /> Logout
                         </MenuItem>
                       </MenuList>
                     </>

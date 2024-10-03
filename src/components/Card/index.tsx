@@ -71,14 +71,14 @@ const Card: FunctionComponent<IProps> = ({
             textDecoration: "underline"
           }}
         >
-          <Link to={CTA}>{title}</Link>
+          <Link to={CTA}>{truncate(title, 21)}</Link>
         </Heading>
 
         <Text
           fontSize={"14px"}
           lineHeight={"1.7em"}
           color={"#0009"}
-          dangerouslySetInnerHTML={stripTags(truncate(description, 100))}
+          dangerouslySetInnerHTML={stripTags(truncate(description, 70))}
         />
       </CardBody>
 

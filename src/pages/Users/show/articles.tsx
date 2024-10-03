@@ -6,6 +6,8 @@ import { useGetPublicAuthoredArticles } from '@hooks/article/useGetPublicAuthore
 import { Box, Heading, useDisclosure } from '@chakra-ui/react'
 import { useDeleteArticle } from '@hooks/article/useDeleteArticle'
 import { useUser } from '@context/userContext'
+import { useCreateSaveArticle } from '@hooks/article/useCreateSaveArticles'
+import { useDeleteSaveArticle } from '@hooks/article/useDeleteSavaArticles'
 
 const PublicUserArticles: FunctionComponent = () => {
   const { username } = useParams();
@@ -20,6 +22,8 @@ const PublicUserArticles: FunctionComponent = () => {
     isFetchingNextPage
   } = useGetPublicAuthoredArticles(20, username!);
   const { deleteArticleMutation } = useDeleteArticle()
+  const { createSaveArticleMutation } = useCreateSaveArticle();
+  const { deleteSaveArticleMutation } = useDeleteSaveArticle()
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [deleteArticleId, setDeleteArticleId] = useState(null);
 
@@ -33,6 +37,22 @@ const PublicUserArticles: FunctionComponent = () => {
     deleteArticleMutation.mutate(deleteArticleId)
     onClose()
   }
+
+  const handleSaveUnsavedArticle = (articleId: string, is_saved: boolean) => {
+    if (is_saved) {
+      unsaveArticle(articleId);
+    } else {
+      saveArticle(articleId);
+    }
+  }
+
+  const saveArticle = (articleId: string) => {
+    createSaveArticleMutation.mutate(articleId);
+  };
+
+  const unsaveArticle = (articleId: string) => {
+    deleteSaveArticleMutation.mutate(articleId);
+  };
 
   return (
     <>
@@ -55,6 +75,8 @@ const PublicUserArticles: FunctionComponent = () => {
               authorUsername={article?.author?.username}
               onDelete={() => handleDelete(article?.id)}
               isLoggedIn={!!user}
+              is_saved={article?.is_saved}
+              saveUnsavedArticle={() => handleSaveUnsavedArticle(article?.id, article?.is_saved)}
             />
           ))}
 

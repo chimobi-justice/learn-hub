@@ -24,9 +24,16 @@ import {
   IoIosArrowUp,
   IoIosArrowDown
 } from 'react-icons/io'
+import { FaRegUser } from 'react-icons/fa'
+import { GoPerson } from 'react-icons/go'
+import { FiSearch } from 'react-icons/fi'
+import { RiArticleFill } from 'react-icons/ri'
+import { RiChatThreadLine } from 'react-icons/ri'
+import { CiViewList } from 'react-icons/ci'
+import { IoSettingsOutline } from 'react-icons/io5'
 
 import { colors } from '../../colors'
-import { Button, Search } from '@components/index'
+import { Button } from '@components/index'
 import { Menu } from '@constant/Menu'
 import { useUser } from '@context/userContext'
 import { useSignOut } from '@hooks/auth/useSignOut'
@@ -119,7 +126,20 @@ const NavBarSm: FunctionComponent = () => {
             </Box>
 
             <Box p={"10px"}>
-              <Search />
+              <Link
+                to={"/search"}
+                onClick={() => setOpen(false)}
+              >
+                <Button
+                  size="md"
+                  rounded="md"
+                  type="button"
+                  variant="outline"
+                >
+                  <FiSearch />
+                </Button>
+              </Link>
+
               <List alignItems="start" mt="2rem" w="100%">
                 {Menu?.map((menu) => (
                   <ListItem w="100%" mb="20px" key={menu.id}>
@@ -163,11 +183,11 @@ const NavBarSm: FunctionComponent = () => {
                           </MenuButton>
                           <MenuList>
                             <Link
-                              to={`/me/${user?.data?.username}`}
+                              to={`/${user?.data?.username}`}
                               onClick={() => setOpen(false)}
                             >
                               <MenuItem color={"blcack"}>
-                                Your Profile
+                                <GoPerson style={{ marginRight: "4px" }} /> Your Profile
                               </MenuItem>
                             </Link>
                             <Link
@@ -175,7 +195,7 @@ const NavBarSm: FunctionComponent = () => {
                               onClick={() => setOpen(false)}
                             >
                               <MenuItem color={"black"}>
-                                Your Articles
+                                <RiArticleFill style={{ marginRight: "4px" }} /> Your Articles
                               </MenuItem>
                             </Link>
                             <Link
@@ -183,7 +203,15 @@ const NavBarSm: FunctionComponent = () => {
                               onClick={() => setOpen(false)}
                             >
                               <MenuItem color={"black"}>
-                                Your Theads
+                                <RiChatThreadLine style={{ marginRight: "4px" }} /> Your Theads
+                              </MenuItem>
+                            </Link>
+                            <Link
+                              to={`/${user?.data?.username}/reading-list`}
+                              onClick={() => setOpen(false)}
+                            >
+                              <MenuItem color={"black"}>
+                                <CiViewList style={{ marginRight: "4px" }} /> Reading List
                               </MenuItem>
                             </Link>
                             <Link
@@ -191,12 +219,12 @@ const NavBarSm: FunctionComponent = () => {
                               onClick={() => setOpen(false)}
                             >
                               <MenuItem color={"black"}>
-                                Settings
+                                <IoSettingsOutline style={{ marginRight: "4px" }} /> Settings
                               </MenuItem>
                             </Link>
                             <MenuDivider />
                             <MenuItem color={"black"} onClick={handleLoggedOut}>
-                              Logout
+                              <FaRegUser style={{ marginRight: "4px" }} />  Logout
                             </MenuItem>
                           </MenuList>
                         </>

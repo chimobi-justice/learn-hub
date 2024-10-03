@@ -9,7 +9,8 @@ import {
   FormLabel,
   IconButton,
   SimpleGrid,
-  Spinner
+  Spinner,
+  Text
 } from '@chakra-ui/react'
 import { Formik, Field } from 'formik'
 import { FaCamera } from 'react-icons/fa6'
@@ -85,7 +86,7 @@ const UpdateProfile: FunctionComponent = () => {
           <Box
             position="absolute"
             top={{ base: "-10%", md: "-13%"}}
-            left="50%"
+            left={{ base: "82%", md: "50%"}}
             transform="translateX(-50%)"
             border="4px solid white"
             borderRadius="full"
@@ -130,8 +131,18 @@ const UpdateProfile: FunctionComponent = () => {
                 />
               </>
             )}
+
           </Box>
         </Box>
+
+        <Text 
+          textAlign={"center"} 
+          mb={"25px"} 
+          fontSize={"13px"} 
+          color={"red.300"}
+        >
+          The profile image must be a file of type: jpg, png, jpeg, JPG, PNG. 
+        </Text>
         <Formik
           enableReinitialize
           initialValues={initialValues}

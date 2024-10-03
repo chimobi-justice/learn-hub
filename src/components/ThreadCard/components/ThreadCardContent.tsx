@@ -21,7 +21,7 @@ const ThreadCardContent: FunctionComponent<ThreadCardContentProps> = ({
   isSingleView 
 }) => (
   <Box my="14px">
-    <Heading as="h6" size="xs">
+    <Heading as="h6" size="sm">
       <Link to={`/threads/${slug}/${threadId}`}>{title}</Link>
     </Heading>
     <Link to={`/threads/${slug}/${threadId}`}>
