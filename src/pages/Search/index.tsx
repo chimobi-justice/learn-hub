@@ -1,5 +1,5 @@
 import { ChangeEvent, FunctionComponent, useEffect, useState } from 'react'
-import { Box, Container, Image, Input, InputGroup, InputLeftElement, Text } from '@chakra-ui/react'
+import { Box, Container, Image, Input, InputGroup, InputLeftElement, Spinner, Text } from '@chakra-ui/react'
 import { FiSearch } from 'react-icons/fi'
 import { useDebounce } from 'use-debounce'
 import { Helmet } from 'react-helmet-async'
@@ -9,7 +9,6 @@ import SearchUsers from '@pages/Search/users'
 import SearchArticles from '@pages/Search/articles'
 import SearchThreads from '@pages/Search/threads'
 import SearchImg from '@assets/images/searching.png'
-import { Loading } from '@components/index'
 
 const Search: FunctionComponent = () => {
   const [searchQuery, setSearchQuery] = useState<string>('')
@@ -45,7 +44,7 @@ const Search: FunctionComponent = () => {
   } = useGetSearch(value, 'threads');
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e?.target?.value;
+    const value = e?.target?.value?.toLocaleLowerCase();
     setSearchQuery(value);
     if (value?.length === 0) {
       // Clear the search results if input is cleared
@@ -117,7 +116,11 @@ const Search: FunctionComponent = () => {
               </Box>
             )}
 
-            {isLoadingUser && isLoadingArticles && isLoadingThreads && <Loading />}
+            {isLoadingUser && isLoadingArticles && isLoadingThreads && (
+              <Box textAlign={"center"} py={"15px"}>
+                <Spinner size={"xl"} />
+              </Box>
+            )}
 
             <SearchUsers
               users={searchArr?.users}
