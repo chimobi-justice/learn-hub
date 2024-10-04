@@ -32,7 +32,7 @@ const LatestArticleCard: FunctionComponent<IProps> = ({
   CTAText
 }) => {
   return (
-    <Card  maxW={"md"}>
+    <Card maxW={"md"} height="100%" display="flex" flexDirection="column" justifyContent="space-between">
       <CardBody>
         <Box>
           <Image

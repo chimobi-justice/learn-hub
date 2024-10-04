@@ -135,7 +135,7 @@ const CommentDrawer: FunctionComponent<CommentDrawerProps> = ({
                     </Box>
                   </Box>
 
-                  <ContentBlockContent content={comment?.comment} />
+                  <ContentBlockContent fontSize='12.5px' content={comment?.comment} />
                 </Box>
 
                 <Divider />

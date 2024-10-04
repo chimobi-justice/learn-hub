@@ -26,7 +26,7 @@ const Profile: FunctionComponent = () => {
   return (
     <>
       <Helmet>
-        <title>{user?.data?.fullname} - profile | learn-hub</title>
+        <title>{`${user?.data?.fullname} - profile | learn-hub`}</title>
       </Helmet>
 
       <Box

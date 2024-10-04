@@ -10,11 +10,17 @@ import UpdatePassword from '@pages/Users/Settings/UpdatePassword'
 import UpdateProfile from '@pages/Users/Settings/UpdateProfile'
 import DeleteAccount from '@pages/Users/Settings/DeleteAccount'
 import { useUser } from '@context/userContext'
+import { Helmet } from 'react-helmet-async'
 
 const ProfileEdit: FunctionComponent = () => {
   const { user } = useUser();
 
   return (
+    <>
+    <Helmet>
+        <title>{`${user?.data?.fullname} - settings | learn-hub`}</title>
+      </Helmet>
+
     <Box
       m={"3rem auto"}
       width={"90%"}
@@ -66,6 +72,7 @@ const ProfileEdit: FunctionComponent = () => {
         </Box>
       </Box>
     </Box>
+    </>
 
   )
 }

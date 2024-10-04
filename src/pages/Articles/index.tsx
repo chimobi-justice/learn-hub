@@ -1,6 +1,6 @@
 import { Fragment, FunctionComponent, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Box, Heading, SimpleGrid, useDisclosure } from '@chakra-ui/react'
+import { Box, Grid, GridItem, Heading, useDisclosure } from '@chakra-ui/react'
 import { Helmet } from 'react-helmet-async'
 
 import {
@@ -99,19 +99,25 @@ const Articles: FunctionComponent = () => {
           )}
         </Box>
 
-        <SimpleGrid minChildWidth="250px" spacing={3}>
-          {pinArticles?.map((article: any, index: number) => (
-            <LatestArticleCard
-              key={index}
-              articleImage={article?.thumbnail}
-              date={article?.created_at?.human}
-              title={article?.title}
-              description={article?.content}
-              CTA={`/articles/${article?.slug}/${article?.id}`}
-              CTAText='Read article'
-            />
+        <Grid
+          templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }}
+          gap={{ base: "10px", md: "15px", lg: "20px" }}
+          px={{ base: "6px", md: "10px", lg: "15px" }}
+          py="40px"
+        >
+          {pinArticles?.map((article: any, index: any) => (
+            <GridItem key={index} w="100%" h="100%">
+              <LatestArticleCard
+                articleImage={article?.thumbnail}
+                date={article?.created_at?.human}
+                title={article?.title}
+                description={article?.content}
+                CTA={`/articles/${article?.slug}/${article?.id}`}
+                CTAText="Read article"
+              />
+            </GridItem>
           ))}
-        </SimpleGrid>
+        </Grid>
 
         <Box
           display={"flex"}

@@ -9,6 +9,7 @@ import SearchUsers from '@pages/Search/users'
 import SearchArticles from '@pages/Search/articles'
 import SearchThreads from '@pages/Search/threads'
 import SearchImg from '@assets/images/searching.png'
+import { colors } from '../../colors'
 
 const Search: FunctionComponent = () => {
   const [searchQuery, setSearchQuery] = useState<string>('')
@@ -117,8 +118,16 @@ const Search: FunctionComponent = () => {
             )}
 
             {isLoadingUser && isLoadingArticles && isLoadingThreads && (
-              <Box textAlign={"center"} py={"15px"}>
-                <Spinner size={"xl"} />
+              <Box
+                textAlign={"center"}
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+                border={"1px solid red"}
+                height={"300px"}
+              >
+                <Spinner size={"xl"} thickness='4px' color={colors.primary} />
               </Box>
             )}
 
