@@ -22,7 +22,7 @@ const ContentBlockContent: FunctionComponent<ContentBlockContentProps> = ({ cont
   return (
     <Box
       ref={contentRef}
-      py={"25px"}
+      py={"20px"}
       dangerouslySetInnerHTML={stripTags(content)}
       lineHeight={"2.3em"}
 

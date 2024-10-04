@@ -1,26 +1,11 @@
-import { FunctionComponent, ReactElement } from 'react'
-import { Navigate, useLocation } from 'react-router-dom'
+import { FunctionComponent } from 'react'
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
 
-interface PrivateRouteProps {
-  element: ReactElement;
-}
-
-const PrivateRoute: FunctionComponent<PrivateRouteProps> = ({ element }) => {
+const PrivateRoute: FunctionComponent = () => {
   const location = useLocation();
+  const token = localStorage.getItem("ucType_");
 
-  const loggedInUser = localStorage.getItem("ucType_");
-
-  if (!loggedInUser) {
-    return (
-      <Navigate
-        to="/auth/login"
-        state={{ from: location }}
-        replace
-      />
-    );
-  }
-
-  return element;
+  return token ? <Outlet /> : <Navigate to="auth/login" state={{ from: location }} replace />
 }
 
 export default PrivateRoute

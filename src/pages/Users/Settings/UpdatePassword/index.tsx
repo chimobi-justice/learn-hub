@@ -11,17 +11,17 @@ import { Formik, Field } from 'formik'
 
 import { Button, Input } from '@components/index'
 import { useUpdatePassword } from '@hooks/user/useUpdatePassword'
-import { UpdatePasswordRequest } from '@api/index'
 import { updatePasswordValidationSchema } from '@validations/updatePassword'
+import { IPassword } from 'src/types'
 
 const UpdatePassword: FunctionComponent = () => {
   const { updatePasswordMutation } = useUpdatePassword();
 
-  const handleUpdatePassword = (values: UpdatePasswordRequest) => {
+  const handleUpdatePassword = (values: IPassword) => {
     updatePasswordMutation.mutate(values)
   };
 
-  const initialValues: UpdatePasswordRequest = {
+  const initialValues: IPassword = {
     current_password: "",
     password: "",
     password_confirmation: ""

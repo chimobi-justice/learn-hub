@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Avatar, Box, Container, Flex, Heading, Text } from '@chakra-ui/react'
+import { Helmet } from 'react-helmet-async'
 
 import { ArticlesCard } from '@components/index'
 import { useUser } from '@context/userContext'
@@ -17,6 +18,11 @@ const SavedArticles = () => {
   }
 
   return (
+    <>
+    <Helmet>
+        <title>{`${user?.data?.fullname} - My reading lists | learn-hub`}</title>
+      </Helmet>
+
     <Container maxW={"container.xl"}>
       <Box
         display={"flex"}
@@ -99,6 +105,7 @@ const SavedArticles = () => {
         </Box>
       </Box>
     </Container>
+    </>
   )
 }
 

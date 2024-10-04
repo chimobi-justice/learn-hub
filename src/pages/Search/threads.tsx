@@ -4,15 +4,9 @@ import { Box, Card, CardBody, Stack, StackDivider, Text } from '@chakra-ui/react
 
 import truncate from '@helpers/truncate'
 import LoadButton from '@pages/Search/components/loadButton'
+import { ISearchThreads } from 'src/types'
 
-interface SearchThreadsProps {
-  threads: any;
-  hasMore: boolean;
-  fetchNext: () => void;
-  isFetching: boolean;
-}
-
-const SearchThreads: FunctionComponent<SearchThreadsProps> = ({ 
+const SearchThreads: FunctionComponent<ISearchThreads> = ({ 
   threads,
   hasMore,
   fetchNext,

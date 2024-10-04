@@ -4,13 +4,7 @@ import { MdOutlineQuickreply, MdOutlineThumbDown, MdOutlineThumbUp } from 'react
 
 import { useUser } from '@context/userContext'
 import { Popover } from '@components/index'
-
-interface ArticleActionButtonsProps {
-  article: any;
-  onLike: () => void;
-  onDisLike: () => void;
-  onShowComment: () => void;
-}
+import { ArticleActionButtonsProps } from 'src/types'
 
 const ArticleActionButtons: FunctionComponent<ArticleActionButtonsProps> = ({
   article,

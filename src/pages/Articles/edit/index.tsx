@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import { useParams } from 'react-router-dom'
 
 import ArticleForm from '@pages/Articles/components/ArticleForm'
-import { useGetSingleArticle } from '@hooks/article/useGetSingleArticle';
+import { useGetSingleArticle } from '@hooks/article/useGetSingleArticle'
 
 const EditArticle: FunctionComponent = () => {
   const { id } = useParams();

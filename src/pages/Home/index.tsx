@@ -1,9 +1,7 @@
 import { FunctionComponent } from 'react'
 
-import HeroSection from '@components/HeroSection'
-import HomeThreads from '@pages/Home/Public/Threads'
-import HomeArticles from '@pages/Home/Public/Articles'
 import HomeAuthUserPage from '@pages/Home/Authenticated'
+import HomeSections from '@pages/Home/Public'
 
 const Home: FunctionComponent = () => {
   const token = localStorage.getItem('ucType_');
@@ -13,11 +11,7 @@ const Home: FunctionComponent = () => {
     {token ? (
         <HomeAuthUserPage />
       ): (
-        <>
-          <HeroSection />
-          <HomeThreads />
-          <HomeArticles />
-        </>
+        <HomeSections />
       )}
     </>
     )

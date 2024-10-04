@@ -13,22 +13,23 @@ interface ThreadCardContentProps {
   isSingleView: boolean;
 }
 
-const ThreadCardContent: FunctionComponent<ThreadCardContentProps> = ({ 
-  title, 
-  content, 
-  slug, 
-  threadId, 
-  isSingleView 
+const ThreadCardContent: FunctionComponent<ThreadCardContentProps> = ({
+  title,
+  content,
+  slug,
+  threadId,
+  isSingleView
 }) => (
   <Box my="14px">
-    <Heading as="h6" size="sm">
-      <Link to={`/threads/${slug}/${threadId}`}>{title}</Link>
-    </Heading>
     <Link to={`/threads/${slug}/${threadId}`}>
-      <Box height={isSingleView ? "auto" : "130px"} overflow={isSingleView ? "" : "hidden"} p="5px">
-        <ContentBlockContent content={isSingleView ? content : truncate(content, 250)} />
-      </Box>
+      <Heading as="h6" size="md">
+        {title}
+      </Heading>
     </Link>
+
+    <Box height={isSingleView ? "auto" : "130px"} overflow={isSingleView ? "" : "hidden"} p="5px">
+      <ContentBlockContent content={isSingleView ? content : truncate(content, 250)} />
+    </Box>
   </Box>
 );
 

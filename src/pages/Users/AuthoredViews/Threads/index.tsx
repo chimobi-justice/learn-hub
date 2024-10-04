@@ -10,6 +10,7 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
+import { Helmet } from 'react-helmet-async'
 
 import { FollowCard, Button, Alert, Skeleton, EmptyState, NotFound, ContentBlockContent } from '@components/index'
 import { useGetAuthoredThreads } from '@hooks/thread/useGetAuthoredThreads'
@@ -51,6 +52,10 @@ const ArthoredThreads: FunctionComponent = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{`${username} - threads | learn-hub`}</title>
+      </Helmet>
+
       <Box
         m={"3rem auto"}
         width={"90%"}

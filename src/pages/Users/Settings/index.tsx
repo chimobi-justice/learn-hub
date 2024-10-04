@@ -25,7 +25,7 @@ const ProfileEdit: FunctionComponent = () => {
         cursor={"pointer"}
         _hover={{textDecoration: "underline"}}
       >
-        <Link to={`/me/${user?.data?.username}`}>
+        <Link to={`/${user?.data?.username}`}>
           Back
         </Link>
       </Text>

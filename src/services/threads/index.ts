@@ -1,6 +1,5 @@
 import { axiosInstance } from '@api/axiosInstance'
 import {
-  ThreadRequest,
   CREATE_THREAD_ENDPOINT,
   DELETE_THREAD_ENDPOINT,
   EDIT_THREAD_ENDPOINT,
@@ -10,13 +9,14 @@ import {
   THREAD_DISLIKE_ENDPOINT,
   THREAD_LIKE_ENDPOINT,
 } from '@api/index'
+import { IThread } from 'src/types'
 
-export const createThread = async (data: ThreadRequest) => {
+export const createThread = async (data: IThread) => {
   const response = await axiosInstance.post(CREATE_THREAD_ENDPOINT, data);
   return response.data;
 }
 
-export const editThread = async ({ data, id }: { data: ThreadRequest, id: string }) => {
+export const editThread = async ({ data, id }: { data: IThread, id: string }) => {
   const response = await axiosInstance.patch(`${EDIT_THREAD_ENDPOINT}/${id}`, data);
   return response.data;
 }

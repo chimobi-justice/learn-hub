@@ -1,4 +1,4 @@
-import { FormEvent, Fragment, FunctionComponent } from 'react'
+import { Fragment, FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Avatar,
@@ -17,17 +17,7 @@ import {
 import { Button, ContentBlockContent, Editor } from '@components/index'
 import { useUser } from '@context/userContext'
 import { colors } from '../../../colors'
-
-interface CommentDrawerProps {
-  isOpen: boolean;
-  onClose: () => void;
-  comments: any[];
-  commentCounts: number;
-  comment: string;
-  setComment: (value: string) => void;
-  handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
-  isSubmitting: boolean;
-}
+import { CommentDrawerProps } from 'src/types'
 
 const CommentDrawer: FunctionComponent<CommentDrawerProps> = ({
   isOpen,

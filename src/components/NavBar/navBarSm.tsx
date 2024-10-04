@@ -105,16 +105,18 @@ const NavBarSm: FunctionComponent = () => {
               p="8px"
               alignItems="center"
             >
-              <Heading
-                as="h4"
-                display={"flex"}
-                gap={2}
-                size="lg"
-                fontStyle={"italic"}
-                color={colors.primary}
-              >
-                Learn <Text color={"#000"}>Hub</Text>
-              </Heading>
+              <Link to="/">
+                <Heading
+                  as="h4"
+                  display={"flex"}
+                  gap={2}
+                  size="lg"
+                  fontStyle={"italic"}
+                  color={colors.primary}
+                >
+                  Learn <Text color={"#000"}>Hub</Text>
+                </Heading>
+              </Link>
 
               <Spacer />
               <Icon

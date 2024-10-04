@@ -4,20 +4,13 @@ import { Box, Card, CardBody, Stack, StackDivider, Text } from '@chakra-ui/react
 
 import truncate from '@helpers/truncate'
 import LoadButton from '@pages/Search/components/loadButton'
+import { ISearchArticles } from 'src/types'
 
-interface SearchArticlesProps {
-  articles: any;
-  hasMore: boolean;
-  fetchNext: () => void;
-  isFetching: boolean;
-}
-
-const SearchArticles: FunctionComponent<SearchArticlesProps> = ({ 
+const SearchArticles: FunctionComponent<ISearchArticles> = ({ 
   articles,
   hasMore,
   fetchNext,
   isFetching
-
 }) => {
   return (
     <Box mt={5}>

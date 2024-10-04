@@ -4,15 +4,9 @@ import { Avatar, Box, Card, CardBody, Flex, Heading, Stack, StackDivider, Text }
 
 import truncate from '@helpers/truncate'
 import LoadButton from '@pages/Search/components/loadButton'
+import { ISearchUsers } from 'src/types'
 
-interface SearchUsersProps {
-  users: any;
-  hasMore: boolean;
-  fetchNext: () => void;
-  isFetching: boolean;
-}
-
-const SearchUsers: FunctionComponent<SearchUsersProps> = ({ 
+const SearchUsers: FunctionComponent<ISearchUsers> = ({ 
   users,
   hasMore,
   fetchNext,
