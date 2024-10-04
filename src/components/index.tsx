@@ -17,6 +17,7 @@ import Editor from '@components/Editor'
 import ContentBlockContent from '@components/CodeBlockContent'
 import ThreadCard from '@components/ThreadCard'
 import Popover from '@components/Popover'
+import Loading from '@components/Loading'
 
 export {
   Alert,
@@ -38,4 +39,5 @@ export {
   ContentBlockContent,
   ThreadCard,
   Popover,
+  Loading,
 }

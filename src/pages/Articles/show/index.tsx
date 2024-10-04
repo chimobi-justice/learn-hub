@@ -12,6 +12,7 @@ import CommentDrawer from '@pages/Articles/components/CommentDrawer'
 import { useArticleActions } from '@pages/Articles/hooks/useArticleActions'
 import ArticleActionButtons from '../components/ArticleActionButtons'
 import ContentBlockContent from '@components/CodeBlockContent'
+import { Helmet } from 'react-helmet-async'
 
 const ShowArticle: FunctionComponent = () => {
   const { id } = useParams();
@@ -37,6 +38,10 @@ const ShowArticle: FunctionComponent = () => {
 
       {data && isSuccess && (
         <Box>
+          <Helmet>
+            <title>{`${data?.data?.title} | learn-hub`}</title>
+          </Helmet>
+
           <>
             <ArticleHeroSection
               title={data?.data?.title}

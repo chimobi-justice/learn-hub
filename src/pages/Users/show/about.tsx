@@ -4,10 +4,10 @@ import { Box, HStack, Text } from '@chakra-ui/react'
 import { FaGithub, FaXTwitter } from 'react-icons/fa6'
 import { GiWorld } from 'react-icons/gi'
 
-import { UserResponse } from '@api/index'
+import { IUser } from 'src/types'
 
 interface PublicUserAboutDetailsProps {
-  data: UserResponse['data'];
+  data: IUser['data'];
 }
 
 const PublicUserAboutDetails: FunctionComponent<PublicUserAboutDetailsProps> = ({ data }) => {

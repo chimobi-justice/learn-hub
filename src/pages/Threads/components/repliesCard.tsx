@@ -12,25 +12,11 @@ import {
   StackDivider,
   Text,
 } from '@chakra-ui/react'
-import ContentBlockContent from '@components/CodeBlockContent';
 
-interface RepliesCardProps {
-  data: Array<{
-    id: string;
-    comment: string;
-    created_at?: {
-      human: string;
-    };
-    user?: {
-      fullname: string;
-      username: string;
-      avatar: string | null;
-      profile_headlines?: string | null;
-    };
-  }>;
-}
+import ContentBlockContent from '@components/CodeBlockContent'
+import { IThreadRepliesCardProps } from 'src/types'
 
-const RepliesCard: FunctionComponent<RepliesCardProps> = ({ data }) => {
+const RepliesCard: FunctionComponent<IThreadRepliesCardProps> = ({ data }) => {
   return (
     <Card mt={"20px"} ml={{ base: "12px", md: "35px" }}>
       <CardHeader pb={"4px"}>

@@ -2,7 +2,6 @@ import { axiosInstance } from '@api/axiosInstance'
 import {
   ARTICLE_DISLIKE_ENDPOINT,
   ARTICLE_LIKE_ENDPOINT,
-  ArticleRequest,
   CREATE_ARTICLE_COMMENT_ENDPOINT,
   CREATE_ARTICLE_ENDPOINT,
   CREATE_SAVE_ARTICLE_ENDPOINT,
@@ -15,13 +14,14 @@ import {
   GET_SAVED_ARTICLES_ENDPOINT,
   GET_SINGLE_ARTICLE_ENDPOINT
 } from '@api/index'
+import { IArticle } from 'src/types'
 
-export const createArticle = async (data: ArticleRequest) => {
+export const createArticle = async (data: IArticle) => {
   const response = await axiosInstance.post(CREATE_ARTICLE_ENDPOINT, data);
   return response.data;
 }
 
-export const editArticle = async ({ data, id }: { data: ArticleRequest, id: any }) => {
+export const editArticle = async ({ data, id }: { data: IArticle, id: any }) => {
   const response = await axiosInstance.patch(`${EDIT_ARTICLE_ENDPOINT}/${id}`, data);
   return response.data;
 }

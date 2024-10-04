@@ -7,23 +7,16 @@ import {
   Text
 } from '@chakra-ui/react'
 import { FaUpload, FaImage } from 'react-icons/fa6'
+import { Helmet } from 'react-helmet-async'
 
 import { Button, Editor } from '@components/index'
 import { useCreateArticle } from '@hooks/article/useCreateArticle'
 import { useEditArticle } from '@hooks/article/useEditArticle'
 import { useImageUpload } from '@hooks/useImageUpload'
-import { ArticleRequest } from '@api/index'
 import { errorNotification } from '@helpers/notification'
+import { IArticle, IArticleFormProps } from 'src/types'
 
-interface ArticleFormProps {
-  titleValue?: string;
-  thumbnailValue?: string;
-  contentValue?: string;
-  isEditing?: boolean
-  id?: any
-}
-
-const ArticleForm: FunctionComponent<ArticleFormProps> = ({
+const ArticleForm: FunctionComponent<IArticleFormProps> = ({
   titleValue = '',
   thumbnailValue = '',
   contentValue = '',
@@ -58,7 +51,7 @@ const ArticleForm: FunctionComponent<ArticleFormProps> = ({
       return;
     }
 
-    const articleData: ArticleRequest = {
+    const articleData: IArticle = {
       thumbnail,
       title,
       content
@@ -83,96 +76,102 @@ const ArticleForm: FunctionComponent<ArticleFormProps> = ({
   }, [titleValue, thumbnailValue, contentValue, isEditing]);
 
   return (
-    <Box width={{ base: "98%", md: "50%" }} m={"2rem auto"}>
-      <form onSubmit={handleSubmitArticle}>
-        <Box borderRadius="9px" p="10px" bg="#f1f1f1">
-          {thumbnail ? (
-            <Image
-              src={thumbnail}
-              width={"100%"}
-              height={"250px"}
-              objectFit={"cover"}
-            />
-          ) : (
-            <Box
-              textAlign="center"
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              height="200px"
-              flexDirection="column"
-            >
-              <Box mb="15px">
-                <FaImage style={{ fontSize: "35px" }} />
+    <>
+      <Helmet>
+        <title>{`${title || 'Create'} | learn-hub`}</title>
+      </Helmet>
+
+      <Box width={{ base: "98%", md: "50%" }} m={"2rem auto"}>
+        <form onSubmit={handleSubmitArticle}>
+          <Box borderRadius="9px" p="10px" bg="#f1f1f1">
+            {thumbnail ? (
+              <Image
+                src={thumbnail}
+                width={"100%"}
+                height={"250px"}
+                objectFit={"cover"}
+              />
+            ) : (
+              <Box
+                textAlign="center"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                height="200px"
+                flexDirection="column"
+              >
+                <Box mb="15px">
+                  <FaImage style={{ fontSize: "35px" }} />
+                </Box>
+
+                <Text fontSize="17px" mb="15px">
+                  We recommend uploading an image that is 1920x1080 pixels
+                </Text>
+
+                <Button
+                  variant="outline"
+                  size={{ base: "md", lg: "lg" }}
+                  width={{ base: "100%", lg: "auto" }}
+                  type="button"
+                  fontWeight="semibold"
+                  rounded="sm"
+                  leftIcon={<FaUpload />}
+                  onClick={handleUploadClick}
+                  isloading={imageUploadLoading}
+                >
+                  Upload from computer
+                </Button>
+
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  style={{ display: 'none' }}
+                  onChange={handleFileUpload}
+                />
               </Box>
 
-              <Text fontSize="17px" mb="15px">
-                We recommend uploading an image that is 1920x1080 pixels
-              </Text>
+            )}
+          </Box>
 
-              <Button
-                variant="outline"
-                size={{ base: "md", lg: "lg" }}
-                width={{ base: "100%", lg: "auto" }}
-                type="button"
-                fontWeight="semibold"
-                rounded="sm"
-                leftIcon={<FaUpload />}
-                onClick={handleUploadClick}
-                isloading={imageUploadLoading}
-              >
-                Upload from computer
-              </Button>
+          <FormControl my={"2.5rem"}>
+            <Input
+              type="text"
+              py="60px"
+              size="lg"
+              fontSize="3rem"
+              variant="flushed"
+              colorScheme="gray"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </FormControl>
 
-              <input
-                type="file"
-                ref={fileInputRef}
-                style={{ display: 'none' }}
-                onChange={handleFileUpload}
-              />
-            </Box>
+          <Box height={"400px"} mb={"25px"}>
+            <Editor
+              content={content}
+              setContent={setContent}
+              placeholder="write here to post threads"
+            />
+          </Box>
 
-          )}
-        </Box>
-
-        <FormControl my={"2.5rem"}>
-          <Input
-            type="text"
-            py="60px"
-            size="lg"
-            fontSize="3rem"
-            variant="flushed"
-            colorScheme="gray"
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </FormControl>
-
-        <Box height={"400px"} mb={"25px"}>
-          <Editor 
-            content={content} 
-            setContent={setContent} 
-            placeholder="write here to post threads" 
-          />
-        </Box>
-
-        <Box textAlign={"right"} py={"25px"}>
-          <Button
-            variant="solid"
-            size={{ base: "md", lg: "lg" }}
-            width={{ base: "100%", lg: "auto" }}
-            type="submit"
-            fontWeight={"semibold"}
-            rounded="sm"
-            isDisabled={!title || !content}
-            isloading={isEditing ? editArticleMutation.isPending : createArticleMutation.isPending}
-          >
-            {isEditing ? "Update" : "Save"}
-          </Button>
-        </Box>
-      </form>
-    </Box>
+          <Box textAlign={"right"} py={"25px"}>
+            <Button
+              variant="solid"
+              size={{ base: "md", lg: "lg" }}
+              width={{ base: "100%", lg: "auto" }}
+              type="submit"
+              fontWeight={"semibold"}
+              rounded="sm"
+              isDisabled={!title || !content}
+              isloading={isEditing ? editArticleMutation.isPending : createArticleMutation.isPending}
+            >
+              {isEditing ? "Update" : "Save"}
+            </Button>
+          </Box>
+        </form>
+      </Box>
+    </>
   )
 }
 

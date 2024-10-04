@@ -14,16 +14,17 @@ import {
 } from '@chakra-ui/react'
 import { Formik, Field } from 'formik'
 import { FaCamera } from 'react-icons/fa6'
+import { Helmet } from 'react-helmet-async'
 
 import { Button, Input, TextArea } from '@components/index'
 import { colors } from '../../../../colors'
 import { useUpdateProfile } from '@hooks/user/useUpdateProfile'
 import { useUpdateAvatar } from '@hooks/user/useUpdateAvatar'
 import { useImageUpload } from '@hooks/useImageUpload'
-import { UpdateProfileRequest } from '@api/index'
 import { updateProfileValidationSchema } from '@validations/updateProfile'
 import { useUser } from '@context/userContext'
 import { capitalizeFirstLetter } from '@helpers/capitalize'
+import { IUserProfile } from 'src/types'
 
 const UpdateProfile: FunctionComponent = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -33,7 +34,7 @@ const UpdateProfile: FunctionComponent = () => {
   const { updateProfileAvatarMutation } = useUpdateAvatar();
   const res = user?.data;
 
-  const [initialValues, setInitialValues] = useState<UpdateProfileRequest>({
+  const [initialValues, setInitialValues] = useState<IUserProfile>({
     fullname: '',
     username: '',
     email: '',
@@ -53,7 +54,7 @@ const UpdateProfile: FunctionComponent = () => {
     },
   });
 
-  const handleUpdateProfile = (values: UpdateProfileRequest) => {
+  const handleUpdateProfile = (values: IUserProfile) => {
     updateProfileMutation.mutate(values);
   };
 
@@ -74,12 +75,17 @@ const UpdateProfile: FunctionComponent = () => {
         profile_headlines: res?.profile_headlines ?? '',
         state: res?.state ?? '',
         country: res?.country ?? '',
-        bio: res?.bio ?? '',
+        bio: res?.bio ?? ''
       })
     }
   }, [res]);
 
   return (
+    <>
+     <Helmet>
+        <title>{user?.data?.fullname} - settings | learn-hub</title>
+      </Helmet>
+
     <Card>
       <CardBody position="relative">
         <Box textAlign="center" mb={12}>
@@ -218,6 +224,7 @@ const UpdateProfile: FunctionComponent = () => {
         </Formik>
       </CardBody>
     </Card>
+    </>
   );
 };
 

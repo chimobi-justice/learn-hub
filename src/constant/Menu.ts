@@ -12,6 +12,6 @@ export const Menu = [
   {
     id: 3,
     name: "Articles",
-    url: "articles"
+    url: "/articles"
   }
 ];

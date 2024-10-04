@@ -1,15 +1,11 @@
-import { Box } from "@chakra-ui/react";
-import Button from "@components/Button";
-import { FunctionComponent } from "react";
-import { FaChevronDown } from "react-icons/fa6";
+import { FunctionComponent } from 'react'
+import { Box } from '@chakra-ui/react'
+import { FaChevronDown } from 'react-icons/fa6'
 
-interface LoadButtonProps {
-  hasMore: boolean;
-  fetchNext: () => void;
-  isFetching: boolean;
-}
+import Button from '@components/Button'
+import { SearchLoadButtonProps } from 'src/types'
 
-const LoadButton: FunctionComponent<LoadButtonProps> = ({
+const LoadButton: FunctionComponent<SearchLoadButtonProps> = ({
   hasMore,
   fetchNext,
   isFetching

@@ -1,34 +1,36 @@
 import { axiosInstance } from '@api/axiosInstance'
 import { 
   DELETE_ACCOUNT_ENDPOINT, 
-  MessageResponse, 
   PUBLIC_USER_ENDPOINT, 
   UPDATE_PASSWORD_ENDPOINT, 
   UPDATE_PROFILE_ENDPOINT, 
   UPLOAD_PROFILE_AVATAR_ENDPOINT, 
   USER_ENDPOINT, 
-  UpdatePasswordRequest, 
-  UpdateProfileAvatarRequest, 
-  UpdateProfileRequest, 
-  UserResponse 
 } from '@api/index'
+import { 
+  IPassword, 
+  IUser, 
+  IUserProfile, 
+  IUserProfileAvatar, 
+  MessageResponse 
+} from 'src/types'
 
-export const getUser = async (): Promise<UserResponse> => {
-  const response = await axiosInstance.get<UserResponse>(USER_ENDPOINT);
+export const getUser = async (): Promise<IUser> => {
+  const response = await axiosInstance.get<IUser>(USER_ENDPOINT);
   return response.data;
 }
 
-export const updatePassword = async (data: UpdatePasswordRequest): Promise<MessageResponse> => {
+export const updatePassword = async (data: IPassword): Promise<MessageResponse> => {
   const response = await axiosInstance.patch(UPDATE_PASSWORD_ENDPOINT, data);
   return response.data;
 }
 
-export const updateProfile = async (data: UpdateProfileRequest): Promise<MessageResponse> => {
+export const updateProfile = async (data: IUserProfile): Promise<MessageResponse> => {
   const response = await axiosInstance.patch(UPDATE_PROFILE_ENDPOINT, data);
   return response.data;
 }
 
-export const uploadProfileAvatar = async (data: UpdateProfileAvatarRequest): Promise<MessageResponse> => {
+export const uploadProfileAvatar = async (data: IUserProfileAvatar): Promise<MessageResponse> => {
   const response = await axiosInstance.patch(UPLOAD_PROFILE_AVATAR_ENDPOINT, data);
   return response.data;
 }
@@ -38,7 +40,7 @@ export const deleteAccount = async () => {
   return response.data;
 }
 
-export const getPublicUser = async (username: string): Promise<UserResponse> => {
-  const response = await axiosInstance.get<UserResponse>(`${PUBLIC_USER_ENDPOINT}/${username}`);
+export const getPublicUser = async (username: string): Promise<IUser> => {
+  const response = await axiosInstance.get<IUser>(`${PUBLIC_USER_ENDPOINT}/${username}`);
   return response.data;
 }

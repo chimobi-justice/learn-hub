@@ -14,7 +14,7 @@ import {
 import { CiEdit } from 'react-icons/ci'
 import { MdDeleteOutline } from 'react-icons/md'
 import { BsSave } from 'react-icons/bs'
-import { IoSaveSharp } from "react-icons/io5";
+import { IoSaveSharp } from 'react-icons/io5'
 
 import truncate from '@helpers/truncate'
 import { stripTags } from '@helpers/stripTags'

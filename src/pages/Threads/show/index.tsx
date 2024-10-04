@@ -8,6 +8,7 @@ import {
   Heading,
   Text
 } from '@chakra-ui/react'
+import { Helmet } from 'react-helmet-async'
 
 import { colors } from '../../../colors'
 import { FollowCard, NotFound, Skeleton } from '@components/index'
@@ -15,6 +16,7 @@ import DiscussionCard from '@pages/Threads/components/discussionCard'
 import RepliesCard from '@pages/Threads/components/repliesCard'
 import { useGetSingleThread } from '@hooks/thread/useGetSingleThread'
 import ThreadCard from '@components/ThreadCard'
+import truncate from '@helpers/truncate'
 
 const ShowThread: FunctionComponent = () => {
   const { id } = useParams();
@@ -28,64 +30,70 @@ const ShowThread: FunctionComponent = () => {
       {isLoading && <Skeleton />}
 
       {data && isSuccess && (
-        <Box
-          width={"90%"}
-          m={"4rem auto"}
-        >
-          <Heading
-            pb={"25px"}
-            size={"lg"}
-            alignItems={"center"}
-          >
-            <Text as={"span"} color={"#0009"}><Link to="/threads">Forum</Link></Text>
-            {" > "}
-            <Text as={"span"}>{data?.data?.title}</Text>
-          </Heading>
+        <>
+          <Helmet>
+            <title>{`${data?.data?.title} | learn-hub`}</title>
+          </Helmet>
 
           <Box
-            display={"flex"}
-            justifyContent={"space-between"}
-            flexDir={{ base: "column", md: "row" }}
-            gap={5}
+            width={"90%"}
+            m={"4rem auto"}
           >
-            <Box width={{ base: "100%", md: "70%" }}>
-              <>
-                <Card>
-                  <CardHeader borderBottom={"1px solid #f1f1f1"}>
-                    <Heading as={"h3"} size={"md"}>
-                      Thr<Text as="span" color={colors.primary}>ea</Text>ds
-                    </Heading>
-                  </CardHeader>
+            <Heading
+              pb={"25px"}
+              size={"lg"}
+              alignItems={"center"}
+            >
+              <Text as={"span"} color={"#0009"}><Link to="/threads">Forum</Link></Text>
+              {" > "}
+              <Text as={"span"}>{truncate(data?.data?.title, 45)}</Text>
+            </Heading>
 
-                  <CardBody>
-                    <ThreadCard thread={data?.data} isSingleView={true} />
-                  </CardBody>
-                </Card>
+            <Box
+              display={"flex"}
+              justifyContent={"space-between"}
+              flexDir={{ base: "column", md: "row" }}
+              gap={5}
+            >
+              <Box width={{ base: "100%", md: "70%" }}>
+                <>
+                  <Card>
+                    <CardHeader borderBottom={"1px solid #f1f1f1"}>
+                      <Heading as={"h3"} size={"md"}>
+                        Thr<Text as="span" color={colors.primary}>ea</Text>ds
+                      </Heading>
+                    </CardHeader>
 
-                {data?.data?.thread_comments &&
-                  data?.data?.thread_comments?.length > 0
-                  && (
-                    <RepliesCard data={data?.data?.thread_comments} />
-                  )
-                }
-              </>
-            </Box>
+                    <CardBody>
+                      <ThreadCard thread={data?.data} isSingleView={true} />
+                    </CardBody>
+                  </Card>
 
-            <Box width={{ base: "100%", md: "30%" }}>
-              <Box>
-                <DiscussionCard />
+                  {data?.data?.thread_comments &&
+                    data?.data?.thread_comments?.length > 0
+                    && (
+                      <RepliesCard data={data?.data?.thread_comments} />
+                    )
+                  }
+                </>
               </Box>
 
-              {/* <Box my={"25px"}>
+              <Box width={{ base: "100%", md: "30%" }}>
+                <Box>
+                  <DiscussionCard />
+                </Box>
+
+                {/* <Box my={"25px"}>
                 <RecommendTopicCard />
               </Box> */}
 
-              <Box>
-                <FollowCard />
+                <Box>
+                  <FollowCard />
+                </Box>
               </Box>
             </Box>
           </Box>
-        </Box>
+        </>
       )}
     </>
   )

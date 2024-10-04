@@ -1,13 +1,15 @@
 import { ChangeEvent, FunctionComponent, useEffect, useState } from 'react'
-import { Box, Container, Image, Input, InputGroup, InputLeftElement, Spinner, Text } from '@chakra-ui/react'
+import { Box, Container, Image, Input, InputGroup, InputLeftElement, Text } from '@chakra-ui/react'
 import { FiSearch } from 'react-icons/fi'
 import { useDebounce } from 'use-debounce'
+import { Helmet } from 'react-helmet-async'
 
 import { useGetSearch } from '@hooks/search/useGetSearch'
 import SearchUsers from '@pages/Search/users'
 import SearchArticles from '@pages/Search/articles'
 import SearchThreads from '@pages/Search/threads'
 import SearchImg from '@assets/images/searching.png'
+import { Loading } from '@components/index'
 
 const Search: FunctionComponent = () => {
   const [searchQuery, setSearchQuery] = useState<string>('')
@@ -74,71 +76,73 @@ const Search: FunctionComponent = () => {
   }, [usersData, articlesData, threadsData, value]);
 
   return (
-    <Box as={"section"} py={"25px"}>
-      <Container maxW={"container.xl"}>
-        <InputGroup size={"lg"}>
-          <InputLeftElement pointerEvents='none'>
-            <FiSearch />
-          </InputLeftElement>
-          <Input
-            type="text"
-            placeholder="Search for articles, threads and users..."
-            value={searchQuery}
-            onChange={handleInputChange}
-          />
-        </InputGroup>
+    <>
+      <Helmet>
+        <title>Search | learn-hub</title>
+      </Helmet>
 
-        <Box mt={"10px"}>
-          {searchQuery?.length === 0 && (
-            <Box
-              mt="20px"
-              textAlign="center"
-              display="flex"
-              flexDirection="column"
-              justifyContent="center"
-              alignItems="center"
-              height="100%"
-              py="20px">
-              <Text pb={"10px"}>Waiting for search.</Text>
+      <Box as={"section"} py={"25px"}>
+        <Container maxW={"container.xl"}>
+          <InputGroup size={"lg"}>
+            <InputLeftElement pointerEvents='none'>
+              <FiSearch />
+            </InputLeftElement>
+            <Input
+              type="text"
+              placeholder="Search for articles, threads and users..."
+              value={searchQuery}
+              onChange={handleInputChange}
+            />
+          </InputGroup>
 
-              <Image
-                src={SearchImg}
-                width={"200px"}
-                height={"200px"}
-                bg={"#fafafa"}
-              />
-            </Box>
-          )}
+          <Box mt={"10px"}>
+            {searchQuery?.length === 0 && (
+              <Box
+                mt="20px"
+                textAlign="center"
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+                height="100%"
+                py="20px">
+                <Text pb={"10px"}>Waiting for search.</Text>
 
-          {isLoadingUser && isLoadingArticles && isLoadingThreads && (
-            <Box textAlign={"center"} py={"7px"} border={"1px solid red"}>
-              <Spinner size={"4xl"} />
-            </Box>
-          )}
+                <Image
+                  src={SearchImg}
+                  width={"200px"}
+                  height={"200px"}
+                  bg={"#fafafa"}
+                />
+              </Box>
+            )}
 
-          <SearchUsers
-            users={searchArr?.users}
-            hasMore={hasMoreUsers}
-            isFetching={isFetchingNextUsers}
-            fetchNext={fetchNextUsers}
-          />
+            {isLoadingUser && isLoadingArticles && isLoadingThreads && <Loading />}
 
-          <SearchArticles
-            articles={searchArr?.articles}
-            hasMore={hasMoreArticles}
-            isFetching={isFetchingNextArticles}
-            fetchNext={fetchNextArticles}
-          />
+            <SearchUsers
+              users={searchArr?.users}
+              hasMore={hasMoreUsers}
+              isFetching={isFetchingNextUsers}
+              fetchNext={fetchNextUsers}
+            />
 
-          <SearchThreads
-            threads={searchArr?.threads}
-            hasMore={hasMoreThreads}
-            isFetching={isFetchingNextThreads}
-            fetchNext={fetchNextThreads}
-          />
-        </Box>
-      </Container>
-    </Box>
+            <SearchArticles
+              articles={searchArr?.articles}
+              hasMore={hasMoreArticles}
+              isFetching={isFetchingNextArticles}
+              fetchNext={fetchNextArticles}
+            />
+
+            <SearchThreads
+              threads={searchArr?.threads}
+              hasMore={hasMoreThreads}
+              isFetching={isFetchingNextThreads}
+              fetchNext={fetchNextThreads}
+            />
+          </Box>
+        </Container>
+      </Box>
+    </>
   )
 }
 

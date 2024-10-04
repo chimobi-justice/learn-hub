@@ -3,16 +3,9 @@ import { Link } from 'react-router-dom'
 import { Avatar, Box, Flex, Heading, Text } from '@chakra-ui/react'
 import { FaArrowLeft } from 'react-icons/fa6'
 
-interface IProps {
-  title: string;
-  authorAvatar: string;
-  authorName: string;
-  authorUsername: string;
-  read_time: string;
-  date: string;
-}
+import { IArticleHeroProps } from 'src/types'
 
-const ArticleHeroSection: FunctionComponent<IProps> = ({
+const ArticleHeroSection: FunctionComponent<IArticleHeroProps> = ({
   title,
   authorAvatar,
   authorName,

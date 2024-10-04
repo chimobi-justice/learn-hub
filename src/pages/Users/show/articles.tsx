@@ -1,9 +1,9 @@
 import { Fragment, FunctionComponent, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { Box, Heading, useDisclosure } from '@chakra-ui/react'
 
 import { Alert, ArticlesCard, Button, Skeleton } from '@components/index'
 import { useGetPublicAuthoredArticles } from '@hooks/article/useGetPublicAuthoredArticles'
-import { Box, Heading, useDisclosure } from '@chakra-ui/react'
 import { useDeleteArticle } from '@hooks/article/useDeleteArticle'
 import { useUser } from '@context/userContext'
 import { useCreateSaveArticle } from '@hooks/article/useCreateSaveArticles'
