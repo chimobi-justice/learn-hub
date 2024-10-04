@@ -124,7 +124,6 @@ const Search: FunctionComponent = () => {
                 flexDirection="column"
                 justifyContent="center"
                 alignItems="center"
-                border={"1px solid red"}
                 height={"300px"}
               >
                 <Spinner size={"xl"} thickness='4px' color={colors.primary} />
