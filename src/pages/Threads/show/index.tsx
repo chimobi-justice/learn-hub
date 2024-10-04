@@ -6,7 +6,8 @@ import {
   CardBody,
   CardHeader,
   Heading,
-  Text
+  Text,
+  useBreakpointValue
 } from '@chakra-ui/react'
 import { Helmet } from 'react-helmet-async'
 
@@ -22,6 +23,8 @@ const ShowThread: FunctionComponent = () => {
   const { id } = useParams();
 
   const { data, isLoading, isSuccess, error } = useGetSingleThread(id!);
+
+  const truncateLenght = useBreakpointValue({base: 45, md: 30, lg: 75});
 
   if (error) return <NotFound />;
 
@@ -41,12 +44,12 @@ const ShowThread: FunctionComponent = () => {
           >
             <Heading
               pb={"25px"}
-              size={"lg"}
+              size={"md"}
               alignItems={"center"}
             >
               <Text as={"span"} color={"#0009"}><Link to="/threads">Forum</Link></Text>
               {" > "}
-              <Text as={"span"}>{truncate(data?.data?.title, 45)}</Text>
+              <Text as={"span"}>{truncate(data?.data?.title, truncateLenght)}</Text>
             </Heading>
 
             <Box

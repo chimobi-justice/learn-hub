@@ -39,7 +39,7 @@ const Card: FunctionComponent<IProps> = ({
   CTAText
 }) => {
   return (
-    <ChakraCard>
+    <ChakraCard height="100%" display="flex" flexDirection="column" justifyContent="space-between">
       <CardHeader>
         <HStack>
           <Box display={"flex"} gap={2} alignItems={"center"}>

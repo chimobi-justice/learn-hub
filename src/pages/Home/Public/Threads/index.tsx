@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
-import { Box, Heading, SimpleGrid, Text } from '@chakra-ui/react'
+import { Box, Grid, GridItem, Heading, Text } from '@chakra-ui/react'
 import { FaArrowRight } from 'react-icons/fa6'
 
 import { Button, Card, Skeleton } from '@components/index'
@@ -8,7 +8,7 @@ import { colors } from '../../../../colors'
 import { useGetThreads } from '@hooks/thread/useGetThreads'
 
 const HomeThreads: FunctionComponent = () => {
-  const { data: threads, isLoading, isSuccess } = useGetThreads(12)
+  const { data: threads, isLoading, isSuccess } = useGetThreads(8)
 
   return (
     <Box width={"90%"} m={"4rem auto"}>
@@ -20,21 +20,28 @@ const HomeThreads: FunctionComponent = () => {
       </Heading>
       {threads && isSuccess && (
         <>
-          <SimpleGrid minChildWidth="300px" spacing={5}>
-            {threads?.map((thread: any, index: number) => (
-              <Card
-                key={index}
-                authorAvatar={thread?.author?.avatar}
-                authorName={thread?.author?.fullname}
-                userName={thread?.author?.username}
-                date={thread?.created_at?.human_short}
-                title={thread?.title}
-                description={thread?.content}
-                CTA={`/threads/${thread?.slug}/${thread?.id}`}
-                CTAText='open thread'
-              />
+          <Grid
+            templateColumns={{ base: "1fr", md: "repeat(2, 1fr)", lg: "repeat(4, 1fr)" }}
+            gap={{ base: "10px", md: "15px", lg: "20px" }}
+            px={{ base: "6px", md: "10px", lg: "15px" }}
+            py="40px"
+          >
+            {threads?.map((thread: any, index: any) => (
+              <GridItem key={index} w="100%" h="100%">
+                <Card
+                  key={index}
+                  authorAvatar={thread?.author?.avatar}
+                  authorName={thread?.author?.fullname}
+                  userName={thread?.author?.username}
+                  date={thread?.created_at?.human_short}
+                  title={thread?.title}
+                  description={thread?.content}
+                  CTA={`/threads/${thread?.slug}/${thread?.id}`}
+                  CTAText='open thread'
+                />
+              </GridItem>
             ))}
-          </SimpleGrid>
+          </Grid>
 
           <Box my={"3.5rem"} textAlign={"center"}>
             <Link to="/threads">

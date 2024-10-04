@@ -14,7 +14,6 @@ import {
 } from '@chakra-ui/react'
 import { Formik, Field } from 'formik'
 import { FaCamera } from 'react-icons/fa6'
-import { Helmet } from 'react-helmet-async'
 
 import { Button, Input, TextArea } from '@components/index'
 import { colors } from '../../../../colors'
@@ -82,10 +81,6 @@ const UpdateProfile: FunctionComponent = () => {
 
   return (
     <>
-     <Helmet>
-        <title>{user?.data?.fullname} - settings | learn-hub</title>
-      </Helmet>
-
     <Card>
       <CardBody position="relative">
         <Box textAlign="center" mb={12}>
