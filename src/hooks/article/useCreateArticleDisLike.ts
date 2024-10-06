@@ -9,17 +9,11 @@ export const useCreateArticleDisLike = () => {
   const createArticleDisLikeMutation = useMutation({
     mutationFn: createArticleDisLike,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['articles']
-      });
+      queryClient.invalidateQueries({ queryKey: ['articles'] });
 
-      queryClient.invalidateQueries({
-        queryKey: ['article']
-      });
+      queryClient.invalidateQueries({ queryKey: ['article'] });
 
-      queryClient.invalidateQueries({
-        queryKey: ['public-author-article']
-      });
+      queryClient.invalidateQueries({ queryKey: ['public-author-article'] });
     },
     onError: (error: any) => {
       errorNotification(error?.response?.data?.message)

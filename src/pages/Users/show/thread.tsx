@@ -15,7 +15,7 @@ const PublicUserThreads: FunctionComponent = () => {
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage
-  } = useGetPublicAuthoredThreads(20, username!);
+  } = useGetPublicAuthoredThreads(25, username!);
 
   return (
     <>

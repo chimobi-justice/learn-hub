@@ -11,17 +11,11 @@ export const useDeleteSaveArticle = () => {
     onSuccess: (data) => {
       successNotification(data?.message)
 
-      queryClient.invalidateQueries({
-        queryKey: ['articles']
-      });
+      queryClient.invalidateQueries({ queryKey: ['articles'] });
 
-      queryClient.invalidateQueries({
-        queryKey: ['saved-articles']
-      });
+      queryClient.invalidateQueries({ queryKey: ['saved-articles'] });
 
-      queryClient.invalidateQueries({
-        queryKey: ['recommented-articles']
-      });
+      queryClient.invalidateQueries({ queryKey: ['recommented-articles'] });
     },
     onError: (error: any) => {
       errorNotification(error?.response?.data?.message)

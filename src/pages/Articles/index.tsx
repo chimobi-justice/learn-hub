@@ -18,6 +18,8 @@ import { useDeleteArticle } from '@hooks/article/useDeleteArticle'
 import { useGetPinnedArticles } from '@hooks/article/useGetPinnedArticles'
 import { useCreateSaveArticle } from '@hooks/article/useCreateSaveArticles'
 import { useDeleteSaveArticle } from '@hooks/article/useDeleteSavaArticles'
+import { useCreateFollowUser } from '@hooks/user/useCreateFollowUser'
+import { useCreateOnFollowUser } from '@hooks/user/useCreateUnFollowUser'
 
 const Articles: FunctionComponent = () => {
   const { user } = useUser();
@@ -28,11 +30,13 @@ const Articles: FunctionComponent = () => {
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage
-  } = useGetPaginatedArticles(10)
+  } = useGetPaginatedArticles(25)
   const { deleteArticleMutation } = useDeleteArticle()
   const { data: pinArticles } = useGetPinnedArticles();
   const { createSaveArticleMutation } = useCreateSaveArticle();
-  const { deleteSaveArticleMutation } = useDeleteSaveArticle()
+  const { deleteSaveArticleMutation } = useDeleteSaveArticle();
+  const { createFollowUserMutation } = useCreateFollowUser()
+  const { createOnFollowUserMutation } = useCreateOnFollowUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [deleteArticleId, setDeleteArticleId] = useState(null);
 
@@ -49,19 +53,19 @@ const Articles: FunctionComponent = () => {
 
   const handleSaveUnsavedArticle = (articleId: string, is_saved: boolean) => {
     if (is_saved) {
-      unsaveArticle(articleId);
+      deleteSaveArticleMutation.mutate(articleId);
     } else {
-      saveArticle(articleId);
+      createSaveArticleMutation.mutate(articleId);
     }
   }
 
-  const saveArticle = (articleId: string) => {
-    createSaveArticleMutation.mutate(articleId);
-  };
-
-  const unsaveArticle = (articleId: string) => {
-    deleteSaveArticleMutation.mutate(articleId);
-  };
+  const handleFollowUnfollow = (userId: string, following: boolean) =>  {
+    if (following) {
+      createOnFollowUserMutation.mutate(userId)
+    } else {
+      createFollowUserMutation.mutate(userId)
+    }
+  }
 
   return (
     <>
@@ -148,6 +152,8 @@ const Articles: FunctionComponent = () => {
                     onDelete={() => handleDelete(article?.id)}
                     isLoggedIn={!!user}
                     is_saved={article?.is_saved}
+                    is_following={article?.author?.is_following}
+                    followUser={() => handleFollowUnfollow(article?.author?.id, article?.author?.is_following)}
                     saveUnsavedArticle={() => handleSaveUnsavedArticle(article?.id, article?.is_saved)}
                   />
                 ))}

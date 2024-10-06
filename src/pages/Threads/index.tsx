@@ -27,7 +27,7 @@ const Threads: FunctionComponent = () => {
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage
-  } = useGetPaginatedThreads(10)
+  } = useGetPaginatedThreads(25)
 
   return (
     <>
@@ -40,7 +40,7 @@ const Threads: FunctionComponent = () => {
         width={"90%"}
         m={"4rem auto"}
       >
-        <Heading pb={"25px"} size={"lg"}>Forum</Heading>
+        <Heading pb={"25px"} size={"md"}>Discussions</Heading>
 
         {user && (
           <Box mb={"15px"}>
@@ -131,7 +131,7 @@ const Threads: FunctionComponent = () => {
             <RecommendTopicCard />
           </Box> */}
 
-            <Box>
+            <Box mt={"15px"}>
               <FollowCard />
             </Box>
           </Box>

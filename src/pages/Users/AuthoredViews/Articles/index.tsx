@@ -23,7 +23,7 @@ const ArthoredArticles: FunctionComponent = () => {
     fetchNextPage,
     isFetchingNextPage,
     dataStatus
-  } = useGetAuthoredArticles(10, username!)
+  } = useGetAuthoredArticles(25, username!)
   const { deleteArticleMutation } = useDeleteArticle()
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [deletingArticleId, setDeletingArticleId] = useState(null);

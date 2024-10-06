@@ -1,5 +1,5 @@
 export interface IUserProps {
-  id: string | number;
+  id: string;
   fullname: string;
   username: string;
   email: string;
@@ -11,6 +11,9 @@ export interface IUserProps {
   state: string;
   country: string;
   bio: string;
+  followers?: number;
+  followings?: number;
+  is_following?: boolean;
 }
 
 export interface IUser {

@@ -11,9 +11,7 @@ export const useCreateArticle = () => {
     onSuccess: (data) => {
       successNotification(data.message);
 
-      queryClient.invalidateQueries({
-        queryKey: ['articles']
-      })
+      queryClient.invalidateQueries({ queryKey: ['articles']})
     },
     onError: (error: any) => {
       errorNotification(error?.response?.data?.message)
