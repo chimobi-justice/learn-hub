@@ -34,6 +34,8 @@ interface IProps {
   id?: any;
   isLoggedIn?: any;
   is_saved?: boolean;
+  is_following?: boolean;
+  followUser?: () => void;
   saveUnsavedArticle?: () => void;
 }
 
@@ -51,6 +53,8 @@ const ArticlesCard: FunctionComponent<IProps> = ({
   id,
   isLoggedIn,
   is_saved,
+  is_following,
+  followUser,
   saveUnsavedArticle
 }) => {
   return (
@@ -146,7 +150,15 @@ const ArticlesCard: FunctionComponent<IProps> = ({
                     )}
 
                     {!isOwner && isLoggedIn && (
-                      <Text fontSize={"14px"} color={"blue"} cursor={"pointer"} _hover={{ textDecoration: "underline" }}>follow</Text>
+                      <Text
+                        fontSize={"14px"}
+                        color={"blue"}
+                        cursor={"pointer"}
+                        _hover={{ textDecoration: "underline" }}
+                        onClick={followUser}
+                      >
+                        {is_following ? "following" : "follow"}
+                      </Text>
                     )}
 
                   </Box>

@@ -1,6 +1,10 @@
 import { axiosInstance } from '@api/axiosInstance'
 import { 
   DELETE_ACCOUNT_ENDPOINT, 
+  FOLLOW_USERS_ENDPOINT, 
+  GET_ALL_USERS_ENDPOINT, 
+  GET_THREE_USERS_ENDPOINT, 
+  ONFOLLOW_USERS_ENDPOINT, 
   PUBLIC_USER_ENDPOINT, 
   UPDATE_PASSWORD_ENDPOINT, 
   UPDATE_PROFILE_ENDPOINT, 
@@ -42,5 +46,26 @@ export const deleteAccount = async () => {
 
 export const getPublicUser = async (username: string): Promise<IUser> => {
   const response = await axiosInstance.get<IUser>(`${PUBLIC_USER_ENDPOINT}/${username}`);
+  return response.data;
+}
+
+export const getThreeUsersOnCard = async () => {
+  const response = await axiosInstance.get(GET_THREE_USERS_ENDPOINT);
+  return response.data.data;
+}
+
+export const getAllFollowUsers = async (limit: number, page: number) => {
+  const response = await axiosInstance.get(`${GET_ALL_USERS_ENDPOINT}?limit=${limit}&page=${page}`);
+  const dataResponse = await response.data;
+  return {...dataResponse, prevOffset: page}
+}
+
+export const createFollowUser = async (id: string) => {
+  const response = await axiosInstance.post(`${FOLLOW_USERS_ENDPOINT}/${id}/follow`);
+  return response.data;
+}
+
+export const createOnFollowUser = async (id: string) => {
+  const response = await axiosInstance.post(`${ONFOLLOW_USERS_ENDPOINT}/${id}/unfollow`);
   return response.data;
 }

@@ -9,17 +9,11 @@ export const useCreateThreadDisLike = () => {
   const createThreadDisLikeMutation = useMutation({
     mutationFn: createThreadDisLike,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['threads']
-      });
+      queryClient.invalidateQueries({ queryKey: ['threads'] });
 
-      queryClient.invalidateQueries({
-        queryKey: ['thread']
-      });
+      queryClient.invalidateQueries({ queryKey: ['thread'] });
 
-      queryClient.invalidateQueries({
-        queryKey: ['public-author-threads']
-      });
+      queryClient.invalidateQueries({ queryKey: ['public-author-threads'] });
     },
     onError: (error: any) => {
       errorNotification(error?.response?.data?.message)

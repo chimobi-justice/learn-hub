@@ -44,10 +44,6 @@ const NavBarSm: FunctionComponent = () => {
   const { user } = useUser();
   const { signOutMutation } = useSignOut()
 
-  const handleLoggedOut = () => {
-    signOutMutation.mutate();
-  };
-
   const handleDrawerBox = () => {
     setOpen((prevState) => !prevState);
   }
@@ -225,7 +221,7 @@ const NavBarSm: FunctionComponent = () => {
                               </MenuItem>
                             </Link>
                             <MenuDivider />
-                            <MenuItem color={"black"} onClick={handleLoggedOut}>
+                            <MenuItem color={"black"} onClick={() => signOutMutation.mutate()}>
                               <FaRegUser style={{ marginRight: "4px" }} />  Logout
                             </MenuItem>
                           </MenuList>

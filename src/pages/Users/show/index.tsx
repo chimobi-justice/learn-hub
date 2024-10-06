@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import {
   Avatar,
   Box,
@@ -19,21 +19,35 @@ import PublicUserArticles from '@pages/Users/show/articles'
 import PublicUserThreads from '@pages/Users/show/thread'
 import { useGetPublicUser } from '@hooks/user/useGetPublicUser'
 import PublicUserAboutDetails from '@pages/Users/show/about'
-import { NotFound, Skeleton } from '@components/index'
+import { Button, FollowCard, NotFound, Skeleton } from '@components/index'
 import { Helmet } from 'react-helmet-async'
-// import FollowCard from '@components/FollowCard'
+import { useCreateFollowUser } from '@hooks/user/useCreateFollowUser'
+import { useCreateOnFollowUser } from '@hooks/user/useCreateUnFollowUser'
+import { useUser } from '@context/userContext'
 
 const ShowUserPublicPosts: FunctionComponent = () => {
   const { username } = useParams();
 
+  const { user } = useUser()
   const { data, isLoading } = useGetPublicUser(username!)
+  const { createFollowUserMutation } = useCreateFollowUser()
+  const { createOnFollowUserMutation } = useCreateOnFollowUser();
 
+  const handleFollowUnfollow = (userId: string, is_following: boolean|undefined) => {
+    if (is_following) {
+      createOnFollowUserMutation.mutate(userId)
+    } else {
+      createFollowUserMutation.mutate(userId)
+    }
+  }
 
   if (isLoading) return <Skeleton />
 
   if (!data) return <NotFound />;
 
   const userData = data?.data;
+
+  const isOwner = user?.data?.username === userData?.username;
 
   return (
     <>
@@ -90,25 +104,46 @@ const ShowUserPublicPosts: FunctionComponent = () => {
               />
 
               <Text my={"15px"} fontWeight={"bold"}>{userData?.fullname}</Text>
-              {/* <Text my={"10px"}>0 Follower</Text> */}
+              <Text my={"10px"} fontSize={"14px"}>
+                {userData?.followers} {userData?.followers === 1 ? 'Follower' : 'Followers'}
+              </Text>
+
 
               <Text fontSize={"14px"} color={"#0009"} lineHeight={"1.6em"}>{userData?.profile_headlines}</Text>
             </Box>
 
-            {/* <Box mt={"25px"}>
-            <Button
-              size="md"
-              rounded="lg"
-              type="button"
-              variant="solid"
-            >
-              follow
-            </Button>
-          </Box> */}
+            {!isOwner && (
+              <Box mt={"25px"}>
+                {user && (
+                  <Button
+                    size="sm"
+                    rounded="md"
+                    type="button"
+                    variant={userData?.is_following ? "solid" : "outline"}
+                    onClick={() => handleFollowUnfollow(userData?.id, userData?.is_following)}
+                  >
+                    {userData?.is_following ? "following" : "follow"}
+                  </Button>
+                )}
 
-            {/* <Box mt={"20px"}>
-            <FollowCard />
-          </Box> */}
+                {!user && (
+                  <Link to={"/auth/login"}>
+                    <Button
+                      size="sm"
+                      rounded="md"
+                      type="button"
+                      variant="outline"
+                    >
+                      follow
+                    </Button>
+                  </Link>
+                )}
+              </Box>
+            )}
+
+            <Box mt={"20px"}>
+              <FollowCard />
+            </Box>
           </Box>
         </Box>
       </Container>

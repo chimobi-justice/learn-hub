@@ -24,7 +24,7 @@ const ShowThread: FunctionComponent = () => {
 
   const { data, isLoading, isSuccess, error } = useGetSingleThread(id!);
 
-  const truncateLenght = useBreakpointValue({base: 45, md: 30, lg: 75});
+  const truncateLenght = useBreakpointValue({base: 45, md: 30, lg: 70});
 
   if (error) return <NotFound />;
 
@@ -47,7 +47,7 @@ const ShowThread: FunctionComponent = () => {
               size={"md"}
               alignItems={"center"}
             >
-              <Text as={"span"} color={"#0009"}><Link to="/threads">Forum</Link></Text>
+              <Text as={"span"} color={"#0009"}><Link to="/threads">Discussions</Link></Text>
               {" > "}
               <Text as={"span"}>{truncate(data?.data?.title, truncateLenght)}</Text>
             </Heading>
@@ -90,7 +90,7 @@ const ShowThread: FunctionComponent = () => {
                 <RecommendTopicCard />
               </Box> */}
 
-                <Box>
+                <Box mt={"15px"}>
                   <FollowCard />
                 </Box>
               </Box>

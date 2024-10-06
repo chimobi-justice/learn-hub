@@ -29,6 +29,8 @@ const ProfileEdit = lazy(() => import('@pages/Users/Settings'));
 const ShowUserPublicPosts = lazy(() => import('@pages/Users/show'));
 const Search = lazy(() => import('@pages/Search'));
 
+const FollowPeople = lazy(() => import('@pages/FollowPeople'))
+
 const Login = lazy(() => import('@pages/Auth/Login'));
 const Register = lazy(() => import('@pages/Auth/Register'));
 
@@ -38,6 +40,8 @@ const routes = createBrowserRouter(
       <Route index path='/' element={<Home />} />
 
       <Route path="/search" element={<Search />} />
+
+      <Route path="/follow/people/suggestions" element={<FollowPeople />} />
 
       <Route index path='/threads' element={<Threads />} />
       <Route index path='/threads/:slug/:id' element={<ShowThread />} />

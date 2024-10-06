@@ -78,7 +78,7 @@ const Profile: FunctionComponent = () => {
                   <Heading as={"h6"} size={"md"}>{user?.data?.fullname}</Heading>
                   <Text fontSize={"17px"} my={"7px"} lineHeight={"1.7em"}>{user?.data?.profile_headlines}</Text>
                   <Text fontSize={"14px"} my={"7px"}>{user?.data?.state}, {user?.data?.country}</Text>
-                  <Text fontSize={"14px"}>0 followers - 0 following</Text>
+                  <Text fontSize={"14px"}>{user?.data?.followers} followers - {user?.data?.followings} following</Text>
 
                   <HStack
                     spacing={3}

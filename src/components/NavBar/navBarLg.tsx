@@ -30,11 +30,7 @@ import { useSignOut } from '@hooks/auth/useSignOut'
 
 const NavBarLg: FunctionComponent = () => {
   const { user } = useUser();
-  const { signOutMutation } = useSignOut()
-
-  const handleLoggedOut = () => {
-    signOutMutation.mutate();
-  };
+  const { signOutMutation } = useSignOut();
 
   return (
     <Box
@@ -112,39 +108,39 @@ const NavBarLg: FunctionComponent = () => {
                               >
                                 {user?.data?.fullname}
                               </Text>
-                            </Box>
+                            </Box>  
                           </Box>
                           {isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
                         </Box>
                       </MenuButton>
                       <MenuList>
-                        <Link to={`/${user?.data?.username}`}>
-                          <MenuItem color={"blcack"}>
+                        <Link to={`/${user?.data?.username}`} style={{display: "block"}}>
+                          <MenuItem color={"black"}>
                             <GoPerson style={{ marginRight: "4px" }} /> Your Profile
                           </MenuItem>
                         </Link>
-                        <Link to={`/me/articles/${user?.data?.username}`}>
+                        <Link to={`/me/articles/${user?.data?.username}`} style={{display: "block"}}>
                           <MenuItem color={"black"}>
                             <RiArticleFill style={{ marginRight: "4px" }} /> Your Articles
                           </MenuItem>
                         </Link>
-                        <Link to={`/me/threads/${user?.data?.username}`}>
+                        <Link to={`/me/threads/${user?.data?.username}`} style={{display: "block"}}>
                           <MenuItem color={"black"}>
                             <RiChatThreadLine style={{ marginRight: "4px" }} /> Your Threads
                           </MenuItem>
                         </Link>
-                        <Link to={`/${user?.data?.username}/reading-list`}>
+                        <Link to={`/${user?.data?.username}/reading-list`} style={{display: "block"}}>
                           <MenuItem color={"black"}>
                             <CiViewList style={{ marginRight: "4px" }} /> Reading List
                           </MenuItem>
                         </Link>
-                        <Link to="/me/settings/account/edit">
+                        <Link to="/me/settings/account/edit" style={{display: "block"}}>
                           <MenuItem color={"black"}>
                             <IoSettingsOutline style={{ marginRight: "4px" }} /> Settings
                           </MenuItem>
                         </Link>
                         <MenuDivider />
-                        <MenuItem color={"black"} onClick={handleLoggedOut}>
+                        <MenuItem color={"black"} onClick={() => signOutMutation.mutate()}>
                           <FaRegUser style={{ marginRight: "4px" }} /> Logout
                         </MenuItem>
                       </MenuList>

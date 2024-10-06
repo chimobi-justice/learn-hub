@@ -31,7 +31,7 @@ const ArthoredThreads: FunctionComponent = () => {
     fetchNextPage,
     isFetchingNextPage,
     dataStatus
-  } = useGetAuthoredThreads(10, username!)
+  } = useGetAuthoredThreads(25, username!)
   const { deleteThreadMutation } = useDeleteThread();
 
   const { isOpen, onOpen, onClose } = useDisclosure();

@@ -11,9 +11,7 @@ export const useCreateThread = () => {
     onSuccess: (data) => {
       successNotification(data.message);
 
-      queryClient.invalidateQueries({
-        queryKey: ['threads']
-      })
+      queryClient.invalidateQueries({ queryKey: ['threads'] })
     },
     onError: (error: any) => {
       errorNotification(error?.response?.data?.message)
