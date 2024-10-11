@@ -127,11 +127,11 @@ const Articles: FunctionComponent = () => {
           display={"flex"}
           alignItems={"flex-start"}
           justifyContent={"space-between"}
-          flexDir={{ base: "column", md: "row" }}
+          flexDir={{ base: "column", lg: "row" }}
           gap={5}
           my={"3rem"}
         >
-          <Box width={{ base: "100%", md: "70%" }}>
+          <Box width={{ base: "100%", lg: "70%" }}>
             {isLoading && <Skeleton />}
 
             {articles && isSuccess && articles?.map((page: any, pageIndex: number) => (
@@ -181,7 +181,7 @@ const Articles: FunctionComponent = () => {
             )}
           </Box>
 
-          <Box width={{ base: "100%", md: "30%" }}>
+          <Box width={{ base: "100%", lg: "30%" }}>
             {/* <Box>
             <RecommendTopicCard />
           </Box> */}

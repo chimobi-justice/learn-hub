@@ -13,11 +13,7 @@ import { colors } from '../../colors'
 
 const Search: FunctionComponent = () => {
   const [searchQuery, setSearchQuery] = useState<string>('')
-  const [searchArr, setSearchArr] = useState<any>({
-    users: [],
-    articles: [],
-    threads: []
-  });
+  const [searchArr, setSearchArr] = useState<any>({ users: [], articles: [], threads: [] });
   const [value] = useDebounce(searchQuery, 1000);
 
   const {
@@ -49,11 +45,7 @@ const Search: FunctionComponent = () => {
     setSearchQuery(value);
     if (value?.length === 0) {
       // Clear the search results if input is cleared
-      setSearchArr({
-        users: [],
-        articles: [],
-        threads: []
-      });
+      setSearchArr({ users: [], articles: [], threads: [] });
     }
   }
 
@@ -67,11 +59,7 @@ const Search: FunctionComponent = () => {
       });
     } else {
       // Clear the search results when the search term is empty
-      setSearchArr({
-        users: [],
-        articles: [],
-        threads: [],
-      });
+      setSearchArr({ users: [], articles: [], threads: [] });
     }
   }, [usersData, articlesData, threadsData, value]);
 
@@ -96,7 +84,8 @@ const Search: FunctionComponent = () => {
           </InputGroup>
 
           <Box mt={"10px"}>
-            {searchQuery?.length === 0 && (
+            {searchQuery?.length === 0 ? (
+              // Show "Waiting for search" when input is empty
               <Box
                 mt="20px"
                 textAlign="center"
@@ -105,9 +94,9 @@ const Search: FunctionComponent = () => {
                 justifyContent="center"
                 alignItems="center"
                 height="100%"
-                py="20px">
+                py="20px"
+              >
                 <Text pb={"10px"}>Waiting for search.</Text>
-
                 <Image
                   src={SearchImg}
                   width={"200px"}
@@ -115,6 +104,46 @@ const Search: FunctionComponent = () => {
                   bg={"#fafafa"}
                 />
               </Box>
+            ) : (
+              // Show loading spinner or search results
+              <>
+                {(isLoadingUser || isLoadingArticles || isLoadingThreads) ? (
+                  <Box
+                    textAlign={"center"}
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    height={"300px"}
+                  >
+                    <Spinner size={"xl"} thickness='4px' color={colors.primary} />
+                  </Box>
+                ) : (
+                  // Show "Nothing found" when no results are found
+                  searchArr?.users?.length === 0 &&
+                  searchArr?.articles?.length === 0 &&
+                  searchArr?.threads?.length === 0 && (
+                    <Box
+                      mt="20px"
+                      textAlign="center"
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="center"
+                      alignItems="center"
+                      height="100%"
+                      py="20px">
+                      <Text pb={"10px"}>Nothing found with that search.</Text>
+
+                      <Image
+                        src={SearchImg}
+                        width={"200px"}
+                        height={"200px"}
+                        bg={"#fafafa"}
+                      />
+                    </Box>
+                  )
+                )}
+              </>
             )}
 
             {isLoadingUser && isLoadingArticles && isLoadingThreads && (

@@ -37,7 +37,7 @@ const Following: FunctionComponent<FollowingProps> = ({ setTabIndex }) => {
     }
   }
 
-  const handleFollowUnfollow = (userId: string, following: boolean) =>  {
+  const handleFollowUnfollow = (userId: string, following: boolean) => {
     if (following) {
       createOnFollowUserMutation.mutate(userId)
     } else {
@@ -66,9 +66,9 @@ const Following: FunctionComponent<FollowingProps> = ({ setTabIndex }) => {
               authorUsername={article?.author?.username}
               isLoggedIn={!!user}
               is_saved={article?.is_saved}
-              is_following={article?.author?.is_following}
-            followUser={() => handleFollowUnfollow(article?.author?.id, article?.author?.is_following)}
-            saveUnsavedArticle={() => handleSaveUnsavedArticle(article?.id, article?.is_saved)}
+              is_following={article?.is_following}
+              followUser={() => handleFollowUnfollow(article?.author?.id, article?.is_following)}
+              saveUnsavedArticle={() => handleSaveUnsavedArticle(article?.id, article?.is_saved)}
             />
           ))}
 

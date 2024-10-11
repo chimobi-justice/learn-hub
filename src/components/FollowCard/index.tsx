@@ -26,7 +26,7 @@ const FollowCard: FunctionComponent = () => {
   const { createFollowUserMutation } = useCreateFollowUser()
   const { createOnFollowUserMutation } = useCreateOnFollowUser();
 
-  const handleFollowUnfollow = (userId: string, following: boolean) =>  {
+  const handleFollowUnfollow = (userId: string, following: boolean) => {
     if (following) {
       createOnFollowUserMutation.mutate(userId)
     } else {
@@ -36,72 +36,84 @@ const FollowCard: FunctionComponent = () => {
 
   return (
     <Card>
-      <CardHeader pb={"4px"}>
-        <Heading size={"sm"}>People to follow</Heading>
-      </CardHeader>
+      {isLoading && (
+        <Box
+          textAlign={"center"}
+          height={"200px"}
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Spinner size={"xl"} thickness={"4px"} color={colors.primary} />
+        </Box>
+      )}
 
-      <CardBody>
-        {isLoading && (
-          <Box textAlign={"center"}>
-            <Spinner size={"xl"} thickness={"4px"} color={colors.primary} />
-          </Box>
-        )}
-        {people && people?.map((person: any, index: number) => (
-          <Flex key={index} mb={"8px"}>
-            <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
-              <Link to={`/user/${person?.username}`}>
-                <Avatar size={"sm"} name={person?.fullname} src={person?.avatar} />
-              </Link>
+      {people && (
+        <>
+          <CardHeader pb={"4px"}>
+            <Heading size={"sm"}>People to follow</Heading>
+          </CardHeader>
 
-              <Box>
-                <Link to={`/user/${person?.username}`}>
-                  <Heading size="xs">{person?.fullname}</Heading>
-                </Link>
-                <Text fontSize={"13px"} color={"#0009"}>{truncate(person?.bio, 25)}</Text>
-              </Box>
-            </Flex>
+          <CardBody>
+            {people?.map((person: any, index: number) => (
+              <Flex key={index} mb={"8px"}>
+                <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
+                  <Link to={`/user/${person?.username}`}>
+                    <Avatar size={"sm"} name={person?.fullname} src={person?.avatar} />
+                  </Link>
 
-            {user && (
-              <Button
-                size="sm"
-                rounded="lg"
-                type="button"
-                variant={person?.is_following ? "solid" : "outline"}
-                onClick={() => handleFollowUnfollow(person?.id, person?.is_following)}
+                  <Box>
+                    <Link to={`/user/${person?.username}`}>
+                      <Heading size="xs">{person?.fullname}</Heading>
+                    </Link>
+                    <Text fontSize={"13px"} color={"#0009"}>{truncate(person?.bio, 25)}</Text>
+                  </Box>
+                </Flex>
+
+                {user && (
+                  <Button
+                    size="sm"
+                    rounded="lg"
+                    type="button"
+                    variant={person?.is_following ? "solid" : "outline"}
+                    onClick={() => handleFollowUnfollow(person?.id, person?.is_following)}
+                  >
+                    {person?.is_following ? "following" : "follow"}
+                  </Button>
+                )}
+
+                {!user && (
+                  <Link to={"/auth/login"}>
+                    <Button
+                      size="sm"
+                      rounded="lg"
+                      type="button"
+                      variant="outline"
+                    >
+                      follow
+                    </Button>
+                  </Link>
+                )}
+              </Flex>
+            ))}
+
+            <Link to="/follow/people/suggestions">
+              <Text
+                fontSize={"13px"}
+                color={colors.primary}
+                mt={"20px"}
+                _hover={{
+                  color: "#101828",
+                  textDecoration: "underline"
+                }}
               >
-                {person?.is_following ? "following" : "follow"}
-              </Button>
-            )}
-
-            {!user && (
-              <Link to={"/auth/login"}>
-                <Button
-                  size="sm"
-                  rounded="lg"
-                  type="button"
-                  variant="outline"
-                >
-                  follow
-                </Button>
-              </Link>
-            )}
-          </Flex>
-        ))}
-
-        <Link to="/follow/people/suggestions">
-          <Text
-            fontSize={"13px"}
-            color={colors.primary}
-            mt={"20px"}
-            _hover={{
-              color: "#101828",
-              textDecoration: "underline"
-            }}
-          >
-            See more suggestions
-          </Text>
-        </Link>
-      </CardBody>
+                See more suggestions
+              </Text>
+            </Link>
+          </CardBody>
+        </>
+      )}
     </Card>
   )
 }

@@ -54,11 +54,11 @@ const ShowArticle: FunctionComponent = () => {
 
             <Box
               width={"100%"}
-              maxWidth={{ base: "90%", md: "80%", lg: "70%" }}
+              maxWidth={{ base: "90%", md: "90%", lg: "70%" }}
               m={"2em auto"}
               py={"30px"}
               display={"flex"}
-              flexDir={{ base: "column-reverse", md: "row" }}
+              flexDir={{ base: "column-reverse", lg: "row" }}
               gap={"10"}
             >
               <Box width={{ base: "100%", md: "20%" }} textAlign={"center"}>
@@ -70,7 +70,7 @@ const ShowArticle: FunctionComponent = () => {
                 />
               </Box>
 
-              <Box width={{ base: "100%", md: "80%" }}>
+              <Box width={{ base: "100%", md: "100%", lg: "80%" }}>
                 <Box mb={"25px"}>
                   <Image
                     src={data?.data?.thumbnail}

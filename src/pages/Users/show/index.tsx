@@ -105,7 +105,8 @@ const ShowUserPublicPosts: FunctionComponent = () => {
 
               <Text my={"15px"} fontWeight={"bold"}>{userData?.fullname}</Text>
               <Text my={"10px"} fontSize={"14px"}>
-                {userData?.followers} {userData?.followers === 1 ? 'Follower' : 'Followers'}
+                {/* // Display follower count with correct pluralization */}
+                {`${userData?.followers} ${userData?.followers! > 1 ? 'Followers' : 'Follower'}`}
               </Text>
 
 

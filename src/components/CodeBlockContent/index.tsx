@@ -42,6 +42,17 @@ const ContentBlockContent: FunctionComponent<ContentBlockContentProps> = ({ cont
         'a': {
           color: 'blue',
           textDecoration: 'underline'
+        },
+        'img': {
+          display: 'block',
+          width: '50%',
+          maxWidth: '100%',
+          height: '350px',
+          mt: '25px',
+          borderRadius: '8px',
+          '@media (max-width: 600px)': {
+            width: '100%', 
+          }
         }
       }}
     />
