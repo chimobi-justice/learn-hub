@@ -120,6 +120,7 @@ const Search: FunctionComponent = () => {
                   </Box>
                 ) : (
                   // Show "Nothing found" when no results are found
+                  searchQuery?.length > 0 &&
                   searchArr?.users?.length === 0 &&
                   searchArr?.articles?.length === 0 &&
                   searchArr?.threads?.length === 0 && (
@@ -144,19 +145,6 @@ const Search: FunctionComponent = () => {
                   )
                 )}
               </>
-            )}
-
-            {isLoadingUser && isLoadingArticles && isLoadingThreads && (
-              <Box
-                textAlign={"center"}
-                display="flex"
-                flexDirection="column"
-                justifyContent="center"
-                alignItems="center"
-                height={"300px"}
-              >
-                <Spinner size={"xl"} thickness='4px' color={colors.primary} />
-              </Box>
             )}
 
             <SearchUsers
