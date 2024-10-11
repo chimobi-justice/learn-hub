@@ -16,8 +16,10 @@ import EmptyState from '@components/EmptyState'
 import Editor from '@components/Editor'
 import ContentBlockContent from '@components/CodeBlockContent'
 import ThreadCard from '@components/ThreadCard'
-import Popover from '@components/Popover'
 import Loading from '@components/Loading'
+import LoginForm from '@components/LoginForm'
+import RegisterForm from '@components/RegisterForm'
+import ShowLoginModal from '@components/ShowLoginModal'
 
 export {
   Alert,
@@ -38,6 +40,8 @@ export {
   Editor,
   ContentBlockContent,
   ThreadCard,
-  Popover,
   Loading,
+  LoginForm,
+  RegisterForm,
+  ShowLoginModal,
 }

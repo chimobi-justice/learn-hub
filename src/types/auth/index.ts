@@ -1,3 +1,12 @@
+import { FormEvent } from 'react'
+
+export interface AuthFormProps {
+  errors: any;
+  touched: any; 
+  isSubmitting: boolean;
+  handleSubmit: (event: FormEvent<HTMLFormElement>) => void; 
+}
+
 export interface AuthFields {
   email: string;
   password: string;

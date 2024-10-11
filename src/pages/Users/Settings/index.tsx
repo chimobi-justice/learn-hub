@@ -25,19 +25,8 @@ const ProfileEdit: FunctionComponent = () => {
       m={"3rem auto"}
       width={"90%"}
     >
-      <Text 
-        mb={"5px"} 
-        fontSize={"18px"} 
-        cursor={"pointer"}
-        _hover={{textDecoration: "underline"}}
-      >
-        <Link to={`/${user?.data?.username}`}>
-          Back
-        </Link>
-      </Text>
-
       <Heading as="h4" size="lg" py={"10px"}>
-        <Text color={"gray.400"} as={"span"}>profile</Text> \ <Text as={"span"}>Settings</Text>
+        <Text color={"gray.400"} as={"span"}><Link to={`/${user?.data?.username}`}>profile</Link></Text> \ <Text as={"span"}>Settings</Text>
       </Heading>
 
       <Box

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { Avatar, Box, Container, Flex, Heading, Text } from '@chakra-ui/react'
 import { Helmet } from 'react-helmet-async'
 
-import { ArticlesCard } from '@components/index'
+import { ArticlesCard, Skeleton } from '@components/index'
 import { useUser } from '@context/userContext'
 import { useSavedArticles } from '@hooks/article/useGetSavedArticles'
 import { colors } from '../../../colors'
@@ -10,7 +10,7 @@ import { useDeleteSaveArticle } from '@hooks/article/useDeleteSavaArticles'
 
 const SavedArticles = () => {
   const { user } = useUser();
-  const { data: savedArticles } = useSavedArticles();
+  const { data: savedArticles, isLoading } = useSavedArticles();
   const { deleteSaveArticleMutation} = useDeleteSaveArticle()
 
   const handleUnSaveArticle = (articleId: string) => {
@@ -45,6 +45,8 @@ const SavedArticles = () => {
           </Box>
 
           <Box>
+            {isLoading && <Skeleton />}
+
             {savedArticles && savedArticles?.map((article: any, index: number) => (
               <ArticlesCard
                 key={index}
@@ -86,10 +88,7 @@ const SavedArticles = () => {
             />
 
             <Text my={"15px"} fontWeight={"bold"}>{user?.data?.fullname}</Text>
-            {/* <Text my={"10px"}>0 Follower</Text> */}
-
             <Text fontSize={"14px"} color={"#0009"} lineHeight={"1.6em"}>{user?.data?.bio}</Text>
-
             <Text
               color={colors.primary}
               fontSize={"15px"}

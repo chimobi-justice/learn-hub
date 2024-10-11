@@ -9,7 +9,6 @@ import {
   DeleteConfirmation,
   ThreadCommentForm
 } from '@components/ThreadCard/components'
-import { errorNotification } from '@helpers/notification'
 import { useUser } from '@context/userContext'
 import { useCreateThreadComment } from '@hooks/thread/useCreateThreadComment'
 import { useCreateThreadLike } from '@hooks/thread/useCreateThreadLike'
@@ -44,11 +43,6 @@ const ThreadCard: FunctionComponent<ThreadCardProps> = ({ thread, isSingleView =
 
   const handleCommentSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!comment) {
-      errorNotification('The comment field is Required*');
-      return;
-    }
-
     const commmentValue = { comment }
     createThreadCommentMutation.mutate({ data: commmentValue, id: thread?.id })
     setComment("");

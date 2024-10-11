@@ -3,7 +3,7 @@ import { Stack, Text, useDisclosure } from '@chakra-ui/react'
 import { MdOutlineQuickreply, MdOutlineThumbDown, MdOutlineThumbUp } from 'react-icons/md'
 
 import { useUser } from '@context/userContext'
-import { Popover } from '@components/index'
+import { ShowLoginModal } from '@components/index'
 import { ArticleActionButtonsProps } from 'src/types'
 
 const ArticleActionButtons: FunctionComponent<ArticleActionButtonsProps> = ({
@@ -13,7 +13,7 @@ const ArticleActionButtons: FunctionComponent<ArticleActionButtonsProps> = ({
   onShowComment
 }) => {
   const { user } = useUser();
-  const { onClose, onToggle, isOpen} = useDisclosure();
+  const { onClose, onOpen, isOpen} = useDisclosure();
   
   return (
     <>
@@ -78,7 +78,7 @@ const ArticleActionButtons: FunctionComponent<ArticleActionButtonsProps> = ({
               <MdOutlineThumbUp
                 size={"24px"}
                 style={{ marginBottom: "5px" }}
-                onClick={onToggle}
+                onClick={onOpen}
               />
               {article?.article_like_counts}
             </Text>
@@ -86,7 +86,7 @@ const ArticleActionButtons: FunctionComponent<ArticleActionButtonsProps> = ({
         )}
       </Stack>
     
-      <Popover
+      <ShowLoginModal
         isOpen={isOpen}
         onClose={onClose}
       />
