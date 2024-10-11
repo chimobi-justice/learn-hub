@@ -82,9 +82,9 @@ const ShowThread: FunctionComponent = () => {
               </Box>
 
               <Box width={{ base: "100%", md: "30%" }}>
-                <Box>
+                {/* <Box>
                   <DiscussionCard />
-                </Box>
+                </Box> */}
 
                 {/* <Box my={"25px"}>
                 <RecommendTopicCard />

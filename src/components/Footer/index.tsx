@@ -138,7 +138,7 @@ const Footer: FunctionComponent = () => {
         </SimpleGrid>
 
         <Box mt={"20px"} pt={"20px"} borderTop={"1px solid gray"}>
-          <Text fontSize={"13px"}>&copy; 2024 Learn Hub. All right reserved. Made in Nigeria.</Text>
+          <Text fontSize={"13px"}>&copy; 2024 Learn Hub. All right reserved. Made in 🇳🇬.</Text>
         </Box>
       </Box>
     </Box>

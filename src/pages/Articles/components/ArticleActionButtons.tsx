@@ -19,7 +19,7 @@ const ArticleActionButtons: FunctionComponent<ArticleActionButtonsProps> = ({
     <>
       <Stack
         spacing={5}
-        direction={{ base: "row", md: "column" }}
+        direction={{ base: "row", lg: "column" }}
         justifyContent={"center"}
       >
         <Text
