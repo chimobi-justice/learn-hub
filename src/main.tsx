@@ -22,11 +22,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={Theme}>
-        <HelmetProvider>
-          <UserContextProvider>
+        <UserContextProvider>
+          <HelmetProvider>
             <App />
-          </UserContextProvider>
-        </HelmetProvider>
+          </HelmetProvider>
+        </UserContextProvider>
         <ToastContainer />
       </ChakraProvider>
       <ReactQueryDevtools />

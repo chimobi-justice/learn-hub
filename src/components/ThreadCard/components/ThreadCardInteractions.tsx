@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react'
-import { HStack, Text } from '@chakra-ui/react'
+import { HStack, Text, useDisclosure } from '@chakra-ui/react'
 import { MdOutlineQuickreply, MdOutlineThumbUp, MdOutlineThumbDown } from 'react-icons/md'
+import ShowLoginModal from '@components/ShowLoginModal'
 
 interface ThreadCardInteractionsProps {
   userLikedThread: boolean;
@@ -20,67 +21,81 @@ const ThreadCardInteractions: FunctionComponent<ThreadCardInteractionsProps> = (
   handleThreadLike,
   handleThreadDisLike,
   user
-}) => (
-  <HStack borderBottom="1px solid #f1f1f1" py="10px" gap={3}>
-    {user ? (
-      <>
-        <Text fontSize="14px" display="flex" gap={1} alignItems="center">
-          <MdOutlineQuickreply
-            size="23px"
-            cursor="pointer"
-            onClick={handleShowCommentInput}
-          />
-          {threadCommentCounts}
-        </Text>
+}) => {
+  const { isOpen, onClose, onOpen } = useDisclosure();
 
-        <Text
-          fontSize={{ base: "15px", md: "18px" }}
-          display={"flex"}
-          gap={3}
-          alignItems={"center"}
-        >
-          {!userLikedThread && (
+  return (
+  <>
+    <HStack borderBottom="1px solid #f1f1f1" py="10px" gap={3}>
+      {user ? (
+        <>
+          <Text fontSize="14px" display="flex" gap={1} alignItems="center">
+            <MdOutlineQuickreply
+              size="23px"
+              cursor="pointer"
+              onClick={handleShowCommentInput}
+            />
+            {threadCommentCounts}
+          </Text>
+
+          <Text
+            fontSize={{ base: "15px", md: "18px" }}
+            display={"flex"}
+            gap={3}
+            alignItems={"center"}
+          >
+            {!userLikedThread && (
+              <MdOutlineThumbUp
+                size={"23px"}
+                cursor={"pointer"}
+                onClick={handleThreadLike}
+              />
+            )}
+
+            {userLikedThread && (
+              <MdOutlineThumbDown
+                size={"23px"}
+                cursor={"pointer"}
+                onClick={handleThreadDisLike}
+              />
+            )}
+            {threadLikeCounts}
+          </Text>
+        </>
+      ) : (
+        <>
+          <Text fontSize="14px" display="flex" gap={1} alignItems="center">
+            <MdOutlineQuickreply
+              size="23px"
+              onClick={onOpen}
+            />
+            {threadCommentCounts}
+          </Text>
+
+          <Text
+            fontSize={{ base: "15px", md: "18px" }}
+            display={"flex"}
+            gap={3}
+            alignItems={"center"}
+          >
             <MdOutlineThumbUp
-              size={"23px"}
-              cursor={"pointer"}
-              onClick={handleThreadLike}
+              size={"24px"}
+              style={{ marginBottom: "5px" }}
+              onClick={onOpen}
             />
-          )}
+            {threadLikeCounts}
+          </Text>
+        </>
+      )}
+    </HStack>
 
-          {userLikedThread && (
-            <MdOutlineThumbDown
-              size={"23px"}
-              cursor={"pointer"}
-              onClick={handleThreadDisLike}
-            />
-          )}
-          {threadLikeCounts}
-        </Text>
-      </>
-    ) : (
-      <>
-        <Text fontSize="14px" display="flex" gap={1} alignItems="center">
-          <MdOutlineQuickreply
-            size="23px"
-          />
-          {threadCommentCounts}
-        </Text>
+    <ShowLoginModal
+      isOpen={isOpen}
+      onClose={onClose}
+    />
+  </>
 
-        <Text
-          fontSize={{ base: "15px", md: "18px" }}
-          display={"flex"}
-          gap={3}
-          alignItems={"center"}
-        >
-          <MdOutlineThumbUp
-            size={"24px"}
-            style={{ marginBottom: "5px" }}
-          />
-          {threadLikeCounts}
-        </Text>
-      </>
-    )}
-  </HStack>
-);
+  )
+}
 
 export default ThreadCardInteractions;
