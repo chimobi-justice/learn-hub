@@ -14,7 +14,7 @@ import { Helmet } from 'react-helmet-async'
 
 import { colors } from '../../colors'
 import { Button, FollowCard, Skeleton, ThreadCard } from '@components/index'
-import DiscussionCard from '@pages/Threads/components/discussionCard'
+// import DiscussionCard from '@pages/Threads/components/discussionCard'
 import { useUser } from '@context/userContext'
 import { useGetPaginatedThreads } from '@hooks/thread/useGetPaginatedThreads'
 
