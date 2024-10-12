@@ -62,11 +62,14 @@ const ArthoredArticles: FunctionComponent = () => {
           <Stack
             spacing={4}
             direction={{ base: "column", md: "row" }}
+            mb={{ base: "15px", md: "0px"}}
+            width={{ base: "100%", md: "auto" }}
           >
             <Link to="/threads/new">
               <Button
                 variant="outline"
-                size="md"
+                size={{ base: "md", lg: "lg" }}
+                width={{ base: "100%", lg: "auto" }}
                 type="button"
                 fontWeight={"semibold"}
                 rounded="lg"
@@ -78,7 +81,8 @@ const ArthoredArticles: FunctionComponent = () => {
             <Link to="/articles/new">
               <Button
                 variant="solid"
-                size="md"
+                size={{ base: "md", lg: "lg" }}
+                width={{ base: "100%", lg: "auto" }}
                 type="button"
                 fontWeight={"semibold"}
                 rounded="lg"
@@ -91,7 +95,7 @@ const ArthoredArticles: FunctionComponent = () => {
 
         <Box
           display={"flex"}
-          justifyContent={"flex-start"}
+          alignItems={"flex-start"}
           flexDirection={{ base: "column", md: "row" }}
           gap={5}
         >
@@ -153,7 +157,7 @@ const ArthoredArticles: FunctionComponent = () => {
             <RecommendTopicCard />
           </Box> */}
 
-            <Box mt={"15px"}>
+            <Box>
               <FollowCard />
             </Box>
           </Box>

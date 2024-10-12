@@ -6,7 +6,7 @@ import truncate from '@helpers/truncate'
 import LoadButton from '@pages/Search/components/loadButton'
 import { ISearchArticles } from 'src/types'
 
-const SearchArticles: FunctionComponent<ISearchArticles> = ({ 
+const SearchArticles: FunctionComponent<ISearchArticles> = ({
   articles,
   hasMore,
   fetchNext,
@@ -23,20 +23,19 @@ const SearchArticles: FunctionComponent<ISearchArticles> = ({
               <CardBody p={"0px"}>
                 <Stack divider={<StackDivider />} spacing='4'>
                   {articles?.map((article: any, index: number) => (
-                    <Text
-                      key={index}
-                      fontSize={"14px"}
-                      p={"15px"}
-                      cursor={"pointer"}
-                      _hover={{
-                        bg: "#f1f1f1"
-                      }}
-                    >
-                      <Link to={article?.url} style={{ display: "block" }}>
+                    <Link to={article?.url} style={{ display: "block" }}>
+                      <Text
+                        key={index}
+                        fontSize={"14px"}
+                        p={"15px"}
+                        cursor={"pointer"}
+                        _hover={{
+                          bg: "#f1f1f1"
+                        }}
+                      >
                         {truncate(article?.title, 200)}
-
-                      </Link>
-                    </Text>
+                      </Text>
+                    </Link>
                   ))}
                 </Stack>
 

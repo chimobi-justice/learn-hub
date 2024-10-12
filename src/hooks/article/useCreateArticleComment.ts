@@ -12,7 +12,6 @@ export const useCreateArticleComment = () => {
       successNotification(data.message);
 
       queryClient.invalidateQueries({ queryKey: ['articles']});
-
       queryClient.invalidateQueries({ queryKey: ['article']});
     },
     onError: (error: any) => {

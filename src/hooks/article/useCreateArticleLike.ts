@@ -10,9 +10,7 @@ export const useCreateArticleLike = () => {
     mutationFn: createArticleLike,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['articles'] });
-
       queryClient.invalidateQueries({ queryKey: ['article'] });
-
       queryClient.invalidateQueries({ queryKey: ['public-author-article'] });
     },
     onError: (error: any) => {

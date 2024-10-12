@@ -11,10 +11,9 @@ export const useCreateSaveArticle = () => {
     onSuccess: (data) => {
       successNotification(data?.message)
 
+      queryClient.invalidateQueries({ queryKey: ['article'] });
       queryClient.invalidateQueries({ queryKey: ['articles'] });
-
       queryClient.invalidateQueries({ queryKey: ['saved-articles'] });
-
       queryClient.invalidateQueries({ queryKey: ['recommented-articles'] });
     },
     onError: (error: any) => {

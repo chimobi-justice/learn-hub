@@ -37,6 +37,7 @@ const NavBarLg: FunctionComponent = () => {
       as="nav"
       bg={colors.secondary}
       display={{ base: 'none', md: 'flex' }}
+      borderBottom={"2px solid #f1f1f1"}
     >
       <Container maxW={"container.xl"}>
         <Box
@@ -88,11 +89,11 @@ const NavBarLg: FunctionComponent = () => {
             </Link>
 
             {user ? (
-              <Box>
-                <ChakraMenu>
+              <Box display={"block"}>
+                <ChakraMenu isLazy>
                   {({ isOpen }) => (
                     <>
-                      <MenuButton as={Box} cursor="pointer">
+                      <MenuButton as={Box} cursor="pointer" display={"block"}>
                         <Box display={"flex"} alignItems={"center"} gap="20px">
                           <Box display={"flex"} alignItems={"center"} gap="12px">
                             <Avatar
@@ -108,33 +109,33 @@ const NavBarLg: FunctionComponent = () => {
                               >
                                 {user?.data?.fullname}
                               </Text>
-                            </Box>  
+                            </Box>
                           </Box>
                           {isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
                         </Box>
                       </MenuButton>
                       <MenuList>
-                        <Link to={`/${user?.data?.username}`} style={{display: "block"}}>
+                        <Link to={`/${user?.data?.username}`} style={{ display: "block" }}>
                           <MenuItem color={"black"}>
                             <GoPerson style={{ marginRight: "4px" }} /> Your Profile
                           </MenuItem>
                         </Link>
-                        <Link to={`/me/articles/${user?.data?.username}`} style={{display: "block"}}>
+                        <Link to={`/me/articles/${user?.data?.username}`} style={{ display: "block" }}>
                           <MenuItem color={"black"}>
                             <RiArticleFill style={{ marginRight: "4px" }} /> Your Articles
                           </MenuItem>
                         </Link>
-                        <Link to={`/me/threads/${user?.data?.username}`} style={{display: "block"}}>
+                        <Link to={`/me/threads/${user?.data?.username}`} style={{ display: "block" }}>
                           <MenuItem color={"black"}>
                             <RiChatThreadLine style={{ marginRight: "4px" }} /> Your Threads
                           </MenuItem>
                         </Link>
-                        <Link to={`/${user?.data?.username}/reading-list`} style={{display: "block"}}>
+                        <Link to={`/${user?.data?.username}/reading-list`} style={{ display: "block" }}>
                           <MenuItem color={"black"}>
                             <CiViewList style={{ marginRight: "4px" }} /> Reading List
                           </MenuItem>
                         </Link>
-                        <Link to="/me/settings/account/edit" style={{display: "block"}}>
+                        <Link to="/me/settings/account/edit" style={{ display: "block" }}>
                           <MenuItem color={"black"}>
                             <IoSettingsOutline style={{ marginRight: "4px" }} /> Settings
                           </MenuItem>

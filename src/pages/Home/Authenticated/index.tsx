@@ -1,14 +1,5 @@
 import { FunctionComponent, useState } from 'react'
-import {
-  Box,
-  Container,
-  Tab,
-  TabIndicator,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs
-} from '@chakra-ui/react'
+import { Box, Container, Tab, TabIndicator, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 
 import { colors } from '../../../colors'
 import { FollowCard, RecommendTopicCard } from '@components/index'

@@ -18,6 +18,8 @@ const HomeThreads: FunctionComponent = () => {
       >
         Thr<Text as="span" color={colors.primary}>ea</Text>ds
       </Heading>
+      {isLoading && <Skeleton />}
+
       {threads && isSuccess && (
         <>
           <Grid
@@ -59,9 +61,6 @@ const HomeThreads: FunctionComponent = () => {
           </Box>
         </>
       )}
-
-      {isLoading && <Skeleton />}
-
     </Box>
   )
 }

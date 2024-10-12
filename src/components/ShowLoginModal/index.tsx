@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay } from '@chakra-ui/react'
+import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay } from '@chakra-ui/react'
 import { Formik } from 'formik'
 
 import { LoginForm } from '@components/index'
@@ -32,13 +32,13 @@ const ShowLoginModal: FunctionComponent<IProps> = ({ isOpen, onClose }) => {
       />
       <ModalContent>
         <ModalBody>
-          <ModalHeader textAlign={"center"}>Sign in to paticipate</ModalHeader>
+          <ModalHeader textAlign={"center"}>Log In</ModalHeader>
+          <ModalCloseButton />
 
           <Formik
             initialValues={initialValues}
             onSubmit={handleSignin}
             validationSchema={signInValidataionSchema}
-
           >
             {({ handleSubmit, errors, touched }) => (
               <LoginForm

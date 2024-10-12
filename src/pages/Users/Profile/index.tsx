@@ -72,14 +72,19 @@ const Profile: FunctionComponent = () => {
                 alignItems={"flex-start"}
                 justifyContent={"space-between"}
                 flexDir={{ base: "column", md: "row" }}
-
               >
                 <Box>
                   <Heading as={"h6"} size={"md"}>{user?.data?.fullname}</Heading>
                   <Text fontSize={"17px"} my={"7px"} lineHeight={"1.7em"}>{user?.data?.profile_headlines}</Text>
                   <Text fontSize={"14px"} my={"7px"}>{user?.data?.state}, {user?.data?.country}</Text>
                   <Text fontSize={"14px"}>
-                    {`${user?.data?.followers} ${user?.data?.followers! > 1 ? 'Followers' : 'Follower'}`} - {user?.data?.followings} following
+                    <Text as={"span"} mr={"3px"}>
+                      {`${user?.data?.followers} ${user?.data?.followers! > 1 ? 'Followers' : 'Follower'}`}
+                    </Text>
+                    {" - "}
+                    <Text as={"span"} ml={"3px"}>
+                     {user?.data?.followings} following
+                    </Text>
                   </Text>
 
                   <HStack

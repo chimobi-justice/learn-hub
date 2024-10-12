@@ -11,17 +11,12 @@ export const useCreateFollowUser = () => {
     onSuccess: (data) => {
       successNotification(data.message);
       queryClient.invalidateQueries({ queryKey: ['follow-users'] });
-
       queryClient.invalidateQueries({ queryKey: ['limit-follow-users'] });
-
       queryClient.invalidateQueries({ queryKey: ['user'] });
-
+      queryClient.invalidateQueries({ queryKey: ['article'] });
       queryClient.invalidateQueries({ queryKey: ['articles'] });
-
       queryClient.invalidateQueries({ queryKey: ['public-author-articles'] });
-
       queryClient.invalidateQueries({ queryKey: ['recommented-articles'] });
-
       queryClient.invalidateQueries({ queryKey: ['get-followed-users-articles'] });
     },
     onError: (error: any) => {

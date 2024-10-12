@@ -11,6 +11,8 @@ export const useDeleteSaveArticle = () => {
     onSuccess: (data) => {
       successNotification(data?.message)
 
+      queryClient.invalidateQueries({ queryKey: ['article'] });
+
       queryClient.invalidateQueries({ queryKey: ['articles'] });
 
       queryClient.invalidateQueries({ queryKey: ['saved-articles'] });

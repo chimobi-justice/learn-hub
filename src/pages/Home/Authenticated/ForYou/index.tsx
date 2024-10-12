@@ -12,17 +12,10 @@ import { useCreateOnFollowUser } from '@hooks/user/useCreateUnFollowUser'
 
 const ForYou = () => {
   const { user } = useUser();
-  const {
-    articles,
-    isLoading,
-    isSuccess,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage
-  } = useGetRecommentedArticles(20)
+  const { articles, isLoading, isSuccess, hasNextPage, fetchNextPage, isFetchingNextPage } = useGetRecommentedArticles(20)
   const { deleteArticleMutation } = useDeleteArticle()
   const { createSaveArticleMutation } = useCreateSaveArticle();
-  const { deleteSaveArticleMutation} = useDeleteSaveArticle();
+  const { deleteSaveArticleMutation } = useDeleteSaveArticle();
   const { createFollowUserMutation } = useCreateFollowUser();
   const { createOnFollowUserMutation } = useCreateOnFollowUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -40,20 +33,12 @@ const ForYou = () => {
   }
 
   const handleSaveUnsavedArticle = (articleId: string, is_saved: boolean) => {
-    if (is_saved) {
-      deleteSaveArticleMutation.mutate(articleId);
-    } else {
-      createSaveArticleMutation.mutate(articleId);
-    }
-  }
+    is_saved ? deleteSaveArticleMutation.mutate(articleId) : createSaveArticleMutation.mutate(articleId);
+  };
 
-  const handleFollowUnfollow = (userId: string, following: boolean) =>  {
-    if (following) {
-      createOnFollowUserMutation.mutate(userId)
-    } else {
-      createFollowUserMutation.mutate(userId)
-    }
-  }
+  const handleFollowUnfollow = (userId: string, following: boolean) => {
+    following ? createOnFollowUserMutation.mutate(userId) : createFollowUserMutation.mutate(userId);
+  };
 
   return (
     <>

@@ -1,11 +1,5 @@
 import { FormEvent, FunctionComponent, useEffect, useRef, useState } from 'react'
-import {
-  Box,
-  FormControl,
-  Image,
-  Input,
-  Text
-} from '@chakra-ui/react'
+import { Box, FormControl, Image, Input, Text } from '@chakra-ui/react'
 import { FaUpload, FaImage } from 'react-icons/fa6'
 import { Helmet } from 'react-helmet-async'
 
@@ -32,17 +26,11 @@ const ArticleForm: FunctionComponent<IArticleFormProps> = ({
   const { editArticleMutation } = useEditArticle();
 
   const handleUploadClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
+    if (fileInputRef.current) fileInputRef.current.click();
   };
 
   const { handleFileUpload, loading: imageUploadLoading } = useImageUpload({
-    onSuccess: (data) => {
-      setThumbnail(data?.data?.imageUploadUrl)
-      console.log(data?.data?.imageUploadUrl);
-      
-    },
+    onSuccess: (data) => { setThumbnail(data?.data?.imageUploadUrl)}
   });
 
   const handleSubmitArticle = (event: FormEvent<HTMLFormElement>) => {
@@ -178,4 +166,4 @@ const ArticleForm: FunctionComponent<IArticleFormProps> = ({
   )
 }
 
-export default ArticleForm
+export default ArticleForm;

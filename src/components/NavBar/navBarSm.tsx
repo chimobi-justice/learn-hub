@@ -58,6 +58,7 @@ const NavBarSm: FunctionComponent = () => {
         p="8px"
         w="100%"
         display={{ base: 'flex', md: 'none' }}
+        borderBottom={"2px solid #f1f1f1"}
       >
         <Link to="/">
           <Heading
