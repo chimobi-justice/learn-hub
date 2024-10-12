@@ -12,7 +12,6 @@ export const useCreateThreadComment = () => {
       successNotification(data.message);
 
       queryClient.invalidateQueries({ queryKey: ['threads'] });
-
       queryClient.invalidateQueries({ queryKey: ['thread'] })
     },
     onError: (error: any) => {

@@ -9,9 +9,7 @@ export const useUpdateProfile = () => {
   const updateProfileMutation = useMutation({
     mutationFn: updateProfile,
     onSuccess: (data) => {
-      queryClient.invalidateQueries({
-        queryKey: ['user']
-      });
+      queryClient.invalidateQueries({ queryKey: ['user'] });
 
       successNotification(data?.message);
     },

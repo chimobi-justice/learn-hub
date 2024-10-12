@@ -3,15 +3,7 @@ import { Link } from 'react-router-dom'
 import { Box, Grid, GridItem, Heading, useDisclosure } from '@chakra-ui/react'
 import { Helmet } from 'react-helmet-async'
 
-import {
-  LatestArticleCard,
-  FollowCard,
-  // RecommendTopicCard,
-  ArticlesCard,
-  Button,
-  Alert,
-  Skeleton
-} from '@components/index'
+import { LatestArticleCard, FollowCard, ArticlesCard, Button, Alert, Skeleton } from '@components/index'
 import { useUser } from '@context/userContext'
 import { useGetPaginatedArticles } from '@hooks/article/useGetPaginatedArticles'
 import { useDeleteArticle } from '@hooks/article/useDeleteArticle'
@@ -23,14 +15,7 @@ import { useCreateOnFollowUser } from '@hooks/user/useCreateUnFollowUser'
 
 const Articles: FunctionComponent = () => {
   const { user } = useUser();
-  const {
-    articles,
-    isLoading,
-    isSuccess,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage
-  } = useGetPaginatedArticles(25)
+  const { articles, isLoading, isSuccess, hasNextPage, fetchNextPage, isFetchingNextPage } = useGetPaginatedArticles(25)
   const { deleteArticleMutation } = useDeleteArticle()
   const { data: pinArticles } = useGetPinnedArticles();
   const { createSaveArticleMutation } = useCreateSaveArticle();
@@ -52,20 +37,12 @@ const Articles: FunctionComponent = () => {
   }
 
   const handleSaveUnsavedArticle = (articleId: string, is_saved: boolean) => {
-    if (is_saved) {
-      deleteSaveArticleMutation.mutate(articleId);
-    } else {
-      createSaveArticleMutation.mutate(articleId);
-    }
-  }
+    is_saved ? deleteSaveArticleMutation.mutate(articleId) : createSaveArticleMutation.mutate(articleId);
+  };
 
-  const handleFollowUnfollow = (userId: string, following: boolean) =>  {
-    if (following) {
-      createOnFollowUserMutation.mutate(userId)
-    } else {
-      createFollowUserMutation.mutate(userId)
-    }
-  }
+  const handleFollowUnfollow = (userId: string, following: boolean) => {
+    following ? createOnFollowUserMutation.mutate(userId) : createFollowUserMutation.mutate(userId);
+  };
 
   return (
     <>

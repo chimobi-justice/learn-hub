@@ -6,11 +6,11 @@ import truncate from '@helpers/truncate'
 import LoadButton from '@pages/Search/components/loadButton'
 import { ISearchThreads } from 'src/types'
 
-const SearchThreads: FunctionComponent<ISearchThreads> = ({ 
+const SearchThreads: FunctionComponent<ISearchThreads> = ({
   threads,
   hasMore,
   fetchNext,
-  isFetching 
+  isFetching
 }) => {
   return (
     <Box mt={5}>
@@ -23,19 +23,19 @@ const SearchThreads: FunctionComponent<ISearchThreads> = ({
               <CardBody p={"0px"}>
                 <Stack divider={<StackDivider />} spacing='4'>
                   {threads?.map((thread: any, index: number) => (
-                    <Text
-                      key={index}
-                      fontSize={"14px"}
-                      p={"15px"}
-                      cursor={"pointer"}
-                      _hover={{
-                        bg: "#f1f1f1"
-                      }}
-                    >
-                      <Link to={thread?.url} style={{ display: "block" }}>
+                    <Link to={thread?.url} style={{ display: "block" }}>
+                      <Text
+                        key={index}
+                        fontSize={"14px"}
+                        p={"15px"}
+                        cursor={"pointer"}
+                        _hover={{
+                          bg: "#f1f1f1"
+                        }}
+                      >
                         {truncate(thread?.title, 200)}
-                      </Link>
-                    </Text>
+                      </Text>
+                    </Link>
                   ))}
                 </Stack>
 

@@ -2,8 +2,8 @@ import { Fragment, FunctionComponent } from 'react'
 import { Box, Heading } from '@chakra-ui/react'
 
 import { ArticlesCard, Button, Skeleton } from '@components/index'
-import { useGetFollowUsersArticles } from '@hooks/user/useGetFollowUserArticles'
 import { useUser } from '@context/userContext'
+import { useGetFollowUsersArticles } from '@hooks/user/useGetFollowUserArticles'
 import { useCreateSaveArticle } from '@hooks/article/useCreateSaveArticles'
 import { useDeleteSaveArticle } from '@hooks/article/useDeleteSavaArticles'
 import { useCreateFollowUser } from '@hooks/user/useCreateFollowUser'
@@ -15,35 +15,19 @@ interface FollowingProps {
 
 const Following: FunctionComponent<FollowingProps> = ({ setTabIndex }) => {
   const { user } = useUser();
-  const {
-    articles,
-    isSuccess,
-    isLoading,
-    hasNextPage,
-    isFetchingNextPage,
-    fetchNextPage
-  } = useGetFollowUsersArticles(25);
+  const { articles, isSuccess, isLoading, hasNextPage, isFetchingNextPage, fetchNextPage } = useGetFollowUsersArticles(25);
   const { createSaveArticleMutation } = useCreateSaveArticle();
   const { deleteSaveArticleMutation } = useDeleteSaveArticle();
   const { createFollowUserMutation } = useCreateFollowUser()
   const { createOnFollowUserMutation } = useCreateOnFollowUser();
-  console.log(articles);
 
   const handleSaveUnsavedArticle = (articleId: string, is_saved: boolean) => {
-    if (is_saved) {
-      deleteSaveArticleMutation.mutate(articleId);
-    } else {
-      createSaveArticleMutation.mutate(articleId);
-    }
-  }
+    is_saved ? deleteSaveArticleMutation.mutate(articleId) : createSaveArticleMutation.mutate(articleId);
+  };
 
   const handleFollowUnfollow = (userId: string, following: boolean) => {
-    if (following) {
-      createOnFollowUserMutation.mutate(userId)
-    } else {
-      createFollowUserMutation.mutate(userId)
-    }
-  }
+    following ? createOnFollowUserMutation.mutate(userId) : createFollowUserMutation.mutate(userId);
+  };
 
   return (
     <>

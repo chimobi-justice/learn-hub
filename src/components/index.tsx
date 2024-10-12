@@ -20,6 +20,7 @@ import Loading from '@components/Loading'
 import LoginForm from '@components/LoginForm'
 import RegisterForm from '@components/RegisterForm'
 import ShowLoginModal from '@components/ShowLoginModal'
+import TextSpeech from '@components/TextSpeech'
 
 export {
   Alert,
@@ -44,4 +45,5 @@ export {
   LoginForm,
   RegisterForm,
   ShowLoginModal,
+  TextSpeech,
 }

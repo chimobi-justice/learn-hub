@@ -9,9 +9,7 @@ export const useDeleteAccount = () => {
   const deleteAccountMutation = useMutation({
     mutationFn: deleteAccount,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['user']
-      })
+      queryClient.invalidateQueries({ queryKey: ['user'] })
 
       localStorage.removeItem('ucType_');
 

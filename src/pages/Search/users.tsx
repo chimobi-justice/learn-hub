@@ -6,7 +6,7 @@ import truncate from '@helpers/truncate'
 import LoadButton from '@pages/Search/components/loadButton'
 import { ISearchUsers } from 'src/types'
 
-const SearchUsers: FunctionComponent<ISearchUsers> = ({ 
+const SearchUsers: FunctionComponent<ISearchUsers> = ({
   users,
   hasMore,
   fetchNext,
@@ -23,16 +23,16 @@ const SearchUsers: FunctionComponent<ISearchUsers> = ({
               <CardBody p={"0px"}>
                 <Stack divider={<StackDivider />} spacing='4'>
                   {users?.map((user: any, index: number) => (
-                    <Box
-                      key={index}
-                      fontSize={"14px"}
-                      p={"15px"}
-                      cursor={"pointer"}
-                      _hover={{
-                        bg: "#f1f1f1"
-                      }}
-                    >
-                      <Link to={user?.url} style={{ display: "block" }}>
+                    <Link to={user?.url} style={{ display: "block" }}>
+                      <Box
+                        key={index}
+                        fontSize={"14px"}
+                        p={"15px"}
+                        cursor={"pointer"}
+                        _hover={{
+                          bg: "#f1f1f1"
+                        }}
+                      >
                         <Flex alignItems={"center"} gap={2}>
                           <Avatar size={"xs"} name={user?.fullname} src={user?.avatar} />
 
@@ -43,8 +43,8 @@ const SearchUsers: FunctionComponent<ISearchUsers> = ({
                         <Text pt='2' fontSize='sm'>
                           {truncate(user?.bio, 190)}
                         </Text>
-                      </Link>
-                    </Box>
+                      </Box>
+                    </Link>
                   ))}
                 </Stack>
 

@@ -12,9 +12,7 @@ export const useDeleteThread = () => {
       successNotification(data.message);
 
       queryClient.invalidateQueries({ queryKey: ['threads'] })
-
       queryClient.invalidateQueries({ queryKey: ['thread'] })
-
       queryClient.invalidateQueries({ queryKey: ['public-author-threads'] });
     },
     onError: (error: any) => {

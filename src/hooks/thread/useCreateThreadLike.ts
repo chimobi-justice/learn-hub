@@ -10,9 +10,7 @@ export const useCreateThreadLike = () => {
     mutationFn: createThreadLike,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['threads'] });
-
       queryClient.invalidateQueries({ queryKey: ['thread'] });
-
       queryClient.invalidateQueries({ queryKey: ['public-author-threads'] });
     },
     onError: (error: any) => {

@@ -10,9 +10,7 @@ export const useSignOut = () => {
     mutationFn: signoutUser,
     onSuccess: (data) => {
       successNotification(data.message);
-      queryClient.invalidateQueries({
-        queryKey: ['user']
-      })
+      queryClient.invalidateQueries({ queryKey: ['user'] })
 
       localStorage.removeItem('ucType_');
 

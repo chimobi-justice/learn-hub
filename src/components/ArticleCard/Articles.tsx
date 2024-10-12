@@ -1,16 +1,6 @@
 import { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
-import {
-  Avatar,
-  Box,
-  Card,
-  CardBody,
-  Flex,
-  Heading,
-  Image,
-  Text,
-  Tooltip
-} from '@chakra-ui/react'
+import { Avatar, Box, Card, CardBody, Flex, Heading, Image, Text, Tooltip } from '@chakra-ui/react'
 import { CiEdit } from 'react-icons/ci'
 import { MdDeleteOutline } from 'react-icons/md'
 import { BsSave } from 'react-icons/bs'
@@ -157,7 +147,7 @@ const ArticlesCard: FunctionComponent<IProps> = ({
                         _hover={{ textDecoration: "underline" }}
                         onClick={followUser}
                       >
-                        {is_following ? "following" : "follow"}
+                        {is_following ? "unfollow" : "follow"}
                       </Text>
                     )}
 

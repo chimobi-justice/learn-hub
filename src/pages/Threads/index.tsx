@@ -1,15 +1,6 @@
 import { Fragment, FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
-import {
-  Box,
-  Card,
-  CardBody,
-  CardHeader,
-  Heading,
-  Stack,
-  StackDivider,
-  Text
-} from '@chakra-ui/react'
+import { Box, Card, CardBody, CardHeader, Heading, Stack, StackDivider, Text } from '@chakra-ui/react'
 import { Helmet } from 'react-helmet-async'
 
 import { colors } from '../../colors'

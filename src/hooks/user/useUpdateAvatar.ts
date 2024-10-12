@@ -9,9 +9,7 @@ export const useUpdateAvatar = () => {
   const updateProfileAvatarMutation = useMutation({
     mutationFn: uploadProfileAvatar,
     onSuccess: (data) => {
-      queryClient.invalidateQueries({
-        queryKey: ['user']
-      });
+      queryClient.invalidateQueries({ queryKey: ['user'] });
 
       successNotification(data?.message)
     },

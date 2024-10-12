@@ -19,6 +19,10 @@ export interface ArticleActionButtonsProps {
   onLike: () => void;
   onDisLike: () => void;
   onShowComment: () => void;
+  isLoggedIn?: boolean;
+  is_saved?: boolean;
+  isOwner?: boolean;
+  saveUnsavedArticle?: () => void;
 }
 
 export interface CommentDrawerProps {
@@ -37,6 +41,8 @@ export interface IArticleHeroProps {
   authorAvatar: string;
   authorName: string;
   authorUsername: string;
+  is_following: string;
+  followUser: () => void;
   read_time: string;
   date: string;
 }
