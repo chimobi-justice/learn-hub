@@ -113,6 +113,7 @@ const ShowArticle: FunctionComponent = () => {
             authorAvatar={data?.data?.author?.avatar}
             authorName={data?.data?.author?.fullname}
             authorUsername={data?.data?.author?.username}
+            isOwner={data?.data?.isOwner}
             is_following={data?.data?.author?.is_following}
             read_time={data?.data?.read_time}
             date={data?.data?.created_at?.human}

@@ -41,8 +41,9 @@ export interface IArticleHeroProps {
   authorAvatar: string;
   authorName: string;
   authorUsername: string;
-  is_following: string;
-  followUser: () => void;
+  is_following: boolean;
+  isOwner: boolean;
   read_time: string;
   date: string;
+  followUser: () => void;
 }
