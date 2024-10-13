@@ -12,6 +12,7 @@ const ArticleHeroSection: FunctionComponent<IArticleHeroProps> = ({
   authorUsername,
   is_following,
   followUser,
+  isOwner,
   read_time,
   date
 }) => {
@@ -40,7 +41,7 @@ const ArticleHeroSection: FunctionComponent<IArticleHeroProps> = ({
               <Heading size="sm">{authorName}</Heading>
             </Link>
 
-            {user && (
+            {user && !isOwner && (
               <Text
                 fontSize={"14px"}
                 color={"blue"}
