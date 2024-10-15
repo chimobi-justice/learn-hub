@@ -1,5 +1,6 @@
-import { ChangeEvent, FocusEvent, FunctionComponent } from 'react'
-import { Input as ChakraInput } from '@chakra-ui/react'
+import { ChangeEvent, FocusEvent, FunctionComponent, useState } from 'react'
+import { Input as ChakraInput, Icon, InputGroup, InputRightElement } from '@chakra-ui/react'
+import { FaRegEyeSlash, FaRegEye } from 'react-icons/fa'
 
 import { colors } from '../../colors'
 
@@ -25,27 +26,42 @@ const Input: FunctionComponent<IProps> = ({
   onChange
 
 }) => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const handleShowPassword = () => setShowPassword(!showPassword);
+
   return (
-    <ChakraInput 
-      bg={"#F7F7F7"}
-      type={type || "text"}
-      value={value}
-      name={name}
-      width={width || "100%"}
-      fontSize={"14px"}
-      size={"lg"}
-      focusBorderColor={colors.primary}
-      borderRadius={"12px"}
-      placeholder={placeholder}
-      _placeholder={{
-        color: "#0009",
-        fontSize: "14px",
-        fontWeight: 400,
-      }}
-      disabled={disabled}
-      onBlur={onBlur}
-      onChange={onChange}
-    />
+    <InputGroup size='md' alignItems={"center"}>
+      <ChakraInput
+        bg={"#F7F7F7"}
+        type={type === "password" && showPassword ? "text" : type}
+        value={value}
+        name={name}
+        width={width || "100%"}
+        fontSize={"14px"}
+        size={"lg"}
+        focusBorderColor={colors.primary}
+        borderRadius={"12px"}
+        placeholder={placeholder}
+        _placeholder={{
+          color: "#0009",
+          fontSize: "14px",
+          fontWeight: 400,
+        }}
+        disabled={disabled}
+        onBlur={onBlur}
+        onChange={onChange}
+      />
+      {type === "password" && (
+        <InputRightElement>
+          <Icon
+            onClick={handleShowPassword}
+            as={showPassword ? FaRegEye : FaRegEyeSlash }
+            cursor={"pointer"}
+          />
+        </InputRightElement>
+      )}
+    </InputGroup>
   )
 }
 

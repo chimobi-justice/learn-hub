@@ -11,6 +11,7 @@ import {
   GET_ALL_ARTICLES_ENDPOINT,
   GET_PINNED_ARTICLES_ENDPOINT,
   GET_RECOMMENDED_ARTICLES_ENDPOINT,
+  GET_RELATED_AUTHOR_ARTICLES_ENDPOINT,
   GET_SAVED_ARTICLES_ENDPOINT,
   GET_SINGLE_ARTICLE_ENDPOINT
 } from '@api/index'
@@ -78,5 +79,10 @@ export const deleteSaveArticle = async (article_id: string) => {
 
 export const getSavedArticles = async () => {
   const response = await axiosInstance.get(GET_SAVED_ARTICLES_ENDPOINT);
+  return response.data.data;
+}
+
+export const getRelatedArticlesArticles = async (id: string) => {
+  const response = await axiosInstance.get(`${GET_RELATED_AUTHOR_ARTICLES_ENDPOINT}/${id}/arthored-related-articles`);
   return response.data.data;
 }

@@ -30,3 +30,4 @@ export const DELETE_SAVE_ARTICLE_ENDPOINT = `${API_BASE_URL}/articles/unsave-art
 
 export const GET_SAVED_ARTICLES_ENDPOINT = `${API_BASE_URL}/articles/saved-articles`;
 
+export const GET_RELATED_AUTHOR_ARTICLES_ENDPOINT = `${API_BASE_URL}/articles`;
