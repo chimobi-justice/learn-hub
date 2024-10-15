@@ -19,11 +19,19 @@ const TextSpeech: FunctionComponent<TextSpeechProps> = ({ title, content }) => {
     newUtterance.lang = "en-US";
     setUtterance(newUtterance);
 
+    newUtterance.onend = () => {
+      setIsSpeaking(false);
+      setIsPaused(false);
+    };
+
+    newUtterance.onerror = (event) => {
+      console.error("Speech synthesis error:", event.error);
+    };
+
     return () => {
       synth.cancel();
     }
   }, [title, content]);
-
 
   const handlePlay = () => {
     if (utterance && !isSpeaking) {

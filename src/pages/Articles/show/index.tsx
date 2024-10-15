@@ -8,6 +8,7 @@ import { Helmet } from 'react-helmet-async'
 import ArticleHeroSection from '@pages/Articles/HeroSection'
 import CommentDrawer from '@pages/Articles/components/CommentDrawer'
 import ArticleActionButtons from '@pages/Articles/components/ArticleActionButtons'
+import RelatedArticles from '@pages/Articles/components/RelatedArticles'
 import { useArticleActions } from '@pages/Articles/hooks/useArticleActions'
 
 import { ContentBlockContent, NotFound, Skeleton } from '@components/index'
@@ -18,6 +19,7 @@ import { useCreateSaveArticle } from '@hooks/article/useCreateSaveArticles'
 import { useDeleteSaveArticle } from '@hooks/article/useDeleteSavaArticles'
 import { useCreateFollowUser } from '@hooks/user/useCreateFollowUser'
 import { useCreateOnFollowUser } from '@hooks/user/useCreateUnFollowUser'
+import useScrollToTop from '@hooks/useScrollToTop'
 
 const ShowArticle: FunctionComponent = () => {
   const { id } = useParams();
@@ -96,6 +98,9 @@ const ShowArticle: FunctionComponent = () => {
     </Flex>
   );
 
+  // if select related article scroll to top
+  useScrollToTop()
+
   if (error) return <NotFound />;
 
   return (
@@ -153,6 +158,8 @@ const ShowArticle: FunctionComponent = () => {
           />
         </Box>
       )}
+
+      <RelatedArticles />
     </>
   );
 };
