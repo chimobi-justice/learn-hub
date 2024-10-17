@@ -20,9 +20,11 @@ import { useDeleteSaveArticle } from '@hooks/article/useDeleteSavaArticles'
 import { useCreateFollowUser } from '@hooks/user/useCreateFollowUser'
 import { useCreateOnFollowUser } from '@hooks/user/useCreateUnFollowUser'
 import useScrollToTop from '@hooks/useScrollToTop'
+import { useUser } from '@context/userContext'
 
 const ShowArticle: FunctionComponent = () => {
   const { id } = useParams();
+  const { user } = useUser();
   const { data, isLoading, isSuccess, error } = useGetSingleArticle(id!);
   const {
     comment,
@@ -44,9 +46,9 @@ const ShowArticle: FunctionComponent = () => {
     is_saved ? deleteSaveArticleMutation.mutate(articleId) : createSaveArticleMutation.mutate(articleId);
   };
 
-  const handleFollowUnfollow = (userId: string, following: boolean) => {
+  const handleFollowUnfollow = (userId: string, following: boolean | undefined) => {
     following ? createOnFollowUserMutation.mutate(userId) : createFollowUserMutation.mutate(userId);
-  };  
+  };
 
   const renderAuthorSocialLinks = () => (
     <HStack spacing={3} my="10px" justify="center">
@@ -98,7 +100,7 @@ const ShowArticle: FunctionComponent = () => {
     </Flex>
   );
 
-  // if select related article scroll to top
+  // if clicked related article scroll to top to update the changes on the UI 
   useScrollToTop()
 
   if (error) return <NotFound />;
@@ -115,12 +117,12 @@ const ShowArticle: FunctionComponent = () => {
 
           <ArticleHeroSection
             title={data?.data?.title}
+            isOwner={data?.data?.isOwner}
+            read_time={data?.data?.read_time}
             authorAvatar={data?.data?.author?.avatar}
             authorName={data?.data?.author?.fullname}
             authorUsername={data?.data?.author?.username}
-            isOwner={data?.data?.isOwner}
             is_following={data?.data?.author?.is_following}
-            read_time={data?.data?.read_time}
             date={data?.data?.created_at?.human}
             followUser={() => handleFollowUnfollow(data?.data?.author?.id, data?.data?.author?.is_following)}
           />
@@ -131,7 +133,7 @@ const ShowArticle: FunctionComponent = () => {
               onLike={handleLikeArticle}
               onDisLike={handleDisLikeArticle}
               onShowComment={() => handleShowComment(data?.data?.id)}
-              isLoggedIn
+              isLoggedIn={!!user}
               isOwner={data?.data?.isOwner}
               is_saved={data?.data?.is_saved}
               saveUnsavedArticle={() => handleSaveUnsavedArticle(data?.data?.id, data?.data?.is_saved)}
@@ -159,7 +161,7 @@ const ShowArticle: FunctionComponent = () => {
         </Box>
       )}
 
-      {data && isSuccess && <RelatedArticles /> }
+      {data && isSuccess && <RelatedArticles />}
     </>
   );
 };

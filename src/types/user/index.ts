@@ -52,11 +52,11 @@ export interface CommentUser {
   fullname: string;
   username: string;
   avatar: string;
-  profileHeadlines: string | null;
-  followers: string;
-  followings: string;
-  isFollowing: boolean;
-  details: AuthorDetails;
+  profile_headlines?: string | null;
+  followers?: string;
+  followings?: string;
+  is_following?: boolean;
+  info_details?: AuthorDetails;
 }
 
 export interface Author extends CommentUser {}

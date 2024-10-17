@@ -20,8 +20,8 @@ const EditThread: FunctionComponent = () => {
 
   return (
     <ThreadForm
-      titleValue={data?.data?.title}
-      contentValue={data?.data?.content}
+      titleValue={data?.data?.title ?? ""}
+      contentValue={data?.data?.content ?? ""}
       id={id}
       isEditing={true}
     />

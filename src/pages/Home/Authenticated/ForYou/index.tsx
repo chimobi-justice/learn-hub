@@ -37,7 +37,7 @@ const ForYou = () => {
     is_saved ? deleteSaveArticleMutation.mutate(articleId) : createSaveArticleMutation.mutate(articleId);
   };
 
-  const handleFollowUnfollow = (userId: string, following: boolean) => {
+  const handleFollowUnfollow = (userId: string, following: boolean | undefined) => {
     following ? createOnFollowUserMutation.mutate(userId) : createFollowUserMutation.mutate(userId);
   };
 

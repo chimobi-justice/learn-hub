@@ -1,5 +1,5 @@
 import { FormEvent } from 'react'
-import { Author, AuthorDetails, CreatedAt } from 'src/types'
+import { Author, CommentUser, CreatedAt } from 'src/types'
 
 export interface IArticleRequest {
   title: string;
@@ -8,10 +8,10 @@ export interface IArticleRequest {
 }
 
 export interface IArticleFormProps {
-  titleValue: string;
-  thumbnailValue: string;
-  contentValue: string;
-  isEditing: boolean
+  titleValue?: string;
+  thumbnailValue?: string;
+  contentValue?: string;
+  isEditing?: boolean;
   id?: string;
 }
 
@@ -42,7 +42,7 @@ export interface IArticleHeroProps {
   authorAvatar: string;
   authorName: string;
   authorUsername: string;
-  is_following: boolean;
+  is_following: boolean | undefined;
   isOwner: boolean;
   read_time: string;
   date: string;
@@ -76,18 +76,6 @@ export interface ArticleComment {
   comment: string;
   created_at: CreatedAt;
   user: CommentUser;
-}
-
- interface CommentUser {
-  id: string;
-  fullname: string;
-  username: string;
-  avatar: string | null;
-  profile_headlines: string | null;
-  followers: string;
-  followings: string;
-  is_following: boolean;
-  info_details: AuthorDetails;
 }
 
 export interface IArticlesResponse {

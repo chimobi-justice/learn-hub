@@ -11,9 +11,9 @@ const EditArticle: FunctionComponent = () => {
 
   return (
     <ArticleForm
-      titleValue={data?.data?.title}
-      thumbnailValue={data?.data?.thumbnail}
-      contentValue={data?.data?.content}
+      titleValue={data?.data?.title ?? ""}
+      thumbnailValue={data?.data?.thumbnail ?? ""}
+      contentValue={data?.data?.content ?? ""}
       id={id}
       isEditing={true}
     />
