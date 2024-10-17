@@ -22,13 +22,13 @@ export interface IThreadRepliesCardProps {
 }
 
 export interface ThreadFormProps {
-  titleValue: string;
-  contentValue: string;
-  isEditing: boolean
+  titleValue?: string;
+  contentValue?: string;
+  isEditing?: boolean;
   id?: string
 }
 
-interface ThreadData  {
+export interface ThreadData  {
   id: string;
   title: string;
   slug: string;

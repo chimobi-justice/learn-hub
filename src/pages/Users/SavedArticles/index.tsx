@@ -19,11 +19,7 @@ const SavedArticles: FunctionComponent = () => {
   const { createFollowUserMutation } = useCreateFollowUser()
   const { createOnFollowUserMutation } = useCreateOnFollowUser();
 
-  const handleUnSaveArticle = (articleId: string) => {
-    deleteSaveArticleMutation.mutate(articleId);
-  }
-
-  const handleFollowUnfollow = (userId: string, following: boolean) => {
+  const handleFollowUnfollow = (userId: string, following: boolean | undefined) => {
     following ? createOnFollowUserMutation.mutate(userId) : createFollowUserMutation.mutate(userId);
   };
 
@@ -69,14 +65,14 @@ const SavedArticles: FunctionComponent = () => {
                       read_time={article?.read_time}
                       CTA={`/articles/${article?.slug}/${article?.id}`}
                       isOwner={article?.isOwner}
+                      is_saved={article?.is_saved}
                       authorAvatar={article?.author?.avatar}
                       authorFullname={article?.author?.fullname}
                       authorUsername={article?.author?.username}
-                      isLoggedIn={!!user}
-                      is_saved={article?.is_saved}
                       is_following={article?.author?.is_following}
+                      isLoggedIn={!!user}
                       followUser={() => handleFollowUnfollow(article?.author?.id, article?.author?.is_following)}
-                      saveUnsavedArticle={() => handleUnSaveArticle(article?.id)}
+                      saveUnsavedArticle={() => deleteSaveArticleMutation.mutate(article?.id)}
                     />
                   ))}
                 </Fragment>

@@ -44,19 +44,11 @@ const PublicUserArticles: FunctionComponent = () => {
   }
 
   const handleSaveUnsavedArticle = (articleId: string, is_saved: boolean) => {
-    if (is_saved) {
-      deleteSaveArticleMutation.mutate(articleId);
-    } else {
-      createSaveArticleMutation.mutate(articleId);
-    }
+    is_saved ? deleteSaveArticleMutation.mutate(articleId) : createSaveArticleMutation.mutate(articleId);
   }
 
-  const handleFollowUnfollow = (userId: string, following: boolean) =>  {
-    if (following) {
-      createOnFollowUserMutation.mutate(userId)
-    } else {
-      createFollowUserMutation.mutate(userId)
-    }
+  const handleFollowUnfollow = (userId: string, following: boolean | undefined) => {
+    following ? createOnFollowUserMutation.mutate(userId) : createFollowUserMutation.mutate(userId);
   }
 
   return (

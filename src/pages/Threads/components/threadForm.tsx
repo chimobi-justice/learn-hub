@@ -89,7 +89,6 @@ const ThreadForm: FunctionComponent<ThreadFormProps> = ({
             </Button>
           </Box>
         </form>
-
       </Box>
     </>
   )
