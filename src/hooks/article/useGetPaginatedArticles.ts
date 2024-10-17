@@ -1,16 +1,8 @@
 import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query'
 
-import { axiosInstance } from '@api/axiosInstance'
-import { GET_PAGINATED_ARTICLES_ENDPOINT } from '@api/index'
+import { getAllArticles } from '@services/articles'
 
 export const useGetPaginatedArticles = (limit: number = 0) => {
-  const fetchPaginatedArticles = async ({ pageParam = 0 }) => {
-    const res = await axiosInstance.get(`${GET_PAGINATED_ARTICLES_ENDPOINT}?limit=${limit}&page=${pageParam}`)
-
-    const dataResponse = await res.data;
-    return { ...dataResponse, prevOffset: pageParam };
-  };
-
   const {
     data: articlesResponse,
     fetchNextPage,
@@ -20,7 +12,7 @@ export const useGetPaginatedArticles = (limit: number = 0) => {
     isSuccess
   } = useInfiniteQuery({
     queryKey: ['articles', limit],
-    queryFn: fetchPaginatedArticles,
+    queryFn: ({ pageParam = 0 }) => getAllArticles(limit, pageParam),
     placeholderData: keepPreviousData,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {

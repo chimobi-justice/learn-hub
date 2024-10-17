@@ -24,6 +24,7 @@ const ArticleActionButtons: FunctionComponent<ArticleActionButtonsProps> = ({
 }) => {
   const { user } = useUser();
   const { onClose, onOpen, isOpen } = useDisclosure();
+  // url to share on socials
   const url = window.location.href;
 
   const renderSaveButton = () => (

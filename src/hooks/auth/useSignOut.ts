@@ -14,7 +14,7 @@ export const useSignOut = () => {
 
       localStorage.removeItem('ucType_');
 
-      location.href = "/?auth&session=signout";
+      window.location.href = "/?auth&session=signout";
     },
     onError: (error: any) => {
       errorNotification(error?.response?.data?.message)

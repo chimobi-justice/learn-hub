@@ -6,6 +6,7 @@ import { FaArrowRight } from 'react-icons/fa6'
 import { Button, Card, Skeleton } from '@components/index'
 import { colors } from '../../../../colors'
 import { useGetThreads } from '@hooks/thread/useGetThreads'
+import { IThreads } from 'src/types'
 
 const HomeThreads: FunctionComponent = () => {
   const { data: threads, isLoading, isSuccess } = useGetThreads(8)
@@ -28,7 +29,7 @@ const HomeThreads: FunctionComponent = () => {
             px={{ base: "6px", md: "10px", lg: "15px" }}
             py="40px"
           >
-            {threads?.map((thread: any, index: any) => (
+            {threads?.data?.map((thread: IThreads, index: number) => (
               <GridItem key={index} w="100%" h="100%">
                 <Card
                   key={index}

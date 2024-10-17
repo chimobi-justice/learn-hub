@@ -1,3 +1,5 @@
+import { AuthorDetails } from 'src/types'
+
 export interface IUserProps {
   id: string;
   fullname: string;
@@ -31,3 +33,30 @@ export interface IPassword {
   password: string;
   password_confirmation: string;
 }
+
+export interface Person {
+  id: string;
+  username: string;
+  fullname: string;
+  avatar: string;
+  bio: string;
+  is_following: boolean;
+}
+
+export interface PeopleResponse {
+  data: Person[];
+}
+
+export interface CommentUser {
+  id: string;
+  fullname: string;
+  username: string;
+  avatar: string;
+  profileHeadlines: string | null;
+  followers: string;
+  followings: string;
+  isFollowing: boolean;
+  details: AuthorDetails;
+}
+
+export interface Author extends CommentUser {}

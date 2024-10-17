@@ -6,6 +6,7 @@ import { FaArrowRight } from 'react-icons/fa6'
 import { Button, LatestArticleCard, Skeleton } from '@components/index'
 import { colors } from '../../../../colors'
 import { useGetArticles } from '@hooks/article/useGetArticles'
+import { IArticles } from 'src/types'
 
 const HomeArticles: FunctionComponent = () => {
   const { data: articles, isLoading, isSuccess } = useGetArticles(6)
@@ -29,7 +30,7 @@ const HomeArticles: FunctionComponent = () => {
             px={{ base: "6px", md: "10px", lg: "15px" }}
             py="40px"
           >
-            {articles?.map((article: any, index: any) => (
+            {articles?.data?.map((article: IArticles, index: number) => (
               <GridItem key={index} w="100%" h="100%">
                 <LatestArticleCard
                   articleImage={article?.thumbnail}

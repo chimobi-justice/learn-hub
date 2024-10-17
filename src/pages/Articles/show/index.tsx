@@ -88,7 +88,7 @@ const ShowArticle: FunctionComponent = () => {
             </Text>
           </Link>
           <Text lineHeight="1.7em" color="#0009">
-            {truncate(data?.data?.author?.info_details?.bio, 230)}
+            {truncate(data?.data?.author?.info_details?.bio ?? "", 230)}
           </Text>
         </Box>
       </Box>
@@ -159,7 +159,7 @@ const ShowArticle: FunctionComponent = () => {
         </Box>
       )}
 
-      <RelatedArticles />
+      {data && isSuccess && <RelatedArticles /> }
     </>
   );
 };

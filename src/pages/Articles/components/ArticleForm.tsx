@@ -8,7 +8,7 @@ import { useCreateArticle } from '@hooks/article/useCreateArticle'
 import { useEditArticle } from '@hooks/article/useEditArticle'
 import { useImageUpload } from '@hooks/useImageUpload'
 import { errorNotification } from '@helpers/notification'
-import { IArticle, IArticleFormProps } from 'src/types'
+import { IArticleRequest, IArticleFormProps } from 'src/types'
 
 const ArticleForm: FunctionComponent<IArticleFormProps> = ({
   titleValue = '',
@@ -41,7 +41,7 @@ const ArticleForm: FunctionComponent<IArticleFormProps> = ({
       return;
     }
 
-    const articleData: IArticle = {
+    const articleData: IArticleRequest = {
       thumbnail,
       title,
       content

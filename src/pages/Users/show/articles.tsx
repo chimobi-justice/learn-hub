@@ -10,6 +10,7 @@ import { useCreateSaveArticle } from '@hooks/article/useCreateSaveArticles'
 import { useDeleteSaveArticle } from '@hooks/article/useDeleteSavaArticles'
 import { useCreateFollowUser } from '@hooks/user/useCreateFollowUser'
 import { useCreateOnFollowUser } from '@hooks/user/useCreateUnFollowUser'
+import { ArticleData } from 'src/types'
 
 const PublicUserArticles: FunctionComponent = () => {
   const { username } = useParams();
@@ -64,7 +65,7 @@ const PublicUserArticles: FunctionComponent = () => {
 
       {articles && isSuccess && articles?.map((page: any, pageIndex: number) => (
         <Fragment key={pageIndex}>
-          {page?.data?.articles.map((article: any, index: number) => (
+          {page?.data?.articles.map((article: ArticleData, index: number) => (
             <ArticlesCard
               key={index}
               id={article?.id}
