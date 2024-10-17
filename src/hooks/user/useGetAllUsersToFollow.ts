@@ -1,6 +1,6 @@
 import { keepPreviousData, useInfiniteQuery, useQuery } from '@tanstack/react-query'
 
-import { getAllFollowUsers, getThreeUsersOnCard } from '@services/user'
+import { getAllUsersToFollow, getThreeUsersOnCard } from '@services/user'
 
 export const useGetThreeCardUsers = () => {
   return useQuery({
@@ -19,7 +19,7 @@ export const useGetAllFollowUsers = (limit: number = 0) => {
     isSuccess
   } = useInfiniteQuery({
     queryKey: ['follow-users'],
-    queryFn: ({ pageParam = 0 }) => getAllFollowUsers(limit, pageParam),
+    queryFn: ({ pageParam = 0 }) => getAllUsersToFollow(limit, pageParam),
     placeholderData: keepPreviousData,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {

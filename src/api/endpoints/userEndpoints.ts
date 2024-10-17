@@ -14,10 +14,14 @@ export const PUBLIC_USER_ENDPOINT = `${API_BASE_URL}/users`;
 
 export const GET_THREE_USERS_ENDPOINT = `${API_BASE_URL}/users/get-three-users`;
 
-export const GET_ALL_USERS_ENDPOINT = `${API_BASE_URL}/users/all-users`;
+export const GET_ALL_USERS_TO_FOLLOW_ENDPOINT = `${API_BASE_URL}/users/all-users`;
 
 export const Get_FOLLOWING_USERS_ARTICLES_ENDPOINT = `${API_BASE_URL}/users/my-follow-users/articles`;
 
 export const FOLLOW_USERS_ENDPOINT = `${API_BASE_URL}/users`;
 
 export const ONFOLLOW_USERS_ENDPOINT = `${API_BASE_URL}/users`;
+
+export const GET_FOLLOWING_USERS_ENDPOINT = `${API_BASE_URL}/users/followings`;
+
+export const GET_FOLLOWERS_USERS_ENDPOINT = `${API_BASE_URL}/users/followers`;

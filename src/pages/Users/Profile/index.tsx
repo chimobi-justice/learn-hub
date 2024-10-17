@@ -79,11 +79,16 @@ const Profile: FunctionComponent = () => {
                   <Text fontSize={"14px"} my={"7px"}>{user?.data?.state}, {user?.data?.country}</Text>
                   <Text fontSize={"14px"}>
                     <Text as={"span"} mr={"3px"}>
-                      {`${user?.data?.followers} ${user?.data?.followers! > 1 ? 'Followers' : 'Follower'}`}
+
+                      <Link to={`/me/users/followers`}>
+                        {`${user?.data?.followers} ${user?.data?.followers! > 1 ? 'Followers' : 'Follower'}`}
+                      </Link>
                     </Text>
                     {" - "}
                     <Text as={"span"} ml={"3px"}>
-                     {user?.data?.followings} following
+                      <Link to={`/me/users/followings`}>
+                        {user?.data?.followings} following
+                      </Link>
                     </Text>
                   </Text>
 
@@ -180,11 +185,7 @@ const Profile: FunctionComponent = () => {
           </Box>
 
           <Box width={{ base: "100%", md: "30%" }}>
-            {/* <Box>
-            <RecommendTopicCard />
-          </Box> */}
-
-            <Box mt={"15px"}>
+            <Box>
               <FollowCard />
             </Box>
           </Box>

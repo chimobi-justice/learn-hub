@@ -17,7 +17,8 @@ export default defineConfig({
       '@constant': '/src/constant',
       '@api': '/src/api',
       '@services': '/src/services',
-      '@validations': '/src/validations'
+      '@validations': '/src/validations',
+      '@utils': '/src/utils',
     }
   }
 })

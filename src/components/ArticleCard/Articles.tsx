@@ -59,7 +59,7 @@ const ArticlesCard: FunctionComponent<IProps> = ({
           <Box width={{ base: "100%", md: "35%" }}>
             <Image
               src={articleImg}
-              alt={articleImg}
+              alt={title}
               width={{ base: "100%", md: "50%" }}
               height={{ base: "200px", md: "150px" }}
               mx={{ base: "", md: "auto" }}

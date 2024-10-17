@@ -31,27 +31,27 @@ const HeroSection: FunctionComponent = () => {
           <Box width={{ base: "100%", md: "50%" }}>
             <Heading
               as="h2"
-              size={{ base: "xl", md: "2xl" }}
+              size={{ base: "xl", lg: "2xl" }}
             >
               Embark on a <Text as="span" color={colors.primary}>Delightful</Text>
             </Heading>
             <Heading
               as="h2"
-              size={{ base: "xl", md: "2xl" }}
+              size={{ base: "xl", lg: "2xl" }}
               my={"20px"}
             >
               Journey of <Text as="span" color={colors.primary}>Growth</Text> With
             </Heading>
             <Heading
               as="h2"
-              size={{ base: "xl", md: "2xl" }}
+              size={{ base: "xl", lg: "2xl" }}
             >
               Community <Text as="span" color={colors.primary}>Experts</Text>
             </Heading>
 
             <Text
               my={"25px"}
-              fontSize={"18px"}
+              fontSize={{ base: "16px", lg: "18px"}}
               width={{ base: "100%", md: "80%" }}
               lineHeight={"1.8em"}
             >

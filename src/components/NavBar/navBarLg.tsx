@@ -52,6 +52,7 @@ const NavBarLg: FunctionComponent = () => {
               fontWeight={"bold"}
               as="h4"
               color={colors.primary}
+              size={{ base: "xs", md: "lg", lg: "2xl"}}
             >
               Learn <Text as="span" color={"#000"}>Hub</Text>
             </Heading>

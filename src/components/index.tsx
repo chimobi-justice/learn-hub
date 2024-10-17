@@ -21,6 +21,7 @@ import LoginForm from '@components/LoginForm'
 import RegisterForm from '@components/RegisterForm'
 import ShowLoginModal from '@components/ShowLoginModal'
 import TextSpeech from '@components/TextSpeech'
+import FollowSection from '@components/FollowSection'
 
 export {
   Alert,
@@ -46,4 +47,5 @@ export {
   RegisterForm,
   ShowLoginModal,
   TextSpeech,
+  FollowSection,
 }

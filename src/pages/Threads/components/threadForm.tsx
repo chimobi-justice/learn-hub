@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet-async'
 import { Button, Editor } from '@components/index'
 import { useCreateThread } from '@hooks/thread/useCreateThread'
 import { useEditThread } from '@hooks/thread/useEditThread'
-import { IThread, ThreadFormProps } from 'src/types'
+import { IThreadRequest, ThreadFormProps } from 'src/types'
 
 const ThreadForm: FunctionComponent<ThreadFormProps> = ({
   titleValue = '',
@@ -22,7 +22,7 @@ const ThreadForm: FunctionComponent<ThreadFormProps> = ({
   const handleSubmitThread = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const threadData: IThread = {
+    const threadData: IThreadRequest = {
       title,
       content
     };

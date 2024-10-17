@@ -11,7 +11,8 @@ import {
   TabPanel,
   TabPanels,
   Tabs,
-  Text
+  Text,
+  useDisclosure
 } from '@chakra-ui/react'
 
 import { colors } from '../../../colors'
@@ -19,7 +20,7 @@ import PublicUserArticles from '@pages/Users/show/articles'
 import PublicUserThreads from '@pages/Users/show/thread'
 import { useGetPublicUser } from '@hooks/user/useGetPublicUser'
 import PublicUserAboutDetails from '@pages/Users/show/about'
-import { Button, FollowCard, NotFound, Skeleton } from '@components/index'
+import { Button, FollowCard, NotFound, ShowLoginModal, Skeleton } from '@components/index'
 import { Helmet } from 'react-helmet-async'
 import { useCreateFollowUser } from '@hooks/user/useCreateFollowUser'
 import { useCreateOnFollowUser } from '@hooks/user/useCreateUnFollowUser'
@@ -32,13 +33,10 @@ const ShowUserPublicPosts: FunctionComponent = () => {
   const { data, isLoading } = useGetPublicUser(username!)
   const { createFollowUserMutation } = useCreateFollowUser()
   const { createOnFollowUserMutation } = useCreateOnFollowUser();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const handleFollowUnfollow = (userId: string, is_following: boolean|undefined) => {
-    if (is_following) {
-      createOnFollowUserMutation.mutate(userId)
-    } else {
-      createFollowUserMutation.mutate(userId)
-    }
+  const handleFollowUnfollow = (userId: string, is_following: boolean | undefined) => {
+    is_following ? createOnFollowUserMutation.mutate(userId) : createFollowUserMutation.mutate(userId);
   }
 
   if (isLoading) return <Skeleton />
@@ -109,7 +107,6 @@ const ShowUserPublicPosts: FunctionComponent = () => {
                 {`${userData?.followers} ${userData?.followers! > 1 ? 'Followers' : 'Follower'}`}
               </Text>
 
-
               <Text fontSize={"14px"} color={"#0009"} lineHeight={"1.6em"}>{userData?.profile_headlines}</Text>
             </Box>
 
@@ -128,16 +125,15 @@ const ShowUserPublicPosts: FunctionComponent = () => {
                 )}
 
                 {!user && (
-                  <Link to={"/auth/login"}>
-                    <Button
-                      size="sm"
-                      rounded="md"
-                      type="button"
-                      variant="outline"
-                    >
-                      follow
-                    </Button>
-                  </Link>
+                  <Button
+                    size="sm"
+                    rounded="md"
+                    type="button"
+                    variant="outline"
+                    onClick={onOpen}
+                  >
+                    follow
+                  </Button>
                 )}
               </Box>
             )}
@@ -148,6 +144,8 @@ const ShowUserPublicPosts: FunctionComponent = () => {
           </Box>
         </Box>
       </Container>
+
+      <ShowLoginModal isOpen={isOpen} onClose={onClose} />
     </>
   )
 }

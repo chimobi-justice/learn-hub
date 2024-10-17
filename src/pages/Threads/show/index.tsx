@@ -24,7 +24,7 @@ const ShowThread: FunctionComponent = () => {
 
   const { data, isLoading, isSuccess, error } = useGetSingleThread(id!);
 
-  const truncateLenght = useBreakpointValue({base: 45, md: 30, lg: 70});
+  const truncateLenght = useBreakpointValue({ base: 45, md: 30, lg: 70 });
 
   if (error) return <NotFound />;
 
@@ -81,7 +81,12 @@ const ShowThread: FunctionComponent = () => {
                 </>
               </Box>
 
-              <Box width={{ base: "100%", md: "30%" }}>
+              <Box
+                width={{ base: "100%", md: "30%" }}
+                position={{ base: "unset", md: "sticky" }}
+                top="10px"
+                height={{ base: "auto", md: "700px" }}
+              >
                 {/* <Box>
                   <DiscussionCard />
                 </Box> */}

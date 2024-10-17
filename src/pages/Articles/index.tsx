@@ -12,6 +12,7 @@ import { useCreateSaveArticle } from '@hooks/article/useCreateSaveArticles'
 import { useDeleteSaveArticle } from '@hooks/article/useDeleteSavaArticles'
 import { useCreateFollowUser } from '@hooks/user/useCreateFollowUser'
 import { useCreateOnFollowUser } from '@hooks/user/useCreateUnFollowUser'
+import { ArticleData, IArticles } from 'src/types'
 
 const Articles: FunctionComponent = () => {
   const { user } = useUser();
@@ -43,7 +44,7 @@ const Articles: FunctionComponent = () => {
   const handleFollowUnfollow = (userId: string, following: boolean) => {
     following ? createOnFollowUserMutation.mutate(userId) : createFollowUserMutation.mutate(userId);
   };
-
+  
   return (
     <>
       <Helmet>
@@ -86,11 +87,11 @@ const Articles: FunctionComponent = () => {
           px={{ base: "6px", md: "10px", lg: "15px" }}
           py="40px"
         >
-          {pinArticles?.map((article: any, index: any) => (
+          {pinArticles?.data?.map((article: IArticles, index: number) => (
             <GridItem key={index} w="100%" h="100%">
               <LatestArticleCard
                 articleImage={article?.thumbnail}
-                date={article?.created_at?.human}
+                date={article?.created_at?.human_short}
                 title={article?.title}
                 description={article?.content}
                 CTA={`/articles/${article?.slug}/${article?.id}`}
@@ -113,7 +114,7 @@ const Articles: FunctionComponent = () => {
 
             {articles && isSuccess && articles?.map((page: any, pageIndex: number) => (
               <Fragment key={pageIndex}>
-                {page?.data?.articles.map((article: any, index: number) => (
+                {page?.data?.articles.map((article: ArticleData, index: number) => (
                   <ArticlesCard
                     key={index}
                     id={article?.id}
@@ -158,7 +159,12 @@ const Articles: FunctionComponent = () => {
             )}
           </Box>
 
-          <Box width={{ base: "100%", lg: "30%" }}>
+          <Box 
+            width={{ base: "100%", md: "30%" }}
+            position={{ base: "unset", md: "sticky" }}
+            top="10px"
+            height={{ base: "auto", md: "700px" }}
+          >
             {/* <Box>
             <RecommendTopicCard />
           </Box> */}
