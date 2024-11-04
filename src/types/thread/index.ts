@@ -65,3 +65,26 @@ export interface IThreads {
   author: Author
   created_at: CreatedAt;
 }
+
+export interface IThreadUsers {
+  id: string;
+  username: string;
+  fullname: string;
+  avatar: string;
+}
+
+export interface IThreadReplies {
+  id: string;
+  user: IThreadUsers;
+  comment: string;
+  replies?: IThreadReplies[];
+}
+
+export interface IThreadComments {
+  id: string;
+  user: IThreadUsers;
+  comment: string;
+  created_at?: CreatedAt
+  replies_count?: number;
+  replies?: IThreadReplies[];
+}

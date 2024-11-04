@@ -52,7 +52,7 @@ const Threads: FunctionComponent = () => {
         <Box
           display={"flex"}
           justifyContent={"space-between"}
-          flexDir={{ base: "column", md: "row" }}
+          flexDir={{ base: "column", lg: "row" }}
           gap={5}
         >
           <Box width={{ base: "100%", md: "70%" }}>
@@ -114,7 +114,7 @@ const Threads: FunctionComponent = () => {
           </Box>
 
           <Box
-            width={{ base: "100%", md: "30%" }}
+            width={{ base: "100%", lg: "30%" }}
             position={{ base: "unset", md: "sticky" }}
             top="10px"
             height={{ base: "auto", md: "700px" }}

@@ -90,3 +90,26 @@ export interface IArticles {
   content: string;
   created_at: CreatedAt;
 }
+
+export interface IArticleUsers {
+  id: string;
+  username: string;
+  fullname: string;
+  avatar: string;
+}
+
+export interface IArticleReplies {
+  id: string;
+  user: IArticleUsers;
+  comment: string;
+  replies?: IArticleReplies[];
+}
+
+export interface IArticleComments {
+  id: string;
+  user: IArticleUsers;
+  comment: string;
+  replies_count?: number;
+  created_at?: Pick<CreatedAt, 'human'>
+  replies?: IArticleReplies[];
+}

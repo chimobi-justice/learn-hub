@@ -74,56 +74,58 @@ const FollowingUsers: FunctionComponent = () => {
         >
           <Link to={`/${user?.data?.username}`}>Back</Link>
         </Heading>
-        <Card height={{ base: "70vh", md: "80vh" }} overflowY={"auto"}>
+        <Card height={"auto"} overflowY={"auto"}>
           <CardBody>
             {isFollowingLoading && isFollowersLoading && <Loading />}
 
-            <Tabs
-              position="relative"
-              variant="unstyled"
-              index={tabIndex}
-              onChange={(index) => handleTabsChange(index)}
-            >
-              <TabList>
-                <Tab>followers</Tab>
-                <Tab>followings</Tab>
-              </TabList>
-              <TabIndicator mt='-1.5px' height='2px' bg={colors.primary} borderRadius='1px' />
-              <TabPanels>
-                <TabPanel>
-                  {isFollowersEmpty && isFollowersSuccess && (
-                    <Box textAlign="center" my="20px">
-                      <Text fontSize="lg" color="gray.600">No followers found</Text>
-                    </Box>
-                  )}
-                  {followers && isFollowersSuccess && (
-                    <FollowSection
-                      people={followers}
-                      hasMore={hasNextPageFollowers}
-                      fetchNext={fetchNextPageFollowers}
-                      isFetching={isFetchingNextPageFollowers}
-                    />
-                  )}
-                </TabPanel>
+            {followers && followings && (
+              <Tabs
+                position="relative"
+                variant="unstyled"
+                index={tabIndex}
+                onChange={(index) => handleTabsChange(index)}
+              >
+                <TabList>
+                  <Tab>followers</Tab>
+                  <Tab>followings</Tab>
+                </TabList>
+                <TabIndicator mt='-1.5px' height='2px' bg={colors.primary} borderRadius='1px' />
+                <TabPanels>
+                  <TabPanel>
+                    {isFollowersEmpty && isFollowersSuccess && (
+                      <Box textAlign="center" my="20px">
+                        <Text fontSize="lg" color="gray.600">No followers found</Text>
+                      </Box>
+                    )}
+                    {followers && isFollowersSuccess && (
+                      <FollowSection
+                        people={followers}
+                        hasMore={hasNextPageFollowers}
+                        fetchNext={fetchNextPageFollowers}
+                        isFetching={isFetchingNextPageFollowers}
+                      />
+                    )}
+                  </TabPanel>
 
-                <TabPanel>
-                  {isFollowingsEmpty && isFollowingSuccess && (
-                    <Box textAlign="center" my="20px">
-                      <Text fontSize="lg" color="gray.600">You're not following any users yet!</Text>
-                    </Box>
-                  )}
+                  <TabPanel>
+                    {isFollowingsEmpty && isFollowingSuccess && (
+                      <Box textAlign="center" my="20px">
+                        <Text fontSize="lg" color="gray.600">You're not following any users yet!</Text>
+                      </Box>
+                    )}
 
-                  {followings && isFollowingSuccess && (
-                    <FollowSection
-                      people={followings}
-                      hasMore={hasNextPageFollowings}
-                      fetchNext={fetchNextPageFollowings}
-                      isFetching={isFetchingNextPageFollowings}
-                    />
-                  )}
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
+                    {followings && isFollowingSuccess && (
+                      <FollowSection
+                        people={followings}
+                        hasMore={hasNextPageFollowings}
+                        fetchNext={fetchNextPageFollowings}
+                        isFetching={isFetchingNextPageFollowings}
+                      />
+                    )}
+                  </TabPanel>
+                </TabPanels>
+              </Tabs>
+            )}
           </CardBody>
         </Card>
       </Box>

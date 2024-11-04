@@ -160,7 +160,7 @@ const Articles: FunctionComponent = () => {
           </Box>
 
           <Box
-            width={{ base: "100%", md: "30%" }}
+            width={{ base: "100%", lg: "30%" }}
             position={{ base: "unset", md: "sticky" }}
             top="10px"
             height={{ base: "auto", md: "700px" }}
