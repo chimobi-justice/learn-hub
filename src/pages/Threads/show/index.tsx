@@ -24,6 +24,8 @@ const ShowThread: FunctionComponent = () => {
 
   const { data, isLoading, isSuccess, error } = useGetSingleThread(id!);
 
+  console.log(data)
+
   const truncateLenght = useBreakpointValue({ base: 45, md: 30, lg: 70 });
 
   if (error) return <NotFound />;
@@ -75,7 +77,7 @@ const ShowThread: FunctionComponent = () => {
                   {data?.data?.thread_comments &&
                     data?.data?.thread_comments?.length > 0
                     && (
-                      <RepliesCard data={data?.data?.thread_comments} />
+                      <RepliesCard data={data?.data?.thread_comments || []} />
                     )
                   }
                 </>

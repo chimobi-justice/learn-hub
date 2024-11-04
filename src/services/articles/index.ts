@@ -31,7 +31,7 @@ export const deleteArticle = async (id: string) => {
   return await handleResponse<MessageResponse>(axiosInstance.delete(`${DELETE_ARTICLE_ENDPOINT}/${id}`));
 }
 
-export const createArticleComment = async ({ data, id }: { data: any, id: any }) => {
+export const createArticleComment = async ({ data, id }: { data: any, id: string }) => {
   return await handleResponse<MessageResponse>(axiosInstance.post(`${CREATE_ARTICLE_COMMENT_ENDPOINT}/${id}/comments`, data));
 }
 
