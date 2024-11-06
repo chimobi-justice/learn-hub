@@ -1,15 +1,18 @@
 import { FormEvent, Fragment, FunctionComponent, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { Avatar, Box, Divider, Flex, Text } from '@chakra-ui/react'
+import { Avatar, Box, Divider, Flex, Text, useDisclosure } from '@chakra-ui/react'
 
 import { IArticleComments } from 'src/types'
 import { useUser } from '@context/userContext'
 import { useCreateArticleComment } from '@hooks/article/useCreateArticleComment'
-import { Button, ContentBlockContent, Editor } from '@components/index'
+import { Button, ContentBlockContent, Editor, ShowLoginModal } from '@components/index'
+import { useDeleteArticleComment } from '@hooks/article/useDeleteArticleComment'
 
 const CommentComponent: FunctionComponent<{ comment: IArticleComments, level: number }> = ({ comment, level }) => {
   const { user } = useUser();
   const { createArticlCommentMutation } = useCreateArticleComment();
+  const { deleteArticleCommentMutation } = useDeleteArticleComment();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { id } = useParams();
 
@@ -99,10 +102,35 @@ const CommentComponent: FunctionComponent<{ comment: IArticleComments, level: nu
               <Text fontSize="13px" cursor="pointer" onClick={() => handleShowCommentInput(comment.id)} as={"span"}>
                 Reply
               </Text>
+
+              {comment.isOwner && (
+                <Text fontSize={"13px"} color={"red.500"} cursor={"pointer"} onClick={() => {
+                  deleteArticleCommentMutation.mutate(comment.id)
+                }}>
+                  Delete
+                </Text>
+              )}
             </Flex>
+          </Flex>
+        )}
 
+        {!user && (
+          <Flex alignItems={"center"} gap={2} mb={"10px"}>
+            <Flex gap={2} alignItems={"center"}>
+              <Text fontSize="13px" cursor="pointer">
+                {comment.replies_count && comment.replies_count > 1 ? (
+                  <span onClick={handleToggleReplies}>
+                    replies {comment.replies_count} &bull;
+                  </span>
+                ) : (
+                  <></>
+                )}
+              </Text>
 
-            {/* <Text fontSize={"13px"} color={"red.500"}>Delete</Text> */}
+              <Text fontSize="13px" cursor="pointer" onClick={onOpen} as={"span"}>
+                Reply
+              </Text>
+            </Flex>
           </Flex>
         )}
 
@@ -149,6 +177,9 @@ const CommentComponent: FunctionComponent<{ comment: IArticleComments, level: nu
             ))}
         </>
       )}
+
+      <ShowLoginModal isOpen={isOpen} onClose={onClose} />
+
     </Fragment>
   );
 };

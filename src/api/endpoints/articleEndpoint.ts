@@ -16,6 +16,8 @@ export const GET_ARTHORED_ARTICLES_ENDPOINT = `${API_BASE_URL}/articles/authored
 
 export const CREATE_ARTICLE_COMMENT_ENDPOINT = `${API_BASE_URL}/articles`;
 
+export const DELETE_ARTICLE_COMMENT_ENDPOINT = `${API_BASE_URL}/articles`;
+
 export const ARTICLE_LIKE_ENDPOINT = `${API_BASE_URL}/articles`;
 
 export const ARTICLE_DISLIKE_ENDPOINT = `${API_BASE_URL}/articles`;

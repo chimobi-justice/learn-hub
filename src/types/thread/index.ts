@@ -85,6 +85,7 @@ export interface IThreadComments {
   user: IThreadUsers;
   comment: string;
   created_at?: CreatedAt
+  isOwner?: boolean;
   replies_count?: number;
   replies?: IThreadReplies[];
 }

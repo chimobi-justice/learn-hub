@@ -16,6 +16,7 @@ export const useSignin = () => {
       queryClient.invalidateQueries({ queryKey: ['user'] })
 
       localStorage.setItem('ucType_', data?.access_token);
+      localStorage.setItem('clu', JSON.stringify(true));
 
       if (location.pathname === '/auth/login') {
         navigate('/');

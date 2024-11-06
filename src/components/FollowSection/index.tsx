@@ -1,8 +1,8 @@
 import { FunctionComponent, Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import { Avatar, Box, Flex, Heading, Spacer, Text } from '@chakra-ui/react'
+import { Avatar, Box, Flex, Heading, Spacer, Text, useDisclosure } from '@chakra-ui/react'
 
-import { Button } from '@components/index'
+import { Button, ShowLoginModal } from '@components/index'
 import truncate from '@helpers/truncate'
 import { useCreateFollowUser } from '@hooks/user/useCreateFollowUser'
 import { useCreateOnFollowUser } from '@hooks/user/useCreateUnFollowUser'
@@ -16,20 +16,21 @@ interface IProps {
   isFetching: boolean;
 }
 
-const FollowSection: FunctionComponent<IProps> = ({ 
-  people, 
-  hasMore, 
-  fetchNext, 
-  isFetching 
+const FollowSection: FunctionComponent<IProps> = ({
+  people,
+  hasMore,
+  fetchNext,
+  isFetching
 }) => {
   const { user } = useUser();
   const { createFollowUserMutation } = useCreateFollowUser()
   const { createOnFollowUserMutation } = useCreateOnFollowUser();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleFollowUnfollow = (userId: string, following: boolean) => {
-    following 
-    ? createOnFollowUserMutation.mutate(userId) // Unfollow the user
-    : createFollowUserMutation.mutate(userId); // Follow the user
+    following
+      ? createOnFollowUserMutation.mutate(userId) // Unfollow the user
+      : createFollowUserMutation.mutate(userId); // Follow the user
   }
 
   return (
@@ -64,16 +65,15 @@ const FollowSection: FunctionComponent<IProps> = ({
                 )}
 
                 {!user && (
-                  <Link to={"/auth/login"}>
-                    <Button
-                      size="sm"
-                      rounded="lg"
-                      type="button"
-                      variant="outline"
-                    >
-                      follow
-                    </Button>
-                  </Link>
+                  <Button
+                    size="sm"
+                    rounded="lg"
+                    type="button"
+                    variant="outline"
+                    onClick={onOpen}
+                  >
+                    follow
+                  </Button>
                 )}
               </Flex>
 
@@ -104,6 +104,8 @@ const FollowSection: FunctionComponent<IProps> = ({
           </Button>
         </Box>
       )}
+
+      <ShowLoginModal isOpen={isOpen} onClose={onClose} />
     </>
   )
 }
