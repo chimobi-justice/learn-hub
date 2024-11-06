@@ -27,6 +27,7 @@ const handleErrorResponse = (error: any) => {
     // Handle 401 (unauthorized) by removing token from localStorage
     if (error.response?.status === 401 && localStorage.getItem('ucType_')) {
       localStorage.removeItem('ucType_');
+      localStorage.removeItem('clu');
       window.location.href = '/auth/login'
     }
     return Promise.reject(error);

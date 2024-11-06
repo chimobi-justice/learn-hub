@@ -111,5 +111,6 @@ export interface IArticleComments {
   comment: string;
   replies_count?: number;
   created_at?: Pick<CreatedAt, 'human'>
+  isOwner?: boolean;
   replies?: IArticleReplies[];
 }

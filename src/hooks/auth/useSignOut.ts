@@ -13,6 +13,7 @@ export const useSignOut = () => {
       queryClient.invalidateQueries({ queryKey: ['user'] })
 
       localStorage.removeItem('ucType_');
+      localStorage.removeItem('clu');
 
       window.location.href = "/?auth&session=signout";
     },

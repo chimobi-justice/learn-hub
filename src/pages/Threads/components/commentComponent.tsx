@@ -1,16 +1,19 @@
 import { FormEvent, Fragment, FunctionComponent, useState } from 'react'
 import { Link, useParams } from "react-router-dom";
-import { Avatar, Box, Flex, Spacer, Text } from '@chakra-ui/react'
+import { Avatar, Box, Flex, Text, useDisclosure } from '@chakra-ui/react'
 
 import { IThreadComments } from 'src/types'
 import { useUser } from '@context/userContext';
-import { Button, ContentBlockContent, Editor } from '@components/index';
-import { useCreateThreadComment } from '@hooks/thread/useCreateThreadComment';
+import { Button, ContentBlockContent, Editor, ShowLoginModal } from '@components/index'
+import { useCreateThreadComment } from '@hooks/thread/useCreateThreadComment'
+import { useDeleteThreadComment } from '@hooks/thread/useDeleteThreadComment';
 
 const CommentComponent: FunctionComponent<{ comment: IThreadComments, level: number }> = ({ comment, level }) => {
   const { user } = useUser();
   const { createThreadCommentMutation } = useCreateThreadComment();
+  const { deleteThreadCommentMutation } = useDeleteThreadComment();
   const { id } = useParams();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [showCommentInput, setShowCommentInput] = useState<string | null>(null);
   const [replyContent, setReplyContent] = useState<string>('');
@@ -68,22 +71,42 @@ const CommentComponent: FunctionComponent<{ comment: IThreadComments, level: num
                   <span onClick={handleToggleReplies}>
                     replies {comment.replies_count} &bull;
                   </span>
-                ): (
+                ) : (
                   <></>
                 )}
               </Text>
 
               <Text fontSize="13px" cursor="pointer" onClick={() => handleShowCommentInput(comment.id)} as={"span"}>
-                 Reply
+                Reply
               </Text>
             </Flex>
 
-            <Spacer />
-            
-            <Flex gap={2}>
-              {/* <Text fontSize={"13px"} color={"red.500"}>Delete</Text> */}
+            {comment.isOwner && (
+              <Text fontSize={"13px"} color={"red.500"} cursor={"pointer"} onClick={() => {
+                deleteThreadCommentMutation.mutate(comment.id)
+              }}>
+                Delete
+              </Text>
+            )}
+          </Flex>
+        )}
 
-  
+        {!user && (
+          <Flex alignItems={"center"} gap={2} mb={"10px"}>
+            <Flex gap={2} alignItems={"center"}>
+              <Text fontSize="13px" cursor="pointer">
+                {comment.replies_count && comment.replies_count > 1 ? (
+                  <span onClick={handleToggleReplies}>
+                    replies {comment.replies_count} &bull;
+                  </span>
+                ) : (
+                  <></>
+                )}
+              </Text>
+
+              <Text fontSize="13px" cursor="pointer" onClick={onOpen} as={"span"}>
+                Reply
+              </Text>
             </Flex>
           </Flex>
         )}
@@ -128,6 +151,8 @@ const CommentComponent: FunctionComponent<{ comment: IThreadComments, level: num
           </>
         )}
       </Box>
+
+      <ShowLoginModal isOpen={isOpen} onClose={onClose} />
     </Fragment>
   );
 };

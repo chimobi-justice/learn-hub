@@ -5,6 +5,7 @@ import {
   CREATE_ARTICLE_COMMENT_ENDPOINT,
   CREATE_ARTICLE_ENDPOINT,
   CREATE_SAVE_ARTICLE_ENDPOINT,
+  DELETE_ARTICLE_COMMENT_ENDPOINT,
   DELETE_ARTICLE_ENDPOINT,
   DELETE_SAVE_ARTICLE_ENDPOINT,
   EDIT_ARTICLE_ENDPOINT,
@@ -33,6 +34,10 @@ export const deleteArticle = async (id: string) => {
 
 export const createArticleComment = async ({ data, id }: { data: any, id: string }) => {
   return await handleResponse<MessageResponse>(axiosInstance.post(`${CREATE_ARTICLE_COMMENT_ENDPOINT}/${id}/comments`, data));
+}
+
+export const deleteArticleComment = async (id: string) => {
+  return await handleResponse<MessageResponse>(axiosInstance.delete(`${DELETE_ARTICLE_COMMENT_ENDPOINT}/comments/${id}`));
 }
 
 export const createArticleLike = async ({ id }: { id: string }) => {

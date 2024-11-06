@@ -7,24 +7,26 @@ import {
   CardHeader,
   Heading,
   Text,
-  useBreakpointValue
+  useBreakpointValue,
+  useDisclosure
 } from '@chakra-ui/react'
 import { Helmet } from 'react-helmet-async'
 
 import { colors } from '../../../colors'
-import { FollowCard, NotFound, Skeleton } from '@components/index'
+import { FollowCard, NotFound, ShowLoginModal, Skeleton } from '@components/index'
 // import DiscussionCard from '@pages/Threads/components/discussionCard'
 import RepliesCard from '@pages/Threads/components/repliesCard'
 import { useGetSingleThread } from '@hooks/thread/useGetSingleThread'
 import ThreadCard from '@components/ThreadCard'
 import truncate from '@helpers/truncate'
+import { useUser } from '@context/userContext'
 
 const ShowThread: FunctionComponent = () => {
   const { id } = useParams();
+  const { user } = useUser();
 
   const { data, isLoading, isSuccess, error } = useGetSingleThread(id!);
-
-  console.log(data)
+  const { onClose, onOpen, isOpen } = useDisclosure();
 
   const truncateLenght = useBreakpointValue({ base: 45, md: 30, lg: 70 });
 
@@ -81,6 +83,29 @@ const ShowThread: FunctionComponent = () => {
                     )
                   }
                 </>
+
+                <Box textAlign={"center"} p={"20px"} my={"15px"}>
+                  {!user && (
+                    <Box>
+                      <Text fontSize={"18px"}>
+                        Sign in to participate!
+                        <Text
+                          as={"span"}
+                          fontSize={"16px"}
+                          ml={"5px"}
+                          color={colors.primary}
+                          cursor={"pointer"}
+                          _hover={{
+                            color: colors.primaryDark
+                          }}
+                          onClick={onOpen}
+                        >
+                          Sign in here
+                        </Text>
+                      </Text>
+                    </Box>
+                  )}
+                </Box>
               </Box>
 
               <Box
@@ -105,6 +130,8 @@ const ShowThread: FunctionComponent = () => {
           </Box>
         </>
       )}
+
+      <ShowLoginModal isOpen={isOpen} onClose={onClose} />
     </>
   )
 }
