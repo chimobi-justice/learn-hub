@@ -4,14 +4,16 @@ import { Avatar, Box, Divider, Flex, Text, useDisclosure } from '@chakra-ui/reac
 
 import { IArticleComments } from 'src/types'
 import { useUser } from '@context/userContext'
-import { useCreateArticleComment } from '@hooks/article/useCreateArticleComment'
 import { Button, ContentBlockContent, Editor, ShowLoginModal } from '@components/index'
+import { useCreateArticleComment } from '@hooks/article/useCreateArticleComment'
 import { useDeleteArticleComment } from '@hooks/article/useDeleteArticleComment'
+import { useEditArticleComment } from '@hooks/article/useEditArticleComment'
 
 const CommentComponent: FunctionComponent<{ comment: IArticleComments, level: number }> = ({ comment, level }) => {
   const { user } = useUser();
   const { createArticlCommentMutation } = useCreateArticleComment();
   const { deleteArticleCommentMutation } = useDeleteArticleComment();
+  const { editArticlCommentMutation } = useEditArticleComment();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { id } = useParams();
@@ -19,31 +21,53 @@ const CommentComponent: FunctionComponent<{ comment: IArticleComments, level: nu
   const [showCommentInput, setShowCommentInput] = useState<string | null>(null);
   const [replyContent, setReplyContent] = useState<string>('');
   const [showAllReplies, setShowAllReplies] = useState<boolean>(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
-  const handleShowCommentInput = (articleId: any) => {
+  const handleShowCommentInput = (articleId: string, isEditingMode: boolean = false, commentText: string) => {
     if (showCommentInput === articleId) {
       setShowCommentInput(null);
+      setReplyContent("");
+      setIsEditing(false);
     } else {
       setShowCommentInput(articleId);
+      setIsEditing(isEditingMode);
+      setReplyContent(isEditingMode ? commentText : "");
     }
   }
 
-  const handleCommentSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const payload = {
-      comment: replyContent,
-      parent_id: comment.id
-    }
 
-    if (replyContent.trim()) {
-      createArticlCommentMutation.mutate({ data: payload, id: id! })
-      setReplyContent("");
+    if (!replyContent.trim()) return;
+
+    if (isEditing) {
+      editArticlCommentMutation.mutate(
+        { data: { comment: replyContent }, id: comment.id },
+        {
+          onSuccess: () => {
+            setIsEditing(false)
+            setShowCommentInput(null);
+          }
+        }
+      );
+    } else {
+      createArticlCommentMutation.mutate(
+        { data: { comment: replyContent, parent_id: comment.id }, id: id! },
+        {
+          onSuccess: () => {
+            setReplyContent("");
+            setShowCommentInput(null);
+          }
+        }
+      )
     }
   }
 
-  const handleToggleReplies = () => {
-    setShowAllReplies(prev => !prev);
-  }
+  const handleToggleReplies = () => setShowAllReplies(prev => !prev);
+
+  const handleIsEditing = (threadId: string, commentText: string) => {
+    handleShowCommentInput(threadId, true, commentText)
+  };
 
   return (
     <Fragment>
@@ -99,7 +123,11 @@ const CommentComponent: FunctionComponent<{ comment: IArticleComments, level: nu
                 )}
               </Text>
 
-              <Text fontSize="13px" cursor="pointer" onClick={() => handleShowCommentInput(comment.id)} as={"span"}>
+              <Text fontSize="13px" cursor="pointer" onClick={() => {
+                  handleShowCommentInput(comment.id, false, "")
+                }
+              }
+                as={"span"}>
                 Reply
               </Text>
 
@@ -110,6 +138,14 @@ const CommentComponent: FunctionComponent<{ comment: IArticleComments, level: nu
                   Delete
                 </Text>
               )}
+
+              {comment.isOwner && (
+              <Text fontSize={"13px"} color={"blue.500"} cursor={"pointer"} onClick={() => {
+                handleIsEditing(comment.id, comment.comment);
+              }}>
+                Edit
+              </Text>
+            )}
             </Flex>
           </Flex>
         )}
@@ -135,7 +171,7 @@ const CommentComponent: FunctionComponent<{ comment: IArticleComments, level: nu
         )}
 
         {showCommentInput === comment.id && (
-          <form onSubmit={handleCommentSubmit}>
+          <form onSubmit={handleSubmit}>
             <Box height={"160px"} mb={"40px"}>
               <Editor
                 content={replyContent}
@@ -153,7 +189,7 @@ const CommentComponent: FunctionComponent<{ comment: IArticleComments, level: nu
                 fontWeight={"semibold"}
                 rounded="sm"
                 isDisabled={!replyContent}
-                isloading={createArticlCommentMutation.isPending}
+                isloading={isEditing ? editArticlCommentMutation.isPending : createArticlCommentMutation.isPending}
               >
                 Submit
               </Button>

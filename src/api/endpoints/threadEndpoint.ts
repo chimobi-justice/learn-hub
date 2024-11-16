@@ -18,6 +18,8 @@ export const CREATE_THREAD_COMMENT_ENDPOINT = `${API_BASE_URL}/threads`;
 
 export const DELETE_THREAD_COMMENT_ENDPOINT = `${API_BASE_URL}/threads`;
 
+export const EDIT_THREAD_COMMENT_ENDPOINT = `${API_BASE_URL}/threads`;
+
 export const THREAD_LIKE_ENDPOINT = `${API_BASE_URL}/threads`;
 
 export const THREAD_DISLIKE_ENDPOINT = `${API_BASE_URL}/threads`;

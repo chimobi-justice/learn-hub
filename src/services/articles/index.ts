@@ -8,6 +8,7 @@ import {
   DELETE_ARTICLE_COMMENT_ENDPOINT,
   DELETE_ARTICLE_ENDPOINT,
   DELETE_SAVE_ARTICLE_ENDPOINT,
+  EDIT_ARTICLE_COMMENT_ENDPOINT,
   EDIT_ARTICLE_ENDPOINT,
   GET_ALL_ARTICLES_ENDPOINT,
   GET_PAGINATED_ARTICLES_ENDPOINT,
@@ -34,6 +35,10 @@ export const deleteArticle = async (id: string) => {
 
 export const createArticleComment = async ({ data, id }: { data: any, id: string }) => {
   return await handleResponse<MessageResponse>(axiosInstance.post(`${CREATE_ARTICLE_COMMENT_ENDPOINT}/${id}/comments`, data));
+}
+
+export const editArticleComment = async ({ data, id }: { data: any, id: string }) => {
+  return await handleResponse<MessageResponse>(axiosInstance.patch(`${EDIT_ARTICLE_COMMENT_ENDPOINT}/${id}/comments`, data));
 }
 
 export const deleteArticleComment = async (id: string) => {

@@ -18,6 +18,8 @@ export const CREATE_ARTICLE_COMMENT_ENDPOINT = `${API_BASE_URL}/articles`;
 
 export const DELETE_ARTICLE_COMMENT_ENDPOINT = `${API_BASE_URL}/articles`;
 
+export const EDIT_ARTICLE_COMMENT_ENDPOINT = `${API_BASE_URL}/articles`;
+
 export const ARTICLE_LIKE_ENDPOINT = `${API_BASE_URL}/articles`;
 
 export const ARTICLE_DISLIKE_ENDPOINT = `${API_BASE_URL}/articles`;

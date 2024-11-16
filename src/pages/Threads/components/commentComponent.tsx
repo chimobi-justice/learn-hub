@@ -6,43 +6,67 @@ import { IThreadComments } from 'src/types'
 import { useUser } from '@context/userContext';
 import { Button, ContentBlockContent, Editor, ShowLoginModal } from '@components/index'
 import { useCreateThreadComment } from '@hooks/thread/useCreateThreadComment'
-import { useDeleteThreadComment } from '@hooks/thread/useDeleteThreadComment';
+import { useDeleteThreadComment } from '@hooks/thread/useDeleteThreadComment'
+import { useEditThreadComment } from '@hooks/thread/useEditThreadComment'
 
 const CommentComponent: FunctionComponent<{ comment: IThreadComments, level: number }> = ({ comment, level }) => {
   const { user } = useUser();
   const { createThreadCommentMutation } = useCreateThreadComment();
   const { deleteThreadCommentMutation } = useDeleteThreadComment();
+  const { editThreadCommentMutation } = useEditThreadComment();
   const { id } = useParams();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [showCommentInput, setShowCommentInput] = useState<string | null>(null);
   const [replyContent, setReplyContent] = useState<string>('');
   const [showAllReplies, setShowAllReplies] = useState<boolean>(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
-  const handleShowCommentInput = (threadId: any) => {
+  const handleShowCommentInput = (threadId: string, isEditingMode: boolean = false, commentText: string) => {
     if (showCommentInput === threadId) {
       setShowCommentInput(null);
+      setReplyContent("");
+      setIsEditing(false);
     } else {
       setShowCommentInput(threadId);
+      setIsEditing(isEditingMode);
+      setReplyContent(isEditingMode ? commentText : "");
     }
   }
 
-  const handleCommentSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const payload = {
-      comment: replyContent,
-      parent_id: comment.id
-    };
 
-    if (replyContent.trim()) {
-      createThreadCommentMutation.mutate({ data: payload, id: id! });
-      setReplyContent("");
+    if (!replyContent.trim()) return;
+
+    if (isEditing) {
+      editThreadCommentMutation.mutate(
+        { data: { comment: replyContent }, id: comment.id },
+        {
+          onSuccess: () => {
+            setIsEditing(false)
+            setShowCommentInput(null);
+          }
+        }
+      );
+    } else {
+      createThreadCommentMutation.mutate(
+        { data: { comment: replyContent, parent_id: comment.id }, id: id! },
+        {
+          onSuccess: () => {
+            setReplyContent("");
+            setShowCommentInput(null);
+          }
+        }
+      )
     }
   }
 
-  const handleToggleReplies = () => {
-    setShowAllReplies(prev => !prev);
-  }
+  const handleToggleReplies = () => setShowAllReplies(prev => !prev);
+
+  const handleIsEditing = (threadId: string, commentText: string) => {
+    handleShowCommentInput(threadId, true, commentText)
+  };
 
   return (
     <Fragment>
@@ -76,7 +100,11 @@ const CommentComponent: FunctionComponent<{ comment: IThreadComments, level: num
                 )}
               </Text>
 
-              <Text fontSize="13px" cursor="pointer" onClick={() => handleShowCommentInput(comment.id)} as={"span"}>
+              <Text fontSize="13px" cursor="pointer" onClick={() => {
+                  handleShowCommentInput(comment.id, false, "")
+                }
+              }
+                as={"span"}>
                 Reply
               </Text>
             </Flex>
@@ -86,6 +114,14 @@ const CommentComponent: FunctionComponent<{ comment: IThreadComments, level: num
                 deleteThreadCommentMutation.mutate(comment.id)
               }}>
                 Delete
+              </Text>
+            )}
+
+            {comment.isOwner && (
+              <Text fontSize={"13px"} color={"blue.500"} cursor={"pointer"} onClick={() => {
+                handleIsEditing(comment.id, comment.comment);
+              }}>
+                Edit
               </Text>
             )}
           </Flex>
@@ -112,12 +148,12 @@ const CommentComponent: FunctionComponent<{ comment: IThreadComments, level: num
         )}
 
         {showCommentInput === comment.id && (
-          <form onSubmit={handleCommentSubmit}>
+          <form onSubmit={handleSubmit}>
             <Box height={"160px"} mb={"25px"}>
               <Editor
                 content={replyContent}
                 setContent={setReplyContent}
-                placeholder="Write your reply..."
+                placeholder={isEditing ? 'Edit your reply...' : 'Write your reply...'}
               />
             </Box>
 
@@ -130,7 +166,7 @@ const CommentComponent: FunctionComponent<{ comment: IThreadComments, level: num
                 fontWeight={"semibold"}
                 rounded="sm"
                 isDisabled={!replyContent}
-                isloading={createThreadCommentMutation.isPending}
+                isloading={isEditing ? editThreadCommentMutation.isPending : createThreadCommentMutation.isPending}
               >
                 Submit
               </Button>
@@ -156,7 +192,5 @@ const CommentComponent: FunctionComponent<{ comment: IThreadComments, level: num
     </Fragment>
   );
 };
-
-
 
 export default CommentComponent;

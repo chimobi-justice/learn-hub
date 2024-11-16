@@ -10,6 +10,7 @@ import {
   THREAD_LIKE_ENDPOINT,
   GET_PAGINATED_THREADS_ENDPOINT,
   DELETE_THREAD_COMMENT_ENDPOINT,
+  EDIT_THREAD_COMMENT_ENDPOINT,
 } from '@api/index'
 import { handleResponse, getWithPagination } from '@utils/apiHelpers'
 import { IThreadRequest, IThreadResponse, MessageResponse, Thread } from 'src/types'
@@ -28,6 +29,10 @@ export const deleteThread = async (id: string) => {
 
 export const createThreadComment = async ({ data, id }: { data: any, id: string }) => {
   return await handleResponse<MessageResponse>(axiosInstance.post(`${CREATE_THREAD_COMMENT_ENDPOINT}/${id}/comments`, data));
+}
+
+export const editThreadComment = async ({ data, id }: { data: any, id: string }) => {
+  return await handleResponse<MessageResponse>(axiosInstance.patch(`${EDIT_THREAD_COMMENT_ENDPOINT}/${id}/comments`, data));
 }
 
 export const deleteThreadComment = async (id: string) => {
