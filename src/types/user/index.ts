@@ -6,13 +6,11 @@ export interface IUserProps {
   username: string;
   email: string;
   avatar: string;
-  twitter: string;
-  gitHub: string;
-  website: string;
   profile_headlines: string;
   state: string;
   country: string;
   bio: string;
+  socials?: ISocial[];
   followers?: number;
   followings?: number;
   is_following?: boolean;
@@ -22,7 +20,12 @@ export interface IUser {
   data: IUserProps
 }
 
-export interface IUserProfile extends Omit<IUserProps, 'id'>  {}
+export interface ISocial {
+  platform: string;
+  link: string;
+}
+
+export interface IUserProfile extends Omit<IUserProps, 'id'>  { }
 
 export interface IUserProfileAvatar {
   avatar: string;

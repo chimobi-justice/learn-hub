@@ -1,8 +1,8 @@
+import { ISocial } from "./user";
+
 export interface AuthorDetails {
   bio: string | null;
-  twitter: string | null;
-  gitHub: string | null;
-  website: string | null;
+  socials: ISocial[];
 }
 
 export interface CreatedAt {
