@@ -11,14 +11,14 @@ import {
   Image,
   Text
 } from '@chakra-ui/react'
-import { FaGithub, FaXTwitter } from 'react-icons/fa6'
-import { GiWorld } from 'react-icons/gi'
 import { Helmet } from 'react-helmet-async'
 
 import { FollowCard, Button } from '@components/index'
 import CoverPic from '@assets/images/cover.jpg'
 import { useUser } from '@context/userContext'
 import { colors } from '../../../colors'
+import { ISocial } from 'src/types'
+import { getSocialMediaIcon } from '@helpers/getSocialMediaIcon'
 
 const Profile: FunctionComponent = () => {
   const { user } = useUser();
@@ -96,47 +96,19 @@ const Profile: FunctionComponent = () => {
                     spacing={3}
                     my={"10px"}
                   >
-                    {user?.data?.gitHub && (
+                    {user?.data?.socials?.map((social: ISocial) => (
                       <Link
-                        to={`https://www.github.com/${user?.data?.gitHub}`}
+                        to={social?.link}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
                         <Text
                           fontSize={{ base: "15px", md: "18px" }}
                         >
-                          <FaGithub style={{ fontSize: "24px", marginBottom: "5px" }} />
+                          {getSocialMediaIcon(social.platform, "24px")}
                         </Text>
                       </Link>
-                    )}
-
-                    {user?.data?.twitter && (
-                      <Link
-                        to={`https://x.com/${user?.data?.twitter}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Text
-                          fontSize={{ base: "15px", md: "18px" }}
-                        >
-                          <FaXTwitter style={{ fontSize: "24px", marginBottom: "5px" }} />
-                        </Text>
-                      </Link>
-                    )}
-
-                    {user?.data?.website && (
-                      <Link
-                        to={user?.data?.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Text
-                          fontSize={{ base: "15px", md: "18px" }}
-                        >
-                          <GiWorld style={{ fontSize: "24px", marginBottom: "5px" }} />
-                        </Text>
-                      </Link>
-                    )}
+                    ))}
                   </HStack>
                 </Box>
 

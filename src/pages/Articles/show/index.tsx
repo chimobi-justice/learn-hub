@@ -1,8 +1,6 @@
 import { FunctionComponent } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Avatar, Box, Flex, HStack, Image, Text } from '@chakra-ui/react'
-import { FaGithub, FaXTwitter } from 'react-icons/fa6'
-import { GiWorld } from 'react-icons/gi'
 import { Helmet } from 'react-helmet-async'
 
 import ArticleHeroSection from '@pages/Articles/HeroSection'
@@ -21,6 +19,8 @@ import { useCreateFollowUser } from '@hooks/user/useCreateFollowUser'
 import { useCreateOnFollowUser } from '@hooks/user/useCreateUnFollowUser'
 import useScrollToTop from '@hooks/useScrollToTop'
 import { useUser } from '@context/userContext'
+import { ISocial } from 'src/types'
+import { getSocialMediaIcon } from '@helpers/getSocialMediaIcon'
 
 const ShowArticle: FunctionComponent = () => {
   const { id } = useParams();
@@ -52,21 +52,19 @@ const ShowArticle: FunctionComponent = () => {
 
   const renderAuthorSocialLinks = () => (
     <HStack spacing={3} my="10px" justify="center">
-      {data?.data?.author?.info_details?.gitHub && (
-        <Link to={`https://www.github.com/${data?.data?.author?.info_details?.gitHub}`} target="_blank" rel="noopener noreferrer">
-          <FaGithub fontSize="24px" style={{ marginBottom: '5px' }} />
+      {data?.data?.author?.info_details?.socials?.map((social: ISocial) => (
+        <Link
+          to={social?.link}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Text
+            fontSize={{ base: "15px", md: "18px" }}
+          >
+            {getSocialMediaIcon(social.platform, "24px")}
+          </Text>
         </Link>
-      )}
-      {data?.data?.author?.info_details?.twitter && (
-        <Link to={`https://x.com/${data?.data?.author?.info_details?.twitter}`} target="_blank" rel="noopener noreferrer">
-          <FaXTwitter fontSize="24px" style={{ marginBottom: '5px' }} />
-        </Link>
-      )}
-      {data?.data?.author?.info_details?.website && (
-        <Link to={`${data?.data?.author?.info_details?.website}`} target="_blank" rel="noopener noreferrer">
-          <GiWorld fontSize="24px" style={{ marginBottom: '5px' }} />
-        </Link>
-      )}
+      ))}
     </HStack>
   );
 
