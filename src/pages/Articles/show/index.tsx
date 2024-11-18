@@ -1,8 +1,6 @@
 import { FunctionComponent } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Avatar, Box, Flex, HStack, Image, Text } from '@chakra-ui/react'
-import { FaGithub, FaXTwitter } from 'react-icons/fa6'
-import { GiWorld } from 'react-icons/gi'
 import { Helmet } from 'react-helmet-async'
 
 import ArticleHeroSection from '@pages/Articles/HeroSection'
