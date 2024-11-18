@@ -55,7 +55,7 @@ const UpdateProfile: FunctionComponent = () => {
 
   const handleAddSocial = (platform: string) => {
     if (socials.length >= 4) {
-      errorNotification('You can only add up to 3 social media accounts.');
+      errorNotification('You can only add up to 4 social media accounts.');
       return;
     }
 
