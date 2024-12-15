@@ -70,7 +70,7 @@ const CommentComponent: FunctionComponent<{ comment: IThreadComments, level: num
 
   return (
     <Fragment>
-      <Box mb={"5px"} ml={`${level * 20}px`}>
+      <Box mb={"5px"}>
         <Flex flex="1" gap={2} alignItems="flex-start" flexWrap="wrap">
           <Link to={`/user/${comment?.user?.username}`}>
             <Avatar size={"xs"} name={comment?.user?.fullname} src={comment?.user?.avatar} />
@@ -176,7 +176,7 @@ const CommentComponent: FunctionComponent<{ comment: IThreadComments, level: num
 
         {/* Render nested replies */}
         {comment.replies && comment.replies.length > 0 && (
-          <>
+          <Box ml={`${level * 20}px`}>
             {showAllReplies
               ? comment.replies.map(reply => (
                 <CommentComponent key={reply.id} comment={reply} level={level + 1} />
@@ -184,7 +184,7 @@ const CommentComponent: FunctionComponent<{ comment: IThreadComments, level: num
               : comment.replies.slice(0, 1).map(reply => (
                 <CommentComponent key={reply.id} comment={reply} level={level + 1} />
               ))}
-          </>
+          </Box>
         )}
       </Box>
 

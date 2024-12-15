@@ -71,7 +71,7 @@ const CommentComponent: FunctionComponent<{ comment: IArticleComments, level: nu
 
   return (
     <Fragment>
-      <Box mb={"5px"} ml={`${level * 10}px`}> {/* Indent based on level */}
+      <Box mb={"5px"}> {/* Indent based on level */}
         <Box
           display={"flex"}
           justifyContent={"flex-start"}
@@ -203,7 +203,7 @@ const CommentComponent: FunctionComponent<{ comment: IArticleComments, level: nu
 
       {/* Render nested replies */}
       {comment.replies && comment.replies.length > 0 && (
-        <>
+        <Box ml={`${level * 10}px`}>
           {showAllReplies
             ? comment.replies.map(reply => (
               <CommentComponent key={reply.id} comment={reply} level={level + 1} />
@@ -211,7 +211,7 @@ const CommentComponent: FunctionComponent<{ comment: IArticleComments, level: nu
             : comment.replies.slice(0, 1).map(reply => (
               <CommentComponent key={reply.id} comment={reply} level={level + 1} />
             ))}
-        </>
+        </Box>
       )}
 
       <ShowLoginModal isOpen={isOpen} onClose={onClose} />
