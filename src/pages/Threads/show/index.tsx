@@ -1,34 +1,37 @@
 import { FunctionComponent } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import {
   Box,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
   Card,
   CardBody,
   CardHeader,
   Heading,
   Text,
-  useBreakpointValue,
   useDisclosure
 } from '@chakra-ui/react'
 import { Helmet } from 'react-helmet-async'
+import { MdOutlineChevronRight } from 'react-icons/md'
 
 import { colors } from '../../../colors'
-import { FollowCard, NotFound, ShowLoginModal, Skeleton } from '@components/index'
+import { FollowCard, NotFound, ShowLoginModal, Skeleton, ThreadCard } from '@components/index'
 // import DiscussionCard from '@pages/Threads/components/discussionCard'
 import RepliesCard from '@pages/Threads/components/repliesCard'
 import { useGetSingleThread } from '@hooks/thread/useGetSingleThread'
-import ThreadCard from '@components/ThreadCard'
-import truncate from '@helpers/truncate'
 import { useUser } from '@context/userContext'
+import useScrollToTop from '@hooks/useScrollToTop'
 
 const ShowThread: FunctionComponent = () => {
   const { id } = useParams();
   const { user } = useUser();
-
   const { data, isLoading, isSuccess, error } = useGetSingleThread(id!);
+
   const { onClose, onOpen, isOpen } = useDisclosure();
 
-  const truncateLenght = useBreakpointValue({ base: 45, md: 30, lg: 70 });
+  // scroll to top when URL changes on the UI 
+  useScrollToTop()
 
   if (error) return <NotFound />;
 
@@ -46,15 +49,18 @@ const ShowThread: FunctionComponent = () => {
             width={"90%"}
             m={"4rem auto"}
           >
-            <Heading
-              pb={"25px"}
-              size={"md"}
-              alignItems={"center"}
+            <Box
+              pb={"20px"}
             >
-              <Text as={"span"} color={"#0009"}><Link to="/threads">Discussions</Link></Text>
-              {" > "}
-              <Text as={"span"}>{truncate(data?.data?.title, truncateLenght)}</Text>
-            </Heading>
+              <Breadcrumb separator={<MdOutlineChevronRight color='gray.500' />}>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/threads">Discussions</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbItem>
+                  <BreadcrumbLink isCurrentPage color={"gray.600"}>Threads</BreadcrumbLink>
+                </BreadcrumbItem>
+              </Breadcrumb>
+            </Box>
 
             <Box
               display={"flex"}
