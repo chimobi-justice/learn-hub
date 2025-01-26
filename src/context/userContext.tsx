@@ -15,13 +15,7 @@ interface UserContextType {
   isSuccess: boolean;
 }
 
-const defaultContextValue: UserContextType = {
-  user: null,
-  isLoading: true,
-  isSuccess: false
-}
-
-const UserContext = createContext<UserContextType>(defaultContextValue);
+const UserContext = createContext<UserContextType>({} as UserContextType);
 
 const UserContextProvider = ({ children }: { children: ReactNode }): ReactElement => {
   const [user, setUser] = useState<any>(null);
@@ -30,7 +24,7 @@ const UserContextProvider = ({ children }: { children: ReactNode }): ReactElemen
 
   const clu = JSON.parse(localStorage.getItem('clu') || "false");
 
-  const { data, isLoading: loading, isSuccess: success } = useGetUser();
+  const { data, isLoading: loading, isSuccess: success } = useGetUser(clu);
 
   useEffect(() => {
     if (clu && success && data) {
