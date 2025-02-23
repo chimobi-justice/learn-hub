@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Avatar, Box, Container, Flex, Heading, Text } from '@chakra-ui/react'
 import { Helmet } from 'react-helmet-async'
 
-import { ArticlesCard, Button, Skeleton } from '@components/index'
+import { ArticlesCard, Button, EmptyState, Skeleton } from '@components/index'
 import { useUser } from '@context/userContext'
 import { useSavedArticles } from '@hooks/article/useGetSavedArticles'
 import { colors } from '../../../colors'
@@ -51,7 +51,7 @@ const SavedArticles: FunctionComponent = () => {
             </Box>
 
             <Box>
-              {isLoading && <Skeleton />}
+              {isLoading && <Skeleton count={3} />}
 
               {articles && isSuccess && articles?.map((page: any, pageIndex: number) => (
                 <Fragment key={pageIndex}>
@@ -75,6 +75,10 @@ const SavedArticles: FunctionComponent = () => {
                       saveUnsavedArticle={() => deleteSaveArticleMutation.mutate(article?.id)}
                     />
                   ))}
+
+                  {page?.data?.articles.length === 0 && (
+                    <EmptyState title='Your save articles will show up here.' />
+                  )}
                 </Fragment>
               ))}
 

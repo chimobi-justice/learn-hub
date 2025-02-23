@@ -20,7 +20,7 @@ const HomeArticles: FunctionComponent = () => {
         Lat<Text as="span" color={colors.primary}>est</Text> Ar<Text as="span" color={colors.primary}>tic</Text>les
       </Heading>
 
-      {isLoading && <Skeleton />}
+      {isLoading && <Skeleton count={3} />}
 
       {articles && isSuccess && (
         <>

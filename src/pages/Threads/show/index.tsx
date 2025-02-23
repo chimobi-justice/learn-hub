@@ -16,7 +16,7 @@ import { Helmet } from 'react-helmet-async'
 import { MdOutlineChevronRight } from 'react-icons/md'
 
 import { colors } from '../../../colors'
-import { FollowCard, NotFound, ShowLoginModal, Skeleton, ThreadCard } from '@components/index'
+import { FollowCard, NotFound, ShowAuthModal, Skeleton, ThreadCard } from '@components/index'
 // import DiscussionCard from '@pages/Threads/components/discussionCard'
 import RepliesCard from '@pages/Threads/components/repliesCard'
 import { useGetSingleThread } from '@hooks/thread/useGetSingleThread'
@@ -37,7 +37,7 @@ const ShowThread: FunctionComponent = () => {
 
   return (
     <>
-      {isLoading && <Skeleton />}
+      {isLoading && <Skeleton count={3} />}
 
       {data && isSuccess && (
         <>
@@ -137,7 +137,7 @@ const ShowThread: FunctionComponent = () => {
         </>
       )}
 
-      <ShowLoginModal isOpen={isOpen} onClose={onClose} />
+      <ShowAuthModal isOpen={isOpen} onClose={onClose} />
     </>
   )
 }

@@ -9,7 +9,7 @@ import { FaFacebook, FaXTwitter, FaLinkedin } from 'react-icons/fa6'
 import { getFacebookUrl, getTwitterUrl, getLinkedinUrl } from '@phntms/react-share'
 
 import { useUser } from '@context/userContext'
-import { ShowLoginModal, TextSpeech } from '@components/index'
+import { ShowAuthModal, TextSpeech } from '@components/index'
 import { ArticleActionButtonsProps } from 'src/types'
 
 const ArticleActionButtons: FunctionComponent<ArticleActionButtonsProps> = ({
@@ -114,7 +114,7 @@ const ArticleActionButtons: FunctionComponent<ArticleActionButtonsProps> = ({
         )}
       </HStack>
 
-      <ShowLoginModal isOpen={isOpen} onClose={onClose} />
+      <ShowAuthModal isOpen={isOpen} onClose={onClose} />
     </Box>
   );
 };

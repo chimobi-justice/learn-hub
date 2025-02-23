@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { API_BASE_URL } from '@api/constant'
+import { LOCAL_STORAGE_VALUES } from '@constant/Localstorage'
 
 // Configure the base axios instance
 export const axiosInstance = axios.create({
@@ -14,7 +15,7 @@ export const axiosInstance = axios.create({
 
 // Request Interceptor to add Authorization header
 const addAuthorizationHeader = (config: any) => {
-  const token = localStorage.getItem('ucType_');
+  const token = localStorage.getItem(LOCAL_STORAGE_VALUES.ucType_);
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -25,9 +26,9 @@ const addAuthorizationHeader = (config: any) => {
 const handleErrorResponse = (error: any) => {
   if (axios.isAxiosError(error)) {
     // Handle 401 (unauthorized) by removing token from localStorage
-    if (error.response?.status === 401 && localStorage.getItem('ucType_')) {
-      localStorage.removeItem('ucType_');
-      localStorage.removeItem('clu');
+    if (error.response?.status === 401 && localStorage.getItem(LOCAL_STORAGE_VALUES.ucType_)) {
+      localStorage.removeItem(LOCAL_STORAGE_VALUES.ucType_);
+      localStorage.removeItem(LOCAL_STORAGE_VALUES.clu);
       window.location.href = '/auth/login'
     }
     return Promise.reject(error);

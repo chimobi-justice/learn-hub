@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react'
 
 import { colors } from '../../colors'
-import { Button, ShowLoginModal } from '@components/index'
+import { Button, ShowAuthModal } from '@components/index'
 import truncate from '@helpers/truncate'
 import { useGetThreeCardUsers } from '@hooks/user/useGetAllUsersToFollow'
 import { useUser } from '@context/userContext'
@@ -116,7 +116,7 @@ const FollowCard: FunctionComponent = () => {
         )}
       </Card>
 
-      <ShowLoginModal isOpen={isOpen} onClose={onClose} />
+      <ShowAuthModal isOpen={isOpen} onClose={onClose} />
     </>
   )
 }

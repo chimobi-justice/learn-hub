@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { signoutUser } from '@services/auth'
 import { errorNotification, successNotification } from '@helpers/notification'
+import { LOCAL_STORAGE_VALUES } from '@constant/Localstorage'
 
 export const useSignOut = () => {
   const queryClient = useQueryClient();
@@ -12,8 +13,8 @@ export const useSignOut = () => {
       successNotification(data.message);
       queryClient.invalidateQueries({ queryKey: ['user'] })
 
-      localStorage.removeItem('ucType_');
-      localStorage.removeItem('clu');
+      localStorage.removeItem(LOCAL_STORAGE_VALUES.ucType_);
+      localStorage.removeItem(LOCAL_STORAGE_VALUES.clu);
 
       window.location.href = "/?auth&session=signout";
     },

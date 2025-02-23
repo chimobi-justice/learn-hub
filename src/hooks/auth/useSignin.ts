@@ -1,11 +1,11 @@
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { signinUser } from '@services/auth'
 import { errorNotification, successNotification } from '@helpers/notification'
+import { LOCAL_STORAGE_VALUES } from '@constant/Localstorage'
 
 export const useSignin = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const queryClient = useQueryClient();
 
@@ -15,11 +15,11 @@ export const useSignin = () => {
       successNotification(data.message);
       queryClient.invalidateQueries({ queryKey: ['user'] })
 
-      localStorage.setItem('ucType_', data?.access_token);
-      localStorage.setItem('clu', JSON.stringify(true));
+      localStorage.setItem(LOCAL_STORAGE_VALUES.ucType_, data?.access_token);
+      localStorage.setItem(LOCAL_STORAGE_VALUES.clu, JSON.stringify(true));
 
       if (location.pathname === '/auth/login') {
-        navigate('/');
+        window.location.href = '/'
       } else {
         window.location.reload();
       }

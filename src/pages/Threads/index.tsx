@@ -56,7 +56,7 @@ const Threads: FunctionComponent = () => {
           gap={5}
         >
           <Box width={{ base: "100%", md: "70%" }}>
-            {isLoading && <Skeleton />}
+            {isLoading && <Skeleton count={3} />}
 
             {threads && isSuccess && (
               <>

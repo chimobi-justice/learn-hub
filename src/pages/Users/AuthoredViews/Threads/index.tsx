@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react'
 import { Helmet } from 'react-helmet-async'
 
-import { FollowCard, Button, Alert, Skeleton, EmptyState, NotFound, ContentBlockContent } from '@components/index'
+import { FollowCard, Button, Alert, Skeleton, EmptyState, NotFound, CodeBlockContent } from '@components/index'
 import { useGetAuthoredThreads } from '@hooks/thread/useGetAuthoredThreads'
 import { Link, useParams } from 'react-router-dom'
 import { MdDeleteOutline, MdOutlineThumbUp } from 'react-icons/md'
@@ -110,7 +110,7 @@ const ArthoredThreads: FunctionComponent = () => {
         >
           <Box width={{ base: "100%", md: "70%" }}>
             <Box>
-              {isLoading && <Skeleton />}
+              {isLoading && <Skeleton count={3} />}
 
               {threads && isSuccess && threads?.map((page: any, pageIndex: number) => (
                 <Fragment key={pageIndex}>
@@ -142,7 +142,7 @@ const ArthoredThreads: FunctionComponent = () => {
 
                           <Box my={"14px"}>
                             <Box height={"130px"} overflow={"hidden"} p="5px">
-                              <ContentBlockContent content={truncate(thread?.content, 250)} />
+                              <CodeBlockContent content={truncate(thread?.content, 250)} />
                             </Box>
 
                             <HStack borderTop={"1px solid #f1f1f1"} pt={"7px"}>
@@ -162,7 +162,7 @@ const ArthoredThreads: FunctionComponent = () => {
                   ))}
 
                   {!isLoading && isSuccess && page?.data?.threads?.length === 0 && (
-                    <EmptyState />
+                    <EmptyState title="You don't have any threads yet" />
                   )}
                 </Fragment>
               ))}

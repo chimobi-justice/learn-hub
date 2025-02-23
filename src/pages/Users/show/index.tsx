@@ -20,7 +20,7 @@ import PublicUserArticles from '@pages/Users/show/articles'
 import PublicUserThreads from '@pages/Users/show/thread'
 import { useGetPublicUser } from '@hooks/user/useGetPublicUser'
 import PublicUserAboutDetails from '@pages/Users/show/about'
-import { Button, FollowCard, NotFound, ShowLoginModal, Skeleton } from '@components/index'
+import { Button, FollowCard, NotFound, ShowAuthModal, Skeleton } from '@components/index'
 import { Helmet } from 'react-helmet-async'
 import { useCreateFollowUser } from '@hooks/user/useCreateFollowUser'
 import { useCreateOnFollowUser } from '@hooks/user/useCreateUnFollowUser'
@@ -39,7 +39,7 @@ const ShowUserPublicPosts: FunctionComponent = () => {
     is_following ? createOnFollowUserMutation.mutate(userId) : createFollowUserMutation.mutate(userId);
   }
 
-  if (isLoading) return <Skeleton />
+  if (isLoading) return <Skeleton count={3} />
 
   if (!data) return <NotFound />;
 
@@ -145,7 +145,7 @@ const ShowUserPublicPosts: FunctionComponent = () => {
         </Box>
       </Container>
 
-      <ShowLoginModal isOpen={isOpen} onClose={onClose} />
+      <ShowAuthModal isOpen={isOpen} onClose={onClose} />
     </>
   )
 }

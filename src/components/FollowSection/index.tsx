@@ -2,7 +2,7 @@ import { FunctionComponent, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { Avatar, Box, Flex, Heading, Spacer, Text, useDisclosure } from '@chakra-ui/react'
 
-import { Button, ShowLoginModal } from '@components/index'
+import { Button, ShowAuthModal } from '@components/index'
 import truncate from '@helpers/truncate'
 import { useCreateFollowUser } from '@hooks/user/useCreateFollowUser'
 import { useCreateOnFollowUser } from '@hooks/user/useCreateUnFollowUser'
@@ -105,7 +105,7 @@ const FollowSection: FunctionComponent<IProps> = ({
         </Box>
       )}
 
-      <ShowLoginModal isOpen={isOpen} onClose={onClose} />
+      <ShowAuthModal isOpen={isOpen} onClose={onClose} />
     </>
   )
 }

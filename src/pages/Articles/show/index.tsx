@@ -9,7 +9,7 @@ import ArticleActionButtons from '@pages/Articles/components/ArticleActionButton
 import RelatedArticles from '@pages/Articles/components/RelatedArticles'
 import { useArticleActions } from '@pages/Articles/hooks/useArticleActions'
 
-import { ContentBlockContent, NotFound, Skeleton } from '@components/index'
+import { CodeBlockContent, NotFound, Skeleton } from '@components/index'
 import truncate from '@helpers/truncate'
 
 import { useGetSingleArticle } from '@hooks/article/useGetSingleArticle'
@@ -105,7 +105,7 @@ const ShowArticle: FunctionComponent = () => {
 
   return (
     <>
-      {isLoading && <Skeleton />}
+      {isLoading && <Skeleton count={3} />}
 
       {data && isSuccess && (
         <Box>
@@ -140,7 +140,7 @@ const ShowArticle: FunctionComponent = () => {
             <Box>
               <Image src={data?.data?.thumbnail} width="100%" height="350px" mb="25px" />
 
-              <ContentBlockContent content={data?.data?.content} />
+              <CodeBlockContent content={data?.data?.content} />
 
               {renderAuthorInfo()}
             </Box>

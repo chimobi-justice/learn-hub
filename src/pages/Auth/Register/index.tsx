@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Box, Card, CardBody, CardHeader, Heading, Text } from '@chakra-ui/react'
 import { Formik } from 'formik'
 import { Helmet } from 'react-helmet-async'
@@ -12,9 +12,14 @@ import { ISignup } from 'src/types'
 
 const Register: FunctionComponent = () => {
   const { signupMutation } = useSignup();
+  const navigate = useNavigate();
 
   const handleSignup = (values: ISignup) => {
-    signupMutation.mutate(values);
+    signupMutation.mutate(values, {
+      onSuccess: () => {
+        navigate('/auth/login');
+      }
+    });
   };
 
   const initialValues: ISignup = {

@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { deleteAccount } from '@services/user'
 import { errorNotification } from '@helpers/notification'
+import { LOCAL_STORAGE_VALUES } from '@constant/Localstorage'
 
 export const useDeleteAccount = () => {
   const queryClient = useQueryClient();
@@ -11,7 +12,7 @@ export const useDeleteAccount = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['user'] })
 
-      localStorage.removeItem('ucType_');
+      localStorage.removeItem(LOCAL_STORAGE_VALUES.ucType_);
 
       location.href = "/auth/login";
     },

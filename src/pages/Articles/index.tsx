@@ -110,7 +110,7 @@ const Articles: FunctionComponent = () => {
           my={"3rem"}
         >
           <Box width={{ base: "100%", lg: "70%" }}>
-            {isLoading && <Skeleton />}
+            {isLoading && <Skeleton count={3} />}
 
             {articles && isSuccess && articles?.map((page: any, pageIndex: number) => (
               <Fragment key={pageIndex}>

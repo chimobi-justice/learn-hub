@@ -4,7 +4,7 @@ import { Avatar, Box, Flex, Text, useDisclosure } from '@chakra-ui/react'
 
 import { IThreadComments } from 'src/types'
 import { useUser } from '@context/userContext';
-import { Button, ContentBlockContent, Editor, ShowLoginModal } from '@components/index'
+import { Button, CodeBlockContent, Editor, ShowAuthModal } from '@components/index'
 import { useCreateThreadComment } from '@hooks/thread/useCreateThreadComment'
 import { useDeleteThreadComment } from '@hooks/thread/useDeleteThreadComment'
 import { useEditThreadComment } from '@hooks/thread/useEditThreadComment'
@@ -85,7 +85,7 @@ const CommentComponent: FunctionComponent<{ comment: IThreadComments, level: num
           </Box>
         </Flex>
 
-        <ContentBlockContent content={comment.comment} />
+        <CodeBlockContent content={comment.comment} />
 
         {user && (
           <Flex alignItems={"center"} gap={2} mb={"10px"}>
@@ -188,7 +188,7 @@ const CommentComponent: FunctionComponent<{ comment: IThreadComments, level: num
         )}
       </Box>
 
-      <ShowLoginModal isOpen={isOpen} onClose={onClose} />
+      <ShowAuthModal isOpen={isOpen} onClose={onClose} />
     </Fragment>
   );
 };

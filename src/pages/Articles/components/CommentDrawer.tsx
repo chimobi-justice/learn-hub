@@ -13,7 +13,7 @@ import {
   useDisclosure
 } from '@chakra-ui/react'
 
-import { Button, Editor, ShowLoginModal } from '@components/index'
+import { Button, Editor, ShowAuthModal } from '@components/index'
 import { useUser } from '@context/userContext'
 import { colors } from '../../../colors'
 import { CommentDrawerProps } from 'src/types'
@@ -30,7 +30,7 @@ const CommentDrawer: FunctionComponent<CommentDrawerProps> = ({
   isSubmitting
 }) => {
   const { user } = useUser();
-  const { onClose: onCloseShowLoginModal, onOpen: onOpenShowLoginModal, isOpen: isOpenShowLoginModal } = useDisclosure();
+  const { onClose: onCloseShowAuthModal, onOpen: onOpenShowAuthModal, isOpen: isOpenShowAuthModal } = useDisclosure();
 
   return (
     <>
@@ -89,7 +89,7 @@ const CommentDrawer: FunctionComponent<CommentDrawerProps> = ({
                         _hover={{
                           color: colors.primaryDark
                         }}
-                        onClick={onOpenShowLoginModal}
+                        onClick={onOpenShowAuthModal}
                       >
                         Sign in here
                       </Text>
@@ -108,9 +108,9 @@ const CommentDrawer: FunctionComponent<CommentDrawerProps> = ({
         </DrawerContent>
       </Drawer>
 
-      <ShowLoginModal
-        isOpen={isOpenShowLoginModal}
-        onClose={onCloseShowLoginModal}
+      <ShowAuthModal
+        isOpen={isOpenShowAuthModal}
+        onClose={onCloseShowAuthModal}
       />
     </>
   )

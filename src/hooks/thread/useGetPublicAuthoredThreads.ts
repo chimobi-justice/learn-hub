@@ -1,13 +1,12 @@
 import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query'
 
 import { axiosInstance } from '@api/axiosInstance'
-import { GET_ARTHORED_THREADS_ENDPOINT } from '@api/index'
 
 export const useGetPublicAuthoredThreads = (limit: number = 0, username: string) => {
   const fetchPublicAuthoredThreads = async ({ pageParam = 0 }) => {
     try {
       const res = await axiosInstance
-          .get(`${GET_ARTHORED_THREADS_ENDPOINT}/${username}/public?limit=${limit}&page=${pageParam}`);
+          .get(`/threads/authored/${username}/public?limit=${limit}&page=${pageParam}`);
       const dataStatus = res.status;
       const dataResponse = await res.data;
       return { ...dataResponse, dataStatus, prevOffset: pageParam };

@@ -1,12 +1,11 @@
 import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query'
 
 import { axiosInstance } from '@api/axiosInstance'
-import { GET_ARTHORED_ARTICLES_ENDPOINT } from '@api/index'
 
 export const useGetAuthoredArticles = (limit: number = 0, username: string) => {
   const fetchPaginatedArticles = async ({ pageParam = 0 }) => {
     try {
-      const res = await axiosInstance.get(`${GET_ARTHORED_ARTICLES_ENDPOINT}/${username}?limit=${limit}&page=${pageParam}`);
+      const res = await axiosInstance.get(`/articles/authored/${username}?limit=${limit}&page=${pageParam}`);
       const dataStatus = res.status;
       const dataResponse = await res.data;
       return { ...dataResponse, dataStatus, prevOffset: pageParam };
