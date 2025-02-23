@@ -14,7 +14,7 @@ const EditThread: FunctionComponent = () => {
 
   const isOwner = data?.data?.author?.id === user?.data?.id;
 
-  if (isLoading) return <Skeleton />;
+  if (isLoading) return <Skeleton count={3} />;
 
   if (!isOwner) return <NotFound />;
 

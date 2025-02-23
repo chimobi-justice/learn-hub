@@ -101,13 +101,7 @@ const ArthoredArticles: FunctionComponent = () => {
         >
           <Box width={{ base: "100%", md: "70%" }}>
             <Box>
-              {isLoading && <Skeleton />}
-
-              {!isLoading && isSuccess && articles?.length === 0 && (
-                <Box textAlign="center" mt="20px">
-                  <Heading as="h5" size="md">You don't have any articles yet</Heading>
-                </Box>
-              )}
+              {isLoading && <Skeleton count={3} />}
 
               {articles && isSuccess && articles?.map((page: any, pageIndex: number) => (
                 <Fragment key={pageIndex}>
@@ -125,7 +119,7 @@ const ArthoredArticles: FunctionComponent = () => {
                   ))}
 
                   {!isLoading && isSuccess && page?.data?.articles?.length === 0 && (
-                    <EmptyState />
+                    <EmptyState title="You don't have any articles yet" />
                   )}
                 </Fragment>
               ))}

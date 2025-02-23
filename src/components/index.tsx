@@ -14,12 +14,12 @@ import Input from '@components/Input'
 import TextArea from '@components/TextArea'
 import EmptyState from '@components/EmptyState'
 import Editor from '@components/Editor'
-import ContentBlockContent from '@components/CodeBlockContent'
+import CodeBlockContent from '@components/CodeBlockContent'
 import ThreadCard from '@components/ThreadCard'
 import Loading from '@components/Loading'
 import LoginForm from '@components/LoginForm'
 import RegisterForm from '@components/RegisterForm'
-import ShowLoginModal from '@components/ShowLoginModal'
+import ShowAuthModal from '@components/ShowAuthModal'
 import TextSpeech from '@components/TextSpeech'
 import FollowSection from '@components/FollowSection'
 
@@ -40,12 +40,12 @@ export {
   TextArea,
   EmptyState,
   Editor,
-  ContentBlockContent,
+  CodeBlockContent,
   ThreadCard,
   Loading,
   LoginForm,
   RegisterForm,
-  ShowLoginModal,
+  ShowAuthModal,
   TextSpeech,
   FollowSection,
 }

@@ -1,8 +1,13 @@
+import { FunctionComponent } from 'react'
 import { Box, Heading, Image } from '@chakra-ui/react'
 
 import EmptyImg from '@assets/images/empty.png'
 
-const EmptyState = () => {
+interface EmptyStateProps {
+  title: string;
+}
+
+const EmptyState: FunctionComponent<EmptyStateProps> = ({ title }) => {
   return (
     <Box
       mt="20px"
@@ -14,7 +19,7 @@ const EmptyState = () => {
       alignItems="center"
       height="100%"
       py="20px">
-      <Heading as="h5" size="md">You have not created any post for this yet.</Heading>
+      <Heading as="h5" size="md">{title}</Heading>
 
       <Image
         src={EmptyImg}

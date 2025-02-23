@@ -4,7 +4,7 @@ import { Avatar, Box, Divider, Flex, Text, useDisclosure } from '@chakra-ui/reac
 
 import { IArticleComments } from 'src/types'
 import { useUser } from '@context/userContext'
-import { Button, ContentBlockContent, Editor, ShowLoginModal } from '@components/index'
+import { Button, CodeBlockContent, Editor, ShowAuthModal } from '@components/index'
 import { useCreateArticleComment } from '@hooks/article/useCreateArticleComment'
 import { useDeleteArticleComment } from '@hooks/article/useDeleteArticleComment'
 import { useEditArticleComment } from '@hooks/article/useEditArticleComment'
@@ -108,7 +108,7 @@ const CommentComponent: FunctionComponent<{ comment: IArticleComments, level: nu
           </Box>
         </Box>
 
-        <ContentBlockContent fontSize='12.5px' content={comment?.comment} />
+        <CodeBlockContent fontSize='12.5px' content={comment?.comment} />
 
         {user && (
           <Flex alignItems={"center"} gap={2} mb={"10px"}>
@@ -214,7 +214,7 @@ const CommentComponent: FunctionComponent<{ comment: IArticleComments, level: nu
         </Box>
       )}
 
-      <ShowLoginModal isOpen={isOpen} onClose={onClose} />
+      <ShowAuthModal isOpen={isOpen} onClose={onClose} />
 
     </Fragment>
   );

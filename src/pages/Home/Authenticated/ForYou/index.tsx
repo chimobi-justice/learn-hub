@@ -43,7 +43,7 @@ const ForYou = () => {
 
   return (
     <>
-      {isLoading && <Skeleton />}
+      {isLoading && <Skeleton count={3} />}
 
       {articles && isSuccess && articles?.map((page: any, pageIndex: number) => (
         <Fragment key={pageIndex}>

@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Heading } from '@chakra-ui/react'
 
-import { ContentBlockContent } from '@components/index'
+import { CodeBlockContent } from '@components/index'
 import truncate from '@helpers/truncate'
 
 interface ThreadCardContentProps {
@@ -28,7 +28,7 @@ const ThreadCardContent: FunctionComponent<ThreadCardContentProps> = ({
     </Link>
 
     <Box height={isSingleView ? "auto" : "130px"} overflow={isSingleView ? "" : "hidden"} p="5px">
-      <ContentBlockContent content={isSingleView ? content : truncate(content, 250)} />
+      <CodeBlockContent content={isSingleView ? content : truncate(content, 250)} />
     </Box>
   </Box>
 );

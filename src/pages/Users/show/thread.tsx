@@ -19,7 +19,7 @@ const PublicUserThreads: FunctionComponent = () => {
 
   return (
     <>
-      {isLoading && <Skeleton />}
+      {isLoading && <Skeleton count={3} />}
 
       {threads && isSuccess && threads?.map((page: any, pageIndex: number) => (
         <Fragment key={pageIndex}>

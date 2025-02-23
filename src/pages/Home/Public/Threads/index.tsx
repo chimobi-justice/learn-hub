@@ -19,7 +19,7 @@ const HomeThreads: FunctionComponent = () => {
       >
         Thr<Text as="span" color={colors.primary}>ea</Text>ds
       </Heading>
-      {isLoading && <Skeleton />}
+      {isLoading && <Skeleton count={3} />}
 
       {threads && isSuccess && (
         <>

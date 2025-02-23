@@ -4,12 +4,12 @@ import hljs from 'highlight.js'
 
 import { stripTags } from '@helpers/stripTags'
 
-interface ContentBlockContentProps {
+interface CodeBlockContentProps {
   content: string;
   fontSize?: string;
 }
 
-const ContentBlockContent: FunctionComponent<ContentBlockContentProps> = ({ content, fontSize }) => {
+const CodeBlockContent: FunctionComponent<CodeBlockContentProps> = ({ content, fontSize }) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -59,4 +59,4 @@ const ContentBlockContent: FunctionComponent<ContentBlockContentProps> = ({ cont
   );
 };
 
-export default ContentBlockContent;
+export default CodeBlockContent;
