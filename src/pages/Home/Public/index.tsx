@@ -1,11 +1,28 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
+import { useQueryClient } from '@tanstack/react-query'
 
 import HeroSection from '@components/HeroSection'
-import HomeThreads from '@pages/Home/Public/Threads'
-import HomeArticles from '@pages/Home/Public/Articles'
+import { getArticles } from '@services/articles'
+import { getThreads } from '@services/threads'
 
 const HomeSections: FunctionComponent = () => {
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    queryClient.prefetchQuery({
+      queryKey: ['articles'],
+      queryFn: () => getArticles(1),
+      staleTime: 1000 * 60 * 5
+    })
+
+    queryClient.prefetchQuery({
+      queryKey: ['threads'],
+      queryFn: () => getThreads(1),
+      staleTime: 1000 * 60 * 5
+    })
+  }, [queryClient]);
+
   return (
     <>
       <Helmet>
@@ -15,8 +32,6 @@ const HomeSections: FunctionComponent = () => {
       </Helmet>
 
       <HeroSection />
-      <HomeThreads />
-      <HomeArticles />
     </>
   )
 }

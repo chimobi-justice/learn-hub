@@ -51,11 +51,12 @@ const HeroSection: FunctionComponent = () => {
 
             <Text
               my={"25px"}
-              fontSize={{ base: "16px", lg: "18px"}}
+              fontSize={{ base: "16px", lg: "18px" }}
               width={{ base: "100%", md: "80%" }}
               lineHeight={"1.8em"}
             >
-              A portal for problem solving, knowledge sharing and community builders, join others for sharing knowledge.
+              Join others in sharing knowledge. The ultimate platform for content creators. Build, 
+              share, and grow your audience effortlessly.
             </Text>
 
             <Stack
